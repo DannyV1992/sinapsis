@@ -75,7 +75,7 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 
 export default function FAQSection() {
   return (
-    <section className="py-20">
+    <section className="py-24 border-t border-gray-100">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <div className="text-center mb-12">

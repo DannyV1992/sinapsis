@@ -37,7 +37,7 @@ export default function TransformSection() {
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
-    <section ref={containerRef} className="py-24 relative overflow-hidden">
+    <section ref={containerRef} className="py-24 bg-section-alt relative overflow-hidden border-t border-gray-100">
       <motion.div style={{ opacity }} className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div style={{ y }} className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground font-[family-name:var(--font-playfair)]">

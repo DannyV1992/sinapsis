@@ -6,7 +6,7 @@ import AnimateOnScroll from "./AnimateOnScroll";
 
 export default function QuizCTA() {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section className="py-24 relative overflow-hidden border-t border-gray-100">
       <div className="absolute inset-0 bg-gradient-to-br from-accent-light/20 to-primary/5" />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <AnimateOnScroll>

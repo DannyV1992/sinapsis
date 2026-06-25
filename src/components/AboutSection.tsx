@@ -4,7 +4,7 @@ import AnimateOnScroll from "./AnimateOnScroll";
 
 export default function AboutSection() {
   return (
-    <section id="sobre-mi" className="py-20 bg-section-alt">
+    <section id="sobre-mi" className="py-24 border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <AnimateOnScroll>

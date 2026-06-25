@@ -47,7 +47,7 @@ export default function ParallaxServices() {
   const headerOpacity = useTransform(scrollYProgress, [0, 0.3], [0, 1]);
 
   return (
-    <section id="servicios" ref={containerRef} className="py-24 relative">
+    <section id="servicios" ref={containerRef} className="py-24 relative border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div style={{ y: headerY, opacity: headerOpacity }} className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground font-[family-name:var(--font-playfair)]">
