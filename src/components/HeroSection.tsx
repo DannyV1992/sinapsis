@@ -47,7 +47,7 @@ export default function HeroSection() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
-          className="mt-8 text-lg sm:text-xl text-foreground/60 max-w-2xl mx-auto leading-relaxed"
+          className="mt-8 text-lg sm:text-xl text-foreground max-w-2xl mx-auto leading-relaxed"
         >
           En Sinapsis creemos que cuidar tu salud mental es un acto de
           valentía. Te acompañamos en tu proceso con profesionalismo y
