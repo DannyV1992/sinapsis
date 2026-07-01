@@ -59,7 +59,7 @@ const faqData: { keywords: string[]; answer: string; showWhatsApp?: boolean }[] 
   },
   {
     keywords: ["whatsapp", "wsp", "telefono", "teléfono", "numero", "número", "celular", "contacto", "llamar", "escribir"],
-    answer: "Nuestro WhatsApp es +506 8888-8888. ¿Quieres que te abra la conversación?",
+    answer: "Nuestro WhatsApp es +506 7139-8403. ¿Quieres que te abra la conversación?",
     showWhatsApp: true,
   },
 ];
