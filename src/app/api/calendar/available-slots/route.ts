@@ -14,7 +14,8 @@ export async function GET(request: NextRequest) {
 
   try {
     const modality = searchParams.get("modality") || undefined;
-    const slots = await getAvailableSlots(date, modality);
+    const service = searchParams.get("service") || undefined;
+    const slots = await getAvailableSlots(date, modality, service);
     return NextResponse.json({ slots });
   } catch (error) {
     console.error("Error fetching available slots:", error);

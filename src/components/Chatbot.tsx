@@ -19,7 +19,7 @@ const faqData: { keywords: string[]; answer: string; showWhatsApp?: boolean }[] 
   },
   {
     keywords: ["duracion", "duración", "dura", "largo", "tiempo sesion", "tiempo sesión"],
-    answer: "Cada sesión dura entre 50 y 60 minutos. La primera sesión puede extenderse un poco más para conocerte mejor.",
+    answer: "Las sesiones individuales duran 1 hora. Las de pareja o familia duran 1 hora y media. La primera sesión puede extenderse un poco más para conocerte mejor.",
   },
   {
     keywords: ["online", "virtual", "distancia", "videollamada", "zoom"],
@@ -51,7 +51,7 @@ const faqData: { keywords: string[]; answer: string; showWhatsApp?: boolean }[] 
   },
   {
     keywords: ["cancelar", "reprogramar", "cambiar cita", "no puedo ir"],
-    answer: "Puedes cancelar o reprogramar tu cita con al menos 24 horas de anticipación sin costo. Cancelaciones con menos de 24 horas tienen un cargo del 50%.",
+    answer: "Puedes reprogramar tu cita si avisas con al menos 48 horas de anticipación. No se hacen devoluciones pero sí reprogramación dentro de los próximos 7 días hábiles. Si cancelas con menos de 48 horas o no asistes, se debe pagar de nuevo para agendar.",
   },
   {
     keywords: ["seguro", "póliza", "poliza", "ins"],

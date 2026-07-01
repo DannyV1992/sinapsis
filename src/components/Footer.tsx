@@ -33,7 +33,7 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-3">Contacto</h4>
             <ul className="space-y-2 text-sm">
-              <li>contacto@sinapsis.com</li>
+              <li>info@sinapsiscr.com</li>
               <li>+506 8888-8888</li>
               <li>San José, Costa Rica</li>
             </ul>

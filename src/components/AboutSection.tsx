@@ -39,24 +39,28 @@ export default function AboutSection() {
                 Sobre mí
               </h2>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Soy psicóloga clínica con más de X años de experiencia
-                acompañando a personas en su proceso de autoconocimiento y
-                bienestar emocional. Mi enfoque integra diversas corrientes
-                terapéuticas para adaptarme a las necesidades únicas de cada
-                paciente.
+                Psicóloga clínica con enfoque cognitivo-conductual. Me apasiona
+                una terapia que respeta la diversidad en todas sus formas — de
+                identidad, de relaciones, de creencias y de formas de existir.
+              </p>
+              <p className="text-foreground/70 leading-relaxed mb-4">
+                Atiendo problemáticas como ansiedad, depresión, trauma y
+                desarrollo personal. A la vez, me he especializado en acompañar
+                a personas cuyas experiencias no siempre encuentran un espacio
+                que las comprenda — diversidad relacional, identidades no
+                normativas, abuso religioso y procesos de deconstrucción,
+                entre otros.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-6">
-                Creo firmemente que cada persona tiene dentro de sí los
-                recursos necesarios para sanar y crecer. Mi rol es facilitar
-                ese proceso en un espacio seguro, confidencial y libre de
-                juicios.
+                Si necesitas un espacio donde puedas ser, sin filtros ni
+                explicaciones, aquí lo vas a encontrar.
               </p>
               <ul className="space-y-3">
                 {[
-                  "Licenciatura en Psicología Clínica",
-                  "Maestría en Terapia Cognitivo-Conductual",
-                  "Especialización en Ansiedad y Estrés",
-                  "Miembro del Colegio de Profesionales en Psicología",
+                  "Licenciada en Psicología Clínica",
+                  "Terapia cognitivo-conductual",
+                  "Enfoque en diversidad relacional y de género",
+                  "Miembro del Colegio de Profesionales en Psicología de Costa Rica",
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
                     <svg

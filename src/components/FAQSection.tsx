@@ -5,9 +5,14 @@ import AnimateOnScroll from "./AnimateOnScroll";
 
 const faqs = [
   {
+    question: "¿Qué esperar en la primera sesión?",
+    answer:
+      "En la primera sesión nos conocemos, hablamos sobre lo que te trae aquí y definimos juntos los objetivos del proceso. Es un espacio seguro y sin juicios. No necesitas preparar nada especial, solo venir con disposición.",
+  },
+  {
     question: "¿Cuánto dura una sesión?",
     answer:
-      "Cada sesión tiene una duración de 50 a 60 minutos. La primera sesión puede extenderse un poco más para conocerte mejor.",
+      "Las sesiones individuales duran 1 hora. Las sesiones de pareja o familia duran 1 hora y media. La primera sesión puede extenderse un poco más para conocerte mejor.",
   },
   {
     question: "¿Es confidencial?",
@@ -22,12 +27,17 @@ const faqs = [
   {
     question: "¿Cuántas sesiones necesitaré?",
     answer:
-      "Depende de cada persona y sus objetivos. Algunos procesos son breves (8-12 sesiones) y otros son más profundos. Lo definimos juntos según tu progreso.",
+      "Depende de cada persona y sus objetivos. Algunos procesos son breves (8-12 sesiones) y otros son más profundos. Lo definimos juntos según tu progreso. Se recomienda no darse de alta por cuenta propia y esperar la recomendación del profesional.",
   },
   {
     question: "¿Ofrecen sesiones online?",
     answer:
-      "Sí. Las sesiones virtuales tienen la misma calidad y estructura que las presenciales. Solo necesitas un espacio privado y buena conexión a internet.",
+      "Sí. Las sesiones virtuales tienen la misma eficacia que las presenciales. Necesitas un espacio privado sin interrupciones, cámara encendida, conexión estable a internet y no estar realizando otras actividades.",
+  },
+  {
+    question: "¿Cómo funciona la terapia de pareja?",
+    answer:
+      "Se requiere que ambos miembros de la pareja deseen asistir al proceso. Si alguno no desea participar, se recomienda iniciar con sesión individual. Ambos deben asistir a las sesiones.",
   },
   {
     question: "¿Qué métodos de pago aceptan?",

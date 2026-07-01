@@ -3,36 +3,54 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
-const services = [
+const categories = [
   {
-    title: "Terapia individual",
-    description: "Sesiones personalizadas para ansiedad, depresión, autoestima y crecimiento personal.",
-    gradient: "from-purple-500/20 to-indigo-500/20",
+    title: "Problemáticas que atiendo",
+    subtitle: "Cuando algo no está bien y quieres cambiarlo",
+    color: "from-primary to-primary-light",
+    services: [
+      { name: "Ansiedad y estrés", phrase: "Recupera tu calma" },
+      { name: "Depresión", phrase: "Encuentra tu luz" },
+      { name: "Duelo y pérdidas", phrase: "Honra lo que fue" },
+      { name: "Trauma y TEPT", phrase: "Sana tu historia" },
+      { name: "Trastornos alimentarios", phrase: "Reconcíliate con tu cuerpo" },
+      { name: "Adicciones", phrase: "Rompe el ciclo" },
+      { name: "Insomnio", phrase: "Descansa de verdad" },
+      { name: "Crisis", phrase: "No estás solo/a" },
+      { name: "Abuso psicológico", phrase: "Mereces relaciones sanas" },
+      { name: "Burnout", phrase: "No es pereza, es agotamiento" },
+    ],
   },
   {
-    title: "Terapia de pareja",
-    description: "Mejora la comunicación y fortalece el vínculo con herramientas terapéuticas efectivas.",
-    gradient: "from-pink-500/20 to-rose-500/20",
+    title: "Desarrollo personal",
+    subtitle: "Crecer no siempre requiere estar mal",
+    color: "from-accent to-amber-400",
+    services: [
+      { name: "Autoconcepto", phrase: "Mírate con otros ojos" },
+      { name: "Inteligencia emocional", phrase: "Siente sin ahogarte" },
+      { name: "Comunicación asertiva", phrase: "Di lo que necesitas" },
+      { name: "Bienestar sexual", phrase: "Sin tabúes" },
+      { name: "Establecimiento de límites", phrase: "Aprende a decir no" },
+      { name: "Regulación emocional", phrase: "Sin explotar ni reprimir" },
+      { name: "Síndrome del impostor", phrase: "Mereces tus logros" },
+      { name: "Toma de decisiones", phrase: "Avanza con claridad" },
+      { name: "Alta sensibilidad (PAS)", phrase: "Tu sensibilidad no es debilidad" },
+    ],
   },
   {
-    title: "Manejo de ansiedad",
-    description: "Técnicas cognitivo-conductuales y mindfulness para recuperar tu calma.",
-    gradient: "from-blue-500/20 to-cyan-500/20",
-  },
-  {
-    title: "Terapia online",
-    description: "Sesiones virtuales con la misma calidez. Desde la comodidad de tu hogar.",
-    gradient: "from-amber-500/20 to-orange-500/20",
-  },
-  {
-    title: "Orientación vocacional",
-    description: "Descubre tu vocación con acompañamiento psicológico especializado.",
-    gradient: "from-emerald-500/20 to-teal-500/20",
-  },
-  {
-    title: "Talleres grupales",
-    description: "Inteligencia emocional, manejo del estrés y comunicación asertiva.",
-    gradient: "from-violet-500/20 to-purple-500/20",
+    title: "Atención especializada",
+    subtitle: "Porque tu experiencia merece ser comprendida",
+    color: "from-pink-500 to-rose-400",
+    services: [
+      { name: "Comunidad LGBTQ+", phrase: "Espacio seguro" },
+      { name: "Relaciones no monógamas", phrase: "Relaciones éticas" },
+      { name: "Sobrevivientes de abuso religioso", phrase: "Sanar sin juicio" },
+      { name: "Comunidad migrante", phrase: "Acompañamiento en el desarraigo" },
+      { name: "Cambios corporales irreversibles", phrase: "Adaptarse a un cuerpo diferente" },
+      { name: "Duelo reproductivo", phrase: "Tu dolor es real" },
+      { name: "Crianza en hogares monoparentales", phrase: "Lo que cargaste no era tuyo" },
+      { name: "Secuelas de bullying", phrase: "Las secuelas no son invisibles" },
+    ],
   },
 ];
 
@@ -48,36 +66,48 @@ export default function ParallaxServices() {
 
   return (
     <section id="servicios" ref={containerRef} className="py-24 relative border-t border-gray-100">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div style={{ y: headerY, opacity: headerOpacity }} className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl font-bold text-foreground font-[family-name:var(--font-playfair)]">
-            Servicios
+            Áreas de atención
           </h2>
           <p className="mt-4 text-foreground/60 max-w-2xl mx-auto">
-            Diferentes modalidades de atención adaptadas a tus necesidades.
+            Trabajo con diversas problemáticas y poblaciones desde un enfoque integrador.
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((service, i) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {categories.map((cat, ci) => (
             <motion.div
-              key={service.title}
-              initial={{ opacity: 0, y: 60, rotateX: 10 }}
-              whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
-              viewport={{ once: true, margin: "-30px" }}
-              transition={{ duration: 0.6, delay: i * 0.1, ease: "easeOut" }}
-              whileHover={{ scale: 1.03, y: -5 }}
-              className="group relative"
+              key={cat.title}
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: ci * 0.2, duration: 0.6 }}
+              className="bg-white rounded-2xl border border-gray-100 overflow-hidden hover:shadow-lg transition-shadow"
             >
-              <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-              <div className="relative p-6 rounded-2xl border border-gray-100 bg-white/80 backdrop-blur-sm hover:shadow-xl transition-all duration-500 h-full">
-                <div className="w-2 h-2 rounded-full bg-accent mb-4 group-hover:scale-[3] group-hover:bg-primary transition-all duration-500" />
-                <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">
-                  {service.title}
-                </h3>
-                <p className="text-sm text-foreground/60 leading-relaxed">
-                  {service.description}
-                </p>
+              <div className={`h-1.5 bg-gradient-to-r ${cat.color}`} />
+              <div className="p-6">
+                <h3 className="font-bold text-foreground text-lg">{cat.title}</h3>
+                <p className="text-xs text-foreground/50 italic mb-5">{cat.subtitle}</p>
+                <div className="space-y-3">
+                  {cat.services.map((s, i) => (
+                    <motion.div
+                      key={s.name}
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: ci * 0.1 + i * 0.06 }}
+                      className="group flex items-start gap-3 py-1"
+                    >
+                      <div className={`w-1 h-6 rounded-full bg-gray-200 group-hover:bg-gradient-to-b ${cat.color} transition-all mt-0.5`} />
+                      <div>
+                        <p className="text-sm font-medium text-foreground/70 group-hover:text-foreground transition-colors">{s.name}</p>
+                        <p className="text-[11px] text-foreground/0 group-hover:text-foreground/50 transition-all h-0 group-hover:h-4 overflow-hidden italic">{s.phrase}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           ))}

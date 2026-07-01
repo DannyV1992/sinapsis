@@ -1,4 +1,6 @@
 import { google } from "googleapis";
+import { generateBookingPDF } from "./generate-pdf";
+import { Readable } from "node:stream";
 
 function getOAuth2Client() {
   const oauth2Client = new google.auth.OAuth2(
@@ -22,15 +24,21 @@ export function getCalendarClient() {
 export const CALENDAR_ID = process.env.GOOGLE_CALENDAR_ID || "primary";
 
 // Configuración de citas
-const APPOINTMENT_DURATION_MIN = 60; // duración de cada cita en minutos
 const BREAK_BETWEEN_MIN = 15; // descanso entre citas en minutos
+
+function getAppointmentDuration(service?: string): number {
+  if (service === "Terapia de pareja" || service === "Terapia familiar") {
+    return 90; // 1.5 horas
+  }
+  return 60; // 1 hora
+}
 
 export interface TimeSlot {
   start: string;
   end: string;
 }
 
-export async function getAvailableSlots(date: string, modality?: string): Promise<TimeSlot[]> {
+export async function getAvailableSlots(date: string, modality?: string, service?: string): Promise<TimeSlot[]> {
   const calendar = getCalendarClient();
 
   const dayStart = new Date(`${date}T00:00:00`);
@@ -79,8 +87,9 @@ export async function getAvailableSlots(date: string, modality?: string): Promis
     const blockStart = new Date(block.start.dateTime);
     const blockEnd = new Date(block.end.dateTime);
 
-    const slotDuration = APPOINTMENT_DURATION_MIN * 60 * 1000;
-    const slotStep = (APPOINTMENT_DURATION_MIN + BREAK_BETWEEN_MIN) * 60 * 1000;
+    const appointmentDuration = getAppointmentDuration(service);
+    const slotDuration = appointmentDuration * 60 * 1000;
+    const slotStep = (appointmentDuration + BREAK_BETWEEN_MIN) * 60 * 1000;
 
     let slotStart = new Date(blockStart);
     while (slotStart.getTime() + slotDuration <= blockEnd.getTime()) {
@@ -126,7 +135,6 @@ export async function bookAppointment(params: {
 
   if (driveFolderId) {
     try {
-      const { generateBookingPDF } = await import("@/lib/generate-pdf");
       const startDate = new Date(params.start);
       const dateStr = startDate.toLocaleDateString("es-CR", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
       const timeStr = startDate.toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit", hour12: true });
@@ -142,9 +150,9 @@ export async function bookAppointment(params: {
       });
 
       const drive = google.drive({ version: "v3", auth });
-      const fileName = `Cita_${params.name.replace(/\s+/g, "_")}_${params.start.split("T")[0]}.pdf`;
+      const timeForFile = startDate.toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit", hour12: false }).replace(":", "-");
+      const fileName = `Cita_${params.name.replace(/\s+/g, "_")}_${params.start.split("T")[0]}_${timeForFile}.pdf`;
 
-      const { Readable } = await import("stream");
       const stream = new Readable();
       stream.push(pdfBuffer);
       stream.push(null);
@@ -172,8 +180,9 @@ export async function bookAppointment(params: {
       });
 
       pdfLink = file.data.webViewLink || "";
-    } catch (error) {
-      console.error("Error generating/uploading PDF:", error);
+    } catch (error: unknown) {
+      const errMsg = error instanceof Error ? error.message : String(error);
+      console.error("Error generating/uploading PDF:", errMsg, error);
     }
   }
 
@@ -183,23 +192,35 @@ export async function bookAppointment(params: {
     `Email: ${params.email}`,
     `Teléfono: ${params.phone}`,
     `Servicio: ${params.service}`,
-    params.modality ? `Modalidad: ${params.modality}` : "",
+    params.modality ? `Modalidad: ${params.modality.charAt(0).toUpperCase() + params.modality.slice(1)}` : "",
     params.notes ? `Notas: ${params.notes}` : "",
     "",
-    pdfLink ? `📄 Políticas de cancelación: ${pdfLink}` : "",
+    pdfLink ? `Políticas de cancelación: ${pdfLink}` : "",
+    "Si es tu primera vez, lee el consentimiento informado: https://sinapsiscr.com/consentimiento",
   ]
     .filter(Boolean)
     .join("\n");
 
+  const isVirtual = params.modality?.toLowerCase() === "virtual";
+
   const event = await calendar.events.insert({
     calendarId: CALENDAR_ID,
     sendUpdates: "all",
+    conferenceDataVersion: isVirtual ? 1 : 0,
     requestBody: {
       summary: `${params.name} — ${params.service}`,
       description,
       start: { dateTime: params.start, timeZone: "America/Costa_Rica" },
       end: { dateTime: params.end, timeZone: "America/Costa_Rica" },
       attendees: [{ email: params.email }],
+      ...(isVirtual && {
+        conferenceData: {
+          createRequest: {
+            requestId: `sinapsis-${Date.now()}`,
+            conferenceSolutionKey: { type: "hangoutsMeet" },
+          },
+        },
+      }),
       reminders: {
         useDefault: false,
         overrides: [

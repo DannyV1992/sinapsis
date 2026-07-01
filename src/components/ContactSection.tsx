@@ -9,16 +9,25 @@ export default function ContactSection() {
     phone: "",
     message: "",
   });
+  const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const whatsappMessage = encodeURIComponent(
-      `Hola, soy ${formData.name}. ${formData.message}`
-    );
-    window.open(
-      `https://wa.me/50688888888?text=${whatsappMessage}`,
-      "_blank"
-    );
+    setSending(true);
+
+    try {
+      await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      setSent(true);
+    } catch {
+      setSent(true);
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -50,7 +59,7 @@ export default function ContactSection() {
                     />
                   </svg>
                 </div>
-                <span className="text-foreground/70">contacto@sinapsis.com</span>
+                <span className="text-foreground/70">info@sinapsiscr.com</span>
               </div>
               <a href="https://wa.me/50688888888?text=Hola%2C%20quiero%20consultar%20sobre%20los%20servicios%20de%20Sinapsis." target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
                 <div className="w-10 h-10 bg-green-500/10 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-green-500/20 transition-colors">
@@ -95,7 +104,7 @@ export default function ContactSection() {
                 type="text"
                 id="name"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
@@ -108,7 +117,7 @@ export default function ContactSection() {
                 type="email"
                 id="email"
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
               />
@@ -120,7 +129,7 @@ export default function ContactSection() {
               <input
                 type="tel"
                 id="phone"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
@@ -133,17 +142,24 @@ export default function ContactSection() {
                 id="message"
                 rows={4}
                 required
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
+                className="w-full px-4 py-3 rounded-xl bg-white border border-gray-300 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all resize-none"
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
               />
             </div>
-            <button
-              type="submit"
-              className="w-full px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors"
-            >
-              Enviar mensaje
-            </button>
+            {sent ? (
+              <div className="w-full px-6 py-3 bg-green-50 border border-green-200 text-green-700 rounded-xl text-center text-sm">
+                ¡Mensaje enviado! Te responderemos pronto.
+              </div>
+            ) : (
+              <button
+                type="submit"
+                disabled={sending}
+                className="w-full px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors disabled:opacity-50"
+              >
+                {sending ? "Enviando..." : "Enviar mensaje"}
+              </button>
+            )}
           </form>
         </div>
       </div>

@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const services = [
   "Terapia individual",
   "Terapia de pareja",
+  "Terapia familiar",
 ];
 
 interface TimeSlot {
@@ -48,7 +49,7 @@ export default function AgendarPage() {
     setAvailableSlots([]);
     setFormData((prev) => ({ ...prev, slot: null }));
 
-    fetch(`/api/calendar/available-slots?date=${formData.date}&modality=${formData.modality}`)
+    fetch(`/api/calendar/available-slots?date=${formData.date}&modality=${formData.modality}&service=${encodeURIComponent(formData.service)}`)
       .then((res) => res.json())
       .then(async (data) => {
         if (data.slots && data.slots.length > 0) {
@@ -60,6 +61,16 @@ export default function AgendarPage() {
           let foundSame = false;
           let foundOther = false;
 
+          // Primero revisar el mismo día en la otra modalidad
+          try {
+            const res = await fetch(`/api/calendar/available-slots?date=${formData.date}&modality=${otherModality}&service=${encodeURIComponent(formData.service)}`);
+            const otherData = await res.json();
+            if (otherData.slots && otherData.slots.length > 0) {
+              setNextAvailableOther(formData.date);
+              foundOther = true;
+            }
+          } catch {}
+
           for (let i = 1; i <= 30; i++) {
             if (foundSame && foundOther) break;
 
@@ -70,7 +81,7 @@ export default function AgendarPage() {
             try {
               // Buscar en la misma modalidad
               if (!foundSame) {
-                const res = await fetch(`/api/calendar/available-slots?date=${dateStr}&modality=${formData.modality}`);
+                const res = await fetch(`/api/calendar/available-slots?date=${dateStr}&modality=${formData.modality}&service=${encodeURIComponent(formData.service)}`);
                 const nextData = await res.json();
                 if (nextData.slots && nextData.slots.length > 0) {
                   setNextAvailable(dateStr);
@@ -80,7 +91,7 @@ export default function AgendarPage() {
 
               // Buscar en la otra modalidad
               if (!foundOther) {
-                const res = await fetch(`/api/calendar/available-slots?date=${dateStr}&modality=${otherModality}`);
+                const res = await fetch(`/api/calendar/available-slots?date=${dateStr}&modality=${otherModality}&service=${encodeURIComponent(formData.service)}`);
                 const nextData = await res.json();
                 if (nextData.slots && nextData.slots.length > 0) {
                   setNextAvailableOther(dateStr);
@@ -502,7 +513,7 @@ export default function AgendarPage() {
                               <button
                                 type="button"
                                 onClick={() => setFormData({ ...formData, modality: formData.modality === "presencial" ? "virtual" : "presencial", date: nextAvailableOther })}
-                                className="block text-primary/70 font-medium hover:underline"
+                                className="block text-primary font-medium hover:underline"
                               >
                                 Próximo {formData.modality === "presencial" ? "virtual" : "presencial"}: {formatDate(nextAvailableOther)} →
                               </button>
@@ -655,25 +666,46 @@ export default function AgendarPage() {
                   />
                 </div>
                 <div className="p-4 bg-section-alt rounded-xl">
-                  <label className="flex items-start gap-3 cursor-pointer">
-                    <input
-                      type="checkbox"
-                      checked={acceptedPolicy}
-                      onChange={(e) => setAcceptedPolicy(e.target.checked)}
-                      className="mt-1 w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/20"
-                    />
-                    <span className="text-xs text-foreground/60 leading-relaxed">
-                      He leído y acepto las{" "}
-                      <a
-                        href="/politicas"
-                        target="_blank"
-                        className="text-primary underline hover:text-primary-dark"
-                      >
-                        políticas de cancelación
-                      </a>
-                      . Entiendo que cancelaciones con menos de 24 horas de anticipación tienen un cargo del 50%.
-                    </span>
-                  </label>
+                  <table className="w-full border-collapse">
+                    <tbody>
+                      <tr>
+                        <td className="w-6 align-top pt-0.5">
+                          <input
+                            type="checkbox"
+                            checked={acceptedPolicy}
+                            onChange={(e) => setAcceptedPolicy(e.target.checked)}
+                            className="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/20 cursor-pointer"
+                          />
+                        </td>
+                        <td className="text-xs text-foreground/60 leading-relaxed pl-2">
+                          He leído y acepto las{" "}
+                          <a
+                            href="/politicas"
+                            target="_blank"
+                            className="text-primary underline hover:text-primary-dark"
+                          >
+                            políticas de cancelación
+                          </a>
+                          . Entiendo que cancelaciones con menos de 48 horas de anticipación no son reembolsables ni reprogramables.
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="w-6 align-top pt-2">
+                          <span className="text-sm">ℹ️</span>
+                        </td>
+                        <td className="text-xs text-foreground/60 leading-relaxed pl-2 pt-2">
+                          Si es tu primera cita, por favor lee el{" "}
+                          <a
+                            href="/consentimiento"
+                            target="_blank"
+                            className="text-primary underline hover:text-primary-dark"
+                          >
+                            consentimiento informado
+                          </a>.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
                 <div className="flex gap-3 mt-4">
                   <button

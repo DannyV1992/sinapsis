@@ -1,4 +1,4 @@
-import PDFDocument from "pdfkit";
+import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 
 interface BookingData {
   name: string;
@@ -10,101 +10,115 @@ interface BookingData {
   time: string;
 }
 
-export function generateBookingPDF(data: BookingData): Promise<Buffer> {
-  return new Promise((resolve) => {
-    const doc = new PDFDocument({ size: "LETTER", margin: 60 });
-    const chunks: Buffer[] = [];
+export async function generateBookingPDF(data: BookingData): Promise<Buffer> {
+  const doc = await PDFDocument.create();
+  const page = doc.addPage([612, 792]); // Letter size
 
-    doc.on("data", (chunk: Buffer) => chunks.push(chunk));
-    doc.on("end", () => resolve(Buffer.concat(chunks)));
+  const font = await doc.embedFont(StandardFonts.Helvetica);
+  const fontBold = await doc.embedFont(StandardFonts.HelveticaBold);
 
-    // Header
-    doc.fontSize(22).font("Helvetica-Bold").text("Sinapsis", { align: "center" });
-    doc.fontSize(11).font("Helvetica").text("Psicología Clínica", { align: "center" });
-    doc.moveDown(2);
+  const purple = rgb(0.29, 0.25, 0.56);
+  const black = rgb(0, 0, 0);
+  const gray = rgb(0.35, 0.35, 0.35);
 
-    // Title
-    doc.fontSize(16).font("Helvetica-Bold").text("Confirmación de cita", { align: "center" });
-    doc.moveDown(1.5);
+  let y = 720;
+  const margin = 60;
 
-    // Booking details
-    doc.fontSize(11).font("Helvetica-Bold").text("Datos de la cita:");
-    doc.moveDown(0.5);
-    doc.font("Helvetica");
-    doc.text(`Paciente: ${data.name}`);
-    doc.text(`Email: ${data.email}`);
-    doc.text(`Teléfono: ${data.phone}`);
-    doc.text(`Servicio: ${data.service}`);
-    doc.text(`Modalidad: ${data.modality}`);
-    doc.text(`Fecha: ${data.date}`);
-    doc.text(`Hora: ${data.time}`);
-    doc.moveDown(2);
+  // Header
+  page.drawText("Sinapsis", { x: margin, y, font: fontBold, size: 22, color: purple });
+  y -= 18;
+  page.drawText("Psicología Clínica", { x: margin, y, font, size: 11, color: gray });
+  y -= 40;
 
-    // Separator
-    doc.moveTo(60, doc.y).lineTo(552, doc.y).stroke("#4a3f8f");
-    doc.moveDown(1.5);
+  // Title
+  page.drawText("Confirmación de cita", { x: margin, y, font: fontBold, size: 16, color: black });
+  y -= 30;
 
-    // Policies
-    doc.fontSize(14).font("Helvetica-Bold").text("Políticas de cancelación");
-    doc.moveDown(1);
+  // Booking details
+  page.drawText("Datos de la cita:", { x: margin, y, font: fontBold, size: 11, color: black });
+  y -= 20;
 
-    doc.fontSize(10).font("Helvetica-Bold").text("1. Confirmación de cita");
-    doc.font("Helvetica").text(
-      "Al agendar una cita, usted recibirá un correo electrónico de confirmación. La cita se considera confirmada una vez recibido este correo."
-    );
-    doc.moveDown(0.8);
+  const details = [
+    `Paciente: ${data.name}`,
+    `Email: ${data.email}`,
+    `Teléfono: ${data.phone}`,
+    `Servicio: ${data.service}`,
+    `Modalidad: ${data.modality.charAt(0).toUpperCase() + data.modality.slice(1)}`,
+    `Fecha: ${data.date}`,
+    `Hora: ${data.time}`,
+  ];
 
-    doc.font("Helvetica-Bold").text("2. Cancelaciones");
-    doc.font("Helvetica").text(
-      "Las cancelaciones deben realizarse con un mínimo de 24 horas de anticipación. Cancelaciones con menos de 24 horas tienen un cargo del 50% del valor de la sesión."
-    );
-    doc.moveDown(0.8);
+  for (const line of details) {
+    page.drawText(line, { x: margin, y, font, size: 10, color: gray });
+    y -= 16;
+  }
 
-    doc.font("Helvetica-Bold").text("3. Reprogramación");
-    doc.font("Helvetica").text(
-      "Las citas pueden reprogramarse sin costo con al menos 24 horas de anticipación, sujeto a disponibilidad."
-    );
-    doc.moveDown(0.8);
+  y -= 20;
 
-    doc.font("Helvetica-Bold").text("4. Inasistencia");
-    doc.font("Helvetica").text(
-      "La inasistencia sin previo aviso se considera cancelación tardía y aplica el cargo del 50%."
-    );
-    doc.moveDown(0.8);
+  // Separator
+  page.drawLine({ start: { x: margin, y }, end: { x: 552, y }, thickness: 1, color: purple });
+  y -= 25;
 
-    doc.font("Helvetica-Bold").text("5. Cancelación por parte del profesional");
-    doc.font("Helvetica").text(
-      "En caso de cancelación por fuerza mayor, se notificará con anticipación y se reprogramará sin costo."
-    );
-    doc.moveDown(0.8);
+  // Policies
+  page.drawText("Políticas de cancelación", { x: margin, y, font: fontBold, size: 14, color: black });
+  y -= 25;
 
-    doc.font("Helvetica-Bold").text("6. Métodos de pago");
-    doc.font("Helvetica").text(
-      "El pago se realiza al finalizar la sesión. Aceptamos transferencia bancaria, SINPE Móvil y efectivo."
-    );
-    doc.moveDown(0.8);
+  const policies = [
+    { title: "1. Confirmación de cita", text: "Al agendar, recibirá un correo de confirmación con los detalles de su sesión. La cita queda reservada una vez recibido este correo." },
+    { title: "2. Cancelaciones y reprogramación", text: "No se realizan devoluciones de dinero, pero puede reprogramar si avisa con mínimo 48 horas de anticipación. La reprogramación se coordina dentro de los 7 días hábiles siguientes a la fecha original." },
+    { title: "3. Inasistencia", text: "En caso de no asistir o cancelar con menos de 48 horas, no será posible reprogramar. Para agendar una nueva sesión se deberá realizar el pago correspondiente." },
+    { title: "4. Cancelación por el profesional", text: "Si la psicóloga debe cancelar por fuerza mayor, se reprogramará sin costo ni restricción de plazo, o se realizará la devolución del monto." },
+    { title: "5. Recordatorios", text: "Se envían recordatorios automáticos por correo antes de cada sesión. La responsabilidad de asistir en el horario acordado es del paciente." },
+    { title: "6. Continuidad del proceso", text: "Se recomienda dejar agendada la siguiente sesión al finalizar cada cita para mantener el progreso terapéutico." },
+    { title: "7. Métodos de pago", text: "Aceptamos transferencia bancaria, SINPE Móvil y efectivo. El pago se realiza al finalizar cada sesión." },
+  ];
 
-    doc.font("Helvetica-Bold").text("7. Confidencialidad");
-    doc.font("Helvetica").text(
-      "Toda la información proporcionada es estrictamente confidencial, conforme al secreto profesional."
-    );
-    doc.moveDown(2);
+  for (const policy of policies) {
+    page.drawText(policy.title, { x: margin, y, font: fontBold, size: 10, color: black });
+    y -= 14;
 
-    // Separator
-    doc.moveTo(60, doc.y).lineTo(552, doc.y).stroke("#4a3f8f");
-    doc.moveDown(1);
+    // Word wrap the text
+    const words = policy.text.split(" ");
+    let line = "";
+    for (const word of words) {
+      const testLine = line + word + " ";
+      const width = font.widthOfTextAtSize(testLine, 9);
+      if (width > 490) {
+        page.drawText(line.trim(), { x: margin, y, font, size: 9, color: gray });
+        y -= 12;
+        line = word + " ";
+      } else {
+        line = testLine;
+      }
+    }
+    if (line.trim()) {
+      page.drawText(line.trim(), { x: margin, y, font, size: 9, color: gray });
+      y -= 12;
+    }
+    y -= 8;
+  }
 
-    // Acceptance note
-    doc.fontSize(9).font("Helvetica-Oblique").text(
-      `Al confirmar esta cita, ${data.name} acepta las políticas de cancelación aquí descritas.`,
-      { align: "center" }
-    );
-    doc.moveDown(0.5);
-    doc.text(`Documento generado el ${new Date().toLocaleDateString("es-CR")}`, { align: "center" });
+  y -= 10;
+  // Separator
+  page.drawLine({ start: { x: margin, y }, end: { x: 552, y }, thickness: 1, color: purple });
+  y -= 20;
 
-    // Footer
-    doc.fontSize(8).text("Sinapsis — Psicología Clínica | sinapsiscr.com", 60, 720, { align: "center" });
+  // Acceptance
+  page.drawText(
+    `Al confirmar esta cita, ${data.name} acepta las políticas de cancelación aquí descritas.`,
+    { x: margin, y, font, size: 8, color: gray }
+  );
+  y -= 14;
+  page.drawText(
+    `Documento generado el ${new Date().toLocaleDateString("es-CR")}`,
+    { x: margin, y, font, size: 8, color: gray }
+  );
 
-    doc.end();
+  // Footer
+  page.drawText("Sinapsis — Psicología Clínica | sinapsiscr.com", {
+    x: margin, y: 30, font, size: 8, color: gray,
   });
+
+  const pdfBytes = await doc.save();
+  return Buffer.from(pdfBytes);
 }
