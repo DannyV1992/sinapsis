@@ -124,6 +124,7 @@ export default function AgendarPage() {
           email: formData.email,
           phone: formData.phone,
           service: formData.service,
+          modality: formData.modality,
           notes: formData.notes,
         }),
       });
@@ -131,20 +132,6 @@ export default function AgendarPage() {
       const data = await res.json();
 
       if (data.success) {
-        // Send confirmation email with PDF
-        fetch("/api/booking-confirmation", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            service: formData.service,
-            modality: formData.modality,
-            date: formatDate(formData.date),
-            time: `${formatTime(formData.slot!.start)} — ${formatTime(formData.slot!.end)}`,
-          }),
-        }).catch(() => {});
 
         setBookingSuccess(true);
       } else {

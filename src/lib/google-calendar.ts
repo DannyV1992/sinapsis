@@ -114,25 +114,89 @@ export async function bookAppointment(params: {
   email: string;
   phone: string;
   service: string;
+  modality?: string;
   notes?: string;
 }) {
   const calendar = getCalendarClient();
+  const auth = getOAuth2Client();
+
+  // Generate PDF and upload to Drive
+  let pdfLink = "";
+  const driveFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
+
+  if (driveFolderId) {
+    try {
+      const { generateBookingPDF } = await import("@/lib/generate-pdf");
+      const startDate = new Date(params.start);
+      const dateStr = startDate.toLocaleDateString("es-CR", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
+      const timeStr = startDate.toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit", hour12: true });
+
+      const pdfBuffer = await generateBookingPDF({
+        name: params.name,
+        email: params.email,
+        phone: params.phone,
+        service: params.service,
+        modality: params.modality || "",
+        date: dateStr,
+        time: timeStr,
+      });
+
+      const drive = google.drive({ version: "v3", auth });
+      const fileName = `Cita_${params.name.replace(/\s+/g, "_")}_${params.start.split("T")[0]}.pdf`;
+
+      const { Readable } = await import("stream");
+      const stream = new Readable();
+      stream.push(pdfBuffer);
+      stream.push(null);
+
+      const file = await drive.files.create({
+        requestBody: {
+          name: fileName,
+          parents: [driveFolderId],
+          mimeType: "application/pdf",
+        },
+        media: {
+          mimeType: "application/pdf",
+          body: stream,
+        },
+        fields: "id,webViewLink",
+      });
+
+      // Make file accessible to anyone with the link
+      await drive.permissions.create({
+        fileId: file.data.id!,
+        requestBody: {
+          role: "reader",
+          type: "anyone",
+        },
+      });
+
+      pdfLink = file.data.webViewLink || "";
+    } catch (error) {
+      console.error("Error generating/uploading PDF:", error);
+    }
+  }
+
+  const description = [
+    "[AGENDADO]",
+    `Paciente: ${params.name}`,
+    `Email: ${params.email}`,
+    `Teléfono: ${params.phone}`,
+    `Servicio: ${params.service}`,
+    params.modality ? `Modalidad: ${params.modality}` : "",
+    params.notes ? `Notas: ${params.notes}` : "",
+    "",
+    pdfLink ? `📄 Políticas de cancelación: ${pdfLink}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
 
   const event = await calendar.events.insert({
     calendarId: CALENDAR_ID,
     sendUpdates: "all",
     requestBody: {
       summary: `${params.name} — ${params.service}`,
-      description: [
-        "[AGENDADO]",
-        `Paciente: ${params.name}`,
-        `Email: ${params.email}`,
-        `Teléfono: ${params.phone}`,
-        `Servicio: ${params.service}`,
-        params.notes ? `Notas: ${params.notes}` : "",
-      ]
-        .filter(Boolean)
-        .join("\n"),
+      description,
       start: { dateTime: params.start, timeZone: "America/Costa_Rica" },
       end: { dateTime: params.end, timeZone: "America/Costa_Rica" },
       attendees: [{ email: params.email }],
