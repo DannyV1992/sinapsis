@@ -19,10 +19,10 @@ export default function ScrollRevealText() {
       className="py-32 bg-primary-dark relative overflow-hidden"
     >
       {/* Ambient light effects */}
-      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-[100px]" />
-      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-accent/10 rounded-full blur-[80px]" />
+      <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/20 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-48 h-48 bg-accent/10 rounded-full blur-[80px] pointer-events-none" />
 
-      <div className="max-w-4xl mx-auto px-4 text-center">
+      <div className="max-w-4xl mx-auto px-4 text-center relative z-10">
         <p className="text-2xl sm:text-3xl md:text-4xl leading-relaxed font-[family-name:var(--font-playfair)]">
           {words.map((word, i) => {
             const start = i / words.length;
@@ -37,8 +37,8 @@ export default function ScrollRevealText() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.5 }}
+          viewport={{ once: true, margin: "100px" }}
+          transition={{ delay: 0.3 }}
           className="mt-12"
         >
           <Link
