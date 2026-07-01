@@ -41,8 +41,8 @@ export interface TimeSlot {
 export async function getAvailableSlots(date: string, modality?: string, service?: string): Promise<TimeSlot[]> {
   const calendar = getCalendarClient();
 
-  const dayStart = new Date(`${date}T00:00:00`);
-  const dayEnd = new Date(`${date}T23:59:59`);
+  const dayStart = new Date(`${date}T00:00:00-06:00`);
+  const dayEnd = new Date(`${date}T23:59:59-06:00`);
 
   const eventsRes = await calendar.events.list({
     calendarId: CALENDAR_ID,
