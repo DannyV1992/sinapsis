@@ -1,3 +1,5 @@
+import { config } from "@/lib/config";
+
 export default function Footer() {
   return (
     <footer className="bg-primary-dark text-white/80 py-10">
@@ -33,9 +35,9 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-3">Contacto</h4>
             <ul className="space-y-2 text-sm">
-              <li>info@sinapsiscr.com</li>
-              <li>+506 7139-8403</li>
-              <li>San José, Costa Rica</li>
+              <li>{config.email}</li>
+              <li>{config.phoneDisplay}</li>
+              <li>{config.location}</li>
             </ul>
           </div>
         </div>

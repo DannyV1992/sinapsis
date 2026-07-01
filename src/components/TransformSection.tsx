@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import AnimateOnScroll from "./AnimateOnScroll";
+import { config, formatPrice } from "@/lib/config";
 
 const modalities = [
   { name: "Individual", icon: "🧠" },
@@ -12,10 +13,10 @@ const modalities = [
 ];
 
 const descriptions = [
-  "Sesiones de una hora centradas en tus necesidades. Trabajamos ansiedad, depresión, autoestima, duelo y más. Tu proceso, tu ritmo.",
-  "Sesiones de hora y media para mejorar la comunicación, resolver conflictos y reconectarse. Ambos miembros deben tener disposición de participar.",
-  "Sesiones de hora y media para toda la familia. Trabajamos dinámicas, roles y comunicación para fortalecer los vínculos.",
-  "La misma eficacia y calidez desde cualquier lugar. Solo necesitas un espacio privado y conexión estable.",
+  `Sesiones de una hora centradas en tus necesidades. Trabajamos ansiedad, depresión, autoestima, duelo y más. Tu proceso, tu ritmo.\n\n${formatPrice(config.prices.individual)} por sesión`,
+  `Sesiones de hora y media para mejorar la comunicación, resolver conflictos y reconectarse. Ambos miembros deben tener disposición de participar.\n\n${formatPrice(config.prices.pareja)} por sesión`,
+  `Sesiones de hora y media para toda la familia. Trabajamos dinámicas, roles y comunicación para fortalecer los vínculos.\n\n${formatPrice(config.prices.familiar)} por sesión`,
+  "La misma eficacia y calidez desde cualquier lugar. Solo necesitas un espacio privado y conexión estable.\n\nMismo precio según el servicio elegido",
 ];
 
 export default function TransformSection() {

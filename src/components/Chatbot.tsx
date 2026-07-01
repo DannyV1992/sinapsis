@@ -11,7 +11,7 @@ interface Message {
 const faqData: { keywords: string[]; answer: string; showWhatsApp?: boolean }[] = [
   {
     keywords: ["precio", "costo", "cuanto", "cuánto", "tarifa", "cobr"],
-    answer: "La sesión individual tiene un costo de ₡25,000. La primera sesión de valoración tiene el mismo precio. Aceptamos transferencia, SINPE Móvil y efectivo.",
+    answer: "Terapia individual (1 hora): ₡30,000. Terapia de pareja o familiar (1.5 horas): ₡45,000. Aceptamos SINPE Móvil, transferencia bancaria y efectivo. El pago se realiza al finalizar cada sesión.",
   },
   {
     keywords: ["horario", "hora", "cuando", "cuándo", "disponib", "atiend"],

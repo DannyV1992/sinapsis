@@ -40,9 +40,9 @@ const faqs = [
       "Se requiere que ambos miembros de la pareja deseen asistir al proceso. Si alguno no desea participar, se recomienda iniciar con sesión individual. Ambos deben asistir a las sesiones.",
   },
   {
-    question: "¿Qué métodos de pago aceptan?",
+    question: "¿Cuánto cuesta y qué métodos de pago aceptan?",
     answer:
-      "Transferencia bancaria, SINPE Móvil y efectivo. El pago se realiza al finalizar cada sesión.",
+      "Terapia individual (1 hora): ₡30,000. Terapia de pareja o familiar (1.5 horas): ₡45,000. Aceptamos transferencia bancaria, SINPE Móvil y efectivo. El pago se realiza al finalizar cada sesión.",
   },
 ];
 
