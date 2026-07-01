@@ -6,9 +6,6 @@ import { motion, AnimatePresence } from "framer-motion";
 const services = [
   "Terapia individual",
   "Terapia de pareja",
-  "Manejo de ansiedad",
-  "Orientación vocacional",
-  "Terapia online",
 ];
 
 interface TimeSlot {
@@ -24,6 +21,7 @@ export default function AgendarPage() {
     email: "",
     phone: "",
     service: "",
+    modality: "",
     date: "",
     slot: null as TimeSlot | null,
     notes: "",
@@ -31,32 +29,73 @@ export default function AgendarPage() {
   const [availableSlots, setAvailableSlots] = useState<TimeSlot[]>([]);
   const [loadingSlots, setLoadingSlots] = useState(false);
   const [noSlots, setNoSlots] = useState(false);
+  const [nextAvailable, setNextAvailable] = useState("");
+  const [nextAvailableOther, setNextAvailableOther] = useState("");
   const [booking, setBooking] = useState(false);
   const [bookingSuccess, setBookingSuccess] = useState(false);
   const [error, setError] = useState("");
+  const [acceptedPolicy, setAcceptedPolicy] = useState(false);
 
   const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
-    if (!formData.date) return;
+    if (!formData.date || !formData.service || !formData.modality) return;
 
     setLoadingSlots(true);
     setNoSlots(false);
+    setNextAvailable("");
+    setNextAvailableOther("");
     setAvailableSlots([]);
     setFormData((prev) => ({ ...prev, slot: null }));
 
-    fetch(`/api/calendar/available-slots?date=${formData.date}`)
+    fetch(`/api/calendar/available-slots?date=${formData.date}&modality=${formData.modality}`)
       .then((res) => res.json())
-      .then((data) => {
+      .then(async (data) => {
         if (data.slots && data.slots.length > 0) {
           setAvailableSlots(data.slots);
         } else {
           setNoSlots(true);
+          const selectedDate = new Date(formData.date + "T12:00:00");
+          const otherModality = formData.modality === "presencial" ? "virtual" : "presencial";
+          let foundSame = false;
+          let foundOther = false;
+
+          for (let i = 1; i <= 30; i++) {
+            if (foundSame && foundOther) break;
+
+            const nextDate = new Date(selectedDate);
+            nextDate.setDate(nextDate.getDate() + i);
+            const dateStr = nextDate.toISOString().split("T")[0];
+
+            try {
+              // Buscar en la misma modalidad
+              if (!foundSame) {
+                const res = await fetch(`/api/calendar/available-slots?date=${dateStr}&modality=${formData.modality}`);
+                const nextData = await res.json();
+                if (nextData.slots && nextData.slots.length > 0) {
+                  setNextAvailable(dateStr);
+                  foundSame = true;
+                }
+              }
+
+              // Buscar en la otra modalidad
+              if (!foundOther) {
+                const res = await fetch(`/api/calendar/available-slots?date=${dateStr}&modality=${otherModality}`);
+                const nextData = await res.json();
+                if (nextData.slots && nextData.slots.length > 0) {
+                  setNextAvailableOther(dateStr);
+                  foundOther = true;
+                }
+              }
+            } catch {
+              break;
+            }
+          }
         }
       })
       .catch(() => setError("Error al cargar horarios disponibles"))
       .finally(() => setLoadingSlots(false));
-  }, [formData.date]);
+  }, [formData.date, formData.service, formData.modality]);
 
   const handleNext = () => {
     setDirection(1);
@@ -92,6 +131,21 @@ export default function AgendarPage() {
       const data = await res.json();
 
       if (data.success) {
+        // Send confirmation email with PDF
+        fetch("/api/booking-confirmation", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            service: formData.service,
+            modality: formData.modality,
+            date: formatDate(formData.date),
+            time: `${formatTime(formData.slot!.start)} — ${formatTime(formData.slot!.end)}`,
+          }),
+        }).catch(() => {});
+
         setBookingSuccess(true);
       } else {
         setError(data.error || "Error al agendar la cita");
@@ -361,6 +415,35 @@ export default function AgendarPage() {
                   </select>
                 </div>
                 <div>
+                  <label className="block text-sm font-medium text-foreground/70 mb-2">
+                    Modalidad
+                  </label>
+                  <div className="grid grid-cols-2 gap-3">
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, modality: "presencial" })}
+                      className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
+                        formData.modality === "presencial"
+                          ? "bg-primary text-white border-primary"
+                          : "border-gray-200 text-foreground/70 hover:border-primary"
+                      }`}
+                    >
+                      Presencial
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, modality: "virtual" })}
+                      className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
+                        formData.modality === "virtual"
+                          ? "bg-primary text-white border-primary"
+                          : "border-gray-200 text-foreground/70 hover:border-primary"
+                      }`}
+                    >
+                      Virtual
+                    </button>
+                  </div>
+                </div>
+                <div>
                   <label
                     htmlFor="date"
                     className="block text-sm font-medium text-foreground/70 mb-1"
@@ -413,9 +496,47 @@ export default function AgendarPage() {
                     )}
 
                     {noSlots && !loadingSlots && (
-                      <div className="py-4 px-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-700 text-sm">
-                        No hay horarios disponibles para esta fecha. Prueba con
-                        otro día.
+                      <div className="py-4 px-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-700 text-sm space-y-2">
+                        {(nextAvailable || nextAvailableOther) ? (
+                          <>
+                            <p>No hay horarios disponibles en modalidad <strong>{formData.modality}</strong> para esta fecha.</p>
+
+                            {nextAvailable && (
+                              <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, date: nextAvailable })}
+                                className="block text-primary font-medium hover:underline"
+                              >
+                                Próximo {formData.modality}: {formatDate(nextAvailable)} →
+                              </button>
+                            )}
+
+                            {nextAvailableOther && (
+                              <button
+                                type="button"
+                                onClick={() => setFormData({ ...formData, modality: formData.modality === "presencial" ? "virtual" : "presencial", date: nextAvailableOther })}
+                                className="block text-primary/70 font-medium hover:underline"
+                              >
+                                Próximo {formData.modality === "presencial" ? "virtual" : "presencial"}: {formatDate(nextAvailableOther)} →
+                              </button>
+                            )}
+                          </>
+                        ) : (
+                          <div>
+                            <p>No hay citas disponibles en ninguna modalidad para los próximos 30 días.</p>
+                            <a
+                              href="https://wa.me/50688888888?text=Hola%2C%20quiero%20agendar%20una%20cita%20pero%20no%20encontr%C3%A9%20disponibilidad%20en%20la%20web."
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-2 mt-2 text-green-700 font-medium hover:underline"
+                            >
+                              <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                              </svg>
+                              Coordinar por WhatsApp
+                            </a>
+                          </div>
+                        )}
                       </div>
                     )}
 
@@ -461,7 +582,7 @@ export default function AgendarPage() {
                     type="button"
                     onClick={handleNext}
                     disabled={
-                      !formData.service || !formData.date || !formData.slot
+                      !formData.service || !formData.modality || !formData.date || !formData.slot
                     }
                     className="flex-1 px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                   >
@@ -507,6 +628,14 @@ export default function AgendarPage() {
                     </span>
                   </div>
                   <div className="flex justify-between">
+                    <span className="text-sm text-foreground/60">
+                      Modalidad:
+                    </span>
+                    <span className="text-sm font-medium capitalize">
+                      {formData.modality}
+                    </span>
+                  </div>
+                  <div className="flex justify-between">
                     <span className="text-sm text-foreground/60">Fecha:</span>
                     <span className="text-sm font-medium">
                       {formatDate(formData.date)}
@@ -538,6 +667,27 @@ export default function AgendarPage() {
                     }
                   />
                 </div>
+                <div className="p-4 bg-section-alt rounded-xl">
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={acceptedPolicy}
+                      onChange={(e) => setAcceptedPolicy(e.target.checked)}
+                      className="mt-1 w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary/20"
+                    />
+                    <span className="text-xs text-foreground/60 leading-relaxed">
+                      He leído y acepto las{" "}
+                      <a
+                        href="/politicas"
+                        target="_blank"
+                        className="text-primary underline hover:text-primary-dark"
+                      >
+                        políticas de cancelación
+                      </a>
+                      . Entiendo que cancelaciones con menos de 24 horas de anticipación tienen un cargo del 50%.
+                    </span>
+                  </label>
+                </div>
                 <div className="flex gap-3 mt-4">
                   <button
                     type="button"
@@ -548,7 +698,7 @@ export default function AgendarPage() {
                   </button>
                   <button
                     type="submit"
-                    disabled={booking}
+                    disabled={booking || !acceptedPolicy}
                     className="flex-1 px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   >
                     {booking ? (

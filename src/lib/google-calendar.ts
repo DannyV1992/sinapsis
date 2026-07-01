@@ -30,7 +30,7 @@ export interface TimeSlot {
   end: string;
 }
 
-export async function getAvailableSlots(date: string): Promise<TimeSlot[]> {
+export async function getAvailableSlots(date: string, modality?: string): Promise<TimeSlot[]> {
   const calendar = getCalendarClient();
 
   const dayStart = new Date(`${date}T00:00:00`);
@@ -46,17 +46,30 @@ export async function getAvailableSlots(date: string): Promise<TimeSlot[]> {
 
   const allEvents = eventsRes.data.items || [];
 
-  const availabilityBlocks = allEvents.filter(
-    (event) =>
-      event.colorId === "2" ||
-      event.summary?.toLowerCase().includes("disponible")
+  const bookedEvents = allEvents.filter(
+    (event) => event.description?.includes("[AGENDADO]")
   );
 
-  const bookedEvents = allEvents.filter(
-    (event) =>
-      event.colorId !== "2" &&
-      !event.summary?.toLowerCase().includes("disponible")
-  );
+  // Filtrar disponibilidad por modalidad:
+  // - "Presencial" → solo pacientes presenciales
+  // - "Virtual" → solo pacientes virtuales
+  // - Cualquier otro nombre → ambas modalidades
+  const availabilityBlocks = allEvents.filter((event) => {
+    if (event.description?.includes("[AGENDADO]")) return false;
+
+    if (!modality) return true;
+
+    const title = event.summary?.toLowerCase() || "";
+    const isPresencial = title.includes("presencial");
+    const isVirtual = title.includes("virtual");
+
+    // Si el bloque no tiene etiqueta específica, es para ambas
+    if (!isPresencial && !isVirtual) return true;
+
+    if (modality === "virtual") return isVirtual;
+    if (modality === "presencial") return isPresencial;
+    return true;
+  });
 
   const slots: TimeSlot[] = [];
 
@@ -107,9 +120,11 @@ export async function bookAppointment(params: {
 
   const event = await calendar.events.insert({
     calendarId: CALENDAR_ID,
+    sendUpdates: "all",
     requestBody: {
-      summary: `Cita: ${params.name} — ${params.service}`,
+      summary: `${params.name} — ${params.service}`,
       description: [
+        "[AGENDADO]",
         `Paciente: ${params.name}`,
         `Email: ${params.email}`,
         `Teléfono: ${params.phone}`,

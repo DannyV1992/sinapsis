@@ -13,7 +13,8 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const slots = await getAvailableSlots(date);
+    const modality = searchParams.get("modality") || undefined;
+    const slots = await getAvailableSlots(date, modality);
     return NextResponse.json({ slots });
   } catch (error) {
     console.error("Error fetching available slots:", error);
