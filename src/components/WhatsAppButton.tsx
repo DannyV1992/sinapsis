@@ -1,7 +1,7 @@
 "use client";
 
 export default function WhatsAppButton() {
-  const phoneNumber = "50688888888";
+  const phoneNumber = "50671398403";
   const message = encodeURIComponent(
     "Hola, me gustaría consultar sobre los servicios de Sinapsis."
   );

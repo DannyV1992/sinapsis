@@ -139,7 +139,7 @@ export default function Chatbot() {
   const handleOption = (option: string) => {
     if (option === "Abrir WhatsApp" || option === "Escribir por WhatsApp") {
       window.open(
-        "https://wa.me/50688888888?text=" +
+        "https://wa.me/50671398403?text=" +
           encodeURIComponent("Hola, tengo una consulta sobre los servicios de Sinapsis."),
         "_blank"
       );
