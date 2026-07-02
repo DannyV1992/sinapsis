@@ -12,6 +12,8 @@ export const config = {
   location: "San José, Costa Rica",
 
   // Redes sociales
+  instagram: "https://www.instagram.com/diariodelavenus",
+  instagramHandle: "@diariodelavenus",
   whatsappMessage: "Hola, me gustaría consultar sobre los servicios de Sinapsis.",
 
   // Precios

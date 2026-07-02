@@ -420,14 +420,10 @@ export default function AgendarPage() {
                   <div className="grid grid-cols-2 gap-3">
                     <button
                       type="button"
-                      onClick={() => setFormData({ ...formData, modality: "presencial" })}
-                      className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
-                        formData.modality === "presencial"
-                          ? "bg-primary text-white border-primary"
-                          : "border-gray-200 text-foreground/70 hover:border-primary"
-                      }`}
+                      disabled
+                      className="px-4 py-3 rounded-xl border text-sm font-medium border-gray-200 text-foreground/30 cursor-not-allowed"
                     >
-                      Presencial
+                      Presencial (próximamente)
                     </button>
                     <button
                       type="button"
