@@ -30,8 +30,8 @@ export const config = {
     familiar: 90,
   },
 
-  // Horario
-  schedule: "Lunes a viernes, 8:00am - 5:00pm",
+  // Horario (chatbot)
+  schedule: "Lunes a viernes, usualmente de 8:00am - 5:00pm pero los horarios pueden variar según disponibilidad y modalidad de la cita.",
 
   // Métodos de pago
   paymentMethods: "SINPE Móvil, transferencia bancaria y efectivo",
