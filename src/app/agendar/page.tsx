@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { getWhatsAppLink } from "@/lib/config";
 
 const services = [
   "Terapia individual",
@@ -523,7 +524,7 @@ export default function AgendarPage() {
                           <div>
                             <p>No hay citas disponibles en ninguna modalidad para los próximos 30 días.</p>
                             <a
-                              href="https://wa.me/50671398403?text=Hola%2C%20quiero%20agendar%20una%20cita%20pero%20no%20encontr%C3%A9%20disponibilidad%20en%20la%20web."
+                              href={getWhatsAppLink("Hola, quiero agendar una cita pero no encontré disponibilidad en la web.")}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-flex items-center gap-2 mt-2 text-green-700 font-medium hover:underline"

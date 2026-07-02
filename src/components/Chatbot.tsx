@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { config, formatPrice, getWhatsAppLink } from "@/lib/config";
 
 interface Message {
   role: "bot" | "user";
@@ -11,11 +12,11 @@ interface Message {
 const faqData: { keywords: string[]; answer: string; showWhatsApp?: boolean }[] = [
   {
     keywords: ["precio", "costo", "cuanto", "cuánto", "tarifa", "cobr"],
-    answer: "Terapia individual (1 hora): ₡30,000. Terapia de pareja o familiar (1.5 horas): ₡45,000. Aceptamos SINPE Móvil, transferencia bancaria y efectivo. El pago se realiza al finalizar cada sesión.",
+    answer: `Terapia individual (1 hora): ${formatPrice(config.prices.individual)}. Terapia de pareja o familiar (1.5 horas): ${formatPrice(config.prices.pareja)}. Aceptamos ${config.paymentMethods}. El pago se realiza al finalizar cada sesión.`,
   },
   {
     keywords: ["horario", "hora", "cuando", "cuándo", "disponib", "atiend"],
-    answer: "Atiendo de lunes a viernes de 8:00 AM a 5:00 PM. Puedes ver la disponibilidad exacta en la sección de agendar cita.",
+    answer: `Atiendo ${config.schedule}. Puedes ver la disponibilidad exacta en la sección de agendar cita.`,
   },
   {
     keywords: ["duracion", "duración", "dura", "largo", "tiempo sesion", "tiempo sesión"],
@@ -27,11 +28,11 @@ const faqData: { keywords: string[]; answer: string; showWhatsApp?: boolean }[] 
   },
   {
     keywords: ["ubicacion", "ubicación", "donde", "dónde", "dirección", "direccion", "llegar"],
-    answer: "El consultorio está ubicado en San José, Costa Rica. La dirección exacta la comparto al confirmar tu cita.",
+    answer: `El consultorio está ubicado en ${config.location}. La dirección exacta la comparto al confirmar tu cita.`,
   },
   {
     keywords: ["servicio", "ofrec", "tipo", "tratamiento", "especializ"],
-    answer: "Ofrezco terapia individual, terapia de pareja, manejo de ansiedad, orientación vocacional, terapia online y talleres grupales.",
+    answer: "Ofrezco terapia individual, terapia de pareja, terapia familiar y atención online.",
   },
   {
     keywords: ["ansiedad", "nervios", "pánico", "panico", "preocup"],
@@ -59,7 +60,7 @@ const faqData: { keywords: string[]; answer: string; showWhatsApp?: boolean }[] 
   },
   {
     keywords: ["whatsapp", "wsp", "telefono", "teléfono", "numero", "número", "celular", "contacto", "llamar", "escribir"],
-    answer: "Nuestro WhatsApp es +506 7139-8403. ¿Quieres que te abra la conversación?",
+    answer: `Nuestro WhatsApp es ${config.phoneDisplay}. ¿Quieres que te abra la conversación?`,
     showWhatsApp: true,
   },
 ];
@@ -138,11 +139,7 @@ export default function Chatbot() {
 
   const handleOption = (option: string) => {
     if (option === "Abrir WhatsApp" || option === "Escribir por WhatsApp") {
-      window.open(
-        "https://wa.me/50671398403?text=" +
-          encodeURIComponent("Hola, tengo una consulta sobre los servicios de Sinapsis."),
-        "_blank"
-      );
+      window.open(getWhatsAppLink(), "_blank");
       return;
     }
     if (option === "Hacer otra pregunta") {

@@ -1,111 +1,112 @@
-# Configuración de Google Calendar API (OAuth 2.0)
+# Configuración de Sinapsis
 
-> Usa una cuenta personal de Gmail (no institucional).
-> Puede ser el Gmail de la psicóloga o uno dedicado (ej. sinapsis.psicologia@gmail.com).
+## Requisitos previos
 
----
+- Node.js 20+
+- Cuenta de Google Workspace (info@sinapsiscr.com)
+- Dominio sinapsiscr.com (Cloudflare)
+- Cuenta en Vercel (para producción)
 
-## Paso 1: Crear proyecto en Google Cloud
+## Paso 1: Google Cloud Console
 
-1. Ve a https://console.cloud.google.com/ e inicia sesión con la cuenta personal de Gmail
-2. Crea un proyecto nuevo (ej. "Sinapsis")
-3. En el menú lateral, ve a **"APIs y servicios" > "Biblioteca"**
-4. Busca **"Google Calendar API"** y habilítala
+1. Ve a https://console.cloud.google.com con info@sinapsiscr.com
+2. Proyecto: "Sinapsis"
+3. APIs habilitadas:
+   - Google Calendar API
+   - Google Sheets API
+   - Google Drive API
+   - Gmail API (pendiente de propagación de scopes)
 
-## Paso 2: Crear credenciales OAuth
+## Paso 2: Credenciales OAuth
 
-1. Ve a **"APIs y servicios" > "Credenciales"**
-2. Click en **"Crear credenciales" > "ID de cliente de OAuth"**
-3. Si te pide configurar la "Pantalla de consentimiento":
-   - Tipo: **Externo**
-   - Nombre de la app: "Sinapsis"
-   - Email de soporte: tu email
-   - No necesitas agregar scopes ahí (se configuran desde el código)
-   - En "Usuarios de prueba", agrega el email de la psicóloga
-   - Guarda
-4. Vuelve a **Credenciales > Crear credenciales > ID de cliente de OAuth**
-5. Tipo de aplicación: **Aplicación web**
-6. Nombre: "Sinapsis Web"
-7. En **"URIs de redirección autorizados"** agrega: `http://localhost:3000/api/auth/callback`
-8. Click en **Crear**
-9. Copia el **Client ID** y **Client Secret**
+1. APIs y servicios → Credenciales → ID de cliente de OAuth
+2. Tipo: Aplicación web
+3. URIs de redirección autorizados:
+   - `http://localhost:3000/api/auth/callback`
+   - `https://sinapsiscr.com/api/auth/callback`
+4. Pantalla de consentimiento: Interno
+5. Scopes configurados en "Acceso a los datos":
+   - `https://www.googleapis.com/auth/calendar`
+   - `https://www.googleapis.com/auth/spreadsheets`
+   - `https://www.googleapis.com/auth/gmail.send`
+   - `https://www.googleapis.com/auth/drive.file`
 
-## Paso 3: Configurar variables de entorno
+## Paso 3: Obtener refresh token
 
-Crea un archivo `.env.local` en la raíz del proyecto:
+1. Iniciar servidor local: `npm run dev`
+2. Abrir: http://localhost:3000/api/auth/login
+3. Autorizar con info@sinapsiscr.com
+4. Copiar el refresh token que se muestra
+5. Pegarlo en `.env.local` como `GOOGLE_REFRESH_TOKEN`
 
-```
-GOOGLE_CLIENT_ID=tu-client-id.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=tu-client-secret
-GOOGLE_REFRESH_TOKEN=pendiente
-GOOGLE_CALENDAR_ID=primary
-```
+Si los scopes cambian, revocar acceso en https://myaccount.google.com/permissions y re-autorizar.
 
-## Paso 4: Obtener el refresh token
+## Paso 4: Variables de entorno
 
-1. Inicia el servidor de desarrollo: `npm run dev`
-2. Abre en tu navegador: http://localhost:3000/api/auth/login
-3. Te redirigirá a Google — inicia sesión con la cuenta de la psicóloga
-4. Autoriza los permisos del calendario
-5. Verás una página con el **refresh_token** — cópialo
-6. Pégalo en `.env.local` como valor de `GOOGLE_REFRESH_TOKEN`
-7. Reinicia el servidor (`Ctrl+C` y `npm run dev` de nuevo)
-
-> Este paso solo se hace UNA VEZ. El refresh token no expira a menos que se revoque manualmente.
-
-## Paso 5: Configurar el ID del calendario
-
-- Si quieres usar el calendario principal de la cuenta, deja `GOOGLE_CALENDAR_ID=primary`
-- Si prefieres un calendario aparte:
-  1. En Google Calendar, crea un calendario nuevo (ej. "Disponibilidad Sinapsis")
-  2. Ve a Configuración del calendario > "Integrar el calendario"
-  3. Copia el **ID del calendario** (tiene formato `xxx@group.calendar.google.com`)
-  4. Ponlo en `.env.local` como `GOOGLE_CALENDAR_ID`
-
-## Paso 6: Marcar disponibilidad
-
-La psicóloga marca en Google Calendar cuándo puede atender:
-
-### Cómo crear bloques de disponibilidad
-
-En el calendario, crear eventos que:
-- Tengan color **verde (Sage/Salvia)** en Google Calendar, O
-- Contengan la palabra **"Disponible"** en el título
-
-### Ejemplo
-
-Crear evento recurrente:
-- Título: "Disponible"
-- Lunes y miércoles: 8:00 - 12:00
-- Martes y jueves: 14:00 - 17:00
-
-### Cómo funciona la lógica
+Crear `.env.local`:
 
 ```
-Calendario de la psicóloga:
-
-Lunes:
-  [08:00 - 12:00] Disponible (verde)     → Sitio muestra: 8:00, 9:00, 10:00, 11:00
-  [14:00 - 17:00] Disponible (verde)     → Sitio muestra: 14:00, 15:00, 16:00
-
-Cuando alguien agenda a las 9:00:
-  [09:00 - 10:00] Cita: Juan — Terapia   ← Se crea automáticamente
-  
-  Sitio ahora muestra: 8:00, 10:00, 11:00 (9:00 desaparece)
+GOOGLE_CLIENT_ID=803885539185-de63u54iriesq9u0ant3svmq1mabf9gp.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=[secret]
+GOOGLE_REFRESH_TOKEN=[token obtenido en paso 3]
+GOOGLE_CALENDAR_ID=[ID del calendario "Citas Pacientes"]
+GOOGLE_DRIVE_FOLDER_ID=[ID de la carpeta en Drive para PDFs]
+GOOGLE_CONTACT_SHEET_ID=[ID de la hoja "Contacto" en Sheets]
 ```
 
----
+### Dónde encontrar los IDs:
 
-## Resumen de archivos necesarios
+- **GOOGLE_CALENDAR_ID:** Google Calendar → Configuración del calendario "Citas Pacientes" → Integrar el calendario → ID del calendario
+- **GOOGLE_DRIVE_FOLDER_ID:** URL de la carpeta en Drive → el ID está entre `/folders/` y el final
+- **GOOGLE_CONTACT_SHEET_ID:** URL de la hoja de cálculo → el ID está entre `/d/` y `/edit`
 
-```
-.env.local
-├── GOOGLE_CLIENT_ID        ← De paso 2
-├── GOOGLE_CLIENT_SECRET    ← De paso 2
-├── GOOGLE_REFRESH_TOKEN    ← De paso 4
-└── GOOGLE_CALENDAR_ID      ← "primary" o ID de calendario específico
-```
+## Paso 5: Configurar disponibilidad
 
-## Eliminar las rutas de autorización (opcional, para producción)
+En Google Calendar (info@sinapsiscr.com), calendario "Citas Pacientes":
 
-Las rutas `/api/auth/login` y `/api/auth/callback` solo son necesarias para obtener el refresh token. Una vez obtenido, puedes eliminar la carpeta `src/app/api/auth/` si quieres.
+- Crear eventos con título "Presencial" → disponibilidad solo presencial
+- Crear eventos con título "Virtual" → disponibilidad solo virtual
+- Crear eventos con cualquier otro título → disponibilidad para ambas modalidades
+- Los eventos recurrentes funcionan (ej. todos los lunes 8-12)
+
+El sistema genera slots de:
+- 1 hora + 15 min descanso para terapia individual
+- 1.5 horas + 15 min descanso para pareja/familiar
+
+## Paso 6: Deploy en Vercel
+
+1. Conectar repositorio de GitHub en vercel.com
+2. Agregar las mismas variables de entorno de `.env.local` en Settings → Environment Variables
+3. Deploy automático con cada push a `main`
+
+## Paso 7: Conectar dominio
+
+1. En Vercel → Settings → Domains → agregar sinapsiscr.com y www.sinapsiscr.com
+2. En Cloudflare → DNS → agregar registros CNAME según Vercel indique
+3. Proxy de Cloudflare: desactivado (DNS only) para que Vercel emita el SSL
+
+## Configuración central
+
+El archivo `src/lib/config.ts` contiene todos los datos variables del sitio:
+- Teléfono / WhatsApp
+- Email
+- Ubicación
+- Precios
+- Horario
+- Métodos de pago
+- Datos de la profesional
+
+Al modificar este archivo, se actualizan automáticamente en toda la página.
+
+## Servicios de Google Workspace
+
+- **info@sinapsiscr.com** — cuenta principal (admin, APIs, calendar)
+- **citas@sinapsiscr.com** — alias de info (para confirmaciones)
+- **facturas@sinapsiscr.com** — grupo (compartido con contadora)
+
+## Reactivar el chatbot
+
+En `src/app/layout.tsx`:
+1. Descomentar `import Chatbot from "@/components/Chatbot";`
+2. Agregar `<Chatbot />` dentro del body
+3. Configurar `GOOGLE_SHEET_ID` en .env.local si se quiere logging

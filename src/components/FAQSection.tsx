@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import AnimateOnScroll from "./AnimateOnScroll";
+import { config, formatPrice } from "@/lib/config";
 
 const faqs = [
   {
@@ -42,7 +43,7 @@ const faqs = [
   {
     question: "¿Cuánto cuesta y qué métodos de pago aceptan?",
     answer:
-      "Terapia individual (1 hora): ₡30,000. Terapia de pareja o familiar (1.5 horas): ₡45,000. Aceptamos transferencia bancaria, SINPE Móvil y efectivo. El pago se realiza al finalizar cada sesión.",
+      `Terapia individual (1 hora): ${formatPrice(config.prices.individual)}. Terapia de pareja o familiar (1.5 horas): ${formatPrice(config.prices.pareja)}. Aceptamos ${config.paymentMethods}. El pago se realiza al finalizar cada sesión.`,
   },
 ];
 

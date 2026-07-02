@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sinapsis — Psicología Clínica
 
-## Getting Started
+Página web profesional para consultorio de psicología clínica con sistema de agendamiento automatizado.
 
-First, run the development server:
+## Stack tecnológico
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Framework:** Next.js 16 (App Router)
+- **Estilos:** Tailwind CSS
+- **Animaciones:** Framer Motion
+- **APIs:** Google Calendar, Google Sheets, Google Drive
+- **Hosting:** Vercel
+- **Dominio:** sinapsiscr.com (Cloudflare)
+- **Email:** Google Workspace
+
+## Estructura del proyecto
+
+```
+src/
+├── app/
+│   ├── page.tsx                 # Página principal
+│   ├── agendar/                 # Sistema de agendamiento
+│   ├── quiz/                    # Tests de bienestar (6 tests)
+│   ├── politicas/               # Políticas de cancelación
+│   ├── consentimiento/          # Consentimiento informado
+│   ├── logo-export/             # Exportación del logo
+│   └── api/
+│       ├── auth/                # OAuth login/callback
+│       ├── calendar/            # Disponibilidad y reservas
+│       ├── chat-log/            # Logs del chatbot
+│       └── contact/             # Formulario de contacto
+├── components/
+│   ├── AboutSection.tsx
+│   ├── AnimateOnScroll.tsx
+│   ├── Chatbot.tsx              # Chatbot (desactivado, listo para reactivar)
+│   ├── ContactSection.tsx
+│   ├── FAQSection.tsx
+│   ├── Footer.tsx
+│   ├── HeroSection.tsx
+│   ├── HowItWorksSection.tsx
+│   ├── Navbar.tsx
+│   ├── NeuronBackground.tsx     # Animación de neuronas interactiva
+│   ├── ParallaxServices.tsx     # Áreas de atención
+│   ├── QuizCTA.tsx
+│   ├── QuizRunner.tsx
+│   ├── ScrollRevealText.tsx
+│   ├── TransformSection.tsx     # Modalidades de atención
+│   └── WhatsAppButton.tsx
+└── lib/
+    ├── config.ts                # Configuración central (precios, teléfono, email)
+    ├── generate-pdf.ts          # Generación de PDF de políticas
+    ├── google-calendar.ts       # Integración con Google Calendar
+    └── quiz-data.ts             # Datos de los 6 tests
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Configuración central
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Todos los datos variables (precios, teléfono, email, ubicación, horario, métodos de pago) están en `src/lib/config.ts`. Al modificar este archivo, se actualizan automáticamente en toda la página.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Funcionalidades
 
-## Learn More
+### Sistema de agendamiento
+- Conectado a Google Calendar (OAuth 2.0)
+- Filtrado por modalidad (presencial/virtual)
+- Duración dinámica (1h individual, 1.5h pareja/familia)
+- Google Meet automático para citas virtuales
+- PDF de políticas generado y guardado en Drive
+- Link al PDF en la invitación de calendario
+- Sugerencia del próximo día disponible (busca hasta 30 días)
+- Descanso de 15 min entre citas
 
-To learn more about Next.js, take a look at the following resources:
+### Tests de bienestar
+- GAD-7 (Ansiedad)
+- PHQ-9 (Depresión)
+- PSS-10 (Estrés)
+- Rosenberg (Autoestima)
+- ECR-R (Estilos de apego)
+- WHO-5 (Bienestar general)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Chatbot (Neurón)
+- FAQ por palabras clave
+- Derivación a WhatsApp cuando no sabe la respuesta
+- Listo para reactivar (descomentar en layout.tsx)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Formulario de contacto
+- Mensajes guardados en Google Sheets automáticamente
 
-## Deploy on Vercel
+### Calendario — Cómo marcar disponibilidad
+- Crear eventos en el calendario "Citas Pacientes"
+- Título "Presencial" → solo para citas presenciales
+- Título "Virtual" → solo para citas virtuales
+- Cualquier otro título → disponible para ambas modalidades
+- Las citas agendadas se detectan por "[AGENDADO]" en la descripción
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Desarrollo local
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm install
+npm run dev
+```
+
+Abrir http://localhost:3000
+
+## Variables de entorno
+
+Crear archivo `.env.local` con las siguientes variables (ver SETUP.md para instrucciones completas):
+
+```
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_REFRESH_TOKEN=
+GOOGLE_CALENDAR_ID=
+GOOGLE_DRIVE_FOLDER_ID=
+GOOGLE_CONTACT_SHEET_ID=
+```
+
+## Deploy
+
+El proyecto se despliega automáticamente en Vercel al hacer push a la rama `main` en GitHub. Las variables de entorno deben configurarse en Vercel → Settings → Environment Variables.
