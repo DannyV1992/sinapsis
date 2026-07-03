@@ -106,8 +106,24 @@ Al modificar este archivo, se actualizan automáticamente en toda la página.
 ## Servicios de Google Workspace
 
 - **info@sinapsiscr.com** — cuenta principal (admin, APIs, calendar)
-- **citas@sinapsiscr.com** — alias de info (para confirmaciones)
-- **facturas@sinapsiscr.com** — grupo (compartido con contadora)
+- **citas@sinapsiscr.com** — alias de info (para confirmaciones/recordatorios via Resend)
+- **facturas@sinapsiscr.com** — alias de info (para facturación)
+- **facturas.sinapsiscr@gmail.com** — Gmail gratuito de la contadora
+
+### Configuración de correo para la contadora
+
+La contadora no tiene acceso a la cuenta info@. El flujo es:
+
+1. Los correos que llegan a facturas@sinapsiscr.com se reenvían automáticamente a facturas.sinapsiscr@gmail.com
+2. La contadora responde desde facturas.sinapsiscr@gmail.com usando "Enviar como" facturas@sinapsiscr.com
+
+Para configurar "Enviar como" en el Gmail de la contadora:
+1. Configuración → Cuentas e importación → Enviar como → Añadir dirección
+2. Dirección: facturas@sinapsiscr.com
+3. SMTP: smtp.gmail.com, puerto 587 (TLS)
+4. Usuario: info@sinapsiscr.com
+5. Contraseña: contraseña de aplicación generada desde info@ (ver PRIVATE.md)
+6. Google envía código de verificación a facturas@sinapsiscr.com (llega a info@, pasarlo a la contadora)
 
 ## Paso 8: Resend (recordatorios por email)
 
