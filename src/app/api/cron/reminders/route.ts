@@ -10,14 +10,25 @@ export async function GET(request: Request) {
 
   const calendar = getCalendarClient();
 
-  const now = new Date();
-  const in23h = new Date(now.getTime() + 23 * 60 * 60 * 1000);
-  const in25h = new Date(now.getTime() + 25 * 60 * 60 * 1000);
+  const costaRicaNow = new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/Costa_Rica" })
+  );
+  const tomorrow = new Date(costaRicaNow);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0, 0, 0, 0);
+  const dayAfter = new Date(tomorrow);
+  dayAfter.setDate(dayAfter.getDate() + 1);
+
+  const toISO = (d: Date) => {
+    const offset = "-06:00";
+    const pad = (n: number) => String(n).padStart(2, "0");
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}${offset}`;
+  };
 
   const eventsRes = await calendar.events.list({
     calendarId: CALENDAR_ID,
-    timeMin: in23h.toISOString(),
-    timeMax: in25h.toISOString(),
+    timeMin: toISO(tomorrow),
+    timeMax: toISO(dayAfter),
     singleEvents: true,
     orderBy: "startTime",
   });
