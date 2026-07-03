@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePostHog } from "posthog-js/react";
+import { gtagEvent } from "@/lib/gtag";
 import { QuizConfig } from "@/lib/quiz-data";
 
 export default function QuizRunner({ config }: { config: QuizConfig }) {
@@ -25,6 +26,11 @@ export default function QuizRunner({ config }: { config: QuizConfig }) {
         quiz: config.title,
         score,
         max_score: config.maxScore,
+        level: quizResult.level,
+      });
+      gtagEvent("quiz_completed", {
+        quiz_name: config.title,
+        score,
         level: quizResult.level,
       });
       setShowResult(true);

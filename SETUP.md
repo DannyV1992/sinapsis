@@ -149,10 +149,19 @@ Dashboard: https://us.posthog.com
 GA4 ya está integrado con el Measurement ID `G-GE5XQ9THJS` directamente en el layout.
 No requiere variables de entorno.
 
+Eventos de conversión configurados en el código:
+- `purchase` — se dispara al agendar una cita (value en CRC según servicio)
+- `generate_lead` — se dispara al enviar formulario de contacto
+- `contact` — se dispara al hacer click en WhatsApp
+- `quiz_completed` — se dispara al terminar un test de bienestar
+
+Para activar las conversiones en GA4:
+1. GA4 → Admin → Events → esperar a que lleguen los primeros eventos
+2. Marcar `purchase`, `generate_lead`, `contact` con el toggle "Mark as conversion"
+
 Para vincular con Google Ads:
 1. GA4 → Admin → Google Ads linking → vincular cuenta de Ads
-2. GA4 → Admin → Conversions → marcar eventos como conversiones
-3. En Google Ads → importar conversiones de GA4
+2. En Google Ads → Herramientas → Conversiones → importar desde GA4
 
 Dashboard: https://analytics.google.com
 

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { usePostHog } from "posthog-js/react";
+import { gtagEvent } from "@/lib/gtag";
 import { config, getWhatsAppLink } from "@/lib/config";
 
 export default function ContactSection() {
@@ -26,6 +27,7 @@ export default function ContactSection() {
         body: JSON.stringify(formData),
       });
       posthog?.capture("contact_form_submitted");
+      gtagEvent("generate_lead", { currency: "CRC", value: 0 });
       setSent(true);
     } catch {
       setSent(true);

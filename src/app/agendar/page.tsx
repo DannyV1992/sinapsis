@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { usePostHog } from "posthog-js/react";
+import { gtagEvent } from "@/lib/gtag";
 import { getWhatsAppLink } from "@/lib/config";
 
 const services = [
@@ -154,6 +155,11 @@ export default function AgendarPage() {
         posthog?.capture("booking_completed", {
           service: formData.service,
           modality: formData.modality,
+        });
+        gtagEvent("purchase", {
+          currency: "CRC",
+          value: formData.service === "Terapia individual" ? 30000 : 45000,
+          item_name: formData.service,
         });
         setBookingSuccess(true);
       } else {

@@ -106,8 +106,10 @@ Todos los datos variables (precios, teléfono, email, ubicación, horario, méto
 
 ### Analytics
 - PostHog: pageviews, session replay, eventos custom, funnels (modo cookieless)
-- Google Analytics 4: tráfico, audiencias, preparación para Google Ads
-- Eventos custom: `quiz_completed`, `booking_completed`, `booking_step_completed`, `contact_form_submitted`, `whatsapp_clicked`
+- Google Analytics 4: tráfico, audiencias, conversiones para Google Ads
+- Eventos PostHog: `quiz_completed`, `booking_completed`, `booking_step_completed`, `contact_form_submitted`, `whatsapp_clicked`
+- Conversiones GA4: `purchase` (cita agendada), `generate_lead` (formulario), `contact` (WhatsApp)
+- Helper: `src/lib/gtag.ts` — función `gtagEvent()` para enviar eventos a GA4
 
 ### Formulario de contacto
 - Mensajes guardados en Google Sheets automáticamente
