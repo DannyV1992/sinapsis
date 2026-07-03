@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { usePostHog } from "posthog-js/react";
 import { QuizConfig } from "@/lib/quiz-data";
 
 export default function QuizRunner({ config }: { config: QuizConfig }) {
+  const posthog = usePostHog();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [showResult, setShowResult] = useState(false);
@@ -17,6 +19,14 @@ export default function QuizRunner({ config }: { config: QuizConfig }) {
     if (currentQuestion < config.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
+      const score = newAnswers.reduce((sum, a) => sum + a, 0);
+      const quizResult = config.getResult(score);
+      posthog?.capture("quiz_completed", {
+        quiz: config.title,
+        score,
+        max_score: config.maxScore,
+        level: quizResult.level,
+      });
       setShowResult(true);
     }
   };

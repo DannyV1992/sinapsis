@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { usePostHog } from "posthog-js/react";
 import { config, getWhatsAppLink } from "@/lib/config";
 
 export default function ContactSection() {
+  const posthog = usePostHog();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -23,6 +25,7 @@ export default function ContactSection() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
+      posthog?.capture("contact_form_submitted");
       setSent(true);
     } catch {
       setSent(true);

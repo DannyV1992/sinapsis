@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 // import Chatbot from "@/components/Chatbot";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { LocalBusinessJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
+import { PostHogProvider } from "./posthog-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -89,11 +90,13 @@ export default function RootLayout({
         <WebSiteJsonLd />
       </head>
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        {/* <Chatbot /> */}
-        <WhatsAppButton />
+        <PostHogProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          {/* <Chatbot /> */}
+          <WhatsAppButton />
+        </PostHogProvider>
       </body>
     </html>
   );

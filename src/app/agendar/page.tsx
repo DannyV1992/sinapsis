@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { usePostHog } from "posthog-js/react";
 import { getWhatsAppLink } from "@/lib/config";
 
 const services = [
@@ -16,6 +17,7 @@ interface TimeSlot {
 }
 
 export default function AgendarPage() {
+  const posthog = usePostHog();
   const [step, setStep] = useState(1);
   const [direction, setDirection] = useState(1); // 1 = forward, -1 = back
   const [formData, setFormData] = useState({
@@ -110,6 +112,11 @@ export default function AgendarPage() {
   }, [formData.date, formData.service, formData.modality]);
 
   const handleNext = () => {
+    posthog?.capture("booking_step_completed", {
+      step,
+      service: formData.service,
+      modality: formData.modality,
+    });
     setDirection(1);
     setStep(step + 1);
   };
@@ -144,7 +151,10 @@ export default function AgendarPage() {
       const data = await res.json();
 
       if (data.success) {
-
+        posthog?.capture("booking_completed", {
+          service: formData.service,
+          modality: formData.modality,
+        });
         setBookingSuccess(true);
       } else {
         setError(data.error || "Error al agendar la cita");
