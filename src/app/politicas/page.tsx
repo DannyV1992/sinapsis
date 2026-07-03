@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Políticas de cancelación y asistencia",
+  description:
+    "Conoce las políticas de cancelación, reprogramación e inasistencia para tus citas de psicología en Sinapsis.",
+  alternates: {
+    canonical: "https://sinapsiscr.com/politicas",
+  },
+};
+
 export default function PoliticasPage() {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">

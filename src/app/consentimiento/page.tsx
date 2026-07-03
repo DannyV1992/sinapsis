@@ -1,3 +1,14 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Consentimiento informado",
+  description:
+    "Consentimiento informado para el proceso de psicoterapia en Sinapsis. Derechos, confidencialidad y responsabilidades del consultante.",
+  alternates: {
+    canonical: "https://sinapsiscr.com/consentimiento",
+  },
+};
+
 export default function ConsentimientoPage() {
   return (
     <div className="min-h-screen pt-24 pb-16 px-4">

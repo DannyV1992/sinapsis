@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import HeroSection from "@/components/HeroSection";
 import AboutSection from "@/components/AboutSection";
 import HowItWorksSection from "@/components/HowItWorksSection";
@@ -7,6 +8,12 @@ import ScrollRevealText from "@/components/ScrollRevealText";
 import QuizCTA from "@/components/QuizCTA";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "https://sinapsiscr.com",
+  },
+};
 
 export default function Home() {
   return (
