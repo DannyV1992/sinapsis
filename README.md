@@ -89,7 +89,8 @@ Todos los datos variables (precios, teléfono, email, ubicación, horario, méto
 - Listo para reactivar (descomentar en layout.tsx)
 
 ### Recordatorios automáticos (email)
-- Cron job cada hora busca citas en las próximas 24h
+- Cron job diario a las 2pm Costa Rica (20:00 UTC) — compatible con Vercel Hobby
+- Busca todas las citas del día siguiente en Google Calendar
 - Email personalizado con fecha, hora, servicio, modalidad
 - Link de Google Meet incluido para citas virtuales
 - Botón de WhatsApp para reprogramar

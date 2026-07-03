@@ -134,7 +134,7 @@ Para configurar "Enviar como" en el Gmail de la contadora:
 5. API Keys → Create API Key → nombre: `sinapsis-production`, permisos: Sending access solo para sinapsiscr.com
 6. Copiar la key (empieza con `re_`) y agregarla como `RESEND_API_KEY` en `.env.local` y en Vercel
 
-El cron `/api/cron/reminders` se ejecuta cada hora y envía recordatorios 24h antes de cada cita.
+El cron `/api/cron/reminders` se ejecuta una vez al día a las 2pm Costa Rica (20:00 UTC) y envía recordatorios de todas las citas del día siguiente. Compatible con Vercel Hobby (máximo 1 ejecución diaria).
 Los emails se envían desde `citas@sinapsiscr.com`.
 El historial de emails enviados se puede ver en el dashboard de Resend.
 
