@@ -151,4 +151,4 @@ NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 
 El proyecto se despliega automáticamente en Vercel al hacer push a la rama `main` en GitHub. Las variables de entorno deben configurarse en Vercel → Settings → Environment Variables.
 
-El cron de recordatorios se registra automáticamente desde `vercel.json`.
+El cron de recordatorios se registra automáticamente desde `vercel.json`..
