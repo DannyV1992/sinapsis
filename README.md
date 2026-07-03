@@ -8,7 +8,8 @@ Página web profesional para consultorio de psicología clínica con sistema de 
 - **Estilos:** Tailwind CSS
 - **Animaciones:** Framer Motion
 - **APIs:** Google Calendar, Google Sheets, Google Drive
-- **Hosting:** Vercel
+- **Email transaccional:** Resend (recordatorios de citas)
+- **Hosting:** Vercel (+ cron jobs)
 - **Dominio:** sinapsiscr.com (Cloudflare)
 - **Email:** Google Workspace
 
@@ -27,7 +28,9 @@ src/
 │       ├── auth/                # OAuth login/callback
 │       ├── calendar/            # Disponibilidad y reservas
 │       ├── chat-log/            # Logs del chatbot
-│       └── contact/             # Formulario de contacto
+│       ├── contact/             # Formulario de contacto
+│       ├── cron/reminders/      # Cron: recordatorios 24h antes
+│       └── test-email/          # Test de Resend (solo dev)
 ├── components/
 │   ├── AboutSection.tsx
 │   ├── AnimateOnScroll.tsx
@@ -44,9 +47,11 @@ src/
 │   ├── QuizRunner.tsx
 │   ├── ScrollRevealText.tsx
 │   ├── TransformSection.tsx     # Modalidades de atención
-│   └── WhatsAppButton.tsx
+│   ├── WhatsAppButton.tsx
+│   └── JsonLd.tsx               # Datos estructurados (Schema.org)
 └── lib/
     ├── config.ts                # Configuración central (precios, teléfono, email)
+    ├── email.ts                 # Envío de emails con Resend
     ├── generate-pdf.ts          # Generación de PDF de políticas
     ├── google-calendar.ts       # Integración con Google Calendar
     └── quiz-data.ts             # Datos de los 6 tests
@@ -81,6 +86,22 @@ Todos los datos variables (precios, teléfono, email, ubicación, horario, méto
 - Derivación a WhatsApp cuando no sabe la respuesta
 - Listo para reactivar (descomentar en layout.tsx)
 
+### Recordatorios automáticos (email)
+- Cron job cada hora busca citas en las próximas 24h
+- Email personalizado con fecha, hora, servicio, modalidad
+- Link de Google Meet incluido para citas virtuales
+- Botón de WhatsApp para reprogramar
+- Enviado desde citas@sinapsiscr.com via Resend
+- Si la cita se elimina del calendario, no se envía recordatorio
+
+### SEO
+- Metadata con keywords y título template en todas las páginas
+- Open Graph y Twitter Cards
+- JSON-LD: Schema.org MedicalBusiness + WebSite
+- Sitemap dinámico y robots.txt
+- Canonical URLs
+- generateStaticParams para pre-renderizar quizzes
+
 ### Formulario de contacto
 - Mensajes guardados en Google Sheets automáticamente
 
@@ -111,8 +132,12 @@ GOOGLE_REFRESH_TOKEN=
 GOOGLE_CALENDAR_ID=
 GOOGLE_DRIVE_FOLDER_ID=
 GOOGLE_CONTACT_SHEET_ID=
+RESEND_API_KEY=
+CRON_SECRET=
 ```
 
 ## Deploy
 
 El proyecto se despliega automáticamente en Vercel al hacer push a la rama `main` en GitHub. Las variables de entorno deben configurarse en Vercel → Settings → Environment Variables.
+
+El cron de recordatorios se registra automáticamente desde `vercel.json`.

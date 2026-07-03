@@ -116,7 +116,7 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
   const { error } = await getResend().emails.send({
     from: FROM_EMAIL,
     to,
-    subject: `Recordatorio: tu cita es mañana a las ${time}`,
+    subject: `Recordatorio: tu cita psicológica es mañana a las ${time}`,
     html,
   });
 

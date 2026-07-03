@@ -52,6 +52,8 @@ GOOGLE_REFRESH_TOKEN=[token obtenido en paso 3]
 GOOGLE_CALENDAR_ID=[ID del calendario "Citas Pacientes"]
 GOOGLE_DRIVE_FOLDER_ID=[ID de la carpeta en Drive para PDFs]
 GOOGLE_CONTACT_SHEET_ID=[ID de la hoja "Contacto" en Sheets]
+RESEND_API_KEY=[API key de Resend - ver Paso 8]
+CRON_SECRET=[string secreto para autenticar el cron]
 ```
 
 ### Dónde encontrar los IDs:
@@ -76,8 +78,9 @@ El sistema genera slots de:
 ## Paso 6: Deploy en Vercel
 
 1. Conectar repositorio de GitHub en vercel.com
-2. Agregar las mismas variables de entorno de `.env.local` en Settings → Environment Variables
+2. Agregar las mismas variables de entorno de `.env.local` en Settings → Environment Variables (incluyendo RESEND_API_KEY y CRON_SECRET)
 3. Deploy automático con cada push a `main`
+4. El cron de recordatorios se registra automáticamente desde `vercel.json`
 
 ## Paso 7: Conectar dominio
 
@@ -103,6 +106,24 @@ Al modificar este archivo, se actualizan automáticamente en toda la página.
 - **info@sinapsiscr.com** — cuenta principal (admin, APIs, calendar)
 - **citas@sinapsiscr.com** — alias de info (para confirmaciones)
 - **facturas@sinapsiscr.com** — grupo (compartido con contadora)
+
+## Paso 8: Resend (recordatorios por email)
+
+1. Crear cuenta en https://resend.com
+2. Domains → Add Domain → `sinapsiscr.com`
+3. Clic "Auto configure" (si usas Cloudflare) o agregar registros DNS manualmente
+4. Esperar verificación (DKIM + SPF deben estar en verde)
+5. API Keys → Create API Key → nombre: `sinapsis-production`, permisos: Sending access solo para sinapsiscr.com
+6. Copiar la key (empieza con `re_`) y agregarla como `RESEND_API_KEY` en `.env.local` y en Vercel
+
+El cron `/api/cron/reminders` se ejecuta cada hora y envía recordatorios 24h antes de cada cita.
+Los emails se envían desde `citas@sinapsiscr.com`.
+El historial de emails enviados se puede ver en el dashboard de Resend.
+
+### Endpoint de prueba
+
+Para verificar que Resend funciona: `http://localhost:3000/api/test-email`
+(Solo funciona en desarrollo, bloqueado en producción)
 
 ## Reactivar el chatbot
 
