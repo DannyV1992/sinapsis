@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import AnimateOnScroll from "./AnimateOnScroll";
 
 export default function AboutSection() {
@@ -9,25 +10,15 @@ export default function AboutSection() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <AnimateOnScroll>
             <div className="relative">
-              <div className="w-full aspect-[4/5] bg-primary/10 rounded-2xl flex items-center justify-center overflow-hidden">
-                <div className="text-center p-8">
-                  <div className="w-32 h-32 mx-auto bg-primary/20 rounded-full flex items-center justify-center mb-4">
-                    <svg
-                      className="w-16 h-16 text-primary"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                      />
-                    </svg>
-                  </div>
-                  <p className="text-sm text-primary/60">Foto profesional</p>
-                </div>
+              <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden">
+                <Image
+                  src="/cinthya.jpg"
+                  alt="Licda. Cinthya Chavez — Psicóloga clínica"
+                  width={800}
+                  height={1000}
+                  className="w-full h-full object-cover object-bottom scale-110 origin-bottom"
+                  priority
+                />
               </div>
               <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-accent/20 rounded-2xl -z-10" />
               <div className="absolute -top-4 -left-4 w-16 h-16 bg-primary/10 rounded-full -z-10" />
