@@ -9,6 +9,7 @@ Página web profesional para consultorio de psicología clínica con sistema de 
 - **Animaciones:** Framer Motion
 - **APIs:** Google Calendar, Google Sheets, Google Drive
 - **Email transaccional:** Resend (recordatorios de citas)
+- **Analytics:** PostHog (eventos, funnels, session replay) + Google Analytics 4 (Google Ads)
 - **Hosting:** Vercel (+ cron jobs)
 - **Dominio:** sinapsiscr.com (Cloudflare)
 - **Email:** Google Workspace
@@ -19,6 +20,7 @@ Página web profesional para consultorio de psicología clínica con sistema de 
 src/
 ├── app/
 │   ├── page.tsx                 # Página principal
+│   ├── posthog-provider.tsx     # Provider de PostHog (analytics)
 │   ├── agendar/                 # Sistema de agendamiento
 │   ├── quiz/                    # Tests de bienestar (6 tests)
 │   ├── politicas/               # Políticas de cancelación
@@ -102,6 +104,11 @@ Todos los datos variables (precios, teléfono, email, ubicación, horario, méto
 - Canonical URLs
 - generateStaticParams para pre-renderizar quizzes
 
+### Analytics
+- PostHog: pageviews, session replay, eventos custom, funnels (modo cookieless)
+- Google Analytics 4: tráfico, audiencias, preparación para Google Ads
+- Eventos custom: `quiz_completed`, `booking_completed`, `booking_step_completed`, `contact_form_submitted`, `whatsapp_clicked`
+
 ### Formulario de contacto
 - Mensajes guardados en Google Sheets automáticamente
 
@@ -134,6 +141,8 @@ GOOGLE_DRIVE_FOLDER_ID=
 GOOGLE_CONTACT_SHEET_ID=
 RESEND_API_KEY=
 CRON_SECRET=
+NEXT_PUBLIC_POSTHOG_KEY=
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 ```
 
 ## Deploy

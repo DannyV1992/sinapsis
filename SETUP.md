@@ -54,6 +54,8 @@ GOOGLE_DRIVE_FOLDER_ID=[ID de la carpeta en Drive para PDFs]
 GOOGLE_CONTACT_SHEET_ID=[ID de la hoja "Contacto" en Sheets]
 RESEND_API_KEY=[API key de Resend - ver Paso 8]
 CRON_SECRET=[string secreto para autenticar el cron]
+NEXT_PUBLIC_POSTHOG_KEY=[Project token de PostHog - ver Paso 9]
+NEXT_PUBLIC_POSTHOG_HOST=https://us.i.posthog.com
 ```
 
 ### Dónde encontrar los IDs:
@@ -124,6 +126,35 @@ El historial de emails enviados se puede ver en el dashboard de Resend.
 
 Para verificar que Resend funciona: `http://localhost:3000/api/test-email`
 (Solo funciona en desarrollo, bloqueado en producción)
+
+## Paso 9: PostHog (analytics y session replay)
+
+1. Crear cuenta en https://posthog.com (región: US Cloud)
+2. Crear proyecto → nombre: "Sinapsis"
+3. Settings → Project → copiar el **Project token** (empieza con `phc_`)
+4. Pegarlo en `.env.local` como `NEXT_PUBLIC_POSTHOG_KEY`
+5. Agregar la misma variable en Vercel → Settings → Environment Variables
+
+PostHog captura automáticamente pageviews y session replays. Los eventos custom (`quiz_completed`, `booking_completed`, etc.) se envían desde los componentes del frontend.
+
+Configuración aplicada:
+- `persistence: "memory"` — no usa cookies (no requiere banner de consentimiento)
+- `person_profiles: "identified_only"` — no crea perfiles de usuarios anónimos
+- `capture_pageleave: true` — registra cuándo el usuario cierra la pestaña
+
+Dashboard: https://us.posthog.com
+
+## Paso 10: Google Analytics 4 (para Google Ads)
+
+GA4 ya está integrado con el Measurement ID `G-GE5XQ9THJS` directamente en el layout.
+No requiere variables de entorno.
+
+Para vincular con Google Ads:
+1. GA4 → Admin → Google Ads linking → vincular cuenta de Ads
+2. GA4 → Admin → Conversions → marcar eventos como conversiones
+3. En Google Ads → importar conversiones de GA4
+
+Dashboard: https://analytics.google.com
 
 ## Reactivar el chatbot
 

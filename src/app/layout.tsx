@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Playfair_Display, Quicksand } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
@@ -86,6 +87,18 @@ export default function RootLayout({
       className={`${geistSans.variable} ${playfair.variable} ${quicksand.variable} h-full antialiased`}
     >
       <head>
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-GE5XQ9THJS"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-GE5XQ9THJS');
+          `}
+        </Script>
         <LocalBusinessJsonLd />
         <WebSiteJsonLd />
       </head>
