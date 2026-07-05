@@ -4,7 +4,7 @@ function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
 }
 
-const FROM_EMAIL = "Sinapsis <citas@sinapsiscr.com>";
+const FROM_EMAIL = "Citas Sinapsis Psicología <citas@sinapsiscr.com>";
 
 interface ReminderEmailParams {
   to: string;
