@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
+import { sendGmailNotification } from "@/lib/gmail";
 
 function getOAuth2Client() {
   const oauth2Client = new google.auth.OAuth2(
@@ -47,6 +48,19 @@ export async function POST(request: NextRequest) {
         ]],
       },
     });
+
+    await sendGmailNotification(
+      `Nuevo mensaje de contacto: ${name}`,
+      `
+        <h2 style="color:#5b7b7a">Nuevo mensaje de contacto</h2>
+        <table style="border-collapse:collapse;font-family:sans-serif;font-size:15px">
+          <tr><td style="padding:6px 16px 6px 0;color:#666">Nombre</td><td><strong>${name}</strong></td></tr>
+          <tr><td style="padding:6px 16px 6px 0;color:#666">Email</td><td>${email}</td></tr>
+          ${phone ? `<tr><td style="padding:6px 16px 6px 0;color:#666">Teléfono</td><td>${phone}</td></tr>` : ""}
+          <tr><td style="padding:6px 16px 6px 0;color:#666">Mensaje</td><td>${message}</td></tr>
+        </table>
+      `
+    ).catch((err) => console.error("[Gmail] Error notificación contacto:", err));
 
     return NextResponse.json({ success: true });
   } catch (error) {

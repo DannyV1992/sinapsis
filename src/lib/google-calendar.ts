@@ -1,6 +1,52 @@
 import { google } from "googleapis";
-import { generateBookingPDF } from "./generate-pdf";
-import { Readable } from "node:stream";
+import { sendGmailNotification } from "./gmail";
+
+async function logBookingToSheet(params: {
+  name: string;
+  email: string;
+  phone: string;
+  service: string;
+  modality?: string;
+  notes?: string;
+  start: string;
+}) {
+  const sheetId = process.env.GOOGLE_CONTACT_SHEET_ID;
+  if (!sheetId) return;
+
+  const auth = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    "http://localhost:3000/api/auth/callback"
+  );
+  auth.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
+  const sheets = google.sheets({ version: "v4", auth });
+
+  const citaDate = new Date(params.start).toLocaleString("es-CR", {
+    timeZone: "America/Costa_Rica",
+    dateStyle: "short",
+    timeStyle: "short",
+  });
+
+  await sheets.spreadsheets.values.append({
+    spreadsheetId: sheetId,
+    range: "Citas!A:H",
+    valueInputOption: "USER_ENTERED",
+    requestBody: {
+      values: [[
+        new Date().toISOString(),
+        params.name,
+        params.email,
+        params.phone,
+        params.service,
+        params.modality || "No especificada",
+        citaDate,
+        params.notes || "",
+      ]],
+    },
+  });
+}
+// import { generateBookingPDF } from "./generate-pdf"; // desactivado: se usa link directo en lugar de PDF
+// import { Readable } from "node:stream"; // desactivado junto con generación de PDF
 
 function getOAuth2Client() {
   const oauth2Client = new google.auth.OAuth2(
@@ -125,64 +171,14 @@ export async function bookAppointment(params: {
   notes?: string;
 }) {
   const calendar = getCalendarClient();
-  const auth = getOAuth2Client();
+  // const auth = getOAuth2Client(); // solo necesario para Drive (PDF desactivado)
 
-  // Generate PDF and upload to Drive
-  let pdfLink = "";
-  const driveFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
-
-  if (driveFolderId) {
-    try {
-      const startDate = new Date(params.start);
-      const dateStr = startDate.toLocaleDateString("es-CR", { weekday: "long", year: "numeric", month: "long", day: "numeric" });
-      const timeStr = startDate.toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit", hour12: true });
-
-      const pdfBuffer = await generateBookingPDF({
-        name: params.name,
-        email: params.email,
-        phone: params.phone,
-        service: params.service,
-        modality: params.modality || "",
-        date: dateStr,
-        time: timeStr,
-      });
-
-      const drive = google.drive({ version: "v3", auth });
-      const timeForFile = startDate.toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit", hour12: false }).replace(":", "-");
-      const fileName = `Cita_${params.name.replace(/\s+/g, "_")}_${params.start.split("T")[0]}_${timeForFile}.pdf`;
-
-      const stream = new Readable();
-      stream.push(pdfBuffer);
-      stream.push(null);
-
-      const file = await drive.files.create({
-        requestBody: {
-          name: fileName,
-          parents: [driveFolderId],
-          mimeType: "application/pdf",
-        },
-        media: {
-          mimeType: "application/pdf",
-          body: stream,
-        },
-        fields: "id,webViewLink",
-      });
-
-      // Make file accessible to anyone with the link
-      await drive.permissions.create({
-        fileId: file.data.id!,
-        requestBody: {
-          role: "reader",
-          type: "anyone",
-        },
-      });
-
-      pdfLink = file.data.webViewLink || "";
-    } catch (error: unknown) {
-      const errMsg = error instanceof Error ? error.message : String(error);
-      console.error("Error generating/uploading PDF:", errMsg, error);
-    }
-  }
+  // PDF desactivado: se envía link directo en lugar de generar/subir PDF a Drive.
+  // La lógica de generación (generate-pdf.ts) y subida a Drive queda disponible
+  // como referencia para futura implementación del consentimiento informado.
+  //
+  // const driveFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
+  // if (driveFolderId) { ... generateBookingPDF → drive.files.create ... }
 
   const description = [
     "Cita psicológica con Licda. Cinthya Chávez",
@@ -194,7 +190,7 @@ export async function bookAppointment(params: {
     params.modality ? `Modalidad: ${params.modality.charAt(0).toUpperCase() + params.modality.slice(1)}` : "",
     params.notes ? `Notas: ${params.notes}` : "",
     "",
-    pdfLink ? `Políticas de cancelación: ${pdfLink}` : "",
+    "Políticas de cancelación: https://sinapsiscr.com/politicas",
     "Si es tu primera vez, lee el consentimiento informado: https://sinapsiscr.com/consentimiento",
   ]
     .filter(Boolean)
@@ -230,6 +226,31 @@ export async function bookAppointment(params: {
       },
     },
   });
+
+  const startDate = new Date(params.start).toLocaleString("es-CR", {
+    timeZone: "America/Costa_Rica",
+    dateStyle: "full",
+    timeStyle: "short",
+  });
+
+  await logBookingToSheet(params).catch((err) => console.error("[Sheets] Error log cita:", err));
+
+  await sendGmailNotification(
+    `Nueva cita: ${params.name} — ${params.service}`,
+    `
+      <h2 style="color:#5b7b7a">Nueva cita agendada</h2>
+      <table style="border-collapse:collapse;font-family:sans-serif;font-size:15px">
+        <tr><td style="padding:6px 16px 6px 0;color:#666">Paciente</td><td><strong>${params.name}</strong></td></tr>
+        <tr><td style="padding:6px 16px 6px 0;color:#666">Email</td><td>${params.email}</td></tr>
+        <tr><td style="padding:6px 16px 6px 0;color:#666">Teléfono</td><td>${params.phone}</td></tr>
+        <tr><td style="padding:6px 16px 6px 0;color:#666">Servicio</td><td>${params.service}</td></tr>
+        ${params.modality ? `<tr><td style="padding:6px 16px 6px 0;color:#666">Modalidad</td><td>${params.modality.charAt(0).toUpperCase() + params.modality.slice(1)}</td></tr>` : ""}
+        <tr><td style="padding:6px 16px 6px 0;color:#666">Fecha y hora</td><td>${startDate}</td></tr>
+        ${params.notes ? `<tr><td style="padding:6px 16px 6px 0;color:#666">Notas</td><td>${params.notes}</td></tr>` : ""}
+      </table>
+    `,
+    "info@sinapsiscr.com"
+  ).catch((err) => console.error("[Gmail] Error notificación cita:", err));
 
   return event.data;
 }
