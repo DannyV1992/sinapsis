@@ -20,7 +20,7 @@
 src/
 ├── app/
 │   ├── layout.tsx              # Layout raíz: fuentes (Geist, Playfair, Quicksand), metadata SEO, GA4 script, providers
-│   ├── page.tsx                # Landing: Hero → About → Services → HowItWorks → QuizCTA → FAQ → Contact → Transform
+│   ├── page.tsx                # Landing: Hero → About → HowItWorks → Services → Transform → ScrollReveal → FAQ → Contact
 │   ├── globals.css             # Tailwind + estilos globales
 │   ├── posthog-provider.tsx    # Provider PostHog (client component)
 │   ├── robots.ts               # robots.txt dinámico
@@ -85,7 +85,7 @@ src/
 ├── lib/
 │   ├── config.ts               # Configuración central: precios, teléfono, email, horarios, profesional
 │   ├── google-calendar.ts      # OAuth client, getAvailableSlots(), bookAppointment() (+ PDF + Drive upload)
-│   ├── email.ts                # sendReminderEmail() — HTML template con Resend
+│   ├── reminders.ts            # sendReminderEmail() — HTML template con Resend
 │   ├── generate-pdf.ts         # generateBookingPDF() — políticas de cancelación con pdf-lib
 │   ├── quiz-data.ts            # Definición de 6 tests: GAD-7, PHQ-9, PSS-10, Rosenberg, ECR-R, WHO-5
 │   └── gtag.ts                 # Helper gtagEvent() para GA4
@@ -106,7 +106,7 @@ Usuario selecciona servicio/modalidad/fecha
   → POST /api/calendar/book
     → Genera PDF de políticas (pdf-lib)
     → Sube PDF a Google Drive (carpeta compartida)
-    → Crea evento en Google Calendar con descripción [AGENDADO], attendees, Meet link (si virtual)
+    → Crea evento en Google Calendar con extendedProperties.private.type="booked", attendees, Meet link (si virtual)
     → Retorna success
 ```
 
@@ -116,7 +116,7 @@ Usuario selecciona servicio/modalidad/fecha
 Vercel cron (diario 14:00 UTC = 8am Costa Rica)
   → GET /api/cron/reminders (auth: Bearer CRON_SECRET)
   → Lista eventos de mañana en Google Calendar
-  → Filtra solo los que tienen [AGENDADO] en descripción
+  → Filtra por extendedProperties.private.type="booked" (fallback: [AGENDADO] en descripción para citas legacy)
   → Extrae datos del paciente de la descripción del evento
   → Envía email personalizado con Resend (fecha, hora, servicio, modalidad, Meet link)
 ```
@@ -129,7 +129,7 @@ Vercel cron (diario 14:00 UTC = 8am Costa Rica)
   - "Disponible" → ambas modalidades
 - El sistema genera slots de 60min (individual) o 90min (pareja/familiar) dentro de esos bloques
 - Se resta 15min de descanso entre slots
-- Citas existentes ([AGENDADO]) bloquean sus slots
+- Citas existentes (extendedProperties.private.type="booked") bloquean sus slots
 
 ## Variables de entorno
 
@@ -190,7 +190,7 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 ## Convenciones
 
 - Todos los datos variables (precios, teléfono, horarios) van en `src/lib/config.ts`
-- Eventos agendados se identifican por `[AGENDADO]` en la descripción del evento de Calendar
+- Eventos agendados se identifican por `extendedProperties.private.type: "booked"` (fallback legacy: `[AGENDADO]` en descripción)
 - Zona horaria: America/Costa_Rica (UTC-6) hardcodeada en calendar y cron
 - Email transaccional desde: `citas@sinapsiscr.com`
 - Cron limitado a 1 ejecución/día (restricción Vercel Hobby)

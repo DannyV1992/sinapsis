@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { sendReminderEmail } from "@/lib/email";
+import { sendReminderEmail } from "@/lib/reminders";
 
 export async function GET() {
   if (process.env.NODE_ENV === "production") {

@@ -17,6 +17,7 @@ const categories = [
       { name: "Trauma y TEPT", phrase: "Sana tu historia" },
       { name: "Trastornos alimentarios", phrase: "Reconcíliate con tu cuerpo" },
       { name: "Adicciones", phrase: "Rompe el ciclo" },
+      { name: "Conflictos de pareja", phrase: "Reconecta o decide con claridad" },
       { name: "Abuso psicológico", phrase: "Mereces relaciones sanas" },
       { name: "Burnout", phrase: "No es pereza, es agotamiento" },
     ],
@@ -33,6 +34,8 @@ const categories = [
       { name: "Establecimiento de límites", phrase: "Aprende a decir no" },
       { name: "Baja autoestima", phrase: "Mereces reconocerte" },
       { name: "Cambios de hábitos", phrase: "Transforma tu día a día" },
+      { name: "Gestión del estrés laboral", phrase: "Trabaja sin quemarte" },
+      { name: "Manejo de la procrastinación", phrase: "Deja de postergar lo importante" },
       { name: "Toma de decisiones", phrase: "Avanza con claridad" },
     ],
   },
@@ -71,7 +74,7 @@ export default function ParallaxServices() {
             Áreas de atención
           </h2>
           <p className="mt-4 text-foreground/60 max-w-2xl mx-auto">
-            Desde un enfoque cognitivo-conductual y contextual, planteamos objetivos juntos y trabajamos con herramientas y técnicas psicológicas respaldadas por evidencia científica para lograr el cambio que buscas.
+            Trabajamos desde un enfoque cognitivo-conductual y contextual: definimos objetivos juntos y, con técnicas respaldadas por evidencia científica, construimos el cambio paso a paso.
           </p>
         </motion.div>
 

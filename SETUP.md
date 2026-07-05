@@ -70,7 +70,7 @@ En Google Calendar (info@sinapsiscr.com), calendario "Citas Pacientes":
 
 - Crear eventos con título "Presencial" → disponibilidad solo presencial
 - Crear eventos con título "Virtual" → disponibilidad solo virtual
-- Crear eventos con cualquier otro título → disponibilidad para ambas modalidades
+- Crear eventos con título "Disponible" → disponibilidad para ambas modalidades
 - Los eventos recurrentes funcionan (ej. todos los lunes 8-12)
 
 El sistema genera slots de:
@@ -134,7 +134,7 @@ Para configurar "Enviar como" en el Gmail de la contadora:
 5. API Keys → Create API Key → nombre: `sinapsis-production`, permisos: Sending access solo para sinapsiscr.com
 6. Copiar la key (empieza con `re_`) y agregarla como `RESEND_API_KEY` en `.env.local` y en Vercel
 
-El cron `/api/cron/reminders` se ejecuta una vez al día a las 2pm Costa Rica (20:00 UTC) y envía recordatorios de todas las citas del día siguiente. Compatible con Vercel Hobby (máximo 1 ejecución diaria).
+El cron `/api/cron/reminders` se ejecuta una vez al día a las 8am Costa Rica (14:00 UTC) y envía recordatorios de todas las citas del día siguiente. Compatible con Vercel Hobby (máximo 1 ejecución diaria).
 Los emails se envían desde `citas@sinapsiscr.com`.
 El historial de emails enviados se puede ver en el dashboard de Resend.
 

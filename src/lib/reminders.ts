@@ -54,7 +54,7 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
             <td style="padding: 32px 24px;">
               <p style="margin: 0 0 16px; font-size: 16px; color: #1a1a2e;">Hola ${firstName},</p>
               <p style="margin: 0 0 24px; font-size: 15px; color: #444; line-height: 1.5;">
-                Te recordamos que tienes una cita programada para <strong>mañana</strong>.
+                Te recordamos que tienes una cita programada para <strong>mañana</strong> con la Licda. Cinthya Chávez.
               </p>
               <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8f7fc; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
                 <tr>
@@ -84,7 +84,7 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
               </table>
               ${meetSection}
               <p style="margin: 20px 0 24px; font-size: 14px; color: #666; line-height: 1.5;">
-                ${locationText} Recuerda que puedes reprogramar con al menos 48 horas de anticipación.
+                ${locationText} Recuerda que puedes reprogramar con al menos 24 horas de anticipación.
               </p>
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>

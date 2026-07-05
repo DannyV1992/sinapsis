@@ -53,7 +53,7 @@ src/
 │   └── JsonLd.tsx               # Datos estructurados (Schema.org)
 └── lib/
     ├── config.ts                # Configuración central (precios, teléfono, email)
-    ├── email.ts                 # Envío de emails con Resend
+    ├── reminders.ts             # Envío de recordatorios con Resend
     ├── generate-pdf.ts          # Generación de PDF de políticas
     ├── google-calendar.ts       # Integración con Google Calendar
     └── quiz-data.ts             # Datos de los 6 tests
@@ -89,7 +89,7 @@ Todos los datos variables (precios, teléfono, email, ubicación, horario, méto
 - Listo para reactivar (descomentar en layout.tsx)
 
 ### Recordatorios automáticos (email)
-- Cron job diario a las 2pm Costa Rica (20:00 UTC) — compatible con Vercel Hobby
+- Cron job diario a las 8am Costa Rica (14:00 UTC) — compatible con Vercel Hobby
 - Busca todas las citas del día siguiente en Google Calendar
 - Email personalizado con fecha, hora, servicio, modalidad
 - Link de Google Meet incluido para citas virtuales
@@ -119,8 +119,8 @@ Todos los datos variables (precios, teléfono, email, ubicación, horario, méto
 - Crear eventos en el calendario "Citas Pacientes"
 - Título "Presencial" → solo para citas presenciales
 - Título "Virtual" → solo para citas virtuales
-- Cualquier otro título → disponible para ambas modalidades
-- Las citas agendadas se detectan por "[AGENDADO]" en la descripción
+- Título "Disponible" → disponible para ambas modalidades
+- Las citas agendadas se detectan por `extendedProperties.private.type: "booked"`
 
 ## Desarrollo local
 

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCalendarClient, CALENDAR_ID } from "@/lib/google-calendar";
-import { sendReminderEmail } from "@/lib/email";
+import { sendReminderEmail } from "@/lib/reminders";
 
 export async function GET(request: Request) {
   const authHeader = request.headers.get("authorization");
