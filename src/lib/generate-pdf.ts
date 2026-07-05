@@ -64,13 +64,13 @@ export async function generateBookingPDF(data: BookingData): Promise<Buffer> {
   y -= 25;
 
   const policies = [
-    { title: "1. Confirmación de cita", text: "Al agendar, recibirá un correo de confirmación con los detalles de su sesión. La cita queda reservada una vez recibido este correo." },
-    { title: "2. Cancelaciones y reprogramación", text: "No se realizan devoluciones de dinero, pero puede reprogramar si avisa con mínimo 48 horas de anticipación. La reprogramación se coordina dentro de los 7 días hábiles siguientes a la fecha original." },
-    { title: "3. Inasistencia", text: "En caso de no asistir o cancelar con menos de 48 horas, no será posible reprogramar. Para agendar una nueva sesión se deberá realizar el pago correspondiente." },
-    { title: "4. Cancelación por el profesional", text: "Si la psicóloga debe cancelar por fuerza mayor, se reprogramará sin costo ni restricción de plazo, o se realizará la devolución del monto." },
-    { title: "5. Recordatorios", text: "Se envían recordatorios automáticos por correo antes de cada sesión. La responsabilidad de asistir en el horario acordado es del paciente." },
-    { title: "6. Continuidad del proceso", text: "Se recomienda dejar agendada la siguiente sesión al finalizar cada cita para mantener el progreso terapéutico." },
-    { title: "7. Métodos de pago", text: "Aceptamos transferencia bancaria, SINPE Móvil y efectivo. El pago se realiza al finalizar cada sesión." },
+    { title: "1. Confirmación de cita", text: "Al agendar una cita a través de nuestra plataforma, recibirá un correo electrónico de confirmación con los detalles de su sesión (fecha, hora, modalidad y servicio). La cita queda reservada una vez recibido este correo." },
+    { title: "2. Cancelaciones y reprogramación", text: "Si necesita cancelar su cita, no se realizan devoluciones de dinero, pero puede reprogramarla si avisa con un mínimo de 24 horas de anticipación. La reprogramación se coordina dentro de los 7 días hábiles siguientes a la fecha original de la cita, según disponibilidad." },
+    { title: "3. Inasistencia", text: "En caso de no asistir a la cita o cancelar con menos de 24 horas de anticipación, no será posible reprogramar. Para agendar una nueva sesión, se deberá realizar nuevamente el pago correspondiente." },
+    { title: "4. Cancelación por parte del profesional", text: "Si por alguna razón de fuerza mayor la psicóloga debe cancelar una sesión, se le notificará con la mayor anticipación posible. En este caso, se reprogramará sin costo ni restricción de plazo, o se realizará la devolución del monto correspondiente." },
+    { title: "5. Recordatorios", text: "Se envían recordatorios automáticos por correo electrónico un día antes de cada sesión. Sin embargo, no es posible garantizar recordatorios adicionales. La responsabilidad de asistir a la cita en el horario acordado es del paciente." },
+    { title: "6. Continuidad del proceso", text: "Para mantener el progreso terapéutico, se recomienda dejar agendada la siguiente sesión al finalizar cada cita. Esto ayuda a asegurar espacio y mantener la continuidad necesaria para alcanzar los objetivos del proceso." },
+    { title: "7. Métodos de pago", text: "Aceptamos transferencia bancaria y SINPE Móvil. El pago se realiza al iniciar cada sesión." },
   ];
 
   for (const policy of policies) {
