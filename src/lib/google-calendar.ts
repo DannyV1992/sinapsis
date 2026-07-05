@@ -188,6 +188,8 @@ export async function bookAppointment(params: {
   }
 
   const description = [
+    "Cita psicológica con Licda. Cinthya Chávez",
+    "",
     "[AGENDADO]",
     `Paciente: ${params.name}`,
     `Email: ${params.email}`,
@@ -209,7 +211,7 @@ export async function bookAppointment(params: {
     sendUpdates: "all",
     conferenceDataVersion: isVirtual ? 1 : 0,
     requestBody: {
-      summary: `${params.name} — ${params.service}`,
+      summary: `${params.name} — ${params.service} | Licda. Cinthya Chávez`,
       description,
       start: { dateTime: params.start, timeZone: "America/Costa_Rica" },
       end: { dateTime: params.end, timeZone: "America/Costa_Rica" },
