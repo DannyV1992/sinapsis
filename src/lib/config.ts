@@ -34,7 +34,7 @@ export const config = {
   schedule: "Lunes a viernes, usualmente de 8:00am - 5:00pm pero los horarios pueden variar según disponibilidad y modalidad de la cita.",
 
   // Métodos de pago
-  paymentMethods: "SINPE Móvil, transferencia bancaria y efectivo",
+  paymentMethods: "SINPE Móvil y transferencia bancaria",
 
   // Nombre de la profesional
   professional: {

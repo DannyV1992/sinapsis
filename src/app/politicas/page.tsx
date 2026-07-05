@@ -32,7 +32,7 @@ export default function PoliticasPage() {
             <p>
               Si necesita cancelar su cita, <strong>no se realizan devoluciones de dinero</strong>,
               pero puede reprogramarla si avisa con un mínimo de{" "}
-              <strong>48 horas de anticipación</strong>.
+              <strong>24 horas de anticipación</strong>.
             </p>
             <p>
               La reprogramación se coordina dentro de los <strong>7 días hábiles siguientes</strong> a
@@ -43,9 +43,9 @@ export default function PoliticasPage() {
           <section>
             <h2 className="text-xl font-semibold text-foreground mb-3">3. Inasistencia</h2>
             <p>
-              En caso de no asistir a la cita o cancelar con menos de 48 horas de anticipación,
+              En caso de no asistir a la cita o cancelar con menos de 24 horas de anticipación,
               no será posible reprogramar. Para agendar una nueva sesión, se deberá realizar
-              el pago correspondiente.
+              nuevamente el pago correspondiente.
             </p>
           </section>
 
@@ -62,7 +62,7 @@ export default function PoliticasPage() {
           <section>
             <h2 className="text-xl font-semibold text-foreground mb-3">5. Recordatorios</h2>
             <p>
-              Se envían recordatorios automáticos por correo electrónico antes de cada sesión.
+              Se envían recordatorios automáticos por correo electrónico un día antes de cada sesión.
               Sin embargo, no es posible garantizar recordatorios adicionales.
               La responsabilidad de asistir a la cita en el horario acordado es del paciente.
             </p>
@@ -80,8 +80,8 @@ export default function PoliticasPage() {
           <section>
             <h2 className="text-xl font-semibold text-foreground mb-3">7. Métodos de pago</h2>
             <p>
-              Aceptamos transferencia bancaria, SINPE Móvil y efectivo.
-              El pago se realiza al finalizar cada sesión.
+              Aceptamos transferencia bancaria y SINPE Móvil.
+              El pago se realiza al iniciar cada sesión.
             </p>
           </section>
         </div>

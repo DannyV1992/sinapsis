@@ -16,11 +16,6 @@ const faqs = [
       "Las sesiones individuales duran 1 hora. Las sesiones de pareja o familia duran 1 hora y media. La primera sesión puede extenderse un poco más para conocerte mejor.",
   },
   {
-    question: "¿Es confidencial?",
-    answer:
-      "Absolutamente. Todo lo que compartas en sesión está protegido por el secreto profesional. Tu información es completamente privada.",
-  },
-  {
     question: "¿Cómo sé si necesito terapia?",
     answer:
       "Si sientes que algo te impide vivir plenamente — ya sea ansiedad, tristeza, conflictos en tus relaciones o simplemente quieres conocerte mejor — la terapia puede ayudarte.",
@@ -43,7 +38,7 @@ const faqs = [
   {
     question: "¿Cuánto cuesta y qué métodos de pago aceptan?",
     answer:
-      `Terapia individual (1 hora): ${formatPrice(config.prices.individual)}. Terapia de pareja o familiar (1.5 horas): ${formatPrice(config.prices.pareja)}. Aceptamos ${config.paymentMethods}. El pago se realiza al finalizar cada sesión.`,
+      `Terapia individual (1 hora): ${formatPrice(config.prices.individual)}. Terapia de pareja o familiar (1.5 horas): ${formatPrice(config.prices.pareja)}. Aceptamos ${config.paymentMethods}. El pago se realiza al inicio de cada sesión.`,
   },
 ];
 

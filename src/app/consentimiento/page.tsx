@@ -57,8 +57,7 @@ export default function ConsentimientoPage() {
               La duración de cada sesión varía según el servicio: las sesiones individuales
               tienen una duración de 1 hora, mientras que las sesiones de pareja o familia
               duran 1 hora y media. La frecuencia se define de manera conjunta entre
-              consultante y profesional según las necesidades del proceso, siendo lo más
-              usual semanal o quincenal.
+              consultante y profesional según las necesidades del proceso.
             </p>
           </section>
 
@@ -77,7 +76,7 @@ export default function ConsentimientoPage() {
             <h2 className="text-xl font-semibold text-foreground mb-3">5. Responsabilidades del consultante</h2>
             <ul className="list-disc pl-6 space-y-2">
               <li>Asistir de forma puntual a las sesiones programadas.</li>
-              <li>Comunicar cancelaciones con al menos 48 horas de anticipación.</li>
+              <li>Comunicar cancelaciones con al menos 24 horas de anticipación.</li>
               <li>Participar de manera activa y comprometida en el proceso.</li>
               <li>Informar sobre cambios relevantes en su estado de salud física o emocional.</li>
               <li>Estar dispuesto/a a implementar cambios y actividades sugeridas por la profesional.</li>
@@ -91,7 +90,7 @@ export default function ConsentimientoPage() {
               No es posible garantizar resultados específicos, dado que estos dependen de
               múltiples factores, incluyendo la disposición del consultante a realizar
               cambios en su vida cotidiana. La psicóloga no prescribe medicamentos;
-              de ser necesario, se coordinará con un profesional en psiquiatría.
+              de ser necesario, se referirá con un profesional en psiquiatría.
             </p>
           </section>
 

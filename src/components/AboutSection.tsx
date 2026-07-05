@@ -30,17 +30,19 @@ export default function AboutSection() {
                 Sobre mí
               </h2>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Psicóloga clínica con enfoque cognitivo-conductual. Me apasiona
-                una terapia que respeta la diversidad en todas sus formas — de
-                identidad, de relaciones, de creencias y de formas de existir.
+                Psicóloga clínica con enfoque cognitivo-conductual y más de 8
+                años de experiencia en ambientes corporativos, trabajando en
+                bienestar y felicidad organizacional. Amplio conocimiento en
+                diseño y facilitación de team buildings, cultura organizacional,
+                talleres y charlas de desarrollo profesional.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Atiendo problemáticas como ansiedad, depresión, trauma y
-                desarrollo personal. A la vez, me he especializado en acompañar
+                Me apasiona una terapia que respeta la diversidad en todas sus
+                formas — de identidad, de relaciones, de creencias y de formas
+                de existir. Atiendo problemáticas como ansiedad, depresión,
+                trauma y desarrollo personal, y me he especializado en acompañar
                 a personas cuyas experiencias no siempre encuentran un espacio
-                que las comprenda — diversidad relacional, identidades no
-                normativas, abuso religioso y procesos de deconstrucción,
-                entre otros.
+                que las comprenda.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-6">
                 Si necesitas un espacio donde puedas ser, sin filtros ni

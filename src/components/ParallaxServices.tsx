@@ -11,12 +11,12 @@ const categories = [
     services: [
       { name: "Ansiedad y estrés", phrase: "Recupera tu calma" },
       { name: "Depresión", phrase: "Encuentra tu luz" },
+      { name: "Ataques de pánico", phrase: "Recupera el control" },
       { name: "Duelo y pérdidas", phrase: "Honra lo que fue" },
+      { name: "Duelos relacionales", phrase: "Soltar también es sanar" },
       { name: "Trauma y TEPT", phrase: "Sana tu historia" },
       { name: "Trastornos alimentarios", phrase: "Reconcíliate con tu cuerpo" },
       { name: "Adicciones", phrase: "Rompe el ciclo" },
-      { name: "Insomnio", phrase: "Descansa de verdad" },
-      { name: "Crisis", phrase: "No estás solo/a" },
       { name: "Abuso psicológico", phrase: "Mereces relaciones sanas" },
       { name: "Burnout", phrase: "No es pereza, es agotamiento" },
     ],
@@ -27,14 +27,13 @@ const categories = [
     color: "from-accent to-amber-400",
     services: [
       { name: "Autoconcepto", phrase: "Mírate con otros ojos" },
-      { name: "Inteligencia emocional", phrase: "Siente sin ahogarte" },
+      { name: "Regulación emocional", phrase: "Siente sin ahogarte" },
       { name: "Comunicación asertiva", phrase: "Di lo que necesitas" },
       { name: "Bienestar sexual", phrase: "Sin tabúes" },
       { name: "Establecimiento de límites", phrase: "Aprende a decir no" },
-      { name: "Regulación emocional", phrase: "Sin explotar ni reprimir" },
-      { name: "Síndrome del impostor", phrase: "Mereces tus logros" },
+      { name: "Baja autoestima", phrase: "Mereces reconocerte" },
+      { name: "Cambios de hábitos", phrase: "Transforma tu día a día" },
       { name: "Toma de decisiones", phrase: "Avanza con claridad" },
-      { name: "Alta sensibilidad (PAS)", phrase: "Tu sensibilidad no es debilidad" },
     ],
   },
   {
@@ -72,7 +71,7 @@ export default function ParallaxServices() {
             Áreas de atención
           </h2>
           <p className="mt-4 text-foreground/60 max-w-2xl mx-auto">
-            Trabajo con diversas problemáticas y poblaciones desde un enfoque integrador.
+            Desde un enfoque cognitivo-conductual y contextual, planteamos objetivos juntos y trabajamos con herramientas y técnicas psicológicas respaldadas por evidencia científica para lograr el cambio que buscas.
           </p>
         </motion.div>
 

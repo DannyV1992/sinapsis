@@ -59,23 +59,24 @@ export async function getAvailableSlots(date: string, modality?: string, service
   );
 
   // Filtrar disponibilidad por modalidad:
-  // - "Presencial" → solo pacientes presenciales
-  // - "Virtual" → solo pacientes virtuales
-  // - Cualquier otro nombre → ambas modalidades
+  // - "Presencial" → solo citas presenciales
+  // - "Virtual" → solo citas virtuales
+  // - "Disponible" → ambas modalidades
   const availabilityBlocks = allEvents.filter((event) => {
     if (event.description?.includes("[AGENDADO]")) return false;
 
     if (!modality) return true;
 
     const title = event.summary?.toLowerCase() || "";
-    const isPresencial = title.includes("presencial");
-    const isVirtual = title.includes("virtual");
+    const isPresencial = title === "presencial";
+    const isVirtual = title === "virtual";
+    const isDisponible = title === "disponible";
 
-    // Si el bloque no tiene etiqueta específica, es para ambas
-    if (!isPresencial && !isVirtual) return true;
+    if (isDisponible) return true;
+    if (!isPresencial && !isVirtual && !isDisponible) return true;
 
-    if (modality === "virtual") return isVirtual;
-    if (modality === "presencial") return isPresencial;
+    if (modality === "virtual") return isVirtual || isDisponible;
+    if (modality === "presencial") return isPresencial || isDisponible;
     return true;
   });
 
