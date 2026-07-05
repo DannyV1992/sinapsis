@@ -30,23 +30,22 @@ export default function AboutSection() {
                 Sobre mí
               </h2>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Psicóloga clínica con enfoque cognitivo-conductual. Cuento con
-                más de 8 años de trayectoria en entornos corporativos donde he
-                liderado iniciativas de bienestar organizacional, facilitado
-                team buildings y diseñado talleres de desarrollo profesional y
-                cultura de equipos.
+                Decidí dedicarme a la consulta privada porque creo que hay
+                personas que merecen un espacio donde su forma de vivir, de amar y
+                de existir sea tratada como válida desde el primer momento — sin
+                tener que justificarse ni simplificarse para ser comprendidas.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                En consulta, me apasiona una terapia que respeta la diversidad
-                en todas sus formas — de identidad, de relaciones, de creencias
-                y de maneras de existir. Me he especializado en acompañar a
-                personas cuyas experiencias no siempre encuentran un espacio
-                que las comprenda: diversidad relacional, identidades no
-                normativas, abuso religioso y procesos de deconstrucción.
+                Trabajo con un enfoque cognitivo-conductual: definimos objetivos
+                concretos juntos y avanzamos con técnicas respaldadas por
+                evidencia. Me interesa que el proceso sea tuyo, no que se adapte a
+                un molde que no encaja con quién sos.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-6">
-                Si necesitas un espacio donde puedas ser, sin filtros ni
-                explicaciones, aquí lo vas a encontrar.
+                Tengo más de ocho años de trayectoria acompañando personas en
+                entornos corporativos y en consulta. Hoy me especializo en atender a
+                quienes han cargado solos experiencias que no siempre encuentran
+                espacio en la terapia tradicional.
               </p>
               <ul className="space-y-3">
                 {[
