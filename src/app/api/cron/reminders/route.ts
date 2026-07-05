@@ -35,7 +35,7 @@ export async function GET(request: Request) {
 
   const events = eventsRes.data.items || [];
   const bookedEvents = events.filter(
-    (event) => event.description?.includes("[AGENDADO]")
+    (event) => event.extendedProperties?.private?.type === "booked" || event.description?.includes("[AGENDADO]")
   );
 
   const results: { email: string; status: string }[] = [];

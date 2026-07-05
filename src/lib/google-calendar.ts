@@ -54,16 +54,13 @@ export async function getAvailableSlots(date: string, modality?: string, service
 
   const allEvents = eventsRes.data.items || [];
 
-  const bookedEvents = allEvents.filter(
-    (event) => event.description?.includes("[AGENDADO]")
-  );
+  const isBookedEvent = (event: { extendedProperties?: { private?: Record<string, string> | null } | null; description?: string | null }) =>
+    event.extendedProperties?.private?.type === "booked" || event.description?.includes("[AGENDADO]");
 
-  // Filtrar disponibilidad por modalidad:
-  // - "Presencial" → solo citas presenciales
-  // - "Virtual" → solo citas virtuales
-  // - "Disponible" → ambas modalidades
+  const bookedEvents = allEvents.filter(isBookedEvent);
+
   const availabilityBlocks = allEvents.filter((event) => {
-    if (event.description?.includes("[AGENDADO]")) return false;
+    if (isBookedEvent(event)) return false;
 
     if (!modality) return true;
 
@@ -190,7 +187,6 @@ export async function bookAppointment(params: {
   const description = [
     "Cita psicológica con Licda. Cinthya Chávez",
     "",
-    "[AGENDADO]",
     `Paciente: ${params.name}`,
     `Email: ${params.email}`,
     `Teléfono: ${params.phone}`,
@@ -213,6 +209,7 @@ export async function bookAppointment(params: {
     requestBody: {
       summary: `${params.name} — ${params.service} | Licda. Cinthya Chávez`,
       description,
+      extendedProperties: { private: { type: "booked" } },
       start: { dateTime: params.start, timeZone: "America/Costa_Rica" },
       end: { dateTime: params.end, timeZone: "America/Costa_Rica" },
       attendees: [{ email: params.email }],
