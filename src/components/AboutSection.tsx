@@ -13,7 +13,7 @@ export default function AboutSection() {
               <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden">
                 <Image
                   src="/cinthya.jpg"
-                  alt="Licda. Cinthya Chavez — Psicóloga clínica"
+                  alt="Licda. Cinthya Chávez — Psicóloga clínica"
                   width={800}
                   height={1000}
                   className="w-full h-full object-cover object-bottom scale-110 origin-bottom"

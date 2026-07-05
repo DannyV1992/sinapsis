@@ -44,7 +44,7 @@ export const metadata: Metadata = {
     "salud mental Costa Rica",
     "agendar cita psicóloga",
   ],
-  authors: [{ name: "Licda. Cinthya Chavez" }],
+  authors: [{ name: "Licda. Cinthya Chávez" }],
   openGraph: {
     title: "Sinapsis — Psicología Clínica en Costa Rica",
     description:

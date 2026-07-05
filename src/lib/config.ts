@@ -38,9 +38,9 @@ export const config = {
 
   // Nombre de la profesional
   professional: {
-    name: "Cinthya Chavez",
+    name: "Cinthya Chávez",
     title: "Licda.",
-    fullTitle: "Licda. Cinthya Chavez",
+    fullTitle: "Licda. Cinthya Chávez",
     role: "Psicóloga clínica",
     approach: "cognitivo-conductual",
   },

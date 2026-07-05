@@ -101,7 +101,7 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
           <tr>
             <td style="padding: 16px 24px; background-color: #f8f7fc; text-align: center; border-top: 1px solid #eee;">
               <p style="margin: 0; font-size: 12px; color: #999;">
-                Sinapsis — Psicología Clínica · Licda. Cinthya Chavez<br>
+                Sinapsis — Psicología Clínica · Licda. Cinthya Chávez<br>
                 <a href="https://sinapsiscr.com" style="color: #4a3f8f; text-decoration: none;">sinapsiscr.com</a>
               </p>
             </td>
