@@ -12,6 +12,7 @@ export default function HeroSection() {
     >
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent-light/10" />
       <NeuronBackground />
+      <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-background to-transparent pointer-events-none z-10" />
 
       <div className="relative max-w-4xl mx-auto px-4 text-center z-10 bg-background/20 backdrop-blur-[2px] rounded-3xl py-12 px-6 sm:px-12">
         <motion.div
