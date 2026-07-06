@@ -187,7 +187,7 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 - PostHog en vez de Clarity (analytics + session replay en una herramienta, cookieless para sitio de salud mental)
 - GA4 en paralelo: necesario para Google Ads cuando se activen campañas
 - GA4 Measurement ID hardcodeado (es público, simplifica deploy)
-- Paleta celeste + dorado: `--primary` celeste `#2e9ec0`, `--primary-dark` petróleo `#0a4a62`, `--accent` ámbar `#c49a3c` — colores de neuronas hardcodeados en `NeuronBackground.tsx` (no leen CSS vars)
+- Paleta dorado + celeste: `--primary` dorado suave `#d4a843`, `--primary-dark` petróleo `#0a4a62`, `--accent` celeste `#2e9ec0`, fondo gris neutro `#f5f6f8` — colores de neuronas hardcodeados en `NeuronBackground.tsx` en tonos celeste (no leen CSS vars)
 
 ## Convenciones
 
