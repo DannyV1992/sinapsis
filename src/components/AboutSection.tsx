@@ -34,11 +34,10 @@ export default function AboutSection() {
                 Cinthya Chávez
               </h2>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Con más de ocho años de experiencia clínica, me especializo en
-                intervención cognitivo-conductual para adultos. Mi práctica
-                integra técnicas respaldadas por evidencia con un enfoque
-                centrado en la persona, orientado a objetivos concretos y
-                adaptados a cada proceso individual.
+                Me especializo en intervención cognitivo-conductual para adultos.
+                Mi práctica integra técnicas respaldadas por evidencia con un
+                enfoque centrado en la persona, orientado a objetivos concretos
+                y adaptados a cada proceso individual.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-4">
                 Brindo atención en diversidad relacional, de género e identidad,
