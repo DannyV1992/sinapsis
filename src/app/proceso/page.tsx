@@ -153,7 +153,7 @@ export default function ProcesoPage() {
               La TCC no es solo hablar — es aprender a cambiar
             </h2>
             <p className="text-foreground/60 text-base leading-relaxed">
-              La Terapia Cognitivo-Conductual es el enfoque con mayor respaldo científico en psicología clínica.
+              La Terapia Cognitivo-Conductual (TCC) es el enfoque con mayor respaldo científico en psicología clínica.
               Trabaja sobre la relación entre tus pensamientos, emociones y conductas — y te da herramientas
               concretas para interrumpir los patrones que te frenan. No es terapia de por vida ni de hablar
               por hablar: tiene objetivos, estructura y resultados medibles.

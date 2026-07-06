@@ -12,7 +12,7 @@ export default function SobreMiPage() {
     <main className="pt-16 lg:pt-20 font-[family-name:var(--font-lora)]">
 
       {/* Hero */}
-      <section className="relative h-[55vh] min-h-[380px] overflow-hidden bg-primary-dark">
+      <section className="relative h-[20vh] overflow-hidden bg-primary-dark">
         <div className="absolute inset-0 flex items-end">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 w-full">
             <p className="font-[family-name:var(--font-cormorant)] italic text-2xl font-light text-white/70 mb-3">
