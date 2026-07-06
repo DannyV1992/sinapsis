@@ -43,12 +43,14 @@ export default function AboutSection() {
                 Brindo atención en diversidad relacional, de género e identidad,
                 así como en ansiedad, depresión y procesos de autoconocimiento.
                 El espacio terapéutico está diseñado para ser un lugar seguro,
-                sin juicios y orientado al cambio real.
+                sin juicios y orientado al cambio real adaptando el proceso a las
+                necesidades y circunstancias de cada consultante
               </p>
               <p className="text-foreground/70 leading-relaxed mb-8">
-                Con más de 8 años de formación en entornos corporativos y consulta privada, ofrezco
-                atención presencial y virtual, adaptando el proceso a las
-                necesidades y circunstancias de cada consultante.
+                Esta experiencia clínica se complementa con más de 8 años en ambientes corporativos,
+                trabajando en bienestar y felicidad organizacional, con amplio conocimiento en la
+                ejecución de team buildings, cultura organizacional, talleres y charlas para el
+                desarrollo profesional.
               </p>
               <Link
                 href="/sobre-mi"
