@@ -12,17 +12,15 @@ export default function SobreMiPage() {
     <main className="pt-16 lg:pt-20 font-[family-name:var(--font-lora)]">
 
       {/* Hero */}
-      <section className="relative h-[20vh] overflow-hidden bg-primary-dark">
-        <div className="absolute inset-0 flex items-end">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 w-full">
-            <p className="font-[family-name:var(--font-cormorant)] italic text-2xl font-light text-white/70 mb-3">
-              Psicóloga clínica
-            </p>
-            <h1 className="font-[family-name:var(--font-cormorant)] text-6xl sm:text-7xl font-light tracking-wide text-white flex items-center gap-5">
-              Cinthya Chávez
-              <span className="flex-1 h-px bg-white/15 hidden sm:block max-w-[240px]" />
-            </h1>
-          </div>
+      <section className="relative bg-primary-dark pt-20 pb-14 px-4 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <p className="font-[family-name:var(--font-cormorant)] italic text-2xl font-light text-white/70 mb-3">
+            Psicóloga clínica
+          </p>
+          <h1 className="font-[family-name:var(--font-cormorant)] text-6xl sm:text-7xl font-light tracking-wide text-white flex items-center gap-5">
+            Cinthya Chávez
+            <span className="flex-1 h-px bg-white/15 hidden sm:block max-w-[240px]" />
+          </h1>
         </div>
       </section>
 

@@ -27,29 +27,29 @@ export default function AboutSection() {
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.2}>
             <div>
-              <p className="text-sm font-medium text-primary/70 uppercase tracking-widest mb-2">
-                Hola, soy
+              <p className="text-sm font-medium text-primary-dark uppercase tracking-widest mb-2">
+                Psicóloga clínica
               </p>
               <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6 font-[family-name:var(--font-playfair)]">
                 Cinthya Chávez
               </h2>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Decidí dedicarme a la consulta privada porque creo que hay
-                personas que merecen un espacio donde su forma de vivir, de amar y
-                de existir sea tratada como válida desde el primer momento — sin
-                tener que justificarse ni simplificarse para ser comprendidas.
+                Con más de ocho años de experiencia clínica, me especializo en
+                intervención cognitivo-conductual para adultos. Mi práctica
+                integra técnicas respaldadas por evidencia con un enfoque
+                centrado en la persona, orientado a objetivos concretos y
+                adaptados a cada proceso individual.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Trabajo con un enfoque cognitivo-conductual: definimos objetivos
-                concretos juntos y avanzamos con técnicas respaldadas por
-                evidencia. Me interesa que el proceso sea tuyo, no que se adapte a
-                un molde que no encaja con quién sos.
+                Brindo atención en diversidad relacional, de género e identidad,
+                así como en ansiedad, depresión y procesos de autoconocimiento.
+                El espacio terapéutico está diseñado para ser un lugar seguro,
+                sin juicios y orientado al cambio real.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-8">
-                Llevo más de ocho años acompañando personas — primero en entornos
-                corporativos, hoy en consulta privada. Me especializo en trabajar
-                con quienes han cargado solas experiencias que raramente encuentran
-                un lugar en la terapia tradicional.
+                Con más de 8 años de formación en entornos corporativos y consulta privada, ofrezco
+                atención presencial y virtual, adaptando el proceso a las
+                necesidades y circunstancias de cada consultante.
               </p>
               <Link
                 href="/sobre-mi"
@@ -58,7 +58,7 @@ export default function AboutSection() {
                 Conocé más sobre mí
               </Link>
               <div className="border-t border-foreground/10 pt-6">
-                <p className="text-xs font-medium text-foreground/40 uppercase tracking-widest mb-4">Formación y credenciales</p>
+                <p className="text-xs font-medium text-foreground/60 uppercase tracking-widest mb-4">Formación y credenciales</p>
                 <ul className="space-y-2">
                   {[
                     "Licenciada en Psicología Clínica",
@@ -66,7 +66,7 @@ export default function AboutSection() {
                     "Enfoque en diversidad relacional y de género",
                     "Colegio de Profesionales en Psicología de Costa Rica · Cod. 14176",
                   ].map((item) => (
-                    <li key={item} className="flex items-center gap-2 text-sm text-foreground/50">
+                    <li key={item} className="flex items-center gap-2 text-sm text-foreground/70">
                       <span className="w-1 h-1 rounded-full bg-primary/40 flex-shrink-0" />
                       {item}
                     </li>

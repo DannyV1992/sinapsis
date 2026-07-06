@@ -45,10 +45,10 @@ export default function NeuronBackground() {
     const synapses: Synapse[] = [];
 
     const colors = [
-      [46, 158, 192],   // celeste
-      [98, 189, 216],   // celeste claro
-      [30, 130, 165],   // celeste oscuro
-      [72, 175, 210],   // celeste medio
+      [196, 144, 143],  // palo rosa
+      [218, 175, 174],  // palo rosa claro
+      [168, 108, 107],  // palo rosa oscuro
+      [207, 159, 158],  // palo rosa medio
     ];
 
     // Distribute neurons evenly using a grid with jitter
@@ -131,7 +131,7 @@ export default function NeuronBackground() {
       time += 0.005;
 
       // Clear with slight fade
-      ctx.fillStyle = "rgba(242, 248, 251, 0.08)";
+      ctx.fillStyle = "rgba(247, 244, 242, 0.08)";
       ctx.fillRect(0, 0, width, height);
 
       // Update neuron activation
@@ -204,7 +204,7 @@ export default function NeuronBackground() {
             ctx.beginPath();
             ctx.moveTo(neurons[i].x, neurons[i].y);
             ctx.quadraticCurveTo(midX, midY, neurons[j].x, neurons[j].y);
-            ctx.strokeStyle = `rgba(46, 158, 192, ${opacity + activeBoost * 0.15})`;
+            ctx.strokeStyle = `rgba(196, 144, 143, ${opacity + activeBoost * 0.15})`;
             ctx.lineWidth = 0.3 + activeBoost * 1.2;
             ctx.stroke();
           }
@@ -250,8 +250,8 @@ export default function NeuronBackground() {
 
           // Glow around vesicle
           const glow = ctx.createRadialGradient(finalX, finalY, 0, finalX, finalY, v.size * 5);
-          glow.addColorStop(0, `rgba(196, 154, 60, ${synapse.life * 0.45})`);
-          glow.addColorStop(1, "rgba(196, 154, 60, 0)");
+          glow.addColorStop(0, `rgba(138, 170, 150, ${synapse.life * 0.45})`);
+          glow.addColorStop(1, "rgba(138, 170, 150, 0)");
           ctx.beginPath();
           ctx.arc(finalX, finalY, v.size * 5, 0, Math.PI * 2);
           ctx.fillStyle = glow;
@@ -260,9 +260,9 @@ export default function NeuronBackground() {
           // Vesicle body (round)
           ctx.beginPath();
           ctx.arc(finalX, finalY, v.size, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(217, 185, 106, ${synapse.life * 0.85})`;
+          ctx.fillStyle = `rgba(158, 196, 172, ${synapse.life * 0.85})`;
           ctx.fill();
-          ctx.strokeStyle = `rgba(196, 154, 60, ${synapse.life * 0.4})`;
+          ctx.strokeStyle = `rgba(110, 148, 124, ${synapse.life * 0.4})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }
@@ -273,7 +273,7 @@ export default function NeuronBackground() {
           const glowOp = (synapse.progress - 0.7) / 0.3 * synapse.life * 0.2;
           ctx.beginPath();
           ctx.arc(to.x, to.y, to.radius + glowSize, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(196, 133, 106, ${glowOp})`;
+          ctx.fillStyle = `rgba(138, 170, 150, ${glowOp})`;
           ctx.fill();
         }
       }
@@ -364,9 +364,9 @@ export default function NeuronBackground() {
 
         // Fill with activation-dependent color (terracota accent on fire)
         const terracotaMix = act * 0.5;
-        const fillR = Math.round(color[0] * (1 - terracotaMix) + 196 * terracotaMix);
-        const fillG = Math.round(color[1] * (1 - terracotaMix) + 154 * terracotaMix);
-        const fillB = Math.round(color[2] * (1 - terracotaMix) + 60 * terracotaMix);
+        const fillR = Math.round(color[0] * (1 - terracotaMix) + 138 * terracotaMix);
+        const fillG = Math.round(color[1] * (1 - terracotaMix) + 170 * terracotaMix);
+        const fillB = Math.round(color[2] * (1 - terracotaMix) + 150 * terracotaMix);
 
         const somaGrad = ctx.createRadialGradient(
           neuron.x, neuron.y, 0,
@@ -389,8 +389,8 @@ export default function NeuronBackground() {
             neuron.x, neuron.y, 0,
             neuron.x, neuron.y, neuron.radius * 3
           );
-          flashGrad.addColorStop(0, `rgba(196, 154, 60, ${act * 0.2})`);
-          flashGrad.addColorStop(1, "rgba(196, 154, 60, 0)");
+          flashGrad.addColorStop(0, `rgba(138, 170, 150, ${act * 0.2})`);
+          flashGrad.addColorStop(1, "rgba(138, 170, 150, 0)");
           ctx.beginPath();
           ctx.arc(neuron.x, neuron.y, neuron.radius * 3, 0, Math.PI * 2);
           ctx.fillStyle = flashGrad;
