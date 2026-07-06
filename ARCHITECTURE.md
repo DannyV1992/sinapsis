@@ -19,7 +19,7 @@
 ```
 src/
 ├── app/
-│   ├── layout.tsx              # Layout raíz: fuentes (Geist, Playfair, Quicksand), metadata SEO, GA4 script, providers
+│   ├── layout.tsx              # Layout raíz: fuentes (Geist, Playfair, Quicksand, Cormorant, Lora), metadata SEO, GA4 script, providers
 │   ├── page.tsx                # Landing: Hero → About → HowItWorks → Services → Transform → ScrollReveal → FAQ → Contact
 │   ├── globals.css             # Tailwind + estilos globales
 │   ├── posthog-provider.tsx    # Provider PostHog (client component)
@@ -37,6 +37,15 @@ src/
 │   │   └── [id]/
 │   │       ├── page.tsx        # Runner del quiz (usa QuizRunner component)
 │   │       └── layout.tsx      # Metadata dinámica por quiz + generateStaticParams
+│   │
+│   ├── sobre-mi/
+│   │   └── page.tsx            # Página bio completa: hero, intro personal, en consulta, mi plus, por qué/cómo, CTA
+│   │
+│   ├── proceso/
+│   │   └── page.tsx            # Proceso terapéutico: 5 pasos TCC paso a paso + CTA final
+│   │
+│   ├── empresas/
+│   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta, 5 talleres, CTA
 │   │
 │   ├── consentimiento/
 │   │   └── page.tsx            # Consentimiento informado (texto legal)
@@ -66,7 +75,7 @@ src/
 ├── components/
 │   ├── Navbar.tsx              # Navegación fija con links a secciones
 │   ├── HeroSection.tsx         # Banner principal con CTA
-│   ├── AboutSection.tsx        # Bio de la profesional
+│   ├── AboutSection.tsx        # Bio de la profesional + botón "Conocé más sobre mí" → /sobre-mi
 │   ├── ParallaxServices.tsx    # Cards de servicios (individual, pareja, familiar) con parallax
 │   ├── HowItWorksSection.tsx   # Pasos del proceso de agendamiento
 │   ├── QuizCTA.tsx             # CTA hacia los tests de bienestar
@@ -80,7 +89,6 @@ src/
 │   ├── NeuronBackground.tsx    # Animación Three.js de neuronas interactivas
 │   ├── AnimateOnScroll.tsx     # Wrapper Framer Motion para animaciones on-scroll
 │   ├── ScrollRevealText.tsx    # Texto que se revela al hacer scroll
-│   ├── DiversitySection.tsx    # Sección atención especializada (LGBTQ+, diversidad relacional, etc.)
 │   └── JsonLd.tsx              # Schema.org: LocalBusiness + WebSite
 │
 ├── lib/

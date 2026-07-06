@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Playfair_Display, Quicksand, Dancing_Script, Cormorant_Garamond, Josefin_Sans } from "next/font/google";
+import { Geist, Playfair_Display, Quicksand, Cormorant_Garamond, Lora } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -24,12 +24,6 @@ const quicksand = Quicksand({
   subsets: ["latin"],
 });
 
-const dancing = Dancing_Script({
-  variable: "--font-dancing",
-  subsets: ["latin"],
-  weight: ["400", "600"],
-});
-
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
@@ -37,10 +31,11 @@ const cormorant = Cormorant_Garamond({
   style: ["normal", "italic"],
 });
 
-const josefin = Josefin_Sans({
-  variable: "--font-josefin",
+const lora = Lora({
+  variable: "--font-lora",
   subsets: ["latin"],
-  weight: ["100", "200", "300", "400"],
+  weight: ["400", "500"],
+  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -103,7 +98,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${playfair.variable} ${quicksand.variable} ${dancing.variable} ${cormorant.variable} ${josefin.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${playfair.variable} ${quicksand.variable} ${cormorant.variable} ${lora.variable} h-full antialiased`}
     >
       <head>
         <Script

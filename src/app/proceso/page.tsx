@@ -107,33 +107,6 @@ const steps = [
   },
 ];
 
-const faqs = [
-  {
-    question: "¿Cuántas sesiones voy a necesitar?",
-    answer:
-      "Depende de lo que traigas y de tus objetivos. Algunos procesos se resuelven en 8-12 sesiones; otros requieren más tiempo. Lo que puedo decirte desde el inicio es una estimación honesta, no una respuesta vaga para que vengas indefinidamente.",
-  },
-  {
-    question: "¿Es terapia presencial o virtual?",
-    answer:
-      "Ambas opciones están disponibles. Las sesiones virtuales funcionan igual de bien para la mayoría de motivos de consulta. Si tenés dudas sobre cuál se adapta mejor a tu situación, lo evaluamos juntos en la primera consulta.",
-  },
-  {
-    question: "¿Tengo que tener un diagnóstico para ir a terapia?",
-    answer:
-      "No. La terapia no es solo para quien tiene un diagnóstico clínico. Muchas personas llegan por situaciones de vida difíciles, decisiones complejas, o simplemente querer entenderse mejor. Todo eso es válido.",
-  },
-  {
-    question: "¿Qué pasa si en algún momento quiero pausar o terminar?",
-    answer:
-      "Absolutamente válido. El proceso es tuyo y lo manejamos a tu ritmo. Si necesitás pausar, lo hablamos. Si decidís terminar, hacemos un cierre consciente. No hay contratos ni compromisos de permanencia.",
-  },
-  {
-    question: "¿Trabajás con comunidad LGBTQ+ o relaciones no monógamas?",
-    answer:
-      "Sí, es uno de mis enfoques especializados. Mi consulta es un espacio afirmativo: no necesitás explicar ni justificar tu identidad o estructura relacional. Trabajo desde el acompañamiento, no desde el juicio.",
-  },
-];
 
 export default function ProcesoPage() {
   return (
@@ -154,9 +127,6 @@ export default function ProcesoPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7 }}
           >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-accent/20 text-accent text-sm font-medium mb-6 border border-accent/30">
-              Terapia cognitivo-conductual · San José, Costa Rica
-            </span>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white font-[family-name:var(--font-playfair)] leading-tight mb-6">
               ¿Cómo es el proceso
               <br />
@@ -166,25 +136,6 @@ export default function ProcesoPage() {
               No hay magia ni atajos. Lo que hay es un proceso estructurado, honesto y adaptado a vos.
               Aquí te explico exactamente qué esperar — desde la primera sesión hasta el cierre.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <Link
-                href="/agendar"
-                className="inline-flex items-center gap-2 bg-primary hover:bg-primary-light text-white font-semibold px-7 py-3.5 rounded-full transition-colors"
-              >
-                Agendar primera consulta
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-              <a
-                href={getWhatsAppLink("Hola, me gustaría conocer más sobre el proceso terapéutico.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-white/30 text-white hover:bg-white/10 font-medium px-7 py-3.5 rounded-full transition-colors"
-              >
-                Consultar por WhatsApp
-              </a>
-            </div>
           </motion.div>
         </div>
       </section>
@@ -295,100 +246,27 @@ export default function ProcesoPage() {
         </div>
       </section>
 
-      {/* CTA intermedio */}
-      <section className="py-16 px-4 bg-accent-light border-y border-accent/10">
+      {/* CTA final */}
+      <section className="py-20 px-4 bg-accent-light border-t border-accent/10">
         <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground font-[family-name:var(--font-playfair)] mb-3">
-              ¿Listo para dar el primer paso?
-            </h2>
-            <p className="text-foreground/60 mb-8">
-              La primera consulta es el único paso que tenés que dar hoy.
-              El resto lo construimos juntos.
-            </p>
-            <Link
-              href="/agendar"
-              className="inline-flex items-center gap-2 bg-primary-dark hover:bg-primary text-white font-semibold px-8 py-4 rounded-full transition-colors text-lg"
-            >
-              Agendar ahora
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="py-20 px-4">
-        <div className="max-w-3xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
           >
             <h2 className="text-3xl sm:text-4xl font-bold text-foreground font-[family-name:var(--font-playfair)] mb-4">
-              Preguntas frecuentes
-            </h2>
-            <p className="text-foreground/60">
-              Lo que casi todos preguntan antes de agendar.
-            </p>
-          </motion.div>
-
-          <div className="space-y-4">
-            {faqs.map((faq, i) => (
-              <motion.details
-                key={faq.question}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="group bg-white rounded-xl border border-gray-100 overflow-hidden"
-              >
-                <summary className="flex items-center justify-between gap-4 p-6 cursor-pointer list-none select-none hover:bg-gray-50 transition-colors">
-                  <span className="font-semibold text-foreground">{faq.question}</span>
-                  <svg
-                    className="w-5 h-5 text-foreground/40 flex-shrink-0 transition-transform group-open:rotate-180"
-                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </summary>
-                <div className="px-6 pb-6 text-foreground/60 leading-relaxed border-t border-gray-50 pt-4">
-                  {faq.answer}
-                </div>
-              </motion.details>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA final */}
-      <section className="py-20 px-4 bg-primary-dark">
-        <div className="max-w-3xl mx-auto text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-3xl sm:text-4xl font-bold text-white font-[family-name:var(--font-playfair)] mb-4">
               El cambio no ocurre solo —
               <br />
-              <span className="text-primary">pero tampoco tenés que hacerlo solo.</span>
+              <span className="text-primary-dark">pero tampoco tenés que hacerlo sin acompañamiento.</span>
             </h2>
-            <p className="text-white/60 mb-10 max-w-xl mx-auto leading-relaxed">
+            <p className="text-foreground/60 mb-10 max-w-xl mx-auto leading-relaxed">
               Si llegaste hasta aquí, algo en vos ya está listo para comenzar.
               Agendá tu primera consulta o escribime si tenés alguna duda.
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Link
                 href="/agendar"
-                className="inline-flex items-center gap-2 bg-primary hover:bg-primary-light text-white font-semibold px-8 py-4 rounded-full transition-colors"
+                className="inline-flex items-center gap-2 bg-primary-dark hover:bg-primary text-white font-semibold px-8 py-4 rounded-full transition-colors"
               >
                 Agendar consulta
               </Link>
@@ -396,7 +274,7 @@ export default function ProcesoPage() {
                 href={getWhatsAppLink("Hola, leí sobre el proceso terapéutico y tengo una consulta.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-white/30 text-white hover:bg-white/10 font-medium px-8 py-4 rounded-full transition-colors"
+                className="inline-flex items-center gap-2 border border-primary-dark/40 text-primary-dark hover:bg-primary-dark/10 font-medium px-8 py-4 rounded-full transition-colors"
               >
                 Escribir por WhatsApp
               </a>
