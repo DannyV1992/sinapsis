@@ -26,8 +26,11 @@ export default function AboutSection() {
           </AnimateOnScroll>
           <AnimateOnScroll delay={0.2}>
             <div>
-              <h2 className="text-3xl sm:text-4xl font-bold text-foreground mb-6 font-[family-name:var(--font-playfair)]">
-                Sobre mí
+              <p className="text-sm font-medium text-primary/70 uppercase tracking-widest mb-2">
+                Hola, soy
+              </p>
+              <h2 className="text-4xl sm:text-5xl font-bold text-foreground mb-6 font-[family-name:var(--font-playfair)]">
+                Cinthya Chávez
               </h2>
               <p className="text-foreground/70 leading-relaxed mb-4">
                 Decidí dedicarme a la consulta privada porque creo que hay
@@ -41,35 +44,28 @@ export default function AboutSection() {
                 evidencia. Me interesa que el proceso sea tuyo, no que se adapte a
                 un molde que no encaja con quién sos.
               </p>
-              <p className="text-foreground/70 leading-relaxed mb-6">
-                Tengo más de ocho años de trayectoria acompañando personas en
-                entornos corporativos y en consulta. Hoy me especializo en atender a
-                quienes han cargado solos experiencias que no siempre encuentran
-                espacio en la terapia tradicional.
+              <p className="text-foreground/70 leading-relaxed mb-8">
+                Llevo más de ocho años acompañando personas — primero en entornos
+                corporativos, hoy en consulta privada. Me especializo en trabajar
+                con quienes han cargado solas experiencias que raramente encuentran
+                un lugar en la terapia tradicional.
               </p>
-              <ul className="space-y-3">
-                {[
-                  "Licenciada en Psicología Clínica",
-                  "Terapia cognitivo-conductual",
-                  "Enfoque en diversidad relacional y de género",
-                  "Miembro del Colegio de Profesionales en Psicología de Costa Rica (Cod. 14176)",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <svg
-                      className="w-5 h-5 text-accent mt-0.5 flex-shrink-0"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                    <span className="text-foreground/70">{item}</span>
-                  </li>
-                ))}
-              </ul>
+              <div className="border-t border-foreground/10 pt-6">
+                <p className="text-xs font-medium text-foreground/40 uppercase tracking-widest mb-4">Formación y credenciales</p>
+                <ul className="space-y-2">
+                  {[
+                    "Licenciada en Psicología Clínica",
+                    "Terapia cognitivo-conductual",
+                    "Enfoque en diversidad relacional y de género",
+                    "Colegio de Profesionales en Psicología de Costa Rica · Cod. 14176",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-foreground/50">
+                      <span className="w-1 h-1 rounded-full bg-primary/40 flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </AnimateOnScroll>
         </div>
