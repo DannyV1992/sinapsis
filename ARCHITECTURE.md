@@ -94,7 +94,7 @@ src/
 ├── lib/
 │   ├── config.ts               # Configuración central: precios, teléfono, email, horarios, profesional
 │   ├── google-calendar.ts      # OAuth client, getAvailableSlots(), bookAppointment() (+ PDF + Drive upload)
-│   ├── reminders.ts            # sendReminderEmail() — HTML template con Resend
+│   ├── reminders.ts            # sendReminderEmail() — HTML template con Resend (activar con http://localhost:3000/api/test-email)
 │   ├── generate-pdf.ts         # generateBookingPDF() — políticas de cancelación con pdf-lib
 │   ├── quiz-data.ts            # Definición de 6 tests: GAD-7, PHQ-9, PSS-10, Rosenberg, ECR-R, WHO-5
 │   └── gtag.ts                 # Helper gtagEvent() para GA4

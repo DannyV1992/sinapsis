@@ -24,9 +24,9 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
 
   const meetSection = isVirtual && meetLink
     ? `<tr>
-        <td style="padding: 16px 24px; background-color: #f0eef9; border-radius: 8px; margin: 16px 0;">
-          <p style="margin: 0 0 8px; font-size: 14px; color: #4a3f8f; font-weight: 600;">Enlace de la sesión:</p>
-          <a href="${meetLink}" style="color: #4a3f8f; font-size: 14px;">${meetLink}</a>
+        <td style="padding: 16px 24px; background-color: #eef3f0; border-radius: 8px; margin: 16px 0;">
+          <p style="margin: 0 0 8px; font-size: 14px; color: #4a3040; font-weight: 600;">Enlace de la sesión:</p>
+          <a href="${meetLink}" style="color: #4a3040; font-size: 14px;">${meetLink}</a>
         </td>
       </tr>`
     : "";
@@ -39,15 +39,15 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8"></head>
-<body style="margin: 0; padding: 0; background-color: #f8f7fc; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
-  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8f7fc; padding: 32px 16px;">
+<body style="margin: 0; padding: 0; background-color: #f7f4f2; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f7f4f2; padding: 32px 16px;">
     <tr>
       <td align="center">
-        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 520px; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(74,63,143,0.08);">
+        <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 520px; background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(74,48,64,0.08);">
           <tr>
-            <td style="background-color: #4a3f8f; padding: 24px; text-align: center;">
+            <td style="background-color: #4a3040; padding: 24px; text-align: center;">
               <h1 style="margin: 0; color: #ffffff; font-size: 20px; font-weight: 600;">Sinapsis</h1>
-              <p style="margin: 4px 0 0; color: #d4a853; font-size: 13px;">Psicología Clínica</p>
+              <p style="margin: 4px 0 0; color: #c4908f; font-size: 13px;">Psicología Clínica</p>
             </td>
           </tr>
           <tr>
@@ -56,7 +56,7 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
               <p style="margin: 0 0 24px; font-size: 15px; color: #444; line-height: 1.5;">
                 Te recordamos que tienes una cita programada para <strong>mañana</strong> con la Licda. Cinthya Chávez.
               </p>
-              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f8f7fc; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
+              <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f7f4f2; border-radius: 8px; padding: 16px; margin-bottom: 20px;">
                 <tr>
                   <td style="padding: 12px 16px;">
                     <p style="margin: 0 0 8px; font-size: 13px; color: #666; text-transform: uppercase; letter-spacing: 0.5px;">Fecha</p>
@@ -90,7 +90,7 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
                 <tr>
                   <td align="center">
                     <a href="https://wa.me/50671398403?text=${encodeURIComponent("Hola, tengo una consulta sobre mi cita de mañana.")}"
-                       style="display: inline-block; background-color: #4a3f8f; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500;">
+                       style="display: inline-block; background-color: #c4908f; color: #ffffff; text-decoration: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 500;">
                       ¿Necesitas reprogramar? Escríbenos
                     </a>
                   </td>
@@ -99,10 +99,10 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
             </td>
           </tr>
           <tr>
-            <td style="padding: 16px 24px; background-color: #f8f7fc; text-align: center; border-top: 1px solid #eee;">
+            <td style="padding: 16px 24px; background-color: #f7f4f2; text-align: center; border-top: 1px solid #eee;">
               <p style="margin: 0; font-size: 12px; color: #999;">
                 Sinapsis — Psicología Clínica · Licda. Cinthya Chávez<br>
-                <a href="https://sinapsiscr.com" style="color: #4a3f8f; text-decoration: none;">sinapsiscr.com</a>
+                <a href="https://sinapsiscr.com" style="color: #4a3040; text-decoration: none;">sinapsiscr.com</a>
               </p>
             </td>
           </tr>
