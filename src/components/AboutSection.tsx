@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import AnimateOnScroll from "./AnimateOnScroll";
 
 export default function AboutSection() {
@@ -50,6 +51,12 @@ export default function AboutSection() {
                 con quienes han cargado solas experiencias que raramente encuentran
                 un lugar en la terapia tradicional.
               </p>
+              <Link
+                href="/sobre-mi"
+                className="inline-block mb-8 px-6 py-3 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-colors"
+              >
+                Conocé más sobre mí
+              </Link>
               <div className="border-t border-foreground/10 pt-6">
                 <p className="text-xs font-medium text-foreground/40 uppercase tracking-widest mb-4">Formación y credenciales</p>
                 <ul className="space-y-2">

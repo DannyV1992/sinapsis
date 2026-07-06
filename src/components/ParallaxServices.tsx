@@ -7,7 +7,7 @@ const categories = [
   {
     title: "Problemáticas que atiendo",
     subtitle: "Cuando algo no está bien y quieres cambiarlo",
-    color: "from-primary to-primary-light",
+    color: "from-primary to-amber-400",
     services: [
       { name: "Ansiedad y estrés", phrase: "Recupera tu calma" },
       { name: "Depresión", phrase: "Encuentra tu luz" },
@@ -25,7 +25,7 @@ const categories = [
   {
     title: "Desarrollo personal",
     subtitle: "Crecer no siempre requiere estar mal",
-    color: "from-accent to-amber-400",
+    color: "from-accent to-cyan-300",
     services: [
       { name: "Autoconcepto", phrase: "Mírate con otros ojos" },
       { name: "Regulación emocional", phrase: "Siente sin ahogarte" },
