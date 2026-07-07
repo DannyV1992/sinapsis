@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Conócete | Sinapsis",
+  title: "Tests de Salud Mental Gratuitos | Sinapsis",
   description:
-    "Herramientas de autoevaluación para conocer tu estado emocional. Cuestionarios de ansiedad, depresión, estrés y más.",
+    "Tests y cuestionarios gratuitos de ansiedad, depresión, estrés, autoestima y bienestar. Resultados inmediatos y orientación profesional.",
 };
 
 export default function QuizLayout({

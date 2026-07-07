@@ -5,8 +5,8 @@ import ProcesoSteps from "@/components/ProcesoSteps";
 import TccDiagram from "@/components/TccDiagram";
 
 export const metadata: Metadata = {
-  title: "Servicios de psicología — Sinapsis",
-  description: "Consulta psicológica individual, de pareja y familiar en San José, Costa Rica. Enfoque cognitivo-conductual, modalidad presencial y virtual.",
+  title: "Terapia Psicológica en Costa Rica | Sinapsis",
+  description: "Terapia individual, de pareja y familiar en Costa Rica con enfoque cognitivo-conductual. Modalidad presencial y virtual. Agenda tu cita en línea.",
 };
 
 const servicios = [

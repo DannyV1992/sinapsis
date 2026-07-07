@@ -112,7 +112,7 @@ src/
 │   ├── TallerSlideshow.tsx     # Slideshow automático (3.5s, fade) de fotos de talleres — usado en /empresas
 │   ├── TalleresCards.tsx       # Grid filtrable de talleres con chips por categoría (Framer Motion) — usado en /empresas
 │   ├── TccDiagram.tsx          # Diagrama circular interactivo del ciclo TCC (3 sectores clickeables + cuadro descripción) — usado en /servicios
-│   └── JsonLd.tsx              # Schema.org: LocalBusiness + WebSite
+│   └── JsonLd.tsx              # Schema.org: LocalBusiness + WebSite + SearchAction (apunta a /quiz)
 │
 ├── lib/
 │   ├── config.ts               # Configuración central: precios, teléfono, email, horarios, profesional

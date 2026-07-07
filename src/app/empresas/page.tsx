@@ -5,8 +5,8 @@ import TallerSlideshow from "@/components/TallerSlideshow";
 import TalleresCards from "@/components/TalleresCards";
 
 export const metadata: Metadata = {
-  title: "Empresas y Talleres",
-  description: "Talleres de bienestar organizacional, comunicación asertiva y diversidad para equipos de trabajo en Costa Rica.",
+  title: "Talleres de Bienestar para Empresas en Costa Rica | Sinapsis",
+  description: "Talleres de salud mental, bienestar organizacional y diversidad para equipos de trabajo en Costa Rica. Facilitación por psicóloga clínica.",
 };
 
 export default function EmpresasPage() {

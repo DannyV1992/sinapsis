@@ -160,7 +160,17 @@ Configuración aplicada:
 
 Dashboard: https://us.posthog.com
 
-## Paso 10: Google Analytics 4 (para Google Ads)
+## Paso 10: Google Search Console
+
+1. Ir a https://search.google.com/search-console con la cuenta de Google de Cinthya
+2. Agregar propiedad → tipo **Dominio** → `sinapsiscr.com`
+3. Verificar con **Google Analytics** (si es la misma cuenta que administra GA4, es automático) o con registro TXT en Cloudflare → DNS → tipo TXT, nombre `@`, valor el código que Google entrega
+4. Una vez verificado: Sitemaps → agregar `sitemap.xml` → Enviar
+5. El sitemap está en `https://sinapsiscr.com/sitemap.xml` (generado dinámicamente por `src/app/sitemap.ts`)
+
+Para indexar una página nueva rápidamente: Inspección de URLs → pegar la URL → "Solicitar indexación".
+
+## Paso 11: Google Analytics 4 (para Google Ads)
 
 GA4 ya está integrado con el Measurement ID `G-GE5XQ9THJS` directamente en el layout.
 No requiere variables de entorno.

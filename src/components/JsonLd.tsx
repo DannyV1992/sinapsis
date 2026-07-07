@@ -61,6 +61,14 @@ export function WebSiteJsonLd() {
     description:
       "Psicología clínica en Costa Rica. Agenda tu cita en línea.",
     inLanguage: "es",
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: "https://sinapsiscr.com/quiz?q={search_term_string}",
+      },
+      "query-input": "required name=search_term_string",
+    },
   };
 
   return (
