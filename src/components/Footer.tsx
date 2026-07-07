@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { config } from "@/lib/config";
+import { config, getWhatsAppLink } from "@/lib/config";
 
 export default function Footer() {
   return (
@@ -26,9 +26,21 @@ export default function Footer() {
           <div>
             <h4 className="font-semibold text-white mb-3">Contacto</h4>
             <ul className="space-y-2 text-sm">
-              <li>{config.email}</li>
-              <li>{config.phoneDisplay}</li>
-              <li>{config.location}</li>
+              <li>
+                <a href={getWhatsAppLink()} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  {config.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a href={config.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                  {config.instagramHandle}
+                </a>
+              </li>
+              <li>
+                <Link href="/#contacto" className="hover:text-white transition-colors">
+                  {config.email}
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
