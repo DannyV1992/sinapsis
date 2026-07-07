@@ -166,7 +166,7 @@ export async function GET() {
 
   const bytes = await doc.save();
 
-  return new Response(bytes, {
+  return new Response(bytes.buffer as ArrayBuffer, {
     headers: {
       "Content-Type": "application/pdf",
       "Content-Disposition": 'attachment; filename="diario-tcc-sinapsis.pdf"',
