@@ -32,8 +32,12 @@ src/
 │   │   └── layout.tsx          # Metadata de la página de agendamiento
 │   │
 │   ├── quiz/
-│   │   ├── page.tsx            # Grid de los 6 tests disponibles
+│   │   ├── page.tsx            # Grid de los 6 tests con popovers informativos (InfoPopover + FloatingPopover portal) — fila inferior de cada card: "X preguntas · duración · Test:\nescala" distribuidos con justify-between
 │   │   ├── layout.tsx          # Metadata quizzes
+│   │   ├── apego/
+│   │   │   └── page.tsx        # ECR-R real: 36 ítems, escala 1-7, subescalas evitación+ansiedad, 9 combinaciones de resultado
+│   │   ├── necesito-terapia/
+│   │   │   └── page.tsx        # Checklist orientativo 8 preguntas Sí/No — accesible desde CTA al final de cada test
 │   │   └── [id]/
 │   │       ├── page.tsx        # Runner del quiz (usa QuizRunner component)
 │   │       └── layout.tsx      # Metadata dinámica por quiz + generateStaticParams
@@ -54,8 +58,17 @@ src/
 │   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta + slideshow fotos + stats, lista talleres, CTA con video autoplay
 │   │
 │   ├── recursos/
-│   │   └── apoyo/
-│   │       └── page.tsx        # Líneas de apoyo y crisis en Costa Rica (911, 118, 117, 1322, 1165, PANI, OIJ 800-8000-645, Colegio Psicólogos) — 5 secciones: Emergencias, Salud Mental, Niñez/Adolescencia, Adultos Mayores, Violencia/Género
+│   │   ├── apoyo/
+│   │   │   └── page.tsx        # Líneas de apoyo y crisis en Costa Rica (911, 118, 117, 1322, 1165, PANI, OIJ 800-8000-645, Colegio Psicólogos) — 5 secciones
+│   │   ├── biblioteca/
+│   │   │   ├── page.tsx        # Biblioteca recomendada: grid editorial 2 col, tabs por categoría (libros/podcasts/TED/docs), cards con color por tipo — chips con estilo empresas (layoutId="chip-bg-biblioteca")
+│   │   │   └── layout.tsx
+│   │   ├── herramientas/
+│   │   │   ├── page.tsx        # Herramientas interactivas: respiración (box/4-7-8, anillo via @keyframes breath-ring + key={faseIdx} para sincronía exacta, useReducer para avance de fases sin side effects) + grounding 5-4-3-2-1 (colores por paso en botón y barra) + InfoPopover (FloatingPopover portal, flecha superior centrada sobre botón) — chips con estilo empresas
+│   │   │   └── layout.tsx
+│   │   └── descargas/
+│   │       ├── page.tsx        # Materiales descargables: Diario TCC (generado con pdf-lib) + próximamente
+│   │       └── layout.tsx
 │   │
 │   ├── consentimiento/
 │   │   └── page.tsx            # Consentimiento informado (texto legal)
@@ -80,16 +93,18 @@ src/
 │       │
 │       ├── contact/route.ts        # POST: guarda mensaje en Google Sheets
 │       ├── chat-log/route.ts       # POST: log de interacciones del chatbot
-│       └── test-email/route.ts     # POST: prueba de envío Resend (solo dev)
+│       ├── test-email/route.ts     # POST: prueba de envío Resend (solo dev)
+│       └── descargas/
+│           └── diario-tcc/route.ts # GET: genera y devuelve PDF Diario TCC (pdf-lib, A4, portada + 5 páginas de registro)
 │
 ├── components/
-│   ├── Navbar.tsx              # Navegación fija: links directos + dropdown hover "Servicios" → "Terapia" (/terapia) y "Empresas" (/empresas) + dropdown "Recursos" → 5 subitems
+│   ├── Navbar.tsx              # Navegación fija: links directos + dropdown "Servicios" (Terapia, Empresas) + dropdown "Recursos" → Tests, Herramientas, Descargas, Biblioteca, Líneas de Apoyo
 │   ├── HeroSection.tsx         # Banner principal con CTA
 │   ├── AboutSection.tsx        # Bio de la profesional + botón "Conocé más sobre mí" → /sobre-mi
 │   ├── ParallaxServices.tsx    # Cards de áreas de atención (individual, pareja, familiar) con parallax
 │   ├── HowItWorksSection.tsx   # 3 pasos del proceso de agendamiento + enlace "Ver el proceso completo →" en paso 3 → /servicios#proceso
 │   ├── QuizCTA.tsx             # CTA hacia los tests de bienestar
-│   ├── QuizRunner.tsx          # Componente genérico que renderiza cualquier quiz
+│   ├── QuizRunner.tsx          # Componente genérico que renderiza cualquier quiz; al final del resultado muestra CTA → /quiz/necesito-terapia
 │   ├── FAQSection.tsx          # Preguntas frecuentes (acordeón)
 │   ├── ContactSection.tsx      # Formulario de contacto → /api/contact
 │   ├── TransformSection.tsx    # Modalidades de atención (tabs) + enlace "Ver más →" esquina inferior derecha → /servicios#tipos-de-terapia
@@ -110,7 +125,7 @@ src/
 │   ├── google-calendar.ts      # OAuth client, getAvailableSlots(), bookAppointment() (+ PDF + Drive upload)
 │   ├── reminders.ts            # sendReminderEmail() — HTML template con Resend (activar con http://localhost:3000/api/test-email)
 │   ├── generate-pdf.ts         # generateBookingPDF() — políticas de cancelación con pdf-lib
-│   ├── quiz-data.ts            # Definición de 6 tests: GAD-7, PHQ-9, PSS-10, Rosenberg, ECR-R, WHO-5
+│   ├── quiz-data.ts            # Definición de 5 tests: GAD-7, PHQ-9, PSS-10 (reversedItems [6,7,8,9]), Rosenberg (reversedItems [2,4,7,8,9]), WHO-5. ECR-R tiene página propia.
 │   └── gtag.ts                 # Helper gtagEvent() para GA4
 │
 └── types/
@@ -176,6 +191,7 @@ Patrón: PostHog se usa con `usePostHog()` hook en client components. GA4 con `g
 | Evento PostHog | Dónde se dispara | Datos |
 |----------------|-----------------|-------|
 | `quiz_completed` | QuizRunner.tsx | nombre del quiz, puntaje, nivel |
+| `quiz_completed` | quiz/apego/page.tsx | quiz: "ECR-R", evitacion (promedio), ansiedad (promedio) |
 | `booking_step_completed` | agendar/page.tsx | paso, servicio, modalidad |
 | `booking_completed` | agendar/page.tsx | servicio, modalidad |
 | `contact_form_submitted` | ContactSection.tsx | (sin datos personales) |
@@ -219,3 +235,5 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 - Zona horaria: America/Costa_Rica (UTC-6) hardcodeada en calendar y cron
 - Email transaccional desde: `citas@sinapsiscr.com`
 - Cron limitado a 1 ejecución/día (restricción Vercel Hobby)
+- Chips/tabs de selección: estilo unificado — seleccionado: `text-white` + `<motion.span layoutId="chip-bg-*" className="absolute inset-0 rounded-full bg-primary-dark">` (spring animation); no seleccionado: `border border-foreground/15 text-foreground/50 hover:border-foreground/30`. Aplicado en empresas (TalleresCards), herramientas y biblioteca.
+- Animación del anillo de respiración: `@keyframes breath-ring` en `globals.css` (stroke-dashoffset de circunferencia → 0), aplicado con `animation: breath-ring ${duracion}s linear forwards` y `key={faseIdx}` para forzar re-mount en cada fase y garantizar sincronía exacta.

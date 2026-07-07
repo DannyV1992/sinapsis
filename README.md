@@ -22,11 +22,16 @@ src/
 │   ├── page.tsx                 # Página principal
 │   ├── posthog-provider.tsx     # Provider de PostHog (analytics)
 │   ├── agendar/                 # Sistema de agendamiento
-│   ├── quiz/                    # Tests de bienestar (6 tests)
+│   ├── quiz/                    # Tests de bienestar (6 tests + checklist)
+│   │   ├── apego/               # ECR-R real (36 ítems, 2 subescalas)
+│   │   └── necesito-terapia/    # Checklist orientativo 8 preguntas
 │   ├── politicas/               # Políticas de cancelación
 │   ├── consentimiento/          # Consentimiento informado
 │   ├── recursos/
-│   │   └── apoyo/               # Líneas de apoyo y crisis en Costa Rica
+│   │   ├── apoyo/               # Líneas de apoyo y crisis en Costa Rica
+│   │   ├── biblioteca/          # Libros, podcasts, TED, documentales
+│   │   ├── herramientas/        # Respiración + grounding interactivos
+│   │   └── descargas/           # PDFs descargables (Diario TCC)
 │   ├── logo-export/             # Exportación del logo
 │   └── api/
 │       ├── auth/                # OAuth login/callback
@@ -34,7 +39,8 @@ src/
 │       ├── chat-log/            # Logs del chatbot
 │       ├── contact/             # Formulario de contacto
 │       ├── cron/reminders/      # Cron: recordatorios 24h antes
-│       └── test-email/          # Test de Resend (solo dev)
+│       ├── test-email/          # Test de Resend (solo dev)
+│       └── descargas/diario-tcc/ # GET: genera PDF Diario TCC con pdf-lib
 ├── components/
 │   ├── AboutSection.tsx
 │   ├── AnimateOnScroll.tsx
@@ -80,10 +86,17 @@ Todos los datos variables (precios, teléfono, email, ubicación, horario, méto
 ### Tests de bienestar
 - GAD-7 (Ansiedad)
 - PHQ-9 (Depresión)
-- PSS-10 (Estrés)
-- Rosenberg (Autoestima)
-- ECR-R (Estilos de apego)
+- PSS-10 (Estrés) — con ítems positivos invertidos
+- Rosenberg (Autoestima) — con ítems negativos invertidos
+- ECR-R (Apego) — 36 ítems reales, subescalas evitación + ansiedad, página propia `/quiz/apego`
 - WHO-5 (Bienestar general)
+- Checklist "¿Necesito terapia?" — 8 preguntas orientativas, accesible desde el resultado de cada test
+
+### Recursos de bienestar
+- Herramientas interactivas: respiración guiada (box/4-7-8) + grounding 5-4-3-2-1
+- Biblioteca recomendada: libros, podcasts, charlas TED y documentales curados
+- Materiales descargables: Diario TCC generado con pdf-lib (portada + 5 páginas de registro)
+- Líneas de apoyo en Costa Rica (emergencias y salud mental)
 
 ### Chatbot (Neurón)
 - FAQ por palabras clave

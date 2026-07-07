@@ -102,6 +102,7 @@ export default function ApoyoPage() {
 
         {/* Header */}
         <div className="mb-12 text-center">
+          <p className="text-xs font-semibold tracking-widest text-foreground/35 uppercase mb-3">Recursos</p>
           <h1 className="text-4xl sm:text-5xl font-bold text-primary-dark font-[family-name:var(--font-playfair)] mb-4">
             Líneas de Apoyo en Costa Rica
           </h1>

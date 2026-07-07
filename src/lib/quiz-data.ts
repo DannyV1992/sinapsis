@@ -17,6 +17,8 @@ export interface QuizConfig {
   subtitle: string;
   questions: string[];
   options: QuizOption[];
+  // Índices de preguntas cuya puntuación se invierte (score = maxOptionValue - value)
+  reversedItems?: number[];
   getResult: (score: number) => QuizResult;
   maxScore: number;
 }
@@ -101,6 +103,8 @@ export const quizzes: Record<string, QuizConfig> = {
       { label: "Frecuentemente", value: 3 },
       { label: "Muy frecuentemente", value: 4 },
     ],
+    // Ítems 6-9 (índices) son positivos: su puntuación se invierte (4 - valor)
+    reversedItems: [6, 7, 8, 9],
     maxScore: 40,
     getResult(score) {
       if (score <= 13) return { level: "Bajo", color: "text-green-600", bg: "bg-green-50", border: "border-green-200", message: "Tu nivel de estrés percibido es bajo. Tienes buenas herramientas de manejo.", recommendation: "Sigue con lo que funciona. El equilibrio que tienes ahora es valioso — cuídalo." };
@@ -130,42 +134,13 @@ export const quizzes: Record<string, QuizConfig> = {
       { label: "En desacuerdo", value: 1 },
       { label: "Muy en desacuerdo", value: 0 },
     ],
+    // Ítems negativos (índices 2,4,7,8,9): se invierten para que autoestima alta = puntaje alto
+    reversedItems: [2, 4, 7, 8, 9],
     maxScore: 30,
     getResult(score) {
       if (score >= 25) return { level: "Alta", color: "text-green-600", bg: "bg-green-50", border: "border-green-200", message: "Tienes una autoestima saludable. Te valoras y reconoces tus cualidades.", recommendation: "Sigue cultivando esa relación contigo. La autoestima se fortalece con la coherencia entre lo que piensas, sientes y haces." };
       if (score >= 15) return { level: "Media", color: "text-yellow-600", bg: "bg-yellow-50", border: "border-yellow-200", message: "Tu autoestima fluctúa. A veces te sientes bien contigo y otras no tanto.", recommendation: "Trabajar en el autoconocimiento y desafiar creencias limitantes puede ayudarte a construir una base más sólida." };
       return { level: "Baja", color: "text-orange-600", bg: "bg-orange-50", border: "border-orange-200", message: "Tus respuestas sugieren que te cuesta valorarte. Esto es más común de lo que crees, y se puede trabajar.", recommendation: "La terapia es muy efectiva para reconstruir la relación contigo mismo/a. Mereces sentirte bien con quien eres." };
-    },
-  },
-
-  apego: {
-    title: "¿Cómo me vinculo con otros?",
-    subtitle: "Piensa en cómo te sientes en tus relaciones cercanas.",
-    questions: [
-      "Me resulta fácil acercarme emocionalmente a los demás.",
-      "Me preocupa que los demás no me quieran tanto como yo a ellos.",
-      "Me siento cómodo/a dependiendo de otras personas.",
-      "Me preocupa que me abandonen.",
-      "Prefiero no mostrar mis sentimientos a los demás.",
-      "Me frustro cuando mi pareja o amigos no están disponibles.",
-      "Me siento incómodo/a cuando alguien se acerca demasiado.",
-      "Necesito mucha validación de las personas cercanas a mí.",
-      "Me cuesta confiar completamente en los demás.",
-      "Cuando discuto con alguien cercano, temo perder la relación.",
-      "Valoro mi independencia más que la intimidad.",
-      "Me cuesta pedir ayuda aunque la necesite.",
-    ],
-    options: [
-      { label: "Muy de acuerdo", value: 3 },
-      { label: "De acuerdo", value: 2 },
-      { label: "En desacuerdo", value: 1 },
-      { label: "Muy en desacuerdo", value: 0 },
-    ],
-    maxScore: 36,
-    getResult(score) {
-      if (score <= 12) return { level: "Seguro", color: "text-green-600", bg: "bg-green-50", border: "border-green-200", message: "Tus respuestas sugieren un estilo de apego seguro. Te sientes cómodo/a con la intimidad y la independencia.", recommendation: "Tus relaciones probablemente son tu fortaleza. Sigue cultivando esa capacidad de conexión." };
-      if (score <= 22) return { level: "Mixto", color: "text-yellow-600", bg: "bg-yellow-50", border: "border-yellow-200", message: "Tienes rasgos de diferentes estilos. A veces buscas cercanía y otras te proteges.", recommendation: "Explorar tus patrones relacionales con un profesional puede darte mucha claridad sobre por qué reaccionas como reaccionas." };
-      return { level: "Inseguro", color: "text-orange-600", bg: "bg-orange-50", border: "border-orange-200", message: "Tus respuestas sugieren patrones de apego que pueden generar dificultad en tus relaciones.", recommendation: "El estilo de apego se puede trabajar y transformar. La terapia es una herramienta poderosa para construir relaciones más satisfactorias." };
     },
   },
 

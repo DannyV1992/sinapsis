@@ -20,7 +20,11 @@ export default function QuizRunner({ config }: { config: QuizConfig }) {
     if (currentQuestion < config.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      const score = newAnswers.reduce((sum, a) => sum + a, 0);
+      const maxOptionValue = Math.max(...config.options.map((o) => o.value));
+      const score = newAnswers.reduce((sum, a, idx) => {
+        const v = config.reversedItems?.includes(idx) ? maxOptionValue - a : a;
+        return sum + v;
+      }, 0);
       const quizResult = config.getResult(score);
       posthog?.capture("quiz_completed", {
         quiz: config.title,
@@ -37,7 +41,11 @@ export default function QuizRunner({ config }: { config: QuizConfig }) {
     }
   };
 
-  const totalScore = answers.reduce((sum, a) => sum + a, 0);
+  const maxOptionValue = Math.max(...config.options.map((o) => o.value));
+  const totalScore = answers.reduce((sum, a, idx) => {
+    const v = config.reversedItems?.includes(idx) ? maxOptionValue - a : a;
+    return sum + v;
+  }, 0);
   const result = config.getResult(totalScore);
   const progress = ((currentQuestion + (showResult ? 1 : 0)) / config.questions.length) * 100;
 
@@ -161,6 +169,18 @@ export default function QuizRunner({ config }: { config: QuizConfig }) {
                   reflexión, no un diagnóstico clínico. Solo un profesional puede
                   realizar una evaluación completa.
                 </p>
+              </div>
+
+              <div className="flex items-center justify-between px-1">
+                <p className="text-xs text-foreground/40">
+                  ¿No estás seguro/a si necesitás terapia?
+                </p>
+                <Link
+                  href="/quiz/necesito-terapia"
+                  className="text-xs font-semibold text-primary hover:text-primary-dark transition-colors underline underline-offset-2 shrink-0 ml-4"
+                >
+                  Ver checklist →
+                </Link>
               </div>
             </motion.div>
           )}
