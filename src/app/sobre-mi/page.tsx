@@ -3,8 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Sobre mí",
-  description: "Conocé a Cinthya Chávez, psicóloga clínica en Costa Rica especializada en diversidad relacional, identidades no normativas y bienestar emocional.",
+  title: "Sobre mí — Cinthya Chávez, Psicóloga Clínica",
+  description: "Conocé a Cinthya Chávez, psicóloga clínica en Costa Rica. Espacio afirmativo para comunidad LGBTQ+, relaciones no monógamas, deconstrucción religiosa, duelo reproductivo e identidades no normativas. Terapia individual, de pareja y familiar.",
 };
 
 export default function SobreMiPage() {

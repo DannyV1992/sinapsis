@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     template: "%s | Sinapsis",
   },
   description:
-    "Psicóloga clínica en Costa Rica. Terapia cognitivo-conductual individual, de pareja y familiar. Agenda tu cita en línea.",
+    "Psicóloga clínica en Costa Rica. Terapia individual, de pareja y familiar con enfoque cognitivo-conductual. Espacio afirmativo para comunidad LGBTQ+, diversidad relacional y procesos de identidad. Agenda tu cita en línea.",
   keywords: [
     "psicóloga Costa Rica",
     "terapia cognitivo-conductual",
@@ -57,6 +57,11 @@ export const metadata: Metadata = {
     "depresión",
     "salud mental Costa Rica",
     "agendar cita psicóloga",
+    "psicóloga LGBTQ Costa Rica",
+    "terapia afirmativa Costa Rica",
+    "diversidad relacional",
+    "terapia identidad de género",
+    "psicóloga comunidad LGBTQ+",
   ],
   authors: [{ name: "Licda. Cinthya Chávez" }],
   openGraph: {
