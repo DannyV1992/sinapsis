@@ -39,7 +39,7 @@ export default function EmpresasPage() {
                 Antes de abrir consulta privada, pasé más de ocho años trabajando en entornos corporativos — diseñando iniciativas de bienestar organizacional, facilitando team buildings y desarrollando talleres de cultura de equipos.
               </p>
               <p className="text-foreground/80 text-lg leading-relaxed mb-5">
-                Ese recorrido me dio una perspectiva que pocas psicólogas clínicas tienen: entiendo la dinámica de las organizaciones desde adentro. No llego con un taller genérico — llego con contexto real de lo que viven los equipos.
+                Ese recorrido me permite entender la dinámica de las organizaciones desde adentro. No llego con un taller genérico — llego con contexto real de lo que viven los equipos.
               </p>
               <p className="text-foreground/80 text-lg leading-relaxed">
                 Trabajo con empresas de distintos tamaños y sectores. Todo proceso parte de entender qué necesita específicamente tu equipo.
