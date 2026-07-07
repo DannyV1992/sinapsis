@@ -110,13 +110,12 @@ export async function getAvailableSlots(date: string, modality?: string, service
 
     if (!modality) return true;
 
-    const title = event.summary?.toLowerCase() || "";
+    const title = event.summary?.toLowerCase().trim() || "";
     const isPresencial = title === "presencial";
     const isVirtual = title === "virtual";
     const isDisponible = title === "disponible";
 
-    if (isDisponible) return true;
-    if (!isPresencial && !isVirtual && !isDisponible) return true;
+    if (!isPresencial && !isVirtual && !isDisponible) return false;
 
     if (modality === "virtual") return isVirtual || isDisponible;
     if (modality === "presencial") return isPresencial || isDisponible;
