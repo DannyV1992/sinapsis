@@ -14,7 +14,7 @@ export const config = {
   // Redes sociales
   instagram: "https://www.instagram.com/sinapsis_psicologia_",
   instagramHandle: "@sinapsis_psicologia_",
-  whatsappMessage: "Hola, me gustaría consultar sobre los servicios de Sinapsis.",
+  whatsappMessage: "Hola, vengo desde tu sitio web y me gustaría saber más sobre los servicios.",
 
   // Precios
   prices: {
