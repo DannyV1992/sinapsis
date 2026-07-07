@@ -134,7 +134,7 @@ export default function TransformSection() {
                 Agendar
               </Link>
               <Link
-                href="/servicios#tipos-de-terapia"
+                href="/terapia#tipos-de-terapia"
                 className="absolute bottom-4 right-5 text-xs font-semibold text-primary-dark hover:underline"
               >
                 Ver más →

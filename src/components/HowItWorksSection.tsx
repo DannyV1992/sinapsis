@@ -91,7 +91,7 @@ export default function HowItWorksSection() {
                 </p>
                 {"cta" in step && (
                   <Link
-                    href="/servicios#proceso"
+                    href="/terapia#proceso"
                     className="inline-block mt-3 text-xs font-semibold text-primary-dark hover:underline"
                   >
                     Ver el proceso completo →

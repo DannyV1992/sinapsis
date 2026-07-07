@@ -15,11 +15,10 @@ export default function Footer() {
           </div>
           <div>
             <h4 className="font-semibold text-white mb-3">Enlaces</h4>
-            <ul className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm w-fit">
+            <ul className="grid grid-cols-2 grid-rows-3 grid-flow-col gap-x-8 gap-y-2 text-sm w-fit">
               <li><Link href="/sobre-mi" className="hover:text-white transition-colors">Sobre mí</Link></li>
-              <li><Link href="/servicios" className="hover:text-white transition-colors">Psicología</Link></li>
+              <li><Link href="/terapia" className="hover:text-white transition-colors">Terapia</Link></li>
               <li><Link href="/empresas" className="hover:text-white transition-colors">Empresas</Link></li>
-              <li><Link href="/proceso" className="hover:text-white transition-colors">El proceso</Link></li>
               <li><Link href="/#contacto" className="hover:text-white transition-colors">Contacto</Link></li>
               <li><Link href="/agendar" className="hover:text-white transition-colors">Agendar cita</Link></li>
             </ul>

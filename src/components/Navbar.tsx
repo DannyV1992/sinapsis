@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const serviciosSubmenu = [
   {
-    href: "/servicios",
+    href: "/terapia",
     label: "Terapia",
     description: "Consulta individual, pareja y familiar",
   },
