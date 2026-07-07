@@ -111,7 +111,7 @@ export default function TransformSection() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3 }}
-              className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm text-center"
+              className="relative bg-white p-8 rounded-2xl border border-gray-100 shadow-sm text-center"
             >
               <div className="flex justify-center mb-5 text-primary">
                 {modalities[active].icon}
@@ -132,6 +132,12 @@ export default function TransformSection() {
                 className="inline-block px-6 py-2.5 bg-primary text-white rounded-full text-sm font-medium hover:bg-primary-dark transition-colors duration-300"
               >
                 Agendar
+              </Link>
+              <Link
+                href="/servicios#tipos-de-terapia"
+                className="absolute bottom-4 right-5 text-xs font-semibold text-primary-dark hover:underline"
+              >
+                Ver más →
               </Link>
             </motion.div>
           </div>

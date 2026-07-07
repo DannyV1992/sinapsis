@@ -43,6 +43,7 @@ export default function SobreMiPage() {
                   "Licenciada en Psicología Clínica",
                   "Terapia cognitivo-conductual",
                   "Diversidad relacional y de género",
+                  "8+ años en bienestar organizacional",
                   "Cod. 14176 · Colegio de Psicología CR",
                 ].map((item) => (
                   <p key={item} className="text-sm text-foreground/40 flex items-center gap-2">

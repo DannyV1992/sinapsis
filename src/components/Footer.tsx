@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { config } from "@/lib/config";
 
 export default function Footer() {
@@ -8,28 +9,19 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold text-white mb-3">Sinapsis</h3>
             <p className="text-sm leading-relaxed">
-              Psicología clínica y bienestar emocional. Tu salud mental es
-              nuestra prioridad.
+              Psicología clínica y bienestar emocional.<br />
+              Tu salud mental es nuestra prioridad.
             </p>
           </div>
           <div>
             <h4 className="font-semibold text-white mb-3">Enlaces</h4>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <a href="#sobre-mi" className="hover:text-white transition-colors">
-                  Sobre mí
-                </a>
-              </li>
-              <li>
-                <a href="#servicios" className="hover:text-white transition-colors">
-                  Servicios
-                </a>
-              </li>
-              <li>
-                <a href="#contacto" className="hover:text-white transition-colors">
-                  Contacto
-                </a>
-              </li>
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-2 text-sm w-fit">
+              <li><Link href="/sobre-mi" className="hover:text-white transition-colors">Sobre mí</Link></li>
+              <li><Link href="/servicios" className="hover:text-white transition-colors">Psicología</Link></li>
+              <li><Link href="/empresas" className="hover:text-white transition-colors">Empresas</Link></li>
+              <li><Link href="/proceso" className="hover:text-white transition-colors">El proceso</Link></li>
+              <li><Link href="/#contacto" className="hover:text-white transition-colors">Contacto</Link></li>
+              <li><Link href="/agendar" className="hover:text-white transition-colors">Agendar cita</Link></li>
             </ul>
           </div>
           <div>

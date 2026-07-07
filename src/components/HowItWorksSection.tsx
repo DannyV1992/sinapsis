@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import AnimateOnScroll from "./AnimateOnScroll";
 
 const steps = [
@@ -36,6 +37,7 @@ const steps = [
     title: "Tu proceso",
     description:
       "Avanzamos a tu ritmo con sesiones regulares, herramientas prácticas y acompañamiento continuo.",
+    cta: true,
     icon: (
       <path
         strokeLinecap="round"
@@ -87,6 +89,14 @@ export default function HowItWorksSection() {
                 <p className="text-sm text-foreground/60 leading-relaxed">
                   {step.description}
                 </p>
+                {"cta" in step && (
+                  <Link
+                    href="/servicios#proceso"
+                    className="inline-block mt-3 text-xs font-semibold text-primary-dark hover:underline"
+                  >
+                    Ver el proceso completo →
+                  </Link>
+                )}
               </div>
             </AnimateOnScroll>
           ))}

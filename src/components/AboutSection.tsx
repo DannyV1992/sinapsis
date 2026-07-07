@@ -65,6 +65,7 @@ export default function AboutSection() {
                     "Licenciada en Psicología Clínica",
                     "Terapia cognitivo-conductual",
                     "Enfoque en diversidad relacional y de género",
+                    "8+ años en bienestar organizacional",
                     "Colegio de Profesionales en Psicología de Costa Rica (Cod. 14176)",
                   ].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-sm text-foreground/70">

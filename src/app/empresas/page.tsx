@@ -1,107 +1,69 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { getWhatsAppLink } from "@/lib/config";
+import TallerSlideshow from "@/components/TallerSlideshow";
+import TalleresCards from "@/components/TalleresCards";
 
 export const metadata: Metadata = {
   title: "Empresas y Talleres",
   description: "Talleres de bienestar organizacional, comunicación asertiva y diversidad para equipos de trabajo en Costa Rica.",
 };
 
-const talleres = [
-  {
-    title: "Manejo del estrés y prevención del burnout",
-    description:
-      "Herramientas prácticas para que los equipos identifiquen señales de agotamiento y construyan estrategias de autocuidado sostenibles dentro del entorno laboral.",
-    duracion: "3–4 horas / sesión única o proceso",
-  },
-  {
-    title: "Comunicación asertiva en equipos",
-    description:
-      "Técnicas para mejorar la comunicación interna, reducir conflictos y fortalecer la capacidad de dar y recibir retroalimentación con seguridad.",
-    duracion: "3–4 horas / sesión única o proceso",
-  },
-  {
-    title: "Diversidad, inclusión y salud mental",
-    description:
-      "Espacio formativo para líderes y equipos sobre diversidad de identidades, orientaciones y estructuras relacionales en el lugar de trabajo — desde una perspectiva psicológica, no solo de compliance.",
-    duracion: "2–4 horas / adaptable",
-  },
-  {
-    title: "Inteligencia emocional aplicada",
-    description:
-      "Reconocimiento y regulación emocional, empatía, gestión de conflictos interpersonales. Para equipos que quieren mejorar su clima laboral desde adentro.",
-    duracion: "3–4 horas / sesión única o proceso",
-  },
-  {
-    title: "Taller a la medida",
-    description:
-      "Si tenés una necesidad específica de tu organización, podemos diseñar un taller o proceso que se adapte a tu equipo, industria y objetivos.",
-    duracion: "Consultar",
-  },
-];
-
 export default function EmpresasPage() {
   return (
     <main className="pt-16 lg:pt-20">
 
       {/* Hero */}
-      <section className="relative h-[50vh] min-h-[360px] overflow-hidden bg-primary-dark">
-        <Image
-          src="/cinthya.jpg"
-          alt="Empresas y talleres"
-          fill
-          className="object-cover object-center opacity-15"
-        />
-        <div className="absolute inset-0 flex items-end">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pb-14 w-full">
-            <h1 className="font-[family-name:var(--font-playfair)] text-5xl sm:text-6xl font-bold text-white flex items-center gap-5 mb-4">
-              Empresas
-              <span className="flex-1 h-px bg-white/15 hidden sm:block max-w-[200px]" />
-            </h1>
-            <p className="text-white/50 text-xl max-w-lg">
-              Bienestar organizacional y talleres para equipos.
-            </p>
-          </div>
+      <section className="relative bg-primary-dark pt-20 pb-14 px-4 overflow-hidden">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-sm tracking-[0.3em] text-white/50 uppercase mb-3">
+            Bienestar organizacional
+          </p>
+          <h1 className="font-[family-name:var(--font-playfair)] text-6xl sm:text-7xl font-bold text-white flex items-center gap-5">
+            Empresas
+            <span className="flex-1 h-px bg-white/15 hidden sm:block max-w-[240px]" />
+          </h1>
         </div>
       </section>
 
       {/* Propuesta */}
       <section className="py-20 lg:py-28 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-24 items-start">
+          {/* Texto + Slideshow */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-16">
             <div>
-              <p className="text-xs tracking-[0.3em] text-foreground/35 uppercase mb-6">
+              <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-6">
                 Mi experiencia corporativa
               </p>
-              <p className="text-foreground/65 text-lg leading-relaxed font-[family-name:var(--font-cormorant)] mb-5">
+              <p className="text-foreground/80 text-lg leading-relaxed mb-5">
                 Antes de abrir consulta privada, pasé más de ocho años trabajando en entornos corporativos — diseñando iniciativas de bienestar organizacional, facilitando team buildings y desarrollando talleres de cultura de equipos.
               </p>
-              <p className="text-foreground/65 text-lg leading-relaxed font-[family-name:var(--font-cormorant)] mb-5">
+              <p className="text-foreground/80 text-lg leading-relaxed mb-5">
                 Ese recorrido me dio una perspectiva que pocas psicólogas clínicas tienen: entiendo la dinámica de las organizaciones desde adentro. No llego con un taller genérico — llego con contexto real de lo que viven los equipos.
               </p>
-              <p className="text-foreground/65 text-lg leading-relaxed font-[family-name:var(--font-cormorant)]">
+              <p className="text-foreground/80 text-lg leading-relaxed">
                 Trabajo con empresas de distintos tamaños y sectores. Todo proceso parte de entender qué necesita específicamente tu equipo.
               </p>
             </div>
+            <TallerSlideshow />
+          </div>
 
-            {/* Stats */}
-            <div className="space-y-8">
-              {[
-                { number: "8+", label: "años en entornos corporativos" },
-                { number: "100+", label: "personas acompañadas en talleres" },
-                { number: "5", label: "talleres disponibles" },
-              ].map((s) => (
-                <div key={s.label} className="border-b border-foreground/8 pb-8">
-                  <p className="font-[family-name:var(--font-playfair)] text-5xl font-bold text-primary mb-1">
-                    {s.number}
-                  </p>
-                  <p className="text-xs tracking-[0.2em] text-foreground/40 uppercase">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
+          {/* Stats */}
+          <div className="grid grid-cols-3 gap-8 border-t border-foreground/8 pt-12">
+            {[
+              { number: "8+", label: "años en entornos corporativos" },
+              { number: "200+", label: "personas acompañadas en talleres" },
+              { number: "15+", label: "temáticas disponibles" },
+            ].map((s) => (
+              <div key={s.label}>
+                <p className="font-[family-name:var(--font-playfair)] text-5xl font-bold text-primary mb-1">
+                  {s.number}
+                </p>
+                <p className="text-xs tracking-[0.2em] text-foreground/50 uppercase">
+                  {s.label}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -109,55 +71,56 @@ export default function EmpresasPage() {
       {/* Talleres */}
       <section className="bg-section-alt border-t border-foreground/6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-          <p className="text-xs tracking-[0.3em] text-foreground/35 uppercase mb-5">Talleres</p>
+          <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-5">Talleres</p>
           <h2 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-foreground flex items-center gap-5 mb-14">
-            Lo que ofrezco
+            Algunas temáticas que imparto
             <span className="flex-1 h-px bg-foreground/15 hidden sm:block" />
           </h2>
 
-          <div className="space-y-0">
-            {talleres.map((t, i) => (
-              <div key={t.title} className={`py-10 border-t border-foreground/8 ${i === talleres.length - 1 ? "border-b" : ""}`}>
-                <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr_auto] gap-5 lg:gap-12 items-start">
-                  <h3 className="font-[family-name:var(--font-playfair)] text-lg font-bold text-foreground">
-                    {t.title}
-                  </h3>
-                  <p className="text-foreground/60 text-base leading-relaxed font-[family-name:var(--font-cormorant)]">{t.description}</p>
-                  <p className="text-xs tracking-[0.15em] text-primary/60 uppercase whitespace-nowrap">{t.duracion}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <TalleresCards />
         </div>
       </section>
 
       {/* CTA corporativo */}
-      <section className="py-24 bg-primary-dark border-t border-white/5">
+      <section className="py-24 bg-accent/20 border-t border-accent/15">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-12 lg:gap-16 items-center">
+            {/* Video */}
+            <div className="w-full max-w-[220px] mx-auto lg:mx-0 aspect-[9/16] overflow-hidden rounded-lg bg-foreground/5 shrink-0">
+              <video
+                src="/taller-video-1.webm"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            {/* Texto + botones */}
             <div>
-              <p className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-white/70 leading-snug mb-6">
+              <p className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-foreground leading-snug mb-6">
                 ¿Tu equipo necesita esto?
               </p>
-              <p className="text-white/45 text-lg leading-relaxed font-[family-name:var(--font-cormorant)]">
-                Conversemos sobre lo que necesita tu organización. No hay un paquete estándar — cada proceso parte de entender tu contexto específico.
+              <p className="text-foreground/70 text-lg leading-relaxed mb-8">
+                Conversemos sobre lo que necesita tu organización. No trabajo con paquetes cerrados — cada proceso parte de entender tu contexto, ya sea adaptando un taller existente o diseñando algo desde cero para tu equipo y tus objetivos.
               </p>
-            </div>
-            <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
-              <a
-                href={getWhatsAppLink("Hola, me interesa consultar sobre talleres y servicios para empresas.")}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-8 py-4 bg-accent text-primary-dark rounded-full text-sm font-semibold text-center hover:-translate-y-px transition-all duration-300"
-              >
-                Escribir por WhatsApp
-              </a>
-              <Link
-                href="/#contacto"
-                className="px-8 py-4 border border-white/20 text-white/70 rounded-full text-sm font-medium text-center hover:border-white/40 hover:text-white transition-all duration-300"
-              >
-                Enviar mensaje
-              </Link>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href={getWhatsAppLink("Hola, me interesa consultar sobre talleres y servicios para empresas.")}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-8 py-4 bg-primary-dark text-white rounded-full text-sm font-semibold text-center hover:-translate-y-px transition-all duration-300"
+                >
+                  Escribir por WhatsApp
+                </a>
+                <Link
+                  href="/#contacto"
+                  className="px-8 py-4 border border-foreground/20 text-foreground/70 rounded-full text-sm font-medium text-center hover:border-foreground/40 hover:text-foreground transition-all duration-300"
+                >
+                  Enviar mensaje
+                </Link>
+              </div>
             </div>
           </div>
         </div>

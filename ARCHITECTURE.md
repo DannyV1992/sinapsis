@@ -42,10 +42,13 @@ src/
 │   │   └── page.tsx            # Página bio completa: hero, intro personal, en consulta, mi plus, por qué/cómo, CTA
 │   │
 │   ├── proceso/
-│   │   └── page.tsx            # Proceso terapéutico: 5 pasos TCC paso a paso + CTA final
+│   │   └── page.tsx            # (legacy, no enlazada desde navbar) — contenido migrado a /servicios
+│   │
+│   ├── servicios/
+│   │   └── page.tsx            # Psicología clínica: enfoque TCC, tipos de terapia (cards B) con precios, proceso terapéutico (4 pasos), CTA
 │   │
 │   ├── empresas/
-│   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta, 5 talleres, CTA
+│   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta + slideshow fotos + stats, lista talleres, CTA con video autoplay
 │   │
 │   ├── consentimiento/
 │   │   └── page.tsx            # Consentimiento informado (texto legal)
@@ -73,22 +76,25 @@ src/
 │       └── test-email/route.ts     # POST: prueba de envío Resend (solo dev)
 │
 ├── components/
-│   ├── Navbar.tsx              # Navegación fija con links a secciones
+│   ├── Navbar.tsx              # Navegación fija: links directos + dropdown hover "Servicios" → "Terapia" (/servicios) y "Empresas" (/empresas)
 │   ├── HeroSection.tsx         # Banner principal con CTA
 │   ├── AboutSection.tsx        # Bio de la profesional + botón "Conocé más sobre mí" → /sobre-mi
-│   ├── ParallaxServices.tsx    # Cards de servicios (individual, pareja, familiar) con parallax
-│   ├── HowItWorksSection.tsx   # Pasos del proceso de agendamiento
+│   ├── ParallaxServices.tsx    # Cards de áreas de atención (individual, pareja, familiar) con parallax
+│   ├── HowItWorksSection.tsx   # 3 pasos del proceso de agendamiento + enlace "Ver el proceso completo →" en paso 3 → /servicios#proceso
 │   ├── QuizCTA.tsx             # CTA hacia los tests de bienestar
 │   ├── QuizRunner.tsx          # Componente genérico que renderiza cualquier quiz
 │   ├── FAQSection.tsx          # Preguntas frecuentes (acordeón)
 │   ├── ContactSection.tsx      # Formulario de contacto → /api/contact
-│   ├── TransformSection.tsx    # Modalidades de atención (presencial/virtual)
-│   ├── Footer.tsx              # Pie de página con datos de contacto
+│   ├── TransformSection.tsx    # Modalidades de atención (tabs) + enlace "Ver más →" esquina inferior derecha → /servicios#tipos-de-terapia
+│   ├── ProcesoSteps.tsx        # 4 pasos TCC con animaciones Framer Motion — usado en /servicios
+│   ├── Footer.tsx              # Pie de página: enlaces en 2 columnas (sobre-mi, psicología, empresas, proceso, contacto, agendar) + datos de contacto
 │   ├── WhatsAppButton.tsx      # Botón flotante de WhatsApp
 │   ├── Chatbot.tsx             # Chatbot por keywords (desactivado, listo para reactivar)
 │   ├── NeuronBackground.tsx    # Animación Three.js de neuronas interactivas
 │   ├── AnimateOnScroll.tsx     # Wrapper Framer Motion para animaciones on-scroll
 │   ├── ScrollRevealText.tsx    # Texto que se revela al hacer scroll
+│   ├── TallerSlideshow.tsx     # Slideshow automático (3.5s, fade) de fotos de talleres — usado en /empresas
+│   ├── TalleresCards.tsx       # Grid filtrable de talleres con chips por categoría (Framer Motion) — usado en /empresas
 │   └── JsonLd.tsx              # Schema.org: LocalBusiness + WebSite
 │
 ├── lib/

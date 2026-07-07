@@ -1,19 +1,45 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const navLinks = [
+const serviciosSubmenu = [
+  {
+    href: "/servicios",
+    label: "Terapia",
+    description: "Consulta individual, pareja y familiar",
+  },
+  {
+    href: "/empresas",
+    label: "Empresas",
+    description: "Talleres y bienestar organizacional",
+  },
+];
+
+const navLinksLeft = [
   { href: "/#inicio", label: "Inicio" },
   { href: "/sobre-mi", label: "Sobre mí" },
-  { href: "/#servicios", label: "Servicios" },
-  { href: "/proceso", label: "El proceso" },
+];
+
+const navLinksRight = [
   { href: "/#contacto", label: "Contacto" },
 ];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [mobileServiciosOpen, setMobileServiciosOpen] = useState(false);
+  const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [submenuOpen, setSubmenuOpen] = useState(false);
+
+  function openSubmenu() {
+    if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
+    setSubmenuOpen(true);
+  }
+
+  function closeSubmenu() {
+    hoverTimeout.current = setTimeout(() => setSubmenuOpen(false), 120);
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md shadow-sm">
@@ -26,7 +52,7 @@ export default function Navbar() {
 
           {/* Desktop */}
           <div className="hidden md:flex items-center gap-6">
-            {navLinks.map((link) => (
+            {navLinksLeft.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
@@ -35,6 +61,61 @@ export default function Navbar() {
                 {link.label}
               </a>
             ))}
+
+            {/* Servicios dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={openSubmenu}
+              onMouseLeave={closeSubmenu}
+            >
+
+              <button
+                className="relative flex items-center gap-1 text-sm font-semibold text-foreground/70 hover:text-primary transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all hover:after:w-full"
+                aria-haspopup="true"
+                aria-expanded={submenuOpen}
+              >
+                Servicios
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${submenuOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {submenuOpen && (
+                <div
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max bg-white rounded-xl shadow-lg shadow-foreground/8 border border-foreground/6 overflow-hidden flex flex-col"
+                  onMouseEnter={openSubmenu}
+                  onMouseLeave={closeSubmenu}
+                >
+                  {serviciosSubmenu.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="px-5 py-3.5 hover:bg-primary/5 transition-colors group"
+                    >
+                      <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {item.label}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {navLinksRight.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                className="relative text-sm font-semibold text-foreground/70 hover:text-primary transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all hover:after:w-full"
+              >
+                {link.label}
+              </a>
+            ))}
+
             <Link
               href="/agendar"
               className="group relative px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white rounded-full text-sm font-semibold overflow-hidden shadow-md shadow-primary/20 hover:shadow-lg hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-300"
@@ -79,7 +160,7 @@ export default function Navbar() {
         {isOpen && (
           <div className="md:hidden pb-4 border-t border-gray-100">
             <div className="flex flex-col gap-3 pt-4">
-              {navLinks.map((link) => (
+              {navLinksLeft.map((link) => (
                 <a
                   key={link.href}
                   href={link.href}
@@ -89,6 +170,50 @@ export default function Navbar() {
                   {link.label}
                 </a>
               ))}
+
+              {/* Servicios en mobile: toggle */}
+              <div>
+                <button
+                  className="flex items-center justify-between w-full text-sm font-medium text-foreground/70 hover:text-primary px-2 py-1"
+                  onClick={() => setMobileServiciosOpen(!mobileServiciosOpen)}
+                >
+                  Servicios
+                  <svg
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${mobileServiciosOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {mobileServiciosOpen && (
+                  <div className="ml-4 mt-1 flex flex-col gap-1 border-l-2 border-primary/20 pl-3">
+                    {serviciosSubmenu.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="text-sm text-foreground/60 hover:text-primary py-1"
+                        onClick={() => { setIsOpen(false); setMobileServiciosOpen(false); }}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {navLinksRight.map((link) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-sm font-medium text-foreground/70 hover:text-primary px-2 py-1"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+
               <Link
                 href="/agendar"
                 className="mx-2 px-5 py-2 bg-primary text-white rounded-full text-sm font-medium text-center hover:bg-primary-dark transition-colors"
