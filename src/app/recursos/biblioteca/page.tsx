@@ -84,10 +84,10 @@ const items: Item[] = [
   // Podcasts
   {
     titulo: "Psicología Al Desnudo",
-    autor: "Molo Cebrián",
+    autor: "Psi Mammoliti",
     descripcion: "Una psicóloga española que habla de salud mental de forma directa, sin filtros y con mucho humor. Muy popular en hispanohablantes.",
     etiquetas: ["En español"],
-    url: "https://open.spotify.com/show/4cFkPJOfVJNbqXgJuRGH5Z",
+    url: "https://open.spotify.com/show/1TDJJoHWEq7Nbh3yEBOJOj",
     categoria: "podcasts",
   },
   {
@@ -103,7 +103,7 @@ const items: Item[] = [
     autor: "Molo, Luis Muiño & Mónica González",
     descripcion: "Tres psicólogos que analizan comportamientos cotidianos con respaldo científico. Episodios cortos, perfectos para el día a día.",
     etiquetas: ["En español"],
-    url: "https://open.spotify.com/show/3qSgtjCBq6mHDEMqFuuaFf",
+    url: "https://open.spotify.com/show/0sGGLIDnnijRPLef7InllD",
     categoria: "podcasts",
   },
   {
@@ -111,7 +111,7 @@ const items: Item[] = [
     autor: "Dan Harris",
     descripcion: "Entrevistas con expertos en meditación, mindfulness y bienestar mental. Muy práctico para quien no tiene experiencia meditando.",
     etiquetas: ["En inglés", "Mindfulness"],
-    url: "https://open.spotify.com/show/1CfW319UkBMVGZmcnOBhhy",
+    url: "https://open.spotify.com/show/1CfW319UkBMVhCXfei8huv",
     categoria: "podcasts",
   },
   // TED
