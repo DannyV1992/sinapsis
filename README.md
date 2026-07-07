@@ -25,6 +25,8 @@ src/
 │   ├── quiz/                    # Tests de bienestar (6 tests)
 │   ├── politicas/               # Políticas de cancelación
 │   ├── consentimiento/          # Consentimiento informado
+│   ├── recursos/
+│   │   └── apoyo/               # Líneas de apoyo y crisis en Costa Rica
 │   ├── logo-export/             # Exportación del logo
 │   └── api/
 │       ├── auth/                # OAuth login/callback

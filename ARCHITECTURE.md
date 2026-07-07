@@ -53,6 +53,10 @@ src/
 │   ├── empresas/
 │   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta + slideshow fotos + stats, lista talleres, CTA con video autoplay
 │   │
+│   ├── recursos/
+│   │   └── apoyo/
+│   │       └── page.tsx        # Líneas de apoyo y crisis en Costa Rica (911, 118, 117, 1322, 1165, PANI, OIJ 800-8000-645, Colegio Psicólogos) — 5 secciones: Emergencias, Salud Mental, Niñez/Adolescencia, Adultos Mayores, Violencia/Género
+│   │
 │   ├── consentimiento/
 │   │   └── page.tsx            # Consentimiento informado (texto legal)
 │   │
@@ -79,7 +83,7 @@ src/
 │       └── test-email/route.ts     # POST: prueba de envío Resend (solo dev)
 │
 ├── components/
-│   ├── Navbar.tsx              # Navegación fija: links directos + dropdown hover "Servicios" → "Terapia" (/servicios) y "Empresas" (/empresas)
+│   ├── Navbar.tsx              # Navegación fija: links directos + dropdown hover "Servicios" → "Terapia" (/terapia) y "Empresas" (/empresas) + dropdown "Recursos" → 5 subitems
 │   ├── HeroSection.tsx         # Banner principal con CTA
 │   ├── AboutSection.tsx        # Bio de la profesional + botón "Conocé más sobre mí" → /sobre-mi
 │   ├── ParallaxServices.tsx    # Cards de áreas de atención (individual, pareja, familiar) con parallax

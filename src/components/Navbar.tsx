@@ -17,6 +17,14 @@ const serviciosSubmenu = [
   },
 ];
 
+const recursosSubmenu = [
+  { href: "/quiz", label: "Tests de Autoevaluación", description: "Evalúa tu bienestar emocional" },
+  { href: "/recursos/herramientas", label: "Herramientas de Bienestar", description: "Respiración, grounding y más" },
+  { href: "/recursos/descargas", label: "Materiales Descargables", description: "PDFs y plantillas terapéuticas" },
+  { href: "/recursos/biblioteca", label: "Biblioteca Recomendada", description: "Libros, podcasts y charlas" },
+  { href: "/recursos/apoyo", label: "Líneas de Apoyo en CR", description: "Recursos de crisis en Costa Rica" },
+];
+
 const navLinksLeft = [
   { href: "/#inicio", label: "Inicio" },
   { href: "/sobre-mi", label: "Sobre mí" },
@@ -29,8 +37,11 @@ const navLinksRight = [
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [mobileServiciosOpen, setMobileServiciosOpen] = useState(false);
+  const [mobileRecursosOpen, setMobileRecursosOpen] = useState(false);
   const hoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const recursosHoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [submenuOpen, setSubmenuOpen] = useState(false);
+  const [recursosOpen, setRecursosOpen] = useState(false);
 
   function openSubmenu() {
     if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
@@ -39,6 +50,15 @@ export default function Navbar() {
 
   function closeSubmenu() {
     hoverTimeout.current = setTimeout(() => setSubmenuOpen(false), 120);
+  }
+
+  function openRecursos() {
+    if (recursosHoverTimeout.current) clearTimeout(recursosHoverTimeout.current);
+    setRecursosOpen(true);
+  }
+
+  function closeRecursos() {
+    recursosHoverTimeout.current = setTimeout(() => setRecursosOpen(false), 120);
   }
 
   return (
@@ -92,6 +112,49 @@ export default function Navbar() {
                   onMouseLeave={closeSubmenu}
                 >
                   {serviciosSubmenu.map((item) => (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className="px-5 py-3.5 hover:bg-primary/5 transition-colors group"
+                    >
+                      <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {item.label}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Recursos dropdown */}
+            <div
+              className="relative"
+              onMouseEnter={openRecursos}
+              onMouseLeave={closeRecursos}
+            >
+              <button
+                className="relative flex items-center gap-1 text-sm font-semibold text-foreground/70 hover:text-primary transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all hover:after:w-full"
+                aria-haspopup="true"
+                aria-expanded={recursosOpen}
+              >
+                Recursos
+                <svg
+                  className={`w-3.5 h-3.5 transition-transform duration-200 ${recursosOpen ? "rotate-180" : ""}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {recursosOpen && (
+                <div
+                  className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-max bg-white rounded-xl shadow-lg shadow-foreground/8 border border-foreground/6 overflow-hidden flex flex-col"
+                  onMouseEnter={openRecursos}
+                  onMouseLeave={closeRecursos}
+                >
+                  {recursosSubmenu.map((item) => (
                     <Link
                       key={item.href}
                       href={item.href}
@@ -195,6 +258,38 @@ export default function Navbar() {
                         href={item.href}
                         className="text-sm text-foreground/60 hover:text-primary py-1"
                         onClick={() => { setIsOpen(false); setMobileServiciosOpen(false); }}
+                      >
+                        {item.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+
+              {/* Recursos en mobile: toggle */}
+              <div>
+                <button
+                  className="flex items-center justify-between w-full text-sm font-medium text-foreground/70 hover:text-primary px-2 py-1"
+                  onClick={() => setMobileRecursosOpen(!mobileRecursosOpen)}
+                >
+                  Recursos
+                  <svg
+                    className={`w-3.5 h-3.5 transition-transform duration-200 ${mobileRecursosOpen ? "rotate-180" : ""}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {mobileRecursosOpen && (
+                  <div className="ml-4 mt-1 flex flex-col gap-1 border-l-2 border-primary/20 pl-3">
+                    {recursosSubmenu.map((item) => (
+                      <Link
+                        key={item.href}
+                        href={item.href}
+                        className="text-sm text-foreground/60 hover:text-primary py-1"
+                        onClick={() => { setIsOpen(false); setMobileRecursosOpen(false); }}
                       >
                         {item.label}
                       </Link>
