@@ -35,11 +35,16 @@ export function LocalBusinessJsonLd() {
         description: "Sesión de psicoterapia familiar de 1.5 horas",
       },
     ],
+    image: [
+      "https://sinapsiscr.com/cinthya.jpg",
+      "https://sinapsiscr.com/logo.svg",
+    ],
     founder: {
       "@type": "Person",
       name: config.professional.fullTitle,
       jobTitle: config.professional.role,
       description: `Psicóloga clínica con enfoque ${config.professional.approach}. Código CPPCR: 14176.`,
+      image: "https://sinapsiscr.com/cinthya.jpg",
     },
     sameAs: [config.instagram],
   };
