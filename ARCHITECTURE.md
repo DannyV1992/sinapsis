@@ -45,7 +45,10 @@ src/
 │   │   └── page.tsx            # (legacy, no enlazada desde navbar) — contenido migrado a /servicios
 │   │
 │   ├── servicios/
-│   │   └── page.tsx            # Psicología clínica: enfoque TCC, tipos de terapia (cards B) con precios, proceso terapéutico (4 pasos), CTA
+│   │   └── page.tsx            # Psicología clínica: enfoque TCC (TccDiagram interactivo), tipos de terapia (cards) con precios, proceso terapéutico (4 pasos), CTA
+│   │
+│   ├── tcc-prueba/
+│   │   └── page.tsx            # Utility: pruebas de variantes visuales del diagrama TCC (no enlazada desde navbar)
 │   │
 │   ├── empresas/
 │   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta + slideshow fotos + stats, lista talleres, CTA con video autoplay
@@ -95,6 +98,7 @@ src/
 │   ├── ScrollRevealText.tsx    # Texto que se revela al hacer scroll
 │   ├── TallerSlideshow.tsx     # Slideshow automático (3.5s, fade) de fotos de talleres — usado en /empresas
 │   ├── TalleresCards.tsx       # Grid filtrable de talleres con chips por categoría (Framer Motion) — usado en /empresas
+│   ├── TccDiagram.tsx          # Diagrama circular interactivo del ciclo TCC (3 sectores clickeables + cuadro descripción) — usado en /servicios
 │   └── JsonLd.tsx              # Schema.org: LocalBusiness + WebSite
 │
 ├── lib/
@@ -202,6 +206,7 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 - GA4 en paralelo: necesario para Google Ads cuando se activen campañas
 - GA4 Measurement ID hardcodeado (es público, simplifica deploy)
 - Paleta palo rosa + verde salvia: `--primary` palo rosa `#c4908f`, `--primary-dark` ciruela suave `#4a3040`, `--accent` verde salvia `#8aaa96`, fondo marfil cálido `#f7f4f2` — colores de neuronas hardcodeados en `NeuronBackground.tsx` en tonos palo rosa con vesículas en verde salvia (no leen CSS vars)
+- Secciones CTA (`/servicios`, `/empresas`) y contacto (`ContactSection.tsx`) usan `bg-accent/20 border-accent/15` para diferenciarse del fondo marfil sin ser pesadas
 
 ## Convenciones
 

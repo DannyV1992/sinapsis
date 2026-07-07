@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { config, formatPrice, getWhatsAppLink } from "@/lib/config";
 import ProcesoSteps from "@/components/ProcesoSteps";
+import TccDiagram from "@/components/TccDiagram";
 
 export const metadata: Metadata = {
   title: "Servicios de psicología — Sinapsis",
@@ -62,40 +63,7 @@ export default function ServiciosPage() {
       {/* Intro enfoque */}
       <section className="py-20 lg:py-28 bg-background">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-12 lg:gap-24 items-start">
-            <div>
-              <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-6">
-                Mi enfoque
-              </p>
-              <p className="text-foreground/80 text-lg leading-relaxed mb-5">
-                Trabajo desde la terapia cognitivo-conductual (TCC), un enfoque basado en evidencia que conecta lo que pensamos, lo que sentimos y lo que hacemos. No se trata solo de hablar — se trata de entender los patrones y construir herramientas reales para cambiarlos.
-              </p>
-              <p className="text-foreground/80 text-lg leading-relaxed mb-5">
-                Tengo formación especializada en diversidad sexual, de género y estructuras relacionales. Mis consultas son un espacio libre de juicios, donde podés ser quien sos sin necesidad de explicar o justificar tu identidad.
-              </p>
-              <p className="text-foreground/80 text-lg leading-relaxed">
-                El proceso terapéutico tiene estructura, metas claras y avanza a tu ritmo.
-              </p>
-            </div>
-
-            {/* Datos clave */}
-            <div className="space-y-8">
-              {[
-                { number: "TCC", label: "enfoque cognitivo-conductual" },
-                { number: "LGBTQ+", label: "espacio afirmativo" },
-                { number: "San José", label: "consulta presencial y virtual" },
-              ].map((s) => (
-                <div key={s.label} className="border-b border-foreground/8 pb-8">
-                  <p className="font-[family-name:var(--font-playfair)] text-4xl font-bold text-primary mb-1">
-                    {s.number}
-                  </p>
-                  <p className="text-xs tracking-[0.2em] text-foreground/50 uppercase">
-                    {s.label}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+          <TccDiagram />
         </div>
       </section>
 
@@ -161,21 +129,21 @@ export default function ServiciosPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-primary-dark border-t border-white/5">
+      <section className="py-24 bg-accent/20 border-t border-accent/15">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <p className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-white leading-snug mb-6">
-                ¿Listo/a para empezar?
+              <p className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-foreground leading-snug mb-6">
+                ¿Damos el primer paso?
               </p>
-              <p className="text-white/75 text-lg leading-relaxed">
+              <p className="text-foreground/70 text-lg leading-relaxed">
                 Podés agendar directamente o escribirme si tenés preguntas antes de dar el primer paso.
               </p>
             </div>
             <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
               <Link
                 href="/agendar"
-                className="px-8 py-4 bg-accent text-primary-dark rounded-full text-sm font-semibold text-center hover:-translate-y-px transition-all duration-300"
+                className="px-8 py-4 bg-primary-dark text-white rounded-full text-sm font-semibold text-center hover:-translate-y-px transition-all duration-300"
               >
                 Agendar cita
               </Link>
@@ -183,7 +151,7 @@ export default function ServiciosPage() {
                 href={getWhatsAppLink("Hola, tengo una consulta sobre los servicios de psicología.")}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-8 py-4 border border-white/30 text-white/85 rounded-full text-sm font-medium text-center hover:border-white/60 hover:text-white transition-all duration-300"
+                className="px-8 py-4 border border-foreground/30 text-foreground/85 rounded-full text-sm font-medium text-center hover:border-foreground/60 hover:text-foreground transition-all duration-300"
               >
                 Escribir por WhatsApp
               </a>

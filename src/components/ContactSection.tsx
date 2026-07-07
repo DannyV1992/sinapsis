@@ -37,7 +37,7 @@ export default function ContactSection() {
   };
 
   return (
-    <section id="contacto" className="py-24 bg-section-alt border-t border-gray-100">
+    <section id="contacto" className="py-24 bg-accent/20 border-t border-accent/15">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
