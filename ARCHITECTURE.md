@@ -45,14 +45,8 @@ src/
 │   ├── sobre-mi/
 │   │   └── page.tsx            # Página bio completa: hero, intro personal, en consulta, mi plus, por qué/cómo, CTA
 │   │
-│   ├── proceso/
-│   │   └── page.tsx            # (legacy, no enlazada desde navbar) — contenido migrado a /servicios
-│   │
-│   ├── servicios/
+│   ├── terapia/
 │   │   └── page.tsx            # Psicología clínica: enfoque TCC (TccDiagram interactivo), tipos de terapia (cards) con precios, proceso terapéutico (4 pasos), CTA
-│   │
-│   ├── tcc-prueba/
-│   │   └── page.tsx            # Utility: pruebas de variantes visuales del diagrama TCC (no enlazada desde navbar)
 │   │
 │   ├── empresas/
 │   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta + slideshow fotos + stats, lista talleres, CTA con video autoplay
@@ -125,6 +119,7 @@ src/
 │   ├── google-calendar.ts      # OAuth client, getAvailableSlots(), bookAppointment() (+ PDF + Drive upload)
 │   ├── reminders.ts            # sendReminderEmail() — HTML template con Resend (activar con http://localhost:3000/api/test-email)
 │   ├── generate-pdf.ts         # generateBookingPDF() — políticas de cancelación con pdf-lib
+│   ├── gmail.ts                # sendGmailNotification() — notificación interna vía Gmail cuando llega un mensaje de contacto
 │   ├── quiz-data.ts            # Definición de 5 tests: GAD-7, PHQ-9, PSS-10 (reversedItems [6,7,8,9]), Rosenberg (reversedItems [2,4,7,8,9]), WHO-5. ECR-R tiene página propia.
 │   └── gtag.ts                 # Helper gtagEvent() para GA4
 │

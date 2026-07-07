@@ -25,6 +25,9 @@ src/
 │   ├── quiz/                    # Tests de bienestar (6 tests + checklist)
 │   │   ├── apego/               # ECR-R real (36 ítems, 2 subescalas)
 │   │   └── necesito-terapia/    # Checklist orientativo 8 preguntas
+│   ├── sobre-mi/                # Bio completa de la profesional
+│   ├── terapia/                 # Psicología clínica: TCC, tipos de terapia, precios, proceso
+│   ├── empresas/                # Talleres y bienestar organizacional
 │   ├── politicas/               # Políticas de cancelación
 │   ├── consentimiento/          # Consentimiento informado
 │   ├── recursos/
@@ -57,6 +60,10 @@ src/
 │   ├── QuizRunner.tsx
 │   ├── ScrollRevealText.tsx
 │   ├── TransformSection.tsx     # Modalidades de atención
+│   ├── ProcesoSteps.tsx         # 4 pasos TCC con animaciones — usado en /servicios
+│   ├── TallerSlideshow.tsx      # Slideshow de fotos de talleres — usado en /empresas
+│   ├── TalleresCards.tsx        # Grid filtrable de talleres — usado en /empresas
+│   ├── TccDiagram.tsx           # Diagrama circular interactivo del ciclo TCC — usado en /servicios
 │   ├── WhatsAppButton.tsx
 │   └── JsonLd.tsx               # Datos estructurados (Schema.org)
 └── lib/
@@ -64,7 +71,9 @@ src/
     ├── reminders.ts             # Envío de recordatorios con Resend
     ├── generate-pdf.ts          # Generación de PDF de políticas
     ├── google-calendar.ts       # Integración con Google Calendar
-    └── quiz-data.ts             # Datos de los 6 tests
+    ├── gmail.ts                 # Notificación interna vía Gmail al recibir mensaje de contacto
+    ├── quiz-data.ts             # Datos de los 6 tests
+    └── gtag.ts                  # Helper gtagEvent() para GA4
 ```
 
 ## Configuración central
