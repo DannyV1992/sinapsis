@@ -106,20 +106,20 @@ export default function EmpresasPage() {
                 Conversemos sobre lo que necesita tu organización. No trabajo con paquetes cerrados — cada proceso parte de entender tu contexto, ya sea adaptando un taller existente o diseñando algo desde cero para tu equipo y tus objetivos.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
+                <Link
+                  href="/#contacto"
+                  className="px-8 py-4 bg-primary-dark text-white rounded-full text-sm font-semibold text-center hover:-translate-y-px transition-all duration-300"
+                >
+                  Solicitar información
+                </Link>
                 <a
                   href={getWhatsAppLink("Hola, me interesa consultar sobre talleres y servicios para empresas.")}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-8 py-4 bg-primary-dark text-white rounded-full text-sm font-semibold text-center hover:-translate-y-px transition-all duration-300"
+                  className="px-8 py-4 border border-foreground/20 text-foreground/70 rounded-full text-sm font-medium text-center hover:border-foreground/40 hover:text-foreground transition-all duration-300"
                 >
                   Escribir por WhatsApp
                 </a>
-                <Link
-                  href="/#contacto"
-                  className="px-8 py-4 border border-foreground/20 text-foreground/70 rounded-full text-sm font-medium text-center hover:border-foreground/40 hover:text-foreground transition-all duration-300"
-                >
-                  Enviar mensaje
-                </Link>
               </div>
             </div>
           </div>
