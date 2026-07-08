@@ -8,13 +8,6 @@ function ScrollResetter() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // Desactiva el scroll restoration automático del browser/Next.js
-    if (typeof window !== "undefined") {
-      history.scrollRestoration = "manual";
-    }
-  }, []);
-
-  useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.body.scrollTop = 0;
   }, [pathname, searchParams]);
