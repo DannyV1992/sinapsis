@@ -59,6 +59,7 @@ src/
 │   ├── QuizCTA.tsx
 │   ├── QuizRunner.tsx
 │   ├── ScrollRevealText.tsx
+│   ├── ResourcesTeaser.tsx      # Grid de recursos gratuitos (tests, herramientas, biblioteca, apoyo)
 │   ├── TransformSection.tsx     # Modalidades de atención
 │   ├── ProcesoSteps.tsx         # 4 pasos TCC con animaciones — usado en /servicios
 │   ├── TallerSlideshow.tsx      # Slideshow de fotos de talleres — usado en /empresas

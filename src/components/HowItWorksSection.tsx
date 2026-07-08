@@ -51,7 +51,7 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section className="py-24 bg-section-alt border-t border-gray-100">
+    <section className="py-24 bg-background border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimateOnScroll>
           <div className="text-center mb-16">

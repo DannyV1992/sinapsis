@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Geist, Playfair_Display, Quicksand, Cormorant_Garamond, Lora } from "next/font/google";
+import { Geist, Playfair_Display, Quicksand, Cormorant_Garamond, Lora, Caveat } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -36,6 +36,12 @@ const lora = Lora({
   subsets: ["latin"],
   weight: ["400", "500"],
   style: ["normal", "italic"],
+});
+
+const caveat = Caveat({
+  variable: "--font-caveat",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -103,7 +109,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${playfair.variable} ${quicksand.variable} ${cormorant.variable} ${lora.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${playfair.variable} ${quicksand.variable} ${cormorant.variable} ${lora.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
         <Script

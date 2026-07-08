@@ -42,7 +42,7 @@ export default function ScrollRevealText() {
           className="mt-12"
         >
           <Link
-            href="/agendar"
+            href="/terapia"
             className="inline-block px-8 py-4 bg-accent text-primary-dark rounded-full text-lg font-semibold hover:-translate-y-1 transition-all duration-300 shadow-lg shadow-accent/20"
           >
             Dar el primer paso

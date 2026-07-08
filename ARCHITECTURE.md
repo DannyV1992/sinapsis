@@ -20,7 +20,7 @@
 src/
 ├── app/
 │   ├── layout.tsx              # Layout raíz: fuentes (Geist, Playfair, Quicksand, Cormorant, Lora), metadata SEO, GA4 script, providers
-│   ├── page.tsx                # Landing: Hero → About → HowItWorks → Services → Transform → ScrollReveal → FAQ → Contact
+│   ├── page.tsx                # Landing: Hero → About → ScrollReveal → Services → Transform → HowItWorks → ResourcesTeaser → FAQ → Contact
 │   ├── globals.css             # Tailwind + estilos globales
 │   ├── posthog-provider.tsx    # Provider PostHog (client component)
 │   ├── robots.ts               # robots.txt dinámico
@@ -108,7 +108,8 @@ src/
 │   ├── Chatbot.tsx             # Chatbot por keywords (desactivado, listo para reactivar)
 │   ├── NeuronBackground.tsx    # Animación Three.js de neuronas interactivas
 │   ├── AnimateOnScroll.tsx     # Wrapper Framer Motion para animaciones on-scroll
-│   ├── ScrollRevealText.tsx    # Texto que se revela al hacer scroll
+│   ├── ScrollRevealText.tsx    # Texto que se revela al hacer scroll — fondo primary-dark, CTA "Dar el primer paso" → /terapia
+│   ├── ResourcesTeaser.tsx     # Grid 4 cards sobre fondo primary-dark: tests, herramientas, biblioteca, líneas de apoyo — antes del FAQ
 │   ├── TallerSlideshow.tsx     # Slideshow automático (3.5s, fade) de fotos de talleres — usado en /empresas
 │   ├── TalleresCards.tsx       # Grid filtrable de talleres con chips por categoría (Framer Motion) — usado en /empresas
 │   ├── TccDiagram.tsx          # Diagrama circular interactivo del ciclo TCC (3 sectores clickeables + cuadro descripción) — usado en /servicios

@@ -7,6 +7,7 @@ import TransformSection from "@/components/TransformSection";
 import ScrollRevealText from "@/components/ScrollRevealText";
 import FAQSection from "@/components/FAQSection";
 import ContactSection from "@/components/ContactSection";
+import ResourcesTeaser from "@/components/ResourcesTeaser";
 
 export const metadata: Metadata = {
   alternates: {
@@ -19,10 +20,11 @@ export default function Home() {
     <>
       <HeroSection />
       <AboutSection />
-      <HowItWorksSection />
+      <ScrollRevealText />
       <ParallaxServices />
       <TransformSection />
-      <ScrollRevealText />
+      <HowItWorksSection />
+      <ResourcesTeaser />
       <FAQSection />
       <ContactSection />
     </>
