@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { LocalBusinessJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
 import { PostHogProvider } from "./posthog-provider";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -130,6 +131,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-full flex flex-col">
         <PostHogProvider>
+          <ScrollToTop />
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
