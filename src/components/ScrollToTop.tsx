@@ -8,13 +8,15 @@ function ScrollResetter() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    // setTimeout cede el hilo para que Next.js termine su scroll restoration
-    // antes de que nosotros lo pisemos con el reset al top
-    const id = setTimeout(() => {
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-    }, 0);
-    return () => clearTimeout(id);
+    // Desactiva el scroll restoration automático del browser/Next.js
+    if (typeof window !== "undefined") {
+      history.scrollRestoration = "manual";
+    }
+  }, []);
+
+  useEffect(() => {
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
   }, [pathname, searchParams]);
 
   return null;
