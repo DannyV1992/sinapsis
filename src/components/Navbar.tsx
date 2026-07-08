@@ -3,6 +3,7 @@
 import { useState, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const serviciosSubmenu = [
   {
@@ -42,6 +43,24 @@ export default function Navbar() {
   const recursosHoverTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const [recursosOpen, setRecursosOpen] = useState(false);
+  const pathname = usePathname();
+
+  function isActive(href: string) {
+    if (href === "/#inicio") return pathname === "/";
+    if (href.startsWith("/#")) return false;
+    return pathname === href || pathname.startsWith(href + "/");
+  }
+
+  function isGroupActive(items: { href: string }[]) {
+    return items.some((item) => pathname === item.href || pathname.startsWith(item.href + "/"));
+  }
+
+  const linkClass = (href: string) =>
+    `relative text-sm font-semibold transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all ${
+      isActive(href)
+        ? "text-primary after:w-full"
+        : "text-foreground/70 hover:text-primary after:w-0 hover:after:w-full"
+    }`;
 
   function openSubmenu() {
     if (hoverTimeout.current) clearTimeout(hoverTimeout.current);
@@ -76,7 +95,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="relative text-sm font-semibold text-foreground/70 hover:text-primary transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all hover:after:w-full"
+                className={linkClass(link.href)}
               >
                 {link.label}
               </a>
@@ -90,7 +109,7 @@ export default function Navbar() {
             >
 
               <button
-                className="relative flex items-center gap-1 text-sm font-semibold text-foreground/70 hover:text-primary transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all hover:after:w-full"
+                className={`relative flex items-center gap-1 ${isGroupActive(serviciosSubmenu) ? "text-primary after:w-full" : "text-foreground/70 hover:text-primary after:w-0 hover:after:w-full"} text-sm font-semibold transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all`}
                 aria-haspopup="true"
                 aria-expanded={submenuOpen}
               >
@@ -115,9 +134,9 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="px-5 py-3.5 hover:bg-primary/5 transition-colors group"
+                      className={`px-5 py-3.5 transition-colors group ${pathname === item.href ? "bg-primary/8" : "hover:bg-primary/5"}`}
                     >
-                      <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                      <span className={`text-sm font-semibold transition-colors ${pathname === item.href ? "text-primary" : "text-foreground group-hover:text-primary"}`}>
                         {item.label}
                       </span>
                     </Link>
@@ -133,7 +152,7 @@ export default function Navbar() {
               onMouseLeave={closeRecursos}
             >
               <button
-                className="relative flex items-center gap-1 text-sm font-semibold text-foreground/70 hover:text-primary transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all hover:after:w-full"
+                className={`relative flex items-center gap-1 ${isGroupActive(recursosSubmenu) ? "text-primary after:w-full" : "text-foreground/70 hover:text-primary after:w-0 hover:after:w-full"} text-sm font-semibold transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all`}
                 aria-haspopup="true"
                 aria-expanded={recursosOpen}
               >
@@ -158,9 +177,9 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className="px-5 py-3.5 hover:bg-primary/5 transition-colors group"
+                      className={`px-5 py-3.5 transition-colors group ${pathname === item.href ? "bg-primary/8" : "hover:bg-primary/5"}`}
                     >
-                      <span className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
+                      <span className={`text-sm font-semibold transition-colors ${pathname === item.href ? "text-primary" : "text-foreground group-hover:text-primary"}`}>
                         {item.label}
                       </span>
                     </Link>
@@ -173,7 +192,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
-                className="relative text-sm font-semibold text-foreground/70 hover:text-primary transition-colors py-1 after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-accent after:rounded-full after:transition-all hover:after:w-full"
+                className={linkClass(link.href)}
               >
                 {link.label}
               </a>
