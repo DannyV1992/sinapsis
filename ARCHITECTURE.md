@@ -151,7 +151,7 @@ Usuario selecciona servicio/modalidad/fecha
 Vercel cron (diario 14:00 UTC = 8am Costa Rica)
   → GET /api/cron/reminders (auth: Bearer CRON_SECRET)
   → Lista eventos de mañana en Google Calendar
-  → Filtra por extendedProperties.private.type="booked" (fallback: [AGENDADO] en descripción para citas legacy)
+  → Filtra por extendedProperties.private.type="booked"
   → Extrae datos del paciente de la descripción del evento
   → Envía email personalizado con Resend (fecha, hora, servicio, modalidad, Meet link)
 ```
@@ -228,7 +228,7 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 ## Convenciones
 
 - Todos los datos variables (precios, teléfono, horarios) van en `src/lib/config.ts`
-- Eventos agendados se identifican por `extendedProperties.private.type: "booked"` (fallback legacy: `[AGENDADO]` en descripción)
+- Eventos agendados se identifican por `extendedProperties.private.type: "booked"`
 - Zona horaria: America/Costa_Rica (UTC-6) hardcodeada en calendar y cron
 - Email transaccional desde: `citas@sinapsiscr.com`
 - Cron limitado a 1 ejecución/día (restricción Vercel Hobby)
