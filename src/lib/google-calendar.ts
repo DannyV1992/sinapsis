@@ -219,7 +219,7 @@ export async function bookAppointment(params: {
       reminders: {
         useDefault: false,
         overrides: [
-          { method: "popup", minutes: 60 },
+          { method: "popup", minutes: 60 * 6 },
         ],
       },
     },
