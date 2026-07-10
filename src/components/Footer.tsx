@@ -45,13 +45,10 @@ export default function Footer() {
           </div>
         </div>
         <div className="mt-8 pt-6 border-t border-white/20 text-center text-sm">
-          <p>
-            &copy; {new Date().getFullYear()} Sinapsis. Todos los derechos reservados.
-            {" · "}
-            <Link href="/admin" className="opacity-20 hover:opacity-50 transition-opacity text-xs">
-              Acceso interno
-            </Link>
-          </p>
+          <p>&copy; {new Date().getFullYear()} Sinapsis. Todos los derechos reservados.</p>
+          <Link href="/admin" className="opacity-20 hover:opacity-50 transition-opacity text-xs">
+            Acceso interno
+          </Link>
         </div>
       </div>
     </footer>
