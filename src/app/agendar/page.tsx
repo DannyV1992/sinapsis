@@ -160,7 +160,7 @@ export default function AgendarPage() {
           value: formData.service === "Terapia individual" ? 30000 : 45000,
           item_name: formData.service,
         });
-        window.gtag?.("event", "conversion", { send_to: "AW-18306929852/AVLPCNXzls4cELyptplE", currency: "USD", value: 1.0 });
+        window.gtag?.("event", "conversion", { send_to: "AW-18306929852/cGDOCKCpr84cELyptplE", currency: "USD", value: 1.0 });
         setPresencialSuccess(true);
       } else {
         setError(data.error || "Error al enviar la solicitud");
@@ -207,7 +207,7 @@ export default function AgendarPage() {
           value: formData.service === "Terapia individual" ? 30000 : 45000,
           item_name: formData.service,
         });
-        window.gtag?.("event", "conversion", { send_to: "AW-18306929852/AVLPCNXzls4cELyptplE", currency: "USD", value: 1.0 });
+        window.gtag?.("event", "conversion", { send_to: "AW-18306929852/cGDOCKCpr84cELyptplE", currency: "USD", value: 1.0 });
         setBookingSuccess(true);
       } else {
         setError(data.error || "Error al agendar la cita");
