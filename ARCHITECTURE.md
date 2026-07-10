@@ -33,7 +33,7 @@ src/
 │   │       └── page.tsx        # Login admin con contraseña (cookie httpOnly 8h)
 │   │
 │   ├── agendar/
-│   │   ├── page.tsx            # Wizard multi-step: servicio → modalidad → fecha → slot → datos → confirmación. Presencial: flujo de solicitud (ubicación + fecha + hora preferida → Sheet + correos)
+│   │   ├── page.tsx            # Wizard multi-step: servicio → modalidad (virtual default) → fecha → slot → datos → confirmación. Muestra precio en paso 2 al seleccionar servicio. Pantalla de éxito incluye link a WhatsApp para cancelar/reprogramar. Presencial: flujo de solicitud (ubicación + fecha + hora preferida → Sheet + correos)
 │   │   └── layout.tsx          # Metadata de la página de agendamiento
 │   │
 │   ├── quiz/
