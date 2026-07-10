@@ -49,7 +49,7 @@ export default function ResourcesTeaser() {
           className="text-center mb-14"
         >
           <p className="text-white/40 text-sm tracking-widest uppercase mb-4">
-            Mientras decidís
+            Mientras decides
           </p>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-[family-name:var(--font-playfair)] text-white leading-snug">
             Algo que puede ayudarte ahora mismo
