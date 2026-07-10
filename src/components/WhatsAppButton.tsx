@@ -15,6 +15,7 @@ export default function WhatsAppButton() {
       onClick={() => {
         posthog?.capture("whatsapp_clicked");
         gtagEvent("contact", { method: "WhatsApp" });
+        window.gtag?.("event", "conversion", { send_to: "AW-18306929852/NVb1CI6Ess4cELyptplE" });
       }}
       className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg transition-transform hover:scale-110"
       aria-label="Contactar por WhatsApp"
