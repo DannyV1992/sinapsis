@@ -114,7 +114,7 @@ export default function RootLayout({
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             var host = window.location.hostname;
-            var isExcluded = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app');
+            var isExcluded = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app') || window.location.pathname.startsWith('/admin');
             if (!isExcluded) {
               var s = document.createElement('script');
               s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GE5XQ9THJS';
