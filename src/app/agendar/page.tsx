@@ -26,7 +26,7 @@ export default function AgendarPage() {
     email: "",
     phone: "",
     service: "",
-    modality: "",
+    modality: "virtual",
     date: "",
     slot: null as TimeSlot | null,
     notes: "",
@@ -283,7 +283,18 @@ export default function AgendarPage() {
               <span className="font-medium">{presencialData.preferredTime} {presencialAmPm}</span>
             </div>
           </div>
-          <p className="text-xs text-foreground/50 mb-6">Recibirás un correo de confirmación en {formData.email}</p>
+          <p className="text-xs text-foreground/50 mb-4">Recibirás un correo de confirmación en {formData.email}</p>
+          <p className="text-sm text-foreground/60 mb-6">
+            ¿Necesitas cancelar o reprogramar?{" "}
+            <a
+              href={getWhatsAppLink("Hola, necesito cancelar o reprogramar mi cita.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:underline font-medium"
+            >
+              Escríbenos por WhatsApp
+            </a>.
+          </p>
           <a href="/" className="inline-block px-6 py-3 bg-primary text-white rounded-xl font-medium hover:bg-primary-dark transition-colors">
             Volver al inicio
           </a>
@@ -334,8 +345,19 @@ export default function AgendarPage() {
               {formData.slot && formatTime(formData.slot.start)}
             </p>
           </div>
-          <p className="text-sm text-foreground/60 mb-6">
+          <p className="text-sm text-foreground/60 mb-4">
             Recibirás un correo de confirmación en {formData.email}
+          </p>
+          <p className="text-sm text-foreground/60 mb-6">
+            ¿Necesitas cancelar o reprogramar?{" "}
+            <a
+              href={getWhatsAppLink("Hola, necesito cancelar o reprogramar mi cita.")}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-600 hover:underline font-medium"
+            >
+              Escríbenos por WhatsApp
+            </a>.
           </p>
           <a
             href="/"
@@ -509,39 +531,44 @@ export default function AgendarPage() {
                   >
                     Servicio
                   </label>
-                  <select
-                    id="service"
-                    required
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                    value={formData.service}
-                    onChange={(e) =>
-                      setFormData({ ...formData, service: e.target.value })
-                    }
-                  >
-                    <option value="">Selecciona un servicio</option>
-                    {services.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
+                  <div className="relative">
+                    <select
+                      id="service"
+                      required
+                      className="w-full px-4 py-3 pr-10 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none"
+                      value={formData.service}
+                      onChange={(e) =>
+                        setFormData({ ...formData, service: e.target.value })
+                      }
+                    >
+                      <option value="">Selecciona un servicio</option>
+                      {services.map((s) => (
+                        <option key={s} value={s}>
+                          {s}
+                        </option>
+                      ))}
+                    </select>
+                    <svg className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
                 </div>
+                {formData.service && (
+                  <p className="text-sm text-foreground/60 text-center">
+                    Costo:{" "}
+                    <span className="font-medium text-foreground">
+                      {formData.service === "Terapia individual"
+                        ? `₡${config.prices.individual.toLocaleString("es-CR")}`
+                        : `₡${config.prices.pareja.toLocaleString("es-CR")}`}{" "}
+                      por sesión
+                    </span>
+                  </p>
+                )}
                 <div>
                   <label className="block text-sm font-medium text-foreground/70 mb-2">
                     Modalidad
                   </label>
                   <div className="grid grid-cols-2 gap-3">
-                    <button
-                      type="button"
-                      onClick={() => setFormData({ ...formData, modality: "presencial", slot: null })}
-                      className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
-                        formData.modality === "presencial"
-                          ? "bg-primary text-white border-primary"
-                          : "border-gray-200 text-foreground/70 hover:border-primary"
-                      }`}
-                    >
-                      Presencial
-                    </button>
                     <button
                       type="button"
                       onClick={() => setFormData({ ...formData, modality: "virtual" })}
@@ -552,6 +579,17 @@ export default function AgendarPage() {
                       }`}
                     >
                       Virtual
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setFormData({ ...formData, modality: "presencial", slot: null })}
+                      className={`px-4 py-3 rounded-xl border text-sm font-medium transition-all ${
+                        formData.modality === "presencial"
+                          ? "bg-primary text-white border-primary"
+                          : "border-gray-200 text-foreground/70 hover:border-primary"
+                      }`}
+                    >
+                      Presencial
                     </button>
                   </div>
                 </div>
@@ -565,18 +603,23 @@ export default function AgendarPage() {
                       <label htmlFor="location" className="block text-sm font-medium text-foreground/70 mb-1">
                         Ubicación preferida
                       </label>
-                      <select
-                        id="location"
-                        required
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all"
-                        value={presencialData.location}
-                        onChange={(e) => setPresencialData({ ...presencialData, location: e.target.value })}
-                      >
-                        <option value="">Selecciona una ubicación</option>
-                        {config.presencialLocations.map((loc) => (
-                          <option key={loc} value={loc}>{loc}</option>
-                        ))}
-                      </select>
+                      <div className="relative">
+                        <select
+                          id="location"
+                          required
+                          className="w-full px-4 py-3 pr-10 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all appearance-none"
+                          value={presencialData.location}
+                          onChange={(e) => setPresencialData({ ...presencialData, location: e.target.value })}
+                        >
+                          <option value="">Selecciona una ubicación</option>
+                          {config.presencialLocations.map((loc) => (
+                            <option key={loc} value={loc}>{loc}</option>
+                          ))}
+                        </select>
+                        <svg className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-foreground/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
                     </div>
                     <div>
                       <label htmlFor="presencial-date" className="block text-sm font-medium text-foreground/70 mb-1">
