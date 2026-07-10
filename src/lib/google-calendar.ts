@@ -7,6 +7,7 @@ async function logBookingToSheet(params: {
   phone: string;
   service: string;
   modality?: string;
+  location?: string;
   notes?: string;
   start: string;
 }) {
@@ -21,15 +22,17 @@ async function logBookingToSheet(params: {
   auth.setCredentials({ refresh_token: process.env.GOOGLE_REFRESH_TOKEN });
   const sheets = google.sheets({ version: "v4", auth });
 
-  const citaDate = new Date(params.start).toLocaleString("es-CR", {
-    timeZone: "America/Costa_Rica",
-    dateStyle: "short",
-    timeStyle: "short",
-  });
+  const citaDate = new Date(params.start)
+    .toLocaleString("es-CR", {
+      timeZone: "America/Costa_Rica",
+      dateStyle: "short",
+      timeStyle: "short",
+    })
+    .replace(/\s+([ap])\.\s+m\./gi, "$1.m.");
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: sheetId,
-    range: "Citas!A:H",
+    range: "Citas!A:I",
     valueInputOption: "USER_ENTERED",
     requestBody: {
       values: [[
@@ -38,7 +41,8 @@ async function logBookingToSheet(params: {
         params.email,
         params.phone,
         params.service,
-        params.modality || "No especificada",
+        params.modality ? params.modality.charAt(0).toUpperCase() + params.modality.slice(1) : "No especificada",
+        params.location || "",
         citaDate,
         params.notes || "",
       ]],
@@ -167,6 +171,7 @@ export async function bookAppointment(params: {
   phone: string;
   service: string;
   modality?: string;
+  location?: string;
   notes?: string;
 }) {
   const calendar = getCalendarClient();
@@ -187,6 +192,7 @@ export async function bookAppointment(params: {
     `Teléfono: ${params.phone}`,
     `Servicio: ${params.service}`,
     params.modality ? `Modalidad: ${params.modality.charAt(0).toUpperCase() + params.modality.slice(1)}` : "",
+    params.location ? `Ubicación: ${params.location}` : "",
     params.notes ? `Notas: ${params.notes}` : "",
     "",
     "Políticas de cancelación: https://sinapsiscr.com/politicas",
@@ -243,6 +249,7 @@ export async function bookAppointment(params: {
         <tr><td style="padding:6px 16px 6px 0;color:#666">Teléfono</td><td>${params.phone}</td></tr>
         <tr><td style="padding:6px 16px 6px 0;color:#666">Servicio</td><td>${params.service}</td></tr>
         ${params.modality ? `<tr><td style="padding:6px 16px 6px 0;color:#666">Modalidad</td><td>${params.modality.charAt(0).toUpperCase() + params.modality.slice(1)}</td></tr>` : ""}
+        ${params.location ? `<tr><td style="padding:6px 16px 6px 0;color:#666">Ubicación</td><td>${params.location}</td></tr>` : ""}
         <tr><td style="padding:6px 16px 6px 0;color:#666">Fecha y hora</td><td>${startDate}</td></tr>
         ${params.notes ? `<tr><td style="padding:6px 16px 6px 0;color:#666">Notas</td><td>${params.notes}</td></tr>` : ""}
       </table>

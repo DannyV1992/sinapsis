@@ -33,6 +33,9 @@ export const config = {
   // Horario (chatbot)
   schedule: "Lunes a viernes, usualmente de 8:00am - 5:00pm pero los horarios pueden variar según disponibilidad y modalidad de la cita.",
 
+  // Ubicaciones presenciales (coworking)
+  presencialLocations: ["Santa Ana", "San Pedro", "Heredia", "Pinares"],
+
   // Métodos de pago
   paymentMethods: "SINPE Móvil y transferencia bancaria",
 

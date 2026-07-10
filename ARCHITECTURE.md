@@ -27,8 +27,13 @@ src/
 │   ├── sitemap.ts              # Sitemap dinámico
 │   ├── icon.svg                # Favicon
 │   │
+│   ├── admin/
+│   │   ├── page.tsx            # Panel privado: tabs "Solicitudes presenciales" + "Agendar cita directa" (sin analytics)
+│   │   └── login/
+│   │       └── page.tsx        # Login admin con contraseña (cookie httpOnly 8h)
+│   │
 │   ├── agendar/
-│   │   ├── page.tsx            # Wizard multi-step: servicio → modalidad → fecha → slot → datos → confirmación
+│   │   ├── page.tsx            # Wizard multi-step: servicio → modalidad → fecha → slot → datos → confirmación. Presencial: flujo de solicitud (ubicación + fecha + hora preferida → Sheet + correos)
 │   │   └── layout.tsx          # Metadata de la página de agendamiento
 │   │
 │   ├── quiz/
@@ -78,9 +83,17 @@ src/
 │       │   ├── login/route.ts      # GET: redirige a Google OAuth consent
 │       │   └── callback/route.ts   # GET: recibe code, guarda refresh_token
 │       │
+│       ├── admin/
+│       │   ├── login/route.ts                    # POST: valida ADMIN_PASSWORD, setea cookie httpOnly (8h)
+│       │   ├── logout/route.ts                   # POST: elimina cookie de sesión
+│       │   ├── solicitudes/route.ts              # GET: lee hoja SolicitudesPresenciales del Sheet
+│       │   ├── confirm-presencial/route.ts       # POST: crea evento en Calendar + marca solicitud como "Confirmada" en Sheet
+│       │   └── update-solicitud-status/route.ts  # POST(rowIndex, status): actualiza estado en SolicitudesPresenciales (ej. "Cancelada")
+│       │
 │       ├── calendar/
-│       │   ├── available-slots/route.ts  # GET(?date, ?modality, ?service): slots libres del día
-│       │   └── book/route.ts             # POST(start, end, name, email, phone, service, ?modality, ?notes): crea evento + PDF + Drive
+│       │   ├── available-slots/route.ts    # GET(?date, ?modality, ?service): slots libres del día
+│       │   ├── book/route.ts               # POST(start, end, name, email, phone, service, ?modality, ?notes): crea evento + PDF + Drive
+│       │   └── request-presencial/route.ts # POST: guarda en hoja SolicitudesPresenciales + notifica Gmail + email al cliente
 │       │
 │       ├── cron/
 │       │   └── reminders/route.ts  # GET(Bearer CRON_SECRET): envía recordatorios 24h antes, corre diario 14:00 UTC
@@ -114,6 +127,7 @@ src/
 │   ├── TalleresCards.tsx       # Grid filtrable de talleres con chips por categoría (Framer Motion) — usado en /empresas
 │   ├── TccDiagram.tsx          # Diagrama circular interactivo del ciclo TCC (3 sectores clickeables + cuadro descripción) — usado en /servicios
 │   ├── ScrollToTop.tsx         # Client component: escucha cambios de pathname y ejecuta window.scrollTo(0,0) — corrige que en móvil la página nueva aparezca desde la posición previa
+│   ├── SiteShell.tsx           # Client component: envuelve Navbar + Footer + WhatsAppButton; los oculta en rutas /admin
 │   └── JsonLd.tsx              # Schema.org: LocalBusiness + WebSite + SearchAction (apunta a /quiz)
 │
 ├── lib/
@@ -131,18 +145,52 @@ src/
 
 ## Flujos principales
 
-### Agendamiento de citas
+### Agendamiento de citas — Virtual
 
 ```
-Usuario selecciona servicio/modalidad/fecha
-  → GET /api/calendar/available-slots?date=X&modality=Y&service=Z
+Usuario selecciona servicio → modalidad "Virtual" → fecha → slot
+  → GET /api/calendar/available-slots?date=X&modality=virtual&service=Z
   → Muestra slots (calculados desde bloques de disponibilidad en Google Calendar, menos 15min entre citas)
   → Usuario llena datos y confirma
   → POST /api/calendar/book
     → Genera PDF de políticas (pdf-lib)
     → Sube PDF a Google Drive (carpeta compartida)
-    → Crea evento en Google Calendar con extendedProperties.private.type="booked", attendees, Meet link (si virtual)
+    → Crea evento en Google Calendar con extendedProperties.private.type="booked", attendees, Meet link
     → Retorna success
+```
+
+### Agendamiento de citas — Presencial (flujo de solicitud)
+
+```
+Usuario selecciona servicio → modalidad "Presencial" → ubicación + fecha + hora preferida
+  → POST /api/calendar/request-presencial
+    → Guarda en hoja "SolicitudesPresenciales" del Sheet con estado "Pendiente"
+    → Envía notificación interna por Gmail a la psicóloga
+    → Envía email al cliente: "Confirmamos en menos de 24h"
+  → Psicóloga accede a /admin, ve solicitud pendiente, hace click en "Agendar cita"
+  → Modal: edita ubicación, fecha, hora (H:MM AM/PM) y notas
+  → POST /api/admin/confirm-presencial
+    → Llama a bookAppointment() (mismo flujo que virtual, sin Meet link; location como campo separado)
+    → Actualiza estado a "Confirmada" en el Sheet
+  → O bien: click en "Cancelar solicitud" → POST /api/admin/update-solicitud-status → estado "Cancelada"
+```
+
+### Panel de administración (/admin)
+
+```
+Acceso: /admin → middleware verifica cookie admin_session
+  → Sin sesión: redirige a /admin/login
+  → Con sesión válida: muestra panel
+Login: POST /api/admin/login (ADMIN_PASSWORD en env) → cookie httpOnly 8h
+Tabs (default: "Agendar cita"):
+  - Agendar cita directa: wizard simplificado sin PostHog/GA4
+    · Virtual (Calendario): busca slots en Google Calendar
+    · Virtual (Manual): fecha + hora (H:MM AM/PM) sin verificar disponibilidad
+    · Presencial: bookea directo vía /api/admin/confirm-presencial (sin pasar por solicitud)
+  - Solicitudes presenciales: filtro por estado (Pendiente / Confirmada / Cancelada, default Pendiente)
+    · Botón "Agendar cita": abre modal con campos editables (ubicación, fecha, hora H:MM AM/PM, notas)
+    · Botón "Cancelar solicitud": marca estado "Cancelada" en Sheet
+    · Link "Ver hoja de citas" en el header → Google Sheets
 ```
 
 ### Recordatorios automáticos
@@ -180,6 +228,7 @@ Vercel cron (diario 14:00 UTC = 8am Costa Rica)
 | CRON_SECRET | Auth del endpoint de cron |
 | NEXT_PUBLIC_POSTHOG_KEY | PostHog project key |
 | NEXT_PUBLIC_POSTHOG_HOST | PostHog ingest URL |
+| ADMIN_PASSWORD | Contraseña del panel /admin (cookie httpOnly, sesión 8h) |
 
 ## Analytics — eventos
 
@@ -227,10 +276,12 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 
 ## Convenciones
 
-- Todos los datos variables (precios, teléfono, horarios) van en `src/lib/config.ts`
+- Todos los datos variables (precios, teléfono, horarios, ubicaciones presenciales) van en `src/lib/config.ts`
 - Eventos agendados se identifican por `extendedProperties.private.type: "booked"`
 - Zona horaria: America/Costa_Rica (UTC-6) hardcodeada en calendar y cron
 - Email transaccional desde: `citas@sinapsiscr.com`
 - Cron limitado a 1 ejecución/día (restricción Vercel Hobby)
+- Panel /admin protegido con middleware Next.js (`src/middleware.ts`): verifica cookie `admin_session` contra `ADMIN_PASSWORD`; sin sesión redirige a /admin/login. Navbar/Footer ocultos en /admin vía `SiteShell.tsx`
+- Solicitudes presenciales en hoja `SolicitudesPresenciales` del mismo spreadsheet de contacto (columnas: Fecha, Nombre, Email, Teléfono, Servicio, Ubicación, Fecha preferida, Hora preferida, Notas, Estado)
 - Chips/tabs de selección: estilo unificado — seleccionado: `text-white` + `<motion.span layoutId="chip-bg-*" className="absolute inset-0 rounded-full bg-primary-dark">` (spring animation); no seleccionado: `border border-foreground/15 text-foreground/50 hover:border-foreground/30`. Aplicado en empresas (TalleresCards), herramientas y biblioteca.
 - Animación del anillo de respiración: `@keyframes breath-ring` en `globals.css` (stroke-dashoffset de circunferencia → 0), aplicado con `animation: breath-ring ${duracion}s linear forwards` y `key={faseIdx}` para forzar re-mount en cada fase y garantizar sincronía exacta.

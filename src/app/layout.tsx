@@ -2,10 +2,8 @@ import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Playfair_Display, Quicksand, Cormorant_Garamond, Lora, Caveat } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+import SiteShell from "@/components/SiteShell";
 // import Chatbot from "@/components/Chatbot";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import { LocalBusinessJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
 import { PostHogProvider } from "./posthog-provider";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -132,11 +130,10 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <PostHogProvider>
           <ScrollToTop />
-          <Navbar />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <SiteShell>
+            {children}
+          </SiteShell>
           {/* <Chatbot /> */}
-          <WhatsAppButton />
         </PostHogProvider>
       </body>
     </html>

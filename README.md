@@ -21,6 +21,8 @@ src/
 ├── app/
 │   ├── page.tsx                 # Página principal
 │   ├── posthog-provider.tsx     # Provider de PostHog (analytics)
+│   ├── admin/                   # Panel privado (protegido con contraseña)
+│   │   └── login/               # Página de login admin
 │   ├── agendar/                 # Sistema de agendamiento
 │   ├── quiz/                    # Tests de bienestar (6 tests + checklist)
 │   │   ├── apego/               # ECR-R real (36 ítems, 2 subescalas)
@@ -38,7 +40,8 @@ src/
 │   ├── logo-export/             # Exportación del logo
 │   └── api/
 │       ├── auth/                # OAuth login/callback
-│       ├── calendar/            # Disponibilidad y reservas
+│       ├── admin/               # Login, logout, solicitudes, confirm-presencial, update-solicitud-status
+│       ├── calendar/            # Disponibilidad, reservas y solicitudes presenciales
 │       ├── chat-log/            # Logs del chatbot
 │       ├── contact/             # Formulario de contacto
 │       ├── cron/reminders/      # Cron: recordatorios 24h antes
@@ -65,6 +68,7 @@ src/
 │   ├── TallerSlideshow.tsx      # Slideshow de fotos de talleres — usado en /empresas
 │   ├── TalleresCards.tsx        # Grid filtrable de talleres — usado en /empresas
 │   ├── TccDiagram.tsx           # Diagrama circular interactivo del ciclo TCC — usado en /servicios
+│   ├── SiteShell.tsx            # Oculta Navbar/Footer en rutas /admin
 │   ├── WhatsAppButton.tsx
 │   └── JsonLd.tsx               # Datos estructurados (Schema.org)
 └── lib/
@@ -85,13 +89,18 @@ Todos los datos variables (precios, teléfono, email, ubicación, horario, méto
 
 ### Sistema de agendamiento
 - Conectado a Google Calendar (OAuth 2.0)
-- Filtrado por modalidad (presencial/virtual)
+- **Virtual:** slots en tiempo real desde Google Calendar, Meet automático, PDF de políticas en Drive
+- **Presencial:** flujo de solicitud (ubicación preferida + fecha + hora) → Sheet + correos → confirmación manual desde el panel admin
 - Duración dinámica (1h individual, 1.5h pareja/familia)
-- Google Meet automático para citas virtuales
-- PDF de políticas generado y guardado en Drive
-- Link al PDF en la invitación de calendario
 - Sugerencia del próximo día disponible (busca hasta 30 días)
 - Descanso de 15 min entre citas
+
+### Panel de administración (/admin)
+- Acceso privado protegido por contraseña (`ADMIN_PASSWORD`)
+- Tab "Agendar cita" (default): agenda citas directas sin disparar analytics — Virtual (Calendario), Virtual (Manual) o Presencial (bookea directo, sin flujo de solicitud)
+- Tab "Solicitudes presenciales": filtro por estado (Pendiente / Confirmada / Cancelada); modal con campos editables para agendar; botón para cancelar solicitudes
+- Link "Ver hoja de citas" en el header → Google Sheets
+- Link discreto en el footer ("Acceso interno")
 
 ### Tests de bienestar
 - GAD-7 (Ansiedad)
