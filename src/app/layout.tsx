@@ -111,17 +111,21 @@ export default function RootLayout({
       className={`${geistSans.variable} ${playfair.variable} ${quicksand.variable} ${cormorant.variable} ${lora.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-GE5XQ9THJS"
-          strategy="afterInteractive"
-        />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-GE5XQ9THJS');
-            gtag('config', 'AW-18306929852');
+            var host = window.location.hostname;
+            var isExcluded = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app');
+            if (!isExcluded) {
+              var s = document.createElement('script');
+              s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GE5XQ9THJS';
+              s.async = true;
+              document.head.appendChild(s);
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-GE5XQ9THJS');
+              gtag('config', 'AW-18306929852');
+            }
           `}
         </Script>
         <LocalBusinessJsonLd />
