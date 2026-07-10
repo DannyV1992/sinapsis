@@ -722,7 +722,7 @@ export default function AgendarPage() {
                               <div>
                                 <p>No hay citas disponibles en ninguna modalidad para los próximos 30 días.</p>
                                 <a
-                                  href={getWhatsAppLink("Hola, quiero agendar una cita pero no encontré disponibilidad en la web.")}
+                                  href={getWhatsAppLink("Hola, vengo desde tu sitio web y quiero agendar una cita pero no encontré disponibilidad.")}
                                   target="_blank"
                                   rel="noopener noreferrer"
                                   className="inline-flex items-center gap-2 mt-2 text-green-700 font-medium hover:underline"

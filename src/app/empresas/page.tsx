@@ -113,7 +113,7 @@ export default function EmpresasPage() {
                   Solicitar información
                 </Link>
                 <a
-                  href={getWhatsAppLink("Hola, me interesa consultar sobre talleres y servicios para empresas.")}
+                  href={getWhatsAppLink("Hola, vengo desde tu sitio web y me interesa consultar sobre talleres y servicios para empresas.")}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-8 py-4 border border-foreground/20 text-foreground/70 rounded-full text-sm font-medium text-center hover:border-foreground/40 hover:text-foreground transition-all duration-300"

@@ -24,7 +24,7 @@ const servicios = [
     id: "pareja",
     title: "Terapia de pareja",
     description:
-      "Proceso estructurado para parejas que quieren mejorar su comunicación, resolver conflictos recurrentes o atravesar una crisis juntas. El objetivo es construir un vínculo más honesto y funcional.",
+      "Proceso estructurado para parejas que quieren mejorar su comunicación, resolver conflictos recurrentes o atravesar una crisis juntos. El objetivo es construir un vínculo más honesto y funcional.",
     price: config.prices.pareja,
     duration: config.duration.pareja,
     ideal: "Crisis de comunicación, infidelidad, diferencias de valores, convivencia, diversidad afectivo-sexual.",
@@ -148,7 +148,7 @@ export default function ServiciosPage() {
                 Agendar cita
               </Link>
               <a
-                href={getWhatsAppLink("Hola, tengo una consulta sobre los servicios de psicología.")}
+                href={getWhatsAppLink("Hola, vengo desde tu sitio web y tengo una consulta sobre los servicios de psicología.")}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 border border-foreground/30 text-foreground/85 rounded-full text-sm font-medium text-center hover:border-foreground/60 hover:text-foreground transition-all duration-300"

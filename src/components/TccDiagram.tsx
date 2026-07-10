@@ -63,7 +63,7 @@ export default function TccDiagram() {
           La TCC también trabaja directamente sobre las conductas: los patrones de evitación, la procrastinación, las reacciones impulsivas. Pequeños cambios en el comportamiento generan nuevas experiencias, y esas experiencias transforman las creencias.
         </p>
         <p className="text-foreground/70 text-base leading-relaxed">
-          El proceso es colaborativo: vos traés el conocimiento de tu propia vida, yo aporto las herramientas. Juntas construimos un plan concreto, con objetivos claros y avances que podés medir.
+          El proceso es colaborativo: vos traés el conocimiento de tu propia vida, yo aporto las herramientas. Juntos construimos un plan concreto, con objetivos claros y avances que podés medir.
         </p>
       </div>
 
