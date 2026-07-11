@@ -172,7 +172,7 @@ Para indexar una página nueva rápidamente: Inspección de URLs → pegar la UR
 
 ## Paso 11: Google Analytics 4 (para Google Ads)
 
-GA4 ya está integrado con el Measurement ID `G-GE5XQ9THJS` directamente en el layout.
+GA4 ya está integrado con el Measurement ID `G-1F00E5F123` directamente en el layout.
 No requiere variables de entorno.
 
 Eventos de conversión configurados en el código:
