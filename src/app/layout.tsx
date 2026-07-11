@@ -117,13 +117,13 @@ export default function RootLayout({
             var isExcluded = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app') || window.location.pathname.startsWith('/admin');
             if (!isExcluded) {
               var s = document.createElement('script');
-              s.src = 'https://www.googletagmanager.com/gtag/js?id=G-GE5XQ9THJS';
+              s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1F00E5F123';
               s.async = true;
               document.head.appendChild(s);
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
               gtag('js', new Date());
-              gtag('config', 'G-GE5XQ9THJS');
+              gtag('config', 'G-1F00E5F123');
               gtag('config', 'AW-18306929852');
             }
           `}
