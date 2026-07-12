@@ -1249,11 +1249,11 @@ function RuedaEkman() {
 
 // ─── Rueda de Emociones ───────────────────────────────────────────────────────
 
-type EmocioneL3 = { nombre: string; desc: string };
-type EmocioneL2 = { nombre: string; desc: string; hijos: EmocioneL3[] };
-type EmocioneL1 = { nombre: string; desc: string; color: string; hijos: EmocioneL2[] };
+type EmocionL3 = { nombre: string; desc: string };
+type EmocionL2 = { nombre: string; desc: string; hijos: EmocionL3[] };
+type EmocionL1 = { nombre: string; desc: string; color: string; hijos: EmocionL2[] };
 
-const emocioneData: EmocioneL1[] = [
+const emocionData: EmocionL1[] = [
   {
     nombre: "Alegría", color: "#e0a800",
     desc: "Activa el sistema de recompensa cerebral — núcleo accumbens, área tegmental ventral y corteza prefrontal izquierda. Impulsada por dopamina y serotonina, genera bienestar, motivación y conexión social.",
@@ -1348,7 +1348,7 @@ const WILLCOX_COLORS: Record<string, { l1: string; l2: string; l3: string }> = {
   "Miedo":     { l1: "#8f5bb5", l2: "#b58fd1", l3: "#d9c5e8" },
 };
 
-const willcoxData: EmocioneL1[] = [
+const willcoxData: EmocionL1[] = [
   {
     nombre: "Felicidad", color: "#e0a800",
     desc: "Estado de bienestar y satisfacción asociado a experiencias positivas, conexión y energía.",
@@ -1443,7 +1443,7 @@ function robSector(r1: number, r2: number, startDeg: number, endDeg: number): st
   return `M ${f(x1i)} ${f(y1i)} A ${f(r1)} ${f(r1)} 0 ${large} 1 ${f(x2i)} ${f(y2i)} L ${f(x2o)} ${f(y2o)} A ${f(r2)} ${f(r2)} 0 ${large} 0 ${f(x1o)} ${f(y1o)} Z`;
 }
 
-function RuedaEmocioneWheel({ data = emocioneData, infoTexto, colorMap = EMOCIONES_COLORS, descripcion }: { data?: EmocioneL1[]; infoTexto?: string; colorMap?: Record<string, { l1: string; l2: string; l3: string }>; descripcion?: string }) {
+function RuedaEmocionWheel({ data = emocionData, infoTexto, colorMap = EMOCIONES_COLORS, descripcion }: { data?: EmocionL1[]; infoTexto?: string; colorMap?: Record<string, { l1: string; l2: string; l3: string }>; descripcion?: string }) {
   const [selKey, setSelKey] = useState<string | null>(null);
   const OFFSET = -90;
   const coreSlice = 360 / data.length;
@@ -1809,9 +1809,9 @@ export default function HerramientasPage() {
         {herActiva === "478"      && <Respiracion tecnicaInicial="478" />}
         {herActiva === "box"      && <Respiracion tecnicaInicial="box" />}
         {herActiva === "ekman"    && <RuedaEkman />}
-        {herActiva === "emociones-wheel"  && <RuedaEmocioneWheel />}
+        {herActiva === "emociones-wheel"  && <RuedaEmocionWheel />}
         {herActiva === "willcox" && (
-          <RuedaEmocioneWheel
+          <RuedaEmocionWheel
             data={willcoxData}
             colorMap={WILLCOX_COLORS}
             descripcion="Herramienta clínica de Gloria Willcox (1982). Empezá por el centro: identificá la emoción más cercana a lo que sentís y avanzá hacia afuera para encontrar el matiz exacto."
