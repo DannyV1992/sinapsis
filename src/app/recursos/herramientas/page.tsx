@@ -1718,8 +1718,8 @@ const categorias: { id: CatId; label: string; herramientas: { id: HerramientaId;
     label: "Emociones",
     herramientas: [
       { id: "emociones-wheel",  label: "Rueda Neurológica" },
-      { id: "willcox",  label: "Rueda de Gloria Willcox" },
       { id: "plutchik", label: "Rueda de Plutchik" },
+      { id: "willcox",  label: "Rueda de Gloria Willcox" },
     ],
   },
   {
