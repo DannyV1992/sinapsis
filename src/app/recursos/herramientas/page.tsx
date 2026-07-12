@@ -1745,7 +1745,7 @@ export default function HerramientasPage() {
   const herramientasCat = categorias.find((c) => c.id === catActiva)!.herramientas;
 
   return (
-    <main className="min-h-screen bg-[#f7f4f2] pt-24 pb-20">
+    <main className="min-h-screen bg-[#f7f4f2] pt-24 pb-20 overflow-x-hidden">
       <div className="max-w-2xl mx-auto px-4 sm:px-6">
 
         {/* Header */}
@@ -1760,14 +1760,14 @@ export default function HerramientasPage() {
         </div>
 
         {/* Categorías */}
-        <div className="flex items-center gap-2 mb-1">
-          <span className="text-[10px] font-semibold tracking-widest text-foreground/30 uppercase w-16 shrink-0">Área</span>
-          <div className="flex gap-2">
+        <div className="flex items-start gap-2 mb-1">
+          <span className="text-[10px] font-semibold tracking-widest text-foreground/30 uppercase w-16 shrink-0 pt-2">Área</span>
+          <div className="flex flex-wrap gap-2">
             {categorias.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => seleccionarCategoria(cat.id)}
-                className={`relative px-5 py-2 rounded-full text-xs tracking-[0.15em] uppercase font-medium transition-colors duration-200 ${
+                className={`relative px-5 py-2 rounded-full text-xs tracking-[0.15em] uppercase font-medium transition-colors duration-200 shrink-0 ${
                   catActiva === cat.id
                     ? "text-white"
                     : "text-foreground/50 border border-foreground/15 hover:text-foreground/80 hover:border-foreground/30"
@@ -1787,14 +1787,14 @@ export default function HerramientasPage() {
         </div>
 
         {/* Sub-herramientas */}
-        <div className="flex items-center gap-2 mb-10 border-b border-foreground/8 pb-6">
-          <span className="text-[10px] font-semibold tracking-widest text-foreground/30 uppercase w-16 shrink-0">Modelo</span>
-          <div className="flex gap-2">
+        <div className="flex items-start gap-2 mb-10 border-b border-foreground/8 pb-6">
+          <span className="text-[10px] font-semibold tracking-widest text-foreground/30 uppercase w-16 shrink-0 pt-2">Modelo</span>
+          <div className="flex flex-wrap gap-2">
           {herramientasCat.map((h) => (
             <button
               key={h.id}
               onClick={() => setHerActiva(h.id)}
-              className={`relative px-4 py-1.5 rounded-full text-xs tracking-[0.12em] uppercase font-medium transition-colors duration-200 ${
+              className={`relative px-4 py-1.5 rounded-full text-xs tracking-[0.12em] uppercase font-medium transition-colors duration-200 shrink-0 ${
                 herActiva === h.id
                   ? "text-primary-dark border border-primary-dark/40 bg-primary-dark/8"
                   : "text-foreground/40 border border-foreground/12 hover:text-foreground/60 hover:border-foreground/25"
