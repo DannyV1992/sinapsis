@@ -1256,7 +1256,7 @@ type EmocionL1 = { nombre: string; desc: string; color: string; hijos: EmocionL2
 const emocionData: EmocionL1[] = [
   {
     nombre: "Alegría", color: "#e0a800",
-    desc: "Activa el sistema de recompensa cerebral — núcleo accumbens, área tegmental ventral y corteza prefrontal izquierda. Impulsada por dopamina y serotonina, genera bienestar, motivación y conexión social.",
+    desc: "Activa el sistema de recompensa cerebral — núcleo accumbens, área tegmental ventral y corteza prefrontal izquierda. Impulsada por dopamina y oxitocina, genera bienestar, motivación y conexión social.",
     hijos: [
       { nombre: "Optimista",    desc: "Tendencia a ver posibilidades positivas y confiar en que las cosas mejorarán.",                   hijos: [{ nombre: "Esperanzado",  desc: "Convicción serena de que algo mejor es posible, a pesar de las circunstancias." }, { nombre: "Confiado",      desc: "Seguridad en uno mismo y en el entorno, sin necesitar control externo." }] },
       { nombre: "Entusiasmado", desc: "Motivación activa y contagiosa hacia algo que genera ilusión.",                                   hijos: [{ nombre: "Energético",   desc: "Sensación de vitalidad y capacidad de actuar con fuerza." },                    { nombre: "Apasionado",    desc: "Entrega intensa y sostenida hacia algo que genera profundo interés." }] },
@@ -1268,7 +1268,7 @@ const emocionData: EmocionL1[] = [
   },
   {
     nombre: "Ira", color: "#d64545",
-    desc: "Procesada por el hipotálamo y los circuitos de respuesta al estrés. Libera adrenalina y noradrenalina ante una frustración, injusticia o límite violado, activando el cuerpo para defender lo que importa.",
+    desc: "Procesada principalmente por la amígdala y la corteza orbitofrontal, que evalúan amenazas e injusticias. Libera adrenalina y noradrenalina, activando el cuerpo para superar un obstáculo o defender un límite.",
     hijos: [
       { nombre: "Hostil",    desc: "Disposición activa de oposición y rechazo hacia alguien o algo.",                                    hijos: [{ nombre: "Vengativo",  desc: "Deseo activo de que quien causó daño reciba las consecuencias." },              { nombre: "Colérico",   desc: "Estado emocional de irritación intensa y sostenida, listo para estallar." }] },
       { nombre: "Irritado",  desc: "Molestia sostenida por algo que no cesa o no se resuelve.",                                          hijos: [{ nombre: "Envidioso",  desc: "Malestar ante el bienestar ajeno, con deseo de tener lo que el otro tiene." },   { nombre: "Impaciente", desc: "Intolerancia ante la demora o la falta de control sobre el ritmo." }] },
@@ -1292,7 +1292,7 @@ const emocionData: EmocionL1[] = [
   },
   {
     nombre: "Tristeza", color: "#4895ef",
-    desc: "Asociada a la corteza prefrontal medial, el hipocampo y el sistema límbico. Reduce la dopamina disponible, desacelera el organismo y activa circuitos de evaluación de pérdida, duelo y reflexión interna.",
+    desc: "Asociada a la corteza prefrontal medial, el hipocampo y la corteza cingulada subgenual. Reduce la dopamina disponible, desacelera el organismo y activa circuitos de evaluación de pérdida, duelo y reflexión interna.",
     hijos: [
       { nombre: "Solitario",   desc: "Sensación de aislamiento y ausencia de conexión significativa.",                                   hijos: [{ nombre: "Aislado",        desc: "Distancia de los demás que genera silencio y vacío interno." },                  { nombre: "Incomprendido",  desc: "Sentir que nadie logra ver o entender lo que uno realmente siente." }] },
       { nombre: "Deprimido",   desc: "Pesadez sostenida que apaga la energía y el interés por la vida.",                                 hijos: [{ nombre: "Miserable",      desc: "Malestar profundo que abarca todo y hace difícil encontrar alivio." },            { nombre: "Desesperanzado", desc: "Convicción de que las cosas no pueden mejorar, con ausencia de futuro." }] },
