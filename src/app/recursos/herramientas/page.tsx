@@ -402,9 +402,15 @@ function Grounding() {
 
   return (
     <div>
-      <p className="text-sm text-foreground/50 mb-8 leading-relaxed max-w-md">
+      <p className="text-sm text-foreground/50 mb-3 leading-relaxed max-w-md">
         Técnica de anclaje sensorial para momentos de ansiedad o disociación. Te trae al presente usando tus 5 sentidos.
       </p>
+      <div className="mb-8">
+        <InfoPopover
+          label="Grounding 5-4-3-2-1"
+          texto="Cuando hay ansiedad, la mente se va al pasado o al futuro. Esta técnica interrumpe ese patrón forzando la atención al momento presente a través de los sentidos. El conteo descendente estructura la atención y hace más difícil que los pensamientos intrusivos se impongan."
+        />
+      </div>
 
       {/* Indicadores de paso */}
       <div className="flex gap-2 mb-8">
@@ -452,9 +458,152 @@ function Grounding() {
   );
 }
 
+// ─── Escáner Corporal ─────────────────────────────────────────────────────────
+
+const zonasEscaner = [
+  { nombre: "Cabeza y rostro",  duracion: 30, instruccion: "Notá tu frente, mandíbula y cuero cabelludo. ¿Hay tensión? No trates de cambiarla, solo observá.",  bg: "bg-violet-50 border-violet-200", acento: "text-violet-600", barra: "bg-violet-400" },
+  { nombre: "Cuello y hombros", duracion: 30, instruccion: "Observá si tus hombros están elevados o tensos. Dejá que desciendan con naturalidad.",                bg: "bg-sky-50 border-sky-200",       acento: "text-sky-600",    barra: "bg-sky-400"    },
+  { nombre: "Pecho y espalda",  duracion: 30, instruccion: "Sentí el movimiento de tu pecho al respirar. ¿Hay presión, calor o apertura en esta zona?",           bg: "bg-rose-50 border-rose-200",     acento: "text-rose-600",   barra: "bg-rose-400"   },
+  { nombre: "Abdomen",          duracion: 30, instruccion: "¿Tu abdomen está tenso o suelto? Dejá que se relaje con cada exhalación.",                             bg: "bg-amber-50 border-amber-200",   acento: "text-amber-600",  barra: "bg-amber-400"  },
+  { nombre: "Manos y brazos",   duracion: 30, instruccion: "¿Tus manos están apretadas o abiertas? Recorre mentalmente desde los hombros hasta los dedos.",        bg: "bg-teal-50 border-teal-200",     acento: "text-teal-600",   barra: "bg-teal-400"   },
+  { nombre: "Piernas y pies",   duracion: 30, instruccion: "Sentí el contacto de tus pies con el piso. Recorre desde las caderas hasta los dedos.",                bg: "bg-orange-50 border-orange-200", acento: "text-orange-600", barra: "bg-orange-400" },
+];
+
+function EscanerCorporal() {
+  const [corriendo, setCorriendo] = useState(false);
+  const [zonaIdx, setZonaIdx] = useState(0);
+  const [tick, setTick] = useState(0);
+  const [terminado, setTerminado] = useState(false);
+
+  const zona = zonasEscaner[zonaIdx];
+  const progreso = tick / zona.duracion;
+
+  useEffect(() => {
+    if (!corriendo) return;
+    const id = setInterval(() => setTick((t) => t + 1), 1000);
+    return () => clearInterval(id);
+  }, [corriendo, zonaIdx]);
+
+  useEffect(() => {
+    if (!corriendo || tick < zona.duracion) return;
+    if (zonaIdx < zonasEscaner.length - 1) {
+      setZonaIdx((z) => z + 1);
+      setTick(0);
+    } else {
+      setCorriendo(false);
+      setTerminado(true);
+    }
+  }, [tick, corriendo, zonaIdx, zona.duracion]);
+
+  function toggleCorriendo() {
+    if (corriendo) {
+      setCorriendo(false);
+      setZonaIdx(0);
+      setTick(0);
+      setTerminado(false);
+    } else {
+      setTerminado(false);
+      setCorriendo(true);
+    }
+  }
+
+  function reiniciar() {
+    setCorriendo(false);
+    setZonaIdx(0);
+    setTick(0);
+    setTerminado(false);
+  }
+
+  if (terminado) {
+    return (
+      <div className="flex flex-col items-center text-center py-8 gap-6">
+        <div className="w-16 h-16 rounded-full bg-teal-50 border border-teal-200 flex items-center justify-center">
+          <svg className="w-8 h-8 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <div>
+          <h3 className="text-xl font-bold font-[family-name:var(--font-playfair)] text-primary-dark mb-2">
+            Escáner completado
+          </h3>
+          <p className="text-sm text-foreground/55 leading-relaxed max-w-xs">
+            Tomaste un momento para conectar con tu cuerpo. Notá cómo estás ahora comparado con antes de empezar.
+          </p>
+        </div>
+        <button
+          onClick={reiniciar}
+          className="px-6 py-2.5 bg-foreground/8 text-foreground/60 rounded-xl text-sm font-semibold hover:bg-foreground/12 transition-colors"
+        >
+          Repetir
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <p className="text-sm text-foreground/50 mb-3 leading-relaxed max-w-md">
+        Recorrido guiado por el cuerpo para detectar tensión y volver al presente. Cada zona dura 30 segundos.
+      </p>
+      <div className="mb-10">
+        <InfoPopover
+          label="Escáner corporal"
+          texto="Llevás la atención, de forma sistemática, por distintas partes del cuerpo. No buscás relajarte a la fuerza: solo observás. La observación sin juicio, por sí sola, reduce la activación del sistema nervioso."
+        />
+      </div>
+
+      {/* Indicadores de zona */}
+      <div className="flex gap-1.5 mb-8">
+        {zonasEscaner.map((z, i) => (
+          <div
+            key={i}
+            className={`flex-1 h-1.5 rounded-full transition-all duration-500 ${i === zonaIdx ? z.barra : i < zonaIdx ? z.barra : "bg-foreground/10"} ${i < zonaIdx ? "opacity-50" : i === zonaIdx ? "opacity-100" : "opacity-30"}`}
+          />
+        ))}
+      </div>
+
+      {/* Zona activa */}
+      <div className={`rounded-2xl border p-6 mb-8 ${zona.bg}`}>
+        <div className="flex items-center justify-between mb-4">
+          <span className={`text-xs font-bold uppercase tracking-widest opacity-70 ${zona.acento}`}>
+            {zonaIdx + 1} / {zonasEscaner.length} · {zona.nombre}
+          </span>
+          {corriendo && (
+            <div className={`text-3xl font-bold tabular-nums ${zona.acento}`}>
+              {zona.duracion - tick}s
+            </div>
+          )}
+        </div>
+        <p className="text-sm text-foreground/60 leading-relaxed">{zona.instruccion}</p>
+        {corriendo && (
+          <div className="mt-4 h-1 bg-foreground/10 rounded-full overflow-hidden">
+            <div
+              className={`h-full rounded-full ${zona.barra}`}
+              style={{ width: `${progreso * 100}%`, transition: "width 1s linear" }}
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="flex justify-center">
+        <button
+          onClick={toggleCorriendo}
+          className={`px-8 py-3 rounded-xl text-sm font-semibold transition-all ${
+            corriendo
+              ? "bg-foreground/8 text-foreground/60 hover:bg-foreground/12"
+              : "bg-primary text-white hover:bg-primary-dark shadow-sm hover:-translate-y-0.5"
+          }`}
+        >
+          {corriendo ? "Detener" : "Comenzar"}
+        </button>
+      </div>
+    </div>
+  );
+}
+
 // ─── Página ───────────────────────────────────────────────────────────────────
 
-type Herramienta = "respiracion" | "grounding";
+type Herramienta = "respiracion" | "grounding" | "escaner";
 
 export default function HerramientasPage() {
   const [activa, setActiva] = useState<Herramienta>("respiracion");
@@ -476,7 +625,7 @@ export default function HerramientasPage() {
 
         {/* Tabs */}
         <div className="flex gap-2 mb-10 border-b border-foreground/8 pb-6">
-          {(["respiracion", "grounding"] as Herramienta[]).map((h) => (
+          {(["respiracion", "grounding", "escaner"] as Herramienta[]).map((h) => (
             <button
               key={h}
               onClick={() => setActiva(h)}
@@ -493,13 +642,16 @@ export default function HerramientasPage() {
                   transition={{ type: "spring", stiffness: 380, damping: 30 }}
                 />
               )}
-              <span className="relative z-10">{h === "respiracion" ? "Respiración" : "Grounding 5-4-3-2-1"}</span>
+              <span className="relative z-10">
+                {h === "respiracion" ? "Respiración" : h === "grounding" ? "Grounding 5-4-3-2-1" : "Escáner corporal"}
+              </span>
             </button>
           ))}
         </div>
 
         {activa === "respiracion" && <Respiracion />}
         {activa === "grounding" && <Grounding />}
+        {activa === "escaner" && <EscanerCorporal />}
 
         {/* CTA */}
         <div className="mt-16 rounded-2xl bg-accent/10 border border-accent/20 px-6 py-6 text-center">
