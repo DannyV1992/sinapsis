@@ -1,21 +1,21 @@
 "use client";
 
 import { useState, useEffect, useRef, useReducer } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 
 // ─── InfoPopover ──────────────────────────────────────────────────────────────
 
-function FloatingPopover({ coords, label, texto, onClose }: {
+function FloatingPopover({ coords, label, texto }: {
   coords: { top: number; left: number };
   label: string;
   texto: string;
-  onClose: () => void;
 }) {
   const W = 288;
   const left = Math.min(coords.left - 16, window.innerWidth - W - 12);
   const arrowLeft = 14;
-  return require("react-dom").createPortal(
+  return createPortal(
     <motion.div
       initial={{ opacity: 0, y: 4, scale: 0.97 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -80,7 +80,7 @@ function InfoPopover({ label, texto }: { label: string; texto: string }) {
 
       <AnimatePresence>
         {open && typeof document !== "undefined" && (
-          <FloatingPopover coords={coords} label={label} texto={texto} onClose={() => setOpen(false)} />
+          <FloatingPopover coords={coords} label={label} texto={texto} />
         )}
       </AnimatePresence>
     </span>
@@ -838,21 +838,21 @@ function RuedaEmociones() {
 
       <div className="flex flex-col items-center gap-6">
         <svg viewBox="0 0 610 610" className="w-full max-w-2xl">
+          <style>{`@keyframes pulse-border { 0% { stroke:#00FFFF; stroke-opacity:1; } 50% { stroke:#FF00FF; stroke-opacity:1; } 100% { stroke:#00FFFF; stroke-opacity:1; } }`}</style>
           {/* Capa de fondo: cuñas de díadas rellenando el espacio entre hojas */}
           {diadasP.map((d, i) => {
             const gapAngle = OFFSET + (i + 1) * slice;         // frontera entre hoja i y i+1
             const idxA = emocionesP.findIndex((e) => e.primaria === d.a);
             const idxB = emocionesP.findIndex((e) => e.primaria === d.b);
-            const dim = selIdx !== null && selIdx !== idxA && selIdx !== idxB;
+            const dim = selIdx !== null || (selDiada !== null && selDiada !== i);
             const col = blendHex(emocionesP[idxA].color, emocionesP[idxB].color);
-            const isActiveDiada = selDiada === i;
+            const wPath = wedgePath(gapAngle, slice / 2, R_CORE, R_WEDGE);
             return (
               <path
                 key={`wedge-${d.nombre}`}
-                d={wedgePath(gapAngle, slice / 2, R_CORE, R_WEDGE)}
+                d={wPath}
                 fill={mixColor(col, 0.10)}
-                stroke={isActiveDiada ? "white" : "none"}
-                strokeWidth={isActiveDiada ? "2" : "0"}
+                stroke="none"
                 opacity={dim ? 0.3 : 0.85}
                 style={{ cursor: "pointer", transition: "opacity 0.2s" }}
                 onClick={() => toggleDiada(i)}
@@ -863,8 +863,11 @@ function RuedaEmociones() {
           {/* Capa de hojas: cada emoción con sus 3 bandas (intensa/primaria/leve) */}
           {emocionesP.map((emoc, i) => {
             const mA = OFFSET + i * slice + slice / 2;
-            const dimmed = selIdx !== null && selIdx !== i;
-            const isActive = selIdx === i;
+            const diadaActiva = selDiada !== null ? diadasP[selDiada] : null;
+            const enDiada = diadaActiva
+              ? diadaActiva.a === emoc.primaria || diadaActiva.b === emoc.primaria
+              : false;
+            const dimmed = selIdx !== null ? selIdx !== i : selDiada !== null ? !enDiada : false;
 
             const lp1 = labelPos(CX, CY, R_CORE + (R_INTENSE - R_CORE) * 0.62, mA);
             const lp2 = labelPos(CX, CY, (R_INTENSE + R_PRIMARY) / 2, mA);
@@ -880,7 +883,6 @@ function RuedaEmociones() {
 
             return (
               <g key={emoc.primaria}>
-                {/* Banda interna: intensa */}
                 <path
                   d={dInner}
                   fill={cInner}
@@ -889,9 +891,6 @@ function RuedaEmociones() {
                   style={{ cursor: "pointer", transition: "opacity 0.2s" }}
                   onClick={() => toggle(i, "intensa")}
                 />
-                {isActive && selNivel === "intensa" && (
-                  <path d={dInner} fill="none" stroke="white" strokeWidth="2.5" style={{ pointerEvents: "none" }} />
-                )}
                 <text
                   x={lp1.x} y={lp1.y}
                   textAnchor="middle" dominantBaseline="middle"
@@ -903,7 +902,6 @@ function RuedaEmociones() {
                   {emoc.intensa}
                 </text>
 
-                {/* Banda media: primaria */}
                 <path
                   d={dMiddle}
                   fill={cMiddle}
@@ -912,9 +910,6 @@ function RuedaEmociones() {
                   style={{ cursor: "pointer", transition: "opacity 0.2s" }}
                   onClick={() => toggle(i, "primaria")}
                 />
-                {isActive && selNivel === "primaria" && (
-                  <path d={dMiddle} fill="none" stroke="white" strokeWidth="2.5" style={{ pointerEvents: "none" }} />
-                )}
                 <text
                   x={lp2.x} y={lp2.y}
                   textAnchor="middle" dominantBaseline="middle"
@@ -926,7 +921,6 @@ function RuedaEmociones() {
                   {emoc.primaria}
                 </text>
 
-                {/* Banda externa: leve */}
                 <path
                   d={dOuter}
                   fill={cOuter}
@@ -935,9 +929,6 @@ function RuedaEmociones() {
                   style={{ cursor: "pointer", transition: "opacity 0.2s" }}
                   onClick={() => toggle(i, "leve")}
                 />
-                {isActive && selNivel === "leve" && (
-                  <path d={dOuter} fill="none" stroke="white" strokeWidth="2.5" style={{ pointerEvents: "none" }} />
-                )}
                 <text
                   x={lp3.x} y={lp3.y}
                   textAnchor="middle" dominantBaseline="middle"
@@ -968,6 +959,52 @@ function RuedaEmociones() {
               >
                 {d.nombre}
               </text>
+            );
+          })}
+
+          {/* Capa de bordes pulsantes — siempre encima de todo */}
+          {selDiada !== null && (() => {
+            // Solo la "lente" visible entre las dos hojas: lados que siguen los bordes
+            // curvos de los pétalos (petalHalfWidth), sin líneas rectas ni arcos al centro.
+            const gapAngle = OFFSET + (selDiada + 1) * slice;
+            const half = slice / 2;
+            const steps = 24;
+            const f = (n: number) => n.toFixed(2);
+            let d = "";
+            // Lado izquierdo = borde derecho de la hoja izquierda, desde el vértice hacia afuera
+            for (let s = 0; s <= steps; s++) {
+              const r = R_INTENSE + ((R_WEDGE - R_INTENSE) * s) / steps;
+              const p = ptDeg(r, gapAngle - half + petalHalfWidth(r));
+              d += (s === 0 ? "M" : "L") + ` ${f(p.x)} ${f(p.y)} `;
+            }
+            // Arco exterior en R_WEDGE hasta el borde de la hoja derecha
+            const ro = ptDeg(R_WEDGE, gapAngle + half - petalHalfWidth(R_WEDGE));
+            d += `A ${R_WEDGE} ${R_WEDGE} 0 0 1 ${f(ro.x)} ${f(ro.y)} `;
+            // Lado derecho = borde izquierdo de la hoja derecha, de vuelta al vértice
+            for (let s = steps; s >= 0; s--) {
+              const r = R_INTENSE + ((R_WEDGE - R_INTENSE) * s) / steps;
+              const p = ptDeg(r, gapAngle + half - petalHalfWidth(r));
+              d += `L ${f(p.x)} ${f(p.y)} `;
+            }
+            d += "Z";
+            return <path key="diada-border" d={d} fill="none" stroke="#00FFFF" strokeWidth="2" style={{ pointerEvents: "none", animation: "pulse-border 1.4s ease-in-out infinite" }} />;
+          })()}
+          {emocionesP.map((emoc, i) => {
+            const mA = OFFSET + i * slice + slice / 2;
+            const diadaActiva = selDiada !== null ? diadasP[selDiada] : null;
+            const enDiada = diadaActiva
+              ? diadaActiva.a === emoc.primaria || diadaActiva.b === emoc.primaria
+              : false;
+            const showInner  = (selIdx === i && selNivel === "intensa") || enDiada;
+            const showMiddle = (selIdx === i && selNivel === "primaria") || enDiada;
+            const showOuter  = (selIdx === i && selNivel === "leve")    || enDiada;
+            if (!showInner && !showMiddle && !showOuter) return null;
+            return (
+              <g key={`border-${emoc.primaria}`} style={{ pointerEvents: "none" }}>
+                {showInner  && <path d={bandPath(mA, R_CORE,    R_INTENSE)} fill="none" stroke="#00FFFF" strokeWidth="2.5" style={{ animation: "pulse-border 1.4s ease-in-out infinite" }} />}
+                {showMiddle && <path d={bandPath(mA, R_INTENSE, R_PRIMARY)} fill="none" stroke="#00FFFF" strokeWidth="2.5" style={{ animation: "pulse-border 1.4s ease-in-out infinite" }} />}
+                {showOuter  && <path d={bandPath(mA, R_PRIMARY, R_MILD)}    fill="none" stroke="#00FFFF" strokeWidth="2.5" style={{ animation: "pulse-border 1.4s ease-in-out infinite" }} />}
+              </g>
             );
           })}
         </svg>
@@ -1082,161 +1119,6 @@ function RuedaEmociones() {
         {(emActiva || selDiada !== null) && (
           <button
             onClick={() => { setSelIdx(null); setSelNivel(null); setSelDiada(null); }}
-            className="text-xs text-foreground/40 hover:text-foreground/60 transition-colors"
-          >
-            Limpiar selección
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
-
-// ─── Rueda de Emociones (Ekman) ──────────────────────────────────────────────
-
-const emocionesEkman = [
-  {
-    nombre: "Alegría",
-    color: "#f9c74f",
-    desc: "Estado de bienestar y satisfacción. El cuerpo se siente liviano, con energía y apertura hacia los demás.",
-    senales: "Sonrisa, postura abierta, sensación de ligereza, mayor energía.",
-  },
-  {
-    nombre: "Tristeza",
-    color: "#4895ef",
-    desc: "Respuesta natural a una pérdida, decepción o separación. Invita a la reflexión y al procesamiento interno.",
-    senales: "Llanto, pesadez corporal, menor energía, deseo de aislamiento.",
-  },
-  {
-    nombre: "Miedo",
-    color: "#43aa8b",
-    desc: "Alerta ante una amenaza real o percibida. Prepara al cuerpo para protegerse: huir, paralizarse o enfrentar.",
-    senales: "Tensión muscular, aceleración cardíaca, sudoración, atención focalizada.",
-  },
-  {
-    nombre: "Asco",
-    color: "#9b5de5",
-    desc: "Rechazo ante algo que viola los sentidos o los valores. Protege de lo que percibimos como dañino o repugnante.",
-    senales: "Náuseas, fruncir el ceño, distanciamiento físico, expresión de repulsión.",
-  },
-  {
-    nombre: "Ira",
-    color: "#e63946",
-    desc: "Respuesta ante una injusticia, amenaza o frustración. Moviliza energía para defender límites o cambiar situaciones.",
-    senales: "Tensión en mandíbula y puños, calor corporal, respiración acelerada, voz elevada.",
-  },
-  {
-    nombre: "Sorpresa",
-    color: "#48cae4",
-    desc: "Interrupción momentánea ante algo inesperado. La mente se detiene para procesar lo nuevo antes de reaccionar.",
-    senales: "Ojos y boca abiertos, cejas elevadas, pausa en el movimiento.",
-  },
-];
-
-const EKM_CX = 290, EKM_CY = 290;
-const EKM_R_OUTER = 248;
-
-function sectorPath(startDeg: number, endDeg: number) {
-  const f = (n: number) => n.toFixed(2);
-  const a1 = (startDeg * Math.PI) / 180;
-  const a2 = (endDeg * Math.PI) / 180;
-  const x1 = EKM_CX + EKM_R_OUTER * Math.cos(a1);
-  const y1 = EKM_CY + EKM_R_OUTER * Math.sin(a1);
-  const x2 = EKM_CX + EKM_R_OUTER * Math.cos(a2);
-  const y2 = EKM_CY + EKM_R_OUTER * Math.sin(a2);
-  const large = endDeg - startDeg > 180 ? 1 : 0;
-  return `M ${f(EKM_CX)} ${f(EKM_CY)} L ${f(x1)} ${f(y1)} A ${f(EKM_R_OUTER)} ${f(EKM_R_OUTER)} 0 ${large} 1 ${f(x2)} ${f(y2)} Z`;
-}
-
-function RuedaEkman() {
-  const [selIdx, setSelIdx] = useState<number | null>(null);
-  const N = emocionesEkman.length;
-  const slice = 360 / N;
-  const OFFSET = -90;
-
-  function rotLabel(a: number) {
-    const n = ((a % 360) + 360) % 360;
-    return n > 90 && n < 270 ? a + 180 : a;
-  }
-
-  const emActiva = selIdx !== null ? emocionesEkman[selIdx] : null;
-
-  return (
-    <div>
-      <p className="text-sm text-foreground/50 mb-3 leading-relaxed max-w-md">
-        Las 6 emociones básicas universales según Paul Ekman. Presentes en todas las culturas, son respuestas innatas con funciones de supervivencia y comunicación.
-      </p>
-      <div className="mb-8">
-        <InfoPopover
-          label="Modelo de Ekman"
-          texto="Paul Ekman identificó 6 emociones básicas universales mediante investigación transcultural en los años 70, incluyendo estudios con la tribu Fore en Papúa Nueva Guinea. Demostró que sus expresiones faciales son reconocidas en todas las culturas, independientemente del contexto social. No es una rueda visual sino una teoría científica: cada emoción es innata, evolutiva y tiene una función adaptativa específica."
-        />
-      </div>
-
-      <div className="flex flex-col items-center gap-6">
-        <svg viewBox="0 0 580 580" className="w-full max-w-2xl">
-          {emocionesEkman.map((em, i) => {
-            const startDeg = OFFSET + i * slice;
-            const endDeg = startDeg + slice;
-            const mA = startDeg + slice / 2;
-            const dimmed = selIdx !== null && selIdx !== i;
-            const labelR = EKM_R_OUTER * 0.58;
-            const lp = {
-              x: EKM_CX + labelR * Math.cos((mA * Math.PI) / 180),
-              y: EKM_CY + labelR * Math.sin((mA * Math.PI) / 180),
-            };
-            return (
-              <g key={em.nombre} onClick={() => setSelIdx(selIdx === i ? null : i)} style={{ cursor: "pointer" }}>
-                <path
-                  d={sectorPath(startDeg, endDeg)}
-                  fill={em.color}
-                  stroke="white"
-                  strokeWidth="2"
-                  opacity={dimmed ? 0.25 : 1}
-                  style={{ transition: "opacity 0.2s" }}
-                />
-                {selIdx === i && (
-                  <path d={sectorPath(startDeg, endDeg)} fill="none" stroke="white" strokeWidth="3" style={{ pointerEvents: "none" }} />
-                )}
-                <text
-                  x={lp.x} y={lp.y}
-                  textAnchor="middle" dominantBaseline="middle"
-                  fontSize="13" fontWeight="500" fill="#1a1a1a"
-                  opacity={dimmed ? 0.3 : 1}
-                  transform={`rotate(${rotLabel(mA)}, ${lp.x}, ${lp.y})`}
-                  style={{ pointerEvents: "none", userSelect: "none" }}
-                >
-                  {em.nombre}
-                </text>
-              </g>
-            );
-          })}
-        </svg>
-
-        <AnimatePresence mode="wait">
-          {emActiva && (
-            <motion.div
-              key={emActiva.nombre}
-              initial={{ opacity: 0, y: 6 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 6 }}
-              transition={{ duration: 0.18 }}
-              className="w-full rounded-2xl border p-5"
-              style={{ backgroundColor: emActiva.color + "18", borderColor: emActiva.color + "50" }}
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <div className="w-3 h-3 rounded-full" style={{ backgroundColor: emActiva.color }} />
-                <span className="text-sm font-bold" style={{ color: emActiva.color }}>{emActiva.nombre}</span>
-              </div>
-              <p className="text-sm text-foreground/60 leading-relaxed mb-3">{emActiva.desc}</p>
-              <p className="text-xs text-foreground/40"><span className="font-semibold">Señales físicas: </span>{emActiva.senales}</p>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {emActiva && (
-          <button
-            onClick={() => setSelIdx(null)}
             className="text-xs text-foreground/40 hover:text-foreground/60 transition-colors"
           >
             Limpiar selección
@@ -1514,6 +1396,7 @@ function RuedaEmocionWheel({ data = emocionData, infoTexto, colorMap = EMOCIONES
 
       <div className="flex flex-col items-center gap-6">
         <svg viewBox="0 0 600 600" className="w-full max-w-2xl">
+          <style>{`@keyframes pulse-border { 0% { stroke:#00FFFF; stroke-opacity:1; } 50% { stroke:#FF00FF; stroke-opacity:1; } 100% { stroke:#00FFFF; stroke-opacity:1; } }`}</style>
           {data.map((core, ci) => {
             const cStart  = OFFSET + ci * coreSlice;
             const cEnd    = cStart + coreSlice;
@@ -1594,7 +1477,6 @@ function RuedaEmocionWheel({ data = emocionData, infoTexto, colorMap = EMOCIONES
                         />
                       ) : (
                         l2.hijos.map((l3, l3i) => {
-                          const l3Name = l3.nombre;
                           const l3Count = l2.hijos.length;
                           const l3Slice = l2Slice / l3Count;
                           const l3Start = l2Start + l3i * l3Slice;
@@ -1625,7 +1507,7 @@ function RuedaEmocionWheel({ data = emocionData, infoTexto, colorMap = EMOCIONES
                                   transform={`rotate(${rotLabel(l3Mid)}, ${lp3.x}, ${lp3.y})`}
                                   style={{ pointerEvents: "none", userSelect: "none" }}
                                 >
-                                  {l3Name}
+                                  {l3.nombre}
                                 </text>
                               )}
                             </g>
@@ -1638,6 +1520,38 @@ function RuedaEmocionWheel({ data = emocionData, infoTexto, colorMap = EMOCIONES
               </g>
             );
           })}
+
+          {/* Capa de bordes pulsantes — siempre encima de todo */}
+          {selKey && (() => {
+            const parts = selKey.split("-").map(Number);
+            const ci = parts[0];
+            const core = data[ci];
+            const cStart = OFFSET + ci * coreSlice;
+            const cEnd   = cStart + coreSlice;
+            if (parts.length === 1) {
+              return <path key="border-l1" d={robSector(0, ROB_R1, cStart, cEnd)} fill="none" stroke="#00FFFF" strokeWidth="2.5" style={{ pointerEvents: "none", animation: "pulse-border 1.4s ease-in-out infinite" }} />;
+            }
+            const l2i    = parts[1];
+            const l2Count = core.hijos.length;
+            const l2Slice = coreSlice / l2Count;
+            const l2Start = cStart + l2i * l2Slice;
+            const l2End   = l2Start + l2Slice;
+            if (parts.length === 2) {
+              const l2 = core.hijos[l2i];
+              return (
+                <g key="border-l2" style={{ pointerEvents: "none" }}>
+                  <path d={robSector(ROB_R1, ROB_R2, l2Start, l2End)} fill="none" stroke="#00FFFF" strokeWidth="2" style={{ animation: "pulse-border 1.4s ease-in-out infinite" }} />
+                  {l2.hijos.length === 0 && <path d={robSector(ROB_R2, ROB_R3, l2Start, l2End)} fill="none" stroke="#00FFFF" strokeWidth="2" style={{ animation: "pulse-border 1.4s ease-in-out infinite" }} />}
+                </g>
+              );
+            }
+            const l3i    = parts[2];
+            const l3Count = core.hijos[l2i].hijos.length;
+            const l3Slice = l2Slice / l3Count;
+            const l3Start = l2Start + l3i * l3Slice;
+            const l3End   = l3Start + l3Slice;
+            return <path key="border-l3" d={robSector(ROB_R2, ROB_R3, l3Start, l3End)} fill="none" stroke="#00FFFF" strokeWidth="2" style={{ pointerEvents: "none", animation: "pulse-border 1.4s ease-in-out infinite" }} />;
+          })()}
         </svg>
 
         <AnimatePresence mode="wait">
@@ -1702,7 +1616,7 @@ function RuedaEmocionWheel({ data = emocionData, infoTexto, colorMap = EMOCIONES
 // ─── Página ───────────────────────────────────────────────────────────────────
 
 type CatId = "respiracion" | "emociones" | "anclaje";
-type HerramientaId = "478" | "box" | "plutchik" | "ekman" | "emociones-wheel" | "willcox" | "grounding" | "escaner";
+type HerramientaId = "478" | "box" | "plutchik" | "emociones-wheel" | "willcox" | "grounding" | "escaner";
 
 const categorias: { id: CatId; label: string; herramientas: { id: HerramientaId; label: string }[] }[] = [
   {
@@ -1808,7 +1722,6 @@ export default function HerramientasPage() {
 
         {herActiva === "478"      && <Respiracion tecnicaInicial="478" />}
         {herActiva === "box"      && <Respiracion tecnicaInicial="box" />}
-        {herActiva === "ekman"    && <RuedaEkman />}
         {herActiva === "emociones-wheel"  && <RuedaEmocionWheel />}
         {herActiva === "willcox" && (
           <RuedaEmocionWheel
