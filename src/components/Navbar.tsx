@@ -19,11 +19,11 @@ const serviciosSubmenu = [
 ];
 
 const recursosSubmenu = [
-  { href: "/quiz", label: "Tests de Autoevaluación", description: "Evalúa tu bienestar emocional" },
-  { href: "/recursos/herramientas", label: "Herramientas de Bienestar", description: "Respiración, grounding y más" },
-  { href: "/recursos/descargas", label: "Materiales Descargables", description: "PDFs y plantillas terapéuticas" },
-  { href: "/recursos/biblioteca", label: "Biblioteca Recomendada", description: "Libros, podcasts y charlas" },
-  { href: "/recursos/apoyo", label: "Líneas de Apoyo en CR", description: "Recursos de crisis en Costa Rica" },
+  { href: "/quiz", label: "Tests de autoevaluación", description: "Evalúa tu bienestar emocional" },
+  { href: "/recursos/herramientas", label: "Herramientas de bienestar", description: "Respiración, grounding y más" },
+  { href: "/recursos/descargas", label: "Materiales descargables", description: "PDFs y plantillas terapéuticas" },
+  { href: "/recursos/biblioteca", label: "Biblioteca recomendada", description: "Libros, podcasts y charlas" },
+  { href: "/recursos/apoyo", label: "Líneas de apoyo en CR", description: "Recursos de crisis en Costa Rica" },
 ];
 
 const navLinksLeft = [
