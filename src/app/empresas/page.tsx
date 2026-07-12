@@ -120,7 +120,7 @@ export default function EmpresasPage() {
                   trackAds={false}
                 >
                   Escribir por WhatsApp
-                </a>
+                </TrackingWhatsAppLink>
               </div>
             </div>
           </div>

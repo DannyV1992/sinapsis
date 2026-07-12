@@ -135,7 +135,7 @@ function respReducer(state: RespState, action: RespAction): RespState {
 }
 
 function Respiracion() {
-  const [tecnica, setTecnica] = useState<Tecnica>("box");
+  const [tecnica, setTecnica] = useState<Tecnica>("478");
   const [corriendo, setCorriendo] = useState(false);
   const [{ faseIdx, tick, ciclos }, dispatch] = useReducer(respReducer, { faseIdx: 0, tick: 0, ciclos: 0 });
 
