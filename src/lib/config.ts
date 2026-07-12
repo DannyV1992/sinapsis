@@ -9,7 +9,7 @@ export const config = {
   phoneDisplay: "+506 7139-8403",
   email: "info@sinapsiscr.com",
   website: "sinapsiscr.com",
-  location: "San José, Costa Rica",
+  location: "Heredia, Costa Rica",
 
   // Redes sociales
   instagram: "https://www.instagram.com/sinapsis_psicologia_",

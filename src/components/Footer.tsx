@@ -1,8 +1,13 @@
+"use client";
+
 import Link from "next/link";
+import { usePostHog } from "posthog-js/react";
 import { config, getWhatsAppLink } from "@/lib/config";
 import TrackingWhatsAppLink from "@/components/TrackingWhatsAppLink";
 
 export default function Footer() {
+  const posthog = usePostHog();
+
   return (
     <footer className="bg-primary-dark text-white/80 py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -33,7 +38,7 @@ export default function Footer() {
                 </TrackingWhatsAppLink>
               </li>
               <li>
-                <a href={config.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">
+                <a href={config.instagram} target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors" onClick={() => posthog?.capture("instagram_clicked")}>
                   {config.instagramHandle}
                 </a>
               </li>
