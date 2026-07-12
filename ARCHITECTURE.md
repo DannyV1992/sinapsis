@@ -51,7 +51,7 @@ src/
 │   │   └── page.tsx            # Página bio completa: hero, intro personal, en consulta, mi plus, por qué/cómo, CTA
 │   │
 │   ├── terapia/
-│   │   └── page.tsx            # Psicología clínica: enfoque TCC (TccDiagram interactivo), tipos de terapia (cards) con precios, proceso terapéutico (4 pasos), CTA
+│   │   └── page.tsx            # Psicología clínica: H1 "Terapia Psicológica en Costa Rica", enfoque TCC (TccDiagram interactivo), tipos de terapia (cards) con precios, proceso terapéutico (4 pasos), CTA
 │   │
 │   ├── empresas/
 │   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta + slideshow fotos + stats, lista talleres, CTA con video autoplay
@@ -117,7 +117,8 @@ src/
 │   ├── TransformSection.tsx    # Modalidades de atención (tabs) + enlace "Ver más →" esquina inferior derecha → /servicios#tipos-de-terapia
 │   ├── ProcesoSteps.tsx        # 4 pasos TCC con animaciones Framer Motion — usado en /servicios
 │   ├── Footer.tsx              # Pie de página: enlaces en 2 columnas (sobre-mi, psicología, empresas, proceso, contacto, agendar) + datos de contacto
-│   ├── WhatsAppButton.tsx      # Botón flotante de WhatsApp
+│   ├── WhatsAppButton.tsx      # Botón flotante de WhatsApp (fijo bottom-right)
+│   ├── TrackingWhatsAppLink.tsx # <a> client component con onClick que dispara PostHog + (opcionalmente) GA4 contact + conversión AW. Props: eventName (default: "whatsapp_clicked"), trackAds (default: true — poner false para páginas sin campaña activa, ej. empresas)
 │   ├── Chatbot.tsx             # Chatbot por keywords (desactivado, listo para reactivar)
 │   ├── NeuronBackground.tsx    # Animación Three.js de neuronas interactivas
 │   ├── AnimateOnScroll.tsx     # Wrapper Framer Motion para animaciones on-scroll
@@ -241,13 +242,16 @@ Patrón: PostHog se usa con `usePostHog()` hook en client components. GA4 con `g
 | `booking_step_completed` | agendar/page.tsx | paso, servicio, modalidad |
 | `booking_completed` | agendar/page.tsx | servicio, modalidad |
 | `contact_form_submitted` | ContactSection.tsx | (sin datos personales) |
-| `whatsapp_clicked` | WhatsAppButton.tsx | — |
+| `whatsapp_clicked` | WhatsAppButton.tsx (flotante), terapia/page.tsx CTA, ContactSection.tsx, Footer.tsx | — |
+| `whatsapp_empresas` | empresas/page.tsx — solo PostHog, sin Google Ads (campaña dedicada pendiente) | — |
+| `whatsapp_cancelar_reagendar` | agendar/page.tsx (pantalla de éxito virtual y presencial) — solo PostHog | — |
+| `whatsapp_sin_disponibilidad` | agendar/page.tsx (sin slots en 30 días) — PostHog + Google Ads contact | — |
 
 | Evento GA4 | Propósito | Datos |
 |------------|-----------|-------|
 | `purchase` | Conversión de cita agendada | currency: CRC, value: precio, item_name: servicio |
 | `generate_lead` | Formulario enviado | — |
-| `contact` | Click WhatsApp | method: WhatsApp |
+| `contact` | Click WhatsApp (terapia) | method: WhatsApp |
 | `quiz_completed` | Test completado | quiz_name, score, level |
 
 No se capturan datos personales (nombre, email, teléfono) en ningún evento.

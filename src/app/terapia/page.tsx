@@ -3,6 +3,7 @@ import Link from "next/link";
 import { config, formatPrice, getWhatsAppLink } from "@/lib/config";
 import ProcesoSteps from "@/components/ProcesoSteps";
 import TccDiagram from "@/components/TccDiagram";
+import TrackingWhatsAppLink from "@/components/TrackingWhatsAppLink";
 
 export const metadata: Metadata = {
   title: "Terapia Psicológica en Costa Rica | Sinapsis",
@@ -54,7 +55,7 @@ export default function ServiciosPage() {
             Consulta psicológica
           </p>
           <h1 className="font-[family-name:var(--font-playfair)] text-6xl sm:text-7xl font-bold text-white flex items-center gap-5">
-            Psicología
+            Terapia Psicológica en Costa Rica
             <span className="flex-1 h-px bg-white/15 hidden sm:block max-w-[240px]" />
           </h1>
         </div>
@@ -147,14 +148,12 @@ export default function ServiciosPage() {
               >
                 Agendar cita
               </Link>
-              <a
+              <TrackingWhatsAppLink
                 href={getWhatsAppLink("Hola, vengo desde tu sitio web y tengo una consulta sobre los servicios de psicología.")}
-                target="_blank"
-                rel="noopener noreferrer"
                 className="px-8 py-4 border border-foreground/30 text-foreground/85 rounded-full text-sm font-medium text-center hover:border-foreground/60 hover:text-foreground transition-all duration-300"
               >
                 Escribir por WhatsApp
-              </a>
+              </TrackingWhatsAppLink>
             </div>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getWhatsAppLink } from "@/lib/config";
+import TrackingWhatsAppLink from "@/components/TrackingWhatsAppLink";
 import TallerSlideshow from "@/components/TallerSlideshow";
 import TalleresCards from "@/components/TalleresCards";
 
@@ -112,11 +113,11 @@ export default function EmpresasPage() {
                 >
                   Solicitar información
                 </Link>
-                <a
+                <TrackingWhatsAppLink
                   href={getWhatsAppLink("Hola, vengo desde tu sitio web y me interesa consultar sobre talleres y servicios para empresas.")}
-                  target="_blank"
-                  rel="noopener noreferrer"
                   className="px-8 py-4 border border-foreground/20 text-foreground/70 rounded-full text-sm font-medium text-center hover:border-foreground/40 hover:text-foreground transition-all duration-300"
+                  eventName="whatsapp_empresas"
+                  trackAds={false}
                 >
                   Escribir por WhatsApp
                 </a>
