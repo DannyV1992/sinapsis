@@ -987,7 +987,7 @@ function RuedaEmociones() {
               d += `L ${f(p.x)} ${f(p.y)} `;
             }
             d += "Z";
-            return <path key="diada-border" d={d} fill="none" stroke="#00FFFF" strokeWidth="2" style={{ pointerEvents: "none", animation: "pulse-border 1.4s ease-in-out infinite" }} />;
+            return <path key={`diada-border-${selDiada}`} d={d} fill="none" stroke="#00FFFF" strokeWidth="2" style={{ pointerEvents: "none", animation: "pulse-border 1.4s ease-in-out infinite" }} />;
           })()}
           {emocionesP.map((emoc, i) => {
             const mA = OFFSET + i * slice + slice / 2;
@@ -999,8 +999,9 @@ function RuedaEmociones() {
             const showMiddle = (selIdx === i && selNivel === "primaria") || enDiada;
             const showOuter  = (selIdx === i && selNivel === "leve")    || enDiada;
             if (!showInner && !showMiddle && !showOuter) return null;
+            const borderKey = `border-${emoc.primaria}-${selIdx}-${selNivel}-${selDiada}`;
             return (
-              <g key={`border-${emoc.primaria}`} style={{ pointerEvents: "none" }}>
+              <g key={borderKey} style={{ pointerEvents: "none" }}>
                 {showInner  && <path d={bandPath(mA, R_CORE,    R_INTENSE)} fill="none" stroke="#00FFFF" strokeWidth="2.5" style={{ animation: "pulse-border 1.4s ease-in-out infinite" }} />}
                 {showMiddle && <path d={bandPath(mA, R_INTENSE, R_PRIMARY)} fill="none" stroke="#00FFFF" strokeWidth="2.5" style={{ animation: "pulse-border 1.4s ease-in-out infinite" }} />}
                 {showOuter  && <path d={bandPath(mA, R_PRIMARY, R_MILD)}    fill="none" stroke="#00FFFF" strokeWidth="2.5" style={{ animation: "pulse-border 1.4s ease-in-out infinite" }} />}
