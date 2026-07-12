@@ -620,16 +620,16 @@ const emocionesP: EmocionP[] = [
   {
     primaria: "Sorpresa", intensa: "Asombro", leve: "Distracción",
     color: "#48cae4",
-    dataPrimaria: { similares: "Impactada, Inesperado",            sensaciones: "Corazón acelerado",                   mensaje: "Algo nuevo ocurrió",                                     proposito: "Prestar atención a lo que está aquí",                                          opuesto: "Anticipación" },
-    dataIntensa:  { similares: "Inspirada, Asombrada",             sensaciones: "Sin aliento",                         mensaje: "Algo completamente inesperado está pasando",             proposito: "Recordar este momento",                                                        opuesto: "Vigilancia"   },
+    dataPrimaria: { similares: "Impactada, Conmocionada",          sensaciones: "Corazón acelerado",                   mensaje: "Algo nuevo ocurrió",                                     proposito: "Prestar atención a lo que está aquí",                                          opuesto: "Anticipación" },
+    dataIntensa:  { similares: "Inspirada, Maravillada",           sensaciones: "Sin aliento",                         mensaje: "Algo completamente inesperado está pasando",             proposito: "Recordar este momento",                                                        opuesto: "Vigilancia"   },
     dataLeve:     { similares: "Dispersa, Incierta",               sensaciones: "Desenfocada",                         mensaje: "No sé qué priorizar",                                    proposito: "Reflexionar sobre qué priorizar",                                              opuesto: "Interés"      },
   },
   {
     primaria: "Tristeza", intensa: "Pena", leve: "Melancolía",
     color: "#4895ef",
-    dataPrimaria: { similares: "Caída, Pérdida",                   sensaciones: "Pesada",                              mensaje: "El amor se va",                                          proposito: "Enfocarse en lo que nos importa",                                              opuesto: "Alegría"      },
-    dataIntensa:  { similares: "Destrozada, Desesperada",          sensaciones: "Difícil levantarse",                  mensaje: "El amor se perdió",                                      proposito: "Saber qué queremos verdaderamente",                                            opuesto: "Éxtasis"      },
-    dataLeve:     { similares: "Melancólica, Triste",              sensaciones: "Lenta y desconectada",                mensaje: "El amor está distante",                                  proposito: "Recordar personas y cosas que importan",                                       opuesto: "Serenidad"    },
+    dataPrimaria: { similares: "Caída, Pérdida",                   sensaciones: "Pesada",                              mensaje: "Algo importante se va",                                  proposito: "Enfocarse en lo que nos importa",                                              opuesto: "Alegría"      },
+    dataIntensa:  { similares: "Destrozada, Desesperada",          sensaciones: "Difícil levantarse",                  mensaje: "Algo importante se perdió",                              proposito: "Saber qué queremos verdaderamente",                                            opuesto: "Éxtasis"      },
+    dataLeve:     { similares: "Melancólica, Triste",              sensaciones: "Lenta y desconectada",                mensaje: "Algo importante está distante",                          proposito: "Recordar personas y cosas que importan",                                       opuesto: "Serenidad"    },
   },
   {
     primaria: "Disgusto", intensa: "Aversión", leve: "Aburrimiento",
@@ -641,14 +641,14 @@ const emocionesP: EmocionP[] = [
   {
     primaria: "Ira", intensa: "Furia", leve: "Fastidio",
     color: "#e63946",
-    dataPrimaria: { similares: "Furiosa, Intensa",                 sensaciones: "Fuerte y acalorada",                  mensaje: "Algo está en el camino",                                 proposito: "Energizarse para superar un obstáculo",                                        opuesto: "Miedo"        },
-    dataIntensa:  { similares: "Abrumada, Furiosa",                sensaciones: "Corazón palpitante, visión nublada",  mensaje: "Algo vital me está bloqueando",                          proposito: "Atacar un obstáculo",                                                          opuesto: "Terror"       },
+    dataPrimaria: { similares: "Enfadada, Hostil",                  sensaciones: "Fuerte y acalorada",                  mensaje: "Algo está en el camino",                                 proposito: "Energizarse para superar un obstáculo",                                        opuesto: "Miedo"        },
+    dataIntensa:  { similares: "Enloquecida, Descontrolada",        sensaciones: "Corazón palpitante, visión nublada",  mensaje: "Algo vital me está bloqueando",                          proposito: "Atacar un obstáculo",                                                          opuesto: "Terror"       },
     dataLeve:     { similares: "Frustrada, Irritable",             sensaciones: "Levemente agitada",                   mensaje: "Algo está sin resolver",                                 proposito: "Notar problemas menores",                                                      opuesto: "Aprensión"    },
   },
   {
     primaria: "Anticipación", intensa: "Vigilancia", leve: "Interés",
     color: "#f4845f",
-    dataPrimaria: { similares: "Curiosa, Considerando",            sensaciones: "Alerta y explorando",                 mensaje: "El cambio está sucediendo",                              proposito: "Mirar adelante, ver lo que puede venir",                                       opuesto: "Sorpresa"     },
+    dataPrimaria: { similares: "Curiosa, Expectante",              sensaciones: "Alerta y explorando",                 mensaje: "El cambio está sucediendo",                              proposito: "Mirar adelante, ver lo que puede venir",                                       opuesto: "Sorpresa"     },
     dataIntensa:  { similares: "Intensa, Enfocada",                sensaciones: "Muy enfocada",                        mensaje: "Algo importante se acerca",                              proposito: "Prepararse, observar con cuidado, mantenerse alerta",                          opuesto: "Asombro"      },
     dataLeve:     { similares: "Abierta, Observando",              sensaciones: "Leve sensación de curiosidad",        mensaje: "Algo útil podría venir",                                 proposito: "Prestar atención, explorar",                                                   opuesto: "Distracción"  },
   },
@@ -656,12 +656,12 @@ const emocionesP: EmocionP[] = [
 
 const diadasP = [
   { nombre: "Amor",           a: "Alegría",       b: "Confianza",    similares: "Aceptada, Adorada, Conectada",      sensaciones: "Pacífica, corazón cálido",               mensaje: "Estoy profundamente conectada con esta persona",                                    proposito: "Seguridad para crecer y desarrollarse; cuidado de las próximas generaciones",   explicacion: "La Alegría indica que las cosas van bien. La Confianza señala seguridad y conexión. Juntas, nos sentimos profundamente conectadas." },
-  { nombre: "Sumisión",       a: "Confianza",     b: "Miedo",        similares: "Obediencia, Seguimiento, Tribalismo", sensaciones: "Ojos entrecerrados, cabeza baja",      mensaje: "Esta persona tiene la fortaleza para mantenernos seguros",                          proposito: "Protección ante una amenaza mayor",                                             explicacion: "La Confianza señala seguridad y conexión. El Miedo indica que algo que nos importa está en riesgo. Juntos, buscamos protección." },
+  { nombre: "Sumisión",       a: "Confianza",     b: "Miedo",        similares: "Obediencia, Deferencia, Conformidad", sensaciones: "Ojos entrecerrados, cabeza baja",      mensaje: "Esta persona tiene la fortaleza para mantenernos seguros",                          proposito: "Protección ante una amenaza mayor",                                             explicacion: "La Confianza señala seguridad y conexión. El Miedo indica que algo que nos importa está en riesgo. Juntos, buscamos protección." },
   { nombre: "Alarma",         a: "Miedo",         b: "Sorpresa",     similares: "Horrorizada, Vigilante, Impactada",  sensaciones: "Ojos muy abiertos, corazón palpitante", mensaje: "Algo muy riesgoso apareció de repente",                                             proposito: "Reaccionar rápidamente ante una amenaza",                                       explicacion: "El Miedo señala que algo que nos importa está en riesgo. La Sorpresa indica que algo es inesperado. Juntos, nos impactan y nos llevan a defendernos." },
-  { nombre: "Decepción",      a: "Sorpresa",      b: "Tristeza",     similares: "Error, Impacto, Pérdida",            sensaciones: "Sin aliento, músculos contraídos",      mensaje: "Hay una tragedia o pérdida repentina",                                              proposito: "Movilizar rápidamente a un grupo ante una pérdida o problema",                  explicacion: "La Sorpresa indica que algo es inesperado. La Tristeza señala que perdemos algo o alguien importante. Juntas, percibimos que algo externo está mal." },
+  { nombre: "Decepción",      a: "Sorpresa",      b: "Tristeza",     similares: "Desilusión, Golpe, Pérdida",            sensaciones: "Sin aliento, músculos contraídos",      mensaje: "Hay una tragedia o pérdida repentina",                                              proposito: "Movilizar rápidamente a un grupo ante una pérdida o problema",                  explicacion: "La Sorpresa indica que algo es inesperado. La Tristeza señala que perdemos algo o alguien importante. Juntas, percibimos que algo externo está mal." },
   { nombre: "Remordimiento",  a: "Tristeza",      b: "Disgusto",     similares: "Culpa, Expiación, Responsabilidad",  sensaciones: "Pesadez, cabeza gacha",                 mensaje: "Soy responsable de algo importante que se dañó o perdió",                          proposito: "Asumir responsabilidad, reparar el daño, crecer",                               explicacion: "La Tristeza señala que perdemos algo importante. El Disgusto indica una violación de normas. Juntos, sentimos la necesidad de reparar o mejorar." },
-  { nombre: "Desprecio",      a: "Disgusto",      b: "Ira",          similares: "Rectitud, Horror, Vergüenza ajena",  sensaciones: "Labio torcido, calor",                  mensaje: "Algo está mal y debería ser castigado",                                             proposito: "Hacer cumplir las normas del grupo",                                            explicacion: "El Disgusto señala una violación de normas. La Ira indica que algo nos bloquea. Juntos, nos impulsan a rebajar o descartar la barrera percibida." },
-  { nombre: "Agresividad",    a: "Ira",           b: "Anticipación", similares: "Beligerante, Hostil, Argumentativa", sensaciones: "Inflamada, tensa, moviéndose hacia la amenaza", mensaje: "Necesito luchar contra una amenaza que se acerca",                          proposito: "Prepararse para el conflicto",                                                  explicacion: "La Ira indica que algo nos bloquea. La Anticipación es atención al futuro. Juntas, nos impulsan a pelear o romper la barrera." },
+  { nombre: "Desprecio",      a: "Disgusto",      b: "Ira",          similares: "Indignado, Horrorizado, Despectivo",  sensaciones: "Labio torcido, calor",                  mensaje: "Algo está mal y debería ser castigado",                                             proposito: "Hacer cumplir las normas del grupo",                                            explicacion: "El Disgusto señala una violación de normas. La Ira indica que algo nos bloquea. Juntos, nos impulsan a rebajar o descartar la barrera percibida." },
+  { nombre: "Agresividad",    a: "Ira",           b: "Anticipación", similares: "Beligerante, Hostil, Combativa", sensaciones: "Inflamada, tensa, moviéndose hacia la amenaza", mensaje: "Necesito luchar contra una amenaza que se acerca",                          proposito: "Prepararse para el conflicto",                                                  explicacion: "La Ira indica que algo nos bloquea. La Anticipación es atención al futuro. Juntas, nos impulsan a pelear o romper la barrera." },
   { nombre: "Optimismo",      a: "Anticipación",  b: "Alegría",      similares: "Esperanzada, Con ganas",             sensaciones: "Energizada",                            mensaje: "El futuro es mejor que el presente",                                                proposito: "Generar opciones, motivar la acción",                                           explicacion: "La Anticipación es atención al futuro. La Alegría indica que las cosas van bien. Juntas, miramos hacia adelante con ilusión." },
 ];
 
@@ -827,7 +827,7 @@ function RuedaEmociones() {
   return (
     <div>
       <p className="text-sm text-foreground/50 mb-3 leading-relaxed max-w-md">
-        Basada en el modelo de Robert Plutchik. El pétalo interior es la forma más intensa, el exterior la más leve. Tocá cualquier pétalo para ver su descripción.
+        Basada en el modelo de Robert Plutchik (1980). El pétalo interior es la forma más intensa, el exterior la más leve. Tocá cualquier pétalo para ver su descripción.
       </p>
       <div className="mb-8">
         <InfoPopover
@@ -1255,195 +1255,173 @@ type EmocioneL1 = { nombre: string; desc: string; color: string; hijos: Emocione
 
 const emocioneData: EmocioneL1[] = [
   {
+    nombre: "Alegría", color: "#e0a800",
+    desc: "Activa el sistema de recompensa cerebral — núcleo accumbens, área tegmental ventral y corteza prefrontal izquierda. Impulsada por dopamina y serotonina, genera bienestar, motivación y conexión social.",
+    hijos: [
+      { nombre: "Optimista",    desc: "Tendencia a ver posibilidades positivas y confiar en que las cosas mejorarán.",                   hijos: [{ nombre: "Esperanzado", desc: "Convicción serena de que algo mejor es posible, a pesar de las circunstancias." }, { nombre: "Confiado",       desc: "Seguridad en uno mismo y en el entorno, sin necesitar control externo." }] },
+      { nombre: "Entusiasmado", desc: "Motivación activa y contagiosa hacia algo que genera ilusión.",                                   hijos: [{ nombre: "Energético",  desc: "Sensación de vitalidad y capacidad de actuar con fuerza." },              { nombre: "Apasionado",     desc: "Entrega intensa y sostenida hacia algo que genera profundo interés." }] },
+      { nombre: "Juguetón",     desc: "Ligereza y ganas de divertirse sin tomar todo en serio.",                                         hijos: [{ nombre: "Excitado",    desc: "Activación positiva intensa ante algo que despierta entusiasmo." },       { nombre: "Travieso",       desc: "Disfrute de lo inesperado y lo lúdico, con ganas de sorprender." }] },
+      { nombre: "Contento",     desc: "Bienestar tranquilo y sostenido, sin la intensidad del entusiasmo pero con satisfacción real.",   hijos: [{ nombre: "Satisfecho",  desc: "Sensación de que algo salió bien o cubrió una necesidad real." },        { nombre: "Plácido",        desc: "Calma alegre, sin tensión ni urgencia." }] },
+      { nombre: "Agradecido",   desc: "Reconocer y sentir el valor de lo que se tiene o recibe, con apertura hacia los demás.",          hijos: [{ nombre: "Valorado",    desc: "Sentir que la propia presencia o contribución importa a los demás." },   { nombre: "Reconocido",     desc: "Percibir que el propio esfuerzo o valor es visto por quienes importan." }] },
+      { nombre: "Eufórico",     desc: "Alegría desbordante e intensa, con activación máxima del sistema de recompensa.",                 hijos: [{ nombre: "Exaltado",    desc: "Estado de ánimo elevado al máximo, con energía que desborda." },         { nombre: "Radiante",       desc: "Alegría que se irradia hacia afuera, visible y contagiosa." }] },
+    ],
+  },
+  {
     nombre: "Ira", color: "#d64545",
-    desc: "Fuerte sentimiento de disgusto u hostilidad en respuesta a una injusticia, frustración o amenaza percibida. Puede variar desde una irritación leve hasta una rabia intensa.",
+    desc: "Procesada por el hipotálamo y los circuitos de respuesta al estrés. Libera adrenalina y noradrenalina ante una frustración, injusticia o límite violado, activando el cuerpo para defender lo que importa.",
     hijos: [
-      { nombre: "Amenazado", desc: "Sentirse en peligro o en riesgo ante un daño o pérdida percibida o real, desencadenando una respuesta defensiva.", hijos: [
-        { nombre: "Inseguro", desc: "Sentimiento de incertidumbre y falta de confianza en uno mismo, a menudo por percibir incompetencia o miedo al fracaso y al rechazo." },
-        { nombre: "Celoso", desc: "Sentirse envidioso y protector, a menudo por miedo a perder la atención o el afecto de alguien, generando inseguridad y resentimiento." },
-      ]},
-      { nombre: "Odioso", desc: "Sentir una intensa aversión u hostilidad hacia algo o alguien percibido como profundamente ofensivo o dañino.", hijos: [
-        { nombre: "Resentido", desc: "Sentir amargura persistente por un agravio o injusticia percibida, aferrándose a sentimientos negativos hacia quien nos perjudicó." },
-        { nombre: "Violado", desc: "Sentir que los propios límites, derechos o confianza han sido invadidos o vulnerados de forma grave, generando indignación y dolor." },
-      ]},
-      { nombre: "Desquiciado", desc: "Sentirse fuera de sí por una ira tan intensa que resulta difícil de contener, con fuertes impulsos de arremeter.", hijos: [
-        { nombre: "Enfurecido", desc: "Sentirse extremadamente enojado y furioso, con un intenso deseo de arremeter o expresar la propia ira." },
-        { nombre: "Rabioso", desc: "Sentirse enojado o furioso en respuesta a una provocación o frustración específica, con una reacción intensa y visible." },
-      ]},
-      { nombre: "Agresivo", desc: "Sentirse listo para confrontar o atacar, con una fuerte sensación de hostilidad e intención de dominar o defender.", hijos: [
-        { nombre: "Provocado", desc: "Sentir ira como resultado de las acciones o palabras de otra persona que intenta, a propósito, incitar una reacción negativa." },
-        { nombre: "Hostil", desc: "Sentir intensa aversión u oposición hacia alguien o algo, con un fuerte deseo de confrontar." },
-      ]},
-      { nombre: "Frustrado", desc: "Sentirse molesto o desanimado por la incapacidad de lograr algo o por obstáculos que impiden el progreso.", hijos: [
-        { nombre: "Enfadado", desc: "Sentirse molesto o irritado ante una situación o persona, con una reacción de disgusto de intensidad moderada." },
-        { nombre: "Irritado", desc: "Sentirse ligeramente molesto por alguien o algo, por problemas menores o pequeñas contrariedades." },
-      ]},
-      { nombre: "Distante", desc: "Sentirse emocionalmente alejado o indiferente de los demás, por deseo de evitar la intimidad o por sentirse herido.", hijos: [
-        { nombre: "Retraído", desc: "Sentir un fuerte deseo de aislarse de las interacciones sociales, como respuesta a sentirse abrumado, ansioso o rechazado." },
-        { nombre: "Sospechoso", desc: "Sentir desconfianza hacia las intenciones o la sinceridad de los demás, manteniéndose en guardia ante un posible engaño." },
-      ]},
+      { nombre: "Hostil",    desc: "Disposición activa de oposición y rechazo hacia alguien o algo.",                                    hijos: [{ nombre: "Egoísta",    desc: "Actuar pensando solo en el propio beneficio, sin considerar a los demás." }, { nombre: "Agresivo",    desc: "Impulso de atacar o imponer la propia voluntad con fuerza." }] },
+      { nombre: "Irritado",  desc: "Molestia sostenida por algo que no cesa o no se resuelve.",                                          hijos: [{ nombre: "Celoso",     desc: "Miedo a perder algo o alguien valioso ante la percepción de una amenaza." }, { nombre: "Impaciente", desc: "Intolerancia ante la demora o la falta de control sobre el ritmo." }] },
+      { nombre: "Indignado", desc: "Ira moral ante algo que viola el sentido de justicia o la propia dignidad.",                         hijos: [{ nombre: "Ultrajado",  desc: "Sentir que un límite fundamental fue traspasado de forma inaceptable." },    { nombre: "Ofendido",   desc: "Dolor por sentir que la propia dignidad fue ignorada o atacada." }] },
+      { nombre: "Furioso",   desc: "Activación intensa de los circuitos de ira, con respuesta física de calor, tensión y urgencia de actuar.", hijos: [{ nombre: "Resentido", desc: "Amargura acumulada por una injusticia percibida que no se ha podido procesar." }, { nombre: "Rabioso",  desc: "Ira desbordante que el cuerpo siente como presión incontrolable." }] },
+      { nombre: "Crítico",   desc: "Tendencia a evaluar negativamente, exigir más o señalar lo que falla.",                              hijos: [{ nombre: "Escéptico",  desc: "Desconfianza activa hacia las intenciones o motivaciones ajenas." },       { nombre: "Intolerante", desc: "Incapacidad de aceptar algo que contradice los propios valores o límites." }] },
+      { nombre: "Molesto",   desc: "Incomodidad activa ante algo que perturba el propio equilibrio.",                                    hijos: [{ nombre: "Frustrado",  desc: "Sentirse bloqueado o impedido de alcanzar algo que se desea o necesita." }, { nombre: "Amargado",   desc: "Resentimiento sostenido que tiñe la percepción de las situaciones y las personas." }] },
     ],
   },
   {
-    nombre: "Disgusto", color: "#d67d2e",
-    desc: "Sentir una fuerte aversión o repulsión hacia algo o alguien, por sentirse ofendido o indignado moralmente. Puede desencadenarse por estímulos físicos, morales o sociales.",
+    nombre: "Asco", color: "#e8732a",
+    desc: "Vinculado a la ínsula y los ganglios basales, que procesan estímulos aversivos — físicos, morales o sociales. Es una respuesta evolutiva de rechazo que protege al organismo de lo que percibe como dañino o contaminante.",
     hijos: [
-      { nombre: "Crítico", desc: "Sentirse inclinado a juzgar con dureza, señalando defectos o errores, con una actitud negativa y evaluativa.", hijos: [
-        { nombre: "Sarcástico", desc: "Expresar disgusto o desprecio mediante ironía mordaz, con comentarios hirientes disfrazados de humor." },
-        { nombre: "Escéptico", desc: "Sentirse dubitativo y cuestionador, por falta de confianza en la credibilidad de algo, con una actitud cautelosa." },
-      ]},
-      { nombre: "Desaprobado", desc: "Sentir o mostrar una opinión desfavorable hacia algo o alguien, con rechazo del comportamiento ajeno.", hijos: [
-        { nombre: "Sentencioso", desc: "Adoptar una actitud moralizante y de superioridad, emitiendo juicios severos sobre la conducta de los demás." },
-        { nombre: "Aborrecido", desc: "Sentir un rechazo profundo y sostenido hacia algo o alguien percibido como intolerable." },
-      ]},
-      { nombre: "Decepcionado", desc: "Sentirse desanimado porque algo o alguien no cumplió con las expectativas o esperanzas.", hijos: [
-        { nombre: "Repugnante", desc: "Percibir algo como profundamente desagradable u ofensivo, con una fuerte reacción de asco y rechazo." },
-        { nombre: "Rebelado", desc: "Sentir un fuerte impulso de oponerse o resistirse a algo percibido como injusto o impuesto." },
-      ]},
-      { nombre: "Terrible", desc: "Sentirse extremadamente mal o angustiado, abarcando tristeza, asco e incomodidad ante una experiencia muy desagradable.", hijos: [
-        { nombre: "Repulsivo", desc: "Percibir algo como tan desagradable que provoca un fuerte rechazo y el deseo de alejarse." },
-        { nombre: "Detestable", desc: "Sentir aversión intensa hacia algo o alguien considerado despreciable u odioso." },
-      ]},
-      { nombre: "Evasivo", desc: "Sentir el impulso de evitar o esquivar algo percibido como desagradable, incómodo o amenazante.", hijos: [
-        { nombre: "Aversivo", desc: "Experimentar un rechazo instintivo que lleva a apartarse de algo percibido como nocivo o desagradable." },
-        { nombre: "Indeciso", desc: "Sentirse inseguro o reacio a actuar, con demora o vacilación por duda o incertidumbre." },
-      ]},
-      { nombre: "Culpable", desc: "Sentirse responsable de una mala acción u ofensa, con remordimiento y autorreproche.", hijos: [
-        { nombre: "Atormentado", desc: "Sentirse abrumado por el malestar interior o la culpa, con angustia persistente y difícil de calmar." },
-        { nombre: "Avergonzado", desc: "Sentirse cohibido o incómodo por una situación embarazosa o por la propia conducta, con deseo de ocultarse." },
-      ]},
+      { nombre: "Repugnado",    desc: "Rechazo profundo e instintivo ante algo que viola los propios sentidos o valores.",                hijos: [{ nombre: "Asqueado",      desc: "Reacción física y emocional de asco, con necesidad inmediata de alejarse." },         { nombre: "Repelido",      desc: "Impulso visceral de alejarse de algo que genera rechazo total." }] },
+      { nombre: "Desaprobado",  desc: "Opinión desfavorable sostenida ante una conducta que viola las propias normas.",                   hijos: [{ nombre: "Escandalizado", desc: "Perturbación moral intensa ante algo que transgrede los propios valores de forma llamativa." }, { nombre: "Ofendido",      desc: "Dolor por sentir que algo propio — dignidad, valores o confianza — fue violado." }] },
+      { nombre: "Despreciativo", desc: "Rechazo activo hacia algo o alguien percibido como inferior o indigno — variante social del asco.", hijos: [{ nombre: "Desdeñoso",    desc: "Actitud de menosprecio sostenido hacia algo o alguien que se considera sin valor." },  { nombre: "Distante",      desc: "Retiro emocional deliberado hacia algo o alguien que se considera indigno de atención." }] },
+      { nombre: "Horrorizado",  desc: "Conmoción profunda ante algo que viola de forma extrema los propios valores o la sensibilidad.",    hijos: [{ nombre: "Nauseado",      desc: "Malestar físico y emocional intenso, como si el cuerpo rechazara lo que la mente percibe." }, { nombre: "Consternado",   desc: "Turbación profunda ante algo que no se puede ni quiere aceptar." }] },
+      { nombre: "Hastiado",     desc: "Profundo hartazgo acumulado de algo o alguien, con fatiga emocional que genera rechazo sostenido.", hijos: [{ nombre: "Saturado",      desc: "Sensación de estar completamente lleno, sin poder tolerar más." },                 { nombre: "Harto",         desc: "Límite alcanzado — ya no queda margen para seguir tolerando." }] },
+      { nombre: "Mortificado",  desc: "Malestar intenso por la propia conducta o una falla percibida, con deseo de ocultarse.",           hijos: [{ nombre: "Avergonzado",   desc: "Dolor por sentir que uno actuó mal o no estuvo a la altura, con deseo de retirarse." }, { nombre: "Humillado",     desc: "Sentir que la propia dignidad fue rebajada ante los demás." }] },
     ],
   },
   {
-    nombre: "Tristeza", color: "#6ba33a",
-    desc: "Sentirse afligido, infeliz o decaído, generalmente por una pérdida, decepción u otra experiencia negativa. Implica melancolía y puede acompañarse de llanto o retraimiento.",
+    nombre: "Tristeza", color: "#4895ef",
+    desc: "Asociada a la corteza prefrontal medial, el hipocampo y el sistema límbico. Reduce la dopamina disponible, desacelera el organismo y activa circuitos de evaluación de pérdida, duelo y reflexión interna.",
     hijos: [
-      { nombre: "Ansioso", desc: "Experimentar inquietud o preocupación ante algo incierto y potencialmente negativo, con tensión constante.", hijos: [
-        { nombre: "Anhelante", desc: "Sentir un fuerte deseo o añoranza de algo o alguien ausente, con una sensación de vacío o espera." },
-        { nombre: "Abrumado", desc: "Sentirse incapaz de afrontar las exigencias impuestas, con sobrecarga ante demasiadas tareas o presiones." },
-      ]},
-      { nombre: "Abandonado", desc: "Sentirse desatendido o dejado de lado por alguien cercano, generando soledad y tristeza.", hijos: [
-        { nombre: "Ignorado", desc: "Sentirse pasado por alto o invisible para los demás, como si la propia presencia no importara." },
-        { nombre: "Discriminado", desc: "Sentirse tratado de forma injusta o excluido por características personales, generando dolor e indignación." },
-      ]},
-      { nombre: "Desesperado", desc: "Sentir absoluta desesperanza y falta de fe en la posibilidad de mejorar, con profunda resignación.", hijos: [
-        { nombre: "Impotente", desc: "Sensación de falta de control o capacidad para cambiar una situación, de no poder influir en el resultado." },
-        { nombre: "Vulnerable", desc: "Sentirse expuesto al riesgo de daño emocional o físico por falta de protección, con susceptibilidad y fragilidad." },
-      ]},
-      { nombre: "Deprimido", desc: "Sentirse constantemente triste, desesperanzado y desmotivado, con pérdida de interés en actividades antes disfrutadas.", hijos: [
-        { nombre: "Inferior", desc: "Sentirse menos valioso o capaz que los demás, con baja autoestima y una sensación de incompetencia." },
-        { nombre: "Vacío", desc: "Sentimiento de profundo vacío interior, con falta de plenitud emocional, como si algo esencial faltara." },
-      ]},
-      { nombre: "Solitario", desc: "Sentir una profunda sensación de aislamiento o soledad, con anhelo de compañía y conexiones significativas.", hijos: [
-        { nombre: "Abandonado", desc: "Sentirse dejado de lado por quien fue cercano o brindó apoyo, generando soledad y tristeza." },
-        { nombre: "Apartado", desc: "Sentirse separado del entorno o del grupo, al margen de lo que ocurre, con distancia y desconexión." },
-      ]},
-      { nombre: "Aburrido", desc: "Sentirse desinteresado o desenganchado del entorno o las actividades, con monotonía y falta de estimulación.", hijos: [
-        { nombre: "Apático", desc: "Sentirse indiferente o sin interés ni entusiasmo hacia algo o alguien, sin motivación para actuar." },
-        { nombre: "Indiferente", desc: "Sentirse neutral ante algo, con falta de emociones u opiniones fuertes y una sensación de desapego." },
-      ]},
+      { nombre: "Solitario",   desc: "Sensación de aislamiento y ausencia de conexión significativa.",                                   hijos: [{ nombre: "Aislado",        desc: "Distancia de los demás que genera silencio y vacío interno." },               { nombre: "Incomprendido",  desc: "Sentir que nadie logra ver o entender lo que uno realmente siente." }] },
+      { nombre: "Deprimido",   desc: "Pesadez sostenida que apaga la energía y el interés por la vida.",                                 hijos: [{ nombre: "Miserable",      desc: "Malestar profundo que abarca todo y hace difícil encontrar alivio." },         { nombre: "Desesperanzado", desc: "Convicción de que las cosas no pueden mejorar, con ausencia de futuro." }] },
+      { nombre: "Melancólico", desc: "Tristeza difusa y sostenida ligada al recuerdo o a la pérdida de algo que ya no puede volver.",    hijos: [{ nombre: "Nostálgico",     desc: "Añoranza por un tiempo, lugar o persona que ya no está." },                   { nombre: "Añorante",       desc: "Deseo profundo de recuperar algo que se perdió y que era valioso." }] },
+      { nombre: "Abandonado",  desc: "Dolor emocional ante la pérdida o ausencia de un vínculo significativo.",                         hijos: [{ nombre: "Frágil",         desc: "Estado de sensibilidad extrema donde cualquier cosa puede romper el equilibrio." }, { nombre: "Desamparado",  desc: "Sentir que no hay nadie ni nada a lo que acudir para sostenerse." }] },
+      { nombre: "Arrepentido", desc: "Malestar por algo hecho o dicho que causó daño y no se puede deshacer.",                          hijos: [{ nombre: "Culpable",       desc: "Sensación de haber actuado en contra de los propios valores o causado daño." }, { nombre: "Remordido",      desc: "Pensamiento recurrente sobre un error pasado que no cesa." }] },
+      { nombre: "Decaído",     desc: "Pérdida de ánimo y energía, con dificultad para encontrar motivación.",                           hijos: [{ nombre: "Resignado",      desc: "Aceptación pasiva de una situación difícil, con renuncia a cambiarla." },      { nombre: "Agotado",        desc: "Cansancio profundo que va más allá de lo físico, con vaciamiento emocional." }] },
     ],
   },
   {
-    nombre: "Felicidad", color: "#e8b81e",
-    desc: "Sentirse alegre, contento o pleno, a menudo por experiencias, relaciones o circunstancias positivas. Envuelve una sensación de bienestar y satisfacción.",
+    nombre: "Miedo", color: "#9b5de5",
+    desc: "Procesado principalmente por la amígdala, que detecta amenazas y dispara la respuesta de lucha o huida. Activa el eje hipotálamo-hipófisis-suprarrenal, elevando cortisol y adrenalina para preparar al cuerpo.",
     hijos: [
-      { nombre: "Optimista", desc: "Sentir esperanza y confianza en el futuro a pesar de los desafíos, con la convicción de que las cosas mejorarán.", hijos: [
-        { nombre: "Inspirado", desc: "Sentirse motivado y entusiasmado por algo que despierta la creatividad, la pasión o la admiración." },
-        { nombre: "Receptivo", desc: "Sentirse abierto y dispuesto a recibir nuevas ideas, experiencias o afecto, sin resistencia ni prejuicio." },
-      ]},
-      { nombre: "Íntimo", desc: "Sentir una cercanía emocional profunda con otra persona, con confianza, apertura y conexión mutua.", hijos: [
-        { nombre: "Juguetón", desc: "Sentirse alegre y travieso, con ganas de participar en actividades divertidas, con espontaneidad y disfrute." },
-        { nombre: "Sensible", desc: "Sentirse fácilmente afectado por las emociones o el entorno, con mayor conciencia y empatía." },
-      ]},
-      { nombre: "Pacífico", desc: "Sentirse tranquilo y libre de conflicto, con una sensación de armonía interior y serenidad.", hijos: [
-        { nombre: "Esperanzado", desc: "Sentirse seguro de que algo deseado o positivo sucederá, con anticipación y fe en buenos resultados." },
-        { nombre: "Amoroso", desc: "Sentir afecto, cariño y un profundo apego a alguien o algo, con calidez y deseo de su bienestar." },
-      ]},
-      { nombre: "Poderoso", desc: "Sentirse fuerte, capaz e influyente en las propias acciones, con confianza y sensación de control.", hijos: [
-        { nombre: "Provocativo", desc: "Sentirse audaz y estimulante, con disposición a desafiar o despertar reacciones de forma segura y desenfadada." },
-        { nombre: "Valiente", desc: "Sentirse dispuesto a afrontar el miedo, el peligro o la incertidumbre, tomando decisiones audaces pese a los riesgos." },
-      ]},
-      { nombre: "Aceptado", desc: "Sentirse bienvenido e incluido por los demás sin juicio ni rechazo, con un sentido de pertenencia.", hijos: [
-        { nombre: "Respetado", desc: "Sentirse admirado y tratado con consideración y estima, con reconocimiento de la propia dignidad y opiniones." },
-        { nombre: "Realizado", desc: "Sentirse pleno al alcanzar metas o desarrollar el propio potencial, con satisfacción por el esfuerzo invertido." },
-      ]},
-      { nombre: "Orgulloso", desc: "Sentimiento de satisfacción y logro por las propias acciones o cualidades, con autoevaluación positiva.", hijos: [
-        { nombre: "Importante", desc: "Sentir que uno tiene valor y que su presencia o contribución cuentan para los demás." },
-        { nombre: "Confiado", desc: "Tener fe en uno mismo o en algo, con seguridad en las propias capacidades y decisiones." },
-      ]},
+      { nombre: "Aterrorizado", desc: "Miedo de máxima intensidad con activación total de la amígdala y respuesta de huida o parálisis.", hijos: [{ nombre: "Espantado",   desc: "Reacción de pánico ante algo percibido como una amenaza inmediata e inevitable." }, { nombre: "En pánico",   desc: "Pérdida del control racional ante un miedo que desborda toda capacidad de respuesta." }] },
+      { nombre: "Inseguro",    desc: "Falta de confianza en uno mismo o en la situación, con miedo al fracaso.",                         hijos: [{ nombre: "Inferior",    desc: "Sentirse menos valioso o capaz que quienes están alrededor." },               { nombre: "Intimidado",   desc: "Sentir que la presencia o poder de algo externo reduce la propia capacidad de actuar." }] },
+      { nombre: "Paralizado",  desc: "Respuesta de freeze del sistema nervioso — el cuerpo se detiene ante una amenaza que no puede huir ni enfrentar.", hijos: [{ nombre: "Perplejo",    desc: "Desconcierto ante algo que no encaja con ninguna explicación disponible." },   { nombre: "Bloqueado",    desc: "Incapacidad de actuar o decidir, con la mente y el cuerpo detenidos." }] },
+      { nombre: "Amenazado",   desc: "Percibir que algo importante está en riesgo y podría perderse.",                                   hijos: [{ nombre: "Nervioso",    desc: "Activación corporal ante algo incierto, con dificultad para calmarse." },     { nombre: "Acorralado",   desc: "Sensación de no tener salida ante una amenaza que cierra el espacio." }] },
+      { nombre: "Ansioso",     desc: "Inquietud ante algo incierto que podría salir mal, con el cuerpo en alerta.",                      hijos: [{ nombre: "Vulnerable",  desc: "Sentirse expuesto al daño sin protección, con los propios límites disueltos." }, { nombre: "Tenso",        desc: "Cuerpo en alerta constante, sin poder soltar la guardia." }] },
+      { nombre: "Preocupado",  desc: "Atención sostenida en un problema o riesgo que no se puede controlar del todo.",                   hijos: [{ nombre: "Excluido",    desc: "Sentirse dejado fuera deliberadamente, con dolor por no ser incluido." },    { nombre: "Aprensivo",    desc: "Anticipación persistente de algo malo que todavía no ocurrió." }] },
     ],
   },
   {
-    nombre: "Sorpresa", color: "#3d84cc",
-    desc: "Sentir incredulidad o asombro ante algo imprevisto o novedoso. Implica un cambio repentino en la atención y la percepción ante un acontecimiento o revelación inesperada.",
+    nombre: "Sorpresa", color: "#43aa8b",
+    desc: "Activa redes de atención y orientación ante estímulos inesperados, con participación de la corteza cingulada anterior y la amígdala. Interrumpe el procesamiento habitual para redirigir los recursos cognitivos hacia lo nuevo.",
     hijos: [
-      { nombre: "Interesado", desc: "Sentir curiosidad e interés hacia algo o alguien, con el deseo de aprender, explorar o comprender mejor.", hijos: [
-        { nombre: "Entretenido", desc: "Sentirse gratamente ocupado y distraído por algo que capta la atención de forma agradable." },
-        { nombre: "Curioso", desc: "Sentirse deseoso de aprender o descubrir, con impulso por investigar y explorar nuevas ideas y experiencias." },
-      ]},
-      { nombre: "Sorprendido", desc: "Sentir asombro ante algo inesperado, con un cambio repentino en la atención y la percepción.", hijos: [
-        { nombre: "Impresionado", desc: "Sentirse fuertemente afectado o admirado por algo que supera lo esperado." },
-        { nombre: "Consternado", desc: "Sentirse perturbado o abatido ante una noticia o situación inquietante e inesperada." },
-      ]},
-      { nombre: "Confundido", desc: "Sentirse desconcertado ante algo, por falta de comprensión o información contradictoria, con incertidumbre.", hijos: [
-        { nombre: "Desilusionado", desc: "Sentirse decepcionado al darse cuenta de que algo no es tan bueno como se creía, con pérdida de fe." },
-        { nombre: "Perplejo", desc: "Sentirse desconcertado ante una situación difícil de comprender, con dificultad para hallar una explicación clara." },
-      ]},
-      { nombre: "Asombrado", desc: "Sentirse muy sorprendido o conmocionado por algo inesperado o extraordinario, con un profundo cambio en la percepción.", hijos: [
-        { nombre: "Atónito", desc: "Quedarse paralizado por el asombro ante algo tan inesperado que cuesta reaccionar." },
-        { nombre: "Pasmado", desc: "Sentirse tan sorprendido que se queda sin palabras ni capacidad inmediata de respuesta." },
-      ]},
-      { nombre: "Efusivo", desc: "Sentir y expresar emociones de forma intensa y desbordante, con entusiasmo difícil de contener.", hijos: [
-        { nombre: "Inquieto", desc: "Sentirse agitado o incapaz de permanecer en calma, con una energía interior que busca salida." },
-        { nombre: "Enérgico", desc: "Sentirse vivaz, vigoroso y lleno de energía, con vitalidad y disposición para la acción." },
-      ]},
-      { nombre: "Jubiloso", desc: "Sentir una alegría intensa y desbordante, con ganas de celebrar y expresar entusiasmo.", hijos: [
-        { nombre: "Liberado", desc: "Sentirse libre de una carga o restricción, con alivio y apertura a la experiencia." },
-        { nombre: "Eufórico", desc: "Sentir una felicidad extrema y expansiva, con una intensa sensación de bienestar y exaltación." },
-      ]},
-    ],
-  },
-  {
-    nombre: "Miedo", color: "#8f5bb5",
-    desc: "Sentir temor o preocupación ante algo percibido como peligroso o amenazante. Implica un estado de alerta elevado y el deseo de evitar o escapar de la fuente del miedo.",
-    hijos: [
-      { nombre: "Herido", desc: "Sentir dolor o angustia emocional por haber sido maltratado, traicionado o rechazado por otros.", hijos: [
-        { nombre: "Devastado", desc: "Sentirse profundamente afectado y desbordado por una pérdida o golpe emocional muy fuerte." },
-        { nombre: "Apenado", desc: "Sentir tristeza o pesar, generalmente por algo lamentable propio o ajeno." },
-      ]},
-      { nombre: "Humillado", desc: "Sentirse profundamente avergonzado o mortificado, a menudo por ser ridiculizado públicamente, con pérdida de dignidad.", hijos: [
-        { nombre: "Ridiculizado", desc: "Sentirse objeto de burla de forma hiriente, menospreciado ante los demás, generando vergüenza." },
-        { nombre: "Irrespetado", desc: "Sentirse infravalorado o tratado con falta de respeto, con el propio valor u opiniones ignorados." },
-      ]},
-      { nombre: "Rechazado", desc: "Sentirse indeseado, excluido o descartado por los demás, con dolor por no ser valorado ni aceptado.", hijos: [
-        { nombre: "Perturbado", desc: "Sentirse intranquilo o alterado emocionalmente, con la calma interior quebrada por algo inquietante." },
-        { nombre: "Inadecuado", desc: "Sentir que uno no está a la altura o no encaja, con la sensación de no ser suficiente." },
-      ]},
-      { nombre: "Sumiso", desc: "Sentirse inclinado a ceder o someterse ante los demás, sin defender las propias necesidades o límites.", hijos: [
-        { nombre: "Insignificante", desc: "Sentirse trivial o indigno de atención, como si las propias acciones o presencia no importaran." },
-        { nombre: "Indignado", desc: "Sentir un fuerte desagrado ante algo percibido como injusto u ofensivo, con una sensación de ira justificada." },
-      ]},
-      { nombre: "Inseguro", desc: "Sentimiento de incertidumbre y falta de confianza en uno mismo, por percibir incompetencia o miedo al fracaso.", hijos: [
-        { nombre: "Inferior", desc: "Sentirse menos valioso o capaz que los demás, con baja autoestima y sensación de incompetencia." },
-        { nombre: "Pobre", desc: "Sentirse carente o en desventaja, con la percepción de no tener lo necesario o de valer poco." },
-      ]},
-      { nombre: "Asustado", desc: "Experimentar miedo intenso ante una amenaza inmediata y específica, con estado de alerta y deseo de huir o protegerse.", hijos: [
-        { nombre: "Espantado", desc: "Una sensación repentina e intensa de miedo ante una amenaza o peligro inmediato e identificable." },
-        { nombre: "Aterrado", desc: "Sentir un miedo extremo y paralizante ante algo percibido como profundamente amenazante." },
-      ]},
+      { nombre: "Impactado",     desc: "Sentir el golpe de algo inesperado que deja una impresión duradera.",                            hijos: [{ nombre: "Impresionado",  desc: "Sentirse fuertemente afectado por algo que superó lo esperado." },           { nombre: "Conmocionado",  desc: "Impacto profundo que sacude la percepción y deja huella." }] },
+      { nombre: "Asombrado",     desc: "Conmoción ante algo extraordinario que supera la percepción habitual.",                          hijos: [{ nombre: "Maravillado",   desc: "Mezcla de asombro y admiración ante algo que parece superar lo ordinario." }, { nombre: "Admirado",      desc: "Reconocimiento genuino ante algo o alguien que supera las propias expectativas." }] },
+      { nombre: "Desconcertado", desc: "Desorientación ante algo que no encaja con lo que se anticipaba.",                               hijos: [{ nombre: "Atónito",       desc: "Quedarse sin palabras ante algo tan inesperado que la mente tarda en procesar." }, { nombre: "Confundido",    desc: "Desorientación cognitiva ante algo que no encaja con los esquemas habituales." }] },
+      { nombre: "Fascinado",     desc: "Captura total de la atención ante algo inesperado que genera interés y apertura.",               hijos: [{ nombre: "Cautivado",     desc: "Atención completamente tomada por algo que no se puede dejar de observar." },  { nombre: "Hipnotizado",   desc: "Absorción total en algo que suspende el resto del pensamiento." }] },
+      { nombre: "Alarmado",      desc: "Activación de alerta ante algo inesperado que podría implicar peligro.",                         hijos: [{ nombre: "Sobresaltado",  desc: "Reacción física brusca ante algo repentino e inesperado." },                  { nombre: "Inquieto",      desc: "Agitación interna que no cesa tras percibir algo amenazante o incierto." }] },
+      { nombre: "Estupefacto",   desc: "Sorpresa extrema que deja la mente en blanco — el procesamiento habitual se detiene por completo.", hijos: [{ nombre: "Desbordado",  desc: "Las emociones o la situación superan la capacidad de contenerlas." },       { nombre: "Petrificado",   desc: "Inmovilidad total ante algo tan inesperado que el cuerpo no reacciona." }] },
     ],
   },
 ];
 
-const ROB_COLORS: Record<string, { l1: string; l2: string; l3: string }> = {
+const EMOCIONES_COLORS: Record<string, { l1: string; l2: string; l3: string }> = {
+  "Alegría":   { l1: "#e0a800", l2: "#f0d15a", l3: "#f7e7a0" },
   "Ira":       { l1: "#d64545", l2: "#e88b8b", l3: "#f5c9c9" },
-  "Disgusto":  { l1: "#d67d2e", l2: "#e8a866", l3: "#f5d3ab" },
-  "Tristeza":  { l1: "#6ba33a", l2: "#9cc76a", l3: "#cfe6a8" },
-  "Felicidad": { l1: "#e8b81e", l2: "#f0d15a", l3: "#f7e7a0" },
-  "Sorpresa":  { l1: "#3d84cc", l2: "#7db0e0", l3: "#bcd8f2" },
+  "Asco":      { l1: "#e8732a", l2: "#f0a878", l3: "#f7d4ba" },
+  "Tristeza":  { l1: "#4895ef", l2: "#7db5f5", l3: "#bcd8fa" },
+  "Miedo":     { l1: "#9b5de5", l2: "#b58fd1", l3: "#d9c5e8" },
+  "Sorpresa":  { l1: "#43aa8b", l2: "#7dcaaf", l3: "#b5e0d3" },
+};
+
+// Willcox: pares opuestos usan colores complementarios
+// Felicidad(amarillo) ↔ Tristeza(azul) · Enfado(rojo) ↔ Calma(verde) · Miedo(violeta) ↔ Fuerza(naranja)
+const WILLCOX_COLORS: Record<string, { l1: string; l2: string; l3: string }> = {
+  "Felicidad": { l1: "#e0a800", l2: "#f0d15a", l3: "#f7e7a0" },
+  "Fuerza":    { l1: "#e8732a", l2: "#f0a878", l3: "#f7d4ba" },
+  "Calma":     { l1: "#43aa8b", l2: "#7dcaaf", l3: "#b5e0d3" },
+  "Tristeza":  { l1: "#4895ef", l2: "#7db5f5", l3: "#bcd8fa" },
+  "Enfado":    { l1: "#d64545", l2: "#e88b8b", l3: "#f5c9c9" },
   "Miedo":     { l1: "#8f5bb5", l2: "#b58fd1", l3: "#d9c5e8" },
 };
+
+const willcoxData: EmocioneL1[] = [
+  {
+    nombre: "Felicidad", color: "#e0a800",
+    desc: "Estado de bienestar y satisfacción asociado a experiencias positivas, conexión y energía.",
+    hijos: [
+      { nombre: "Optimista",     desc: "Tendencia a ver posibilidades positivas y confiar en que las cosas mejorarán.",         hijos: [{ nombre: "Esperanzado",  desc: "Convicción serena de que algo mejor es posible, a pesar de las circunstancias." }] },
+      { nombre: "Entusiasmado",  desc: "Motivación activa y contagiosa hacia algo que genera ilusión.",                         hijos: [{ nombre: "Energético",   desc: "Sensación de vitalidad y capacidad de actuar con fuerza." }] },
+      { nombre: "Juguetón",      desc: "Ligereza y ganas de divertirse sin tomar todo en serio.",                               hijos: [{ nombre: "Excitado",     desc: "Activación positiva intensa ante algo que despierta entusiasmo." }] },
+      { nombre: "Alegre",        desc: "Sensación de ligereza y bienestar que se expresa de forma espontánea.",                 hijos: [{ nombre: "Sorprendido",  desc: "Reacción positiva ante algo inesperado que supera las expectativas." }] },
+      { nombre: "Aceptado",      desc: "Sentirse bienvenido e incluido por los demás sin juicio ni rechazo.",                   hijos: [{ nombre: "Valorado",     desc: "Sentir que la propia presencia o contribución importa a los demás." }] },
+      { nombre: "Interesado",    desc: "Curiosidad activa hacia algo que capta la atención y despierta el deseo de explorar.", hijos: [{ nombre: "Curioso",      desc: "Impulso de aprender o descubrir, con apertura a lo nuevo." }] },
+    ],
+  },
+  {
+    nombre: "Enfado", color: "#d64545",
+    desc: "Respuesta ante una injusticia, frustración o límite violado. Moviliza energía para defender lo que nos importa.",
+    hijos: [
+      { nombre: "Hostil",    desc: "Disposición activa de oposición y rechazo hacia alguien o algo.",                           hijos: [{ nombre: "Egoísta",   desc: "Actuar pensando solo en el propio beneficio, sin considerar a los demás." }] },
+      { nombre: "Irritado",  desc: "Molestia sostenida por algo que no cesa o no se resuelve.",                                  hijos: [{ nombre: "Celoso",    desc: "Miedo a perder algo o alguien valioso ante la percepción de una amenaza." }] },
+      { nombre: "Herido",    desc: "Dolor emocional porque algo o alguien afectó la propia dignidad o expectativas.",           hijos: [{ nombre: "Furioso",   desc: "Ira intensa que el cuerpo siente como calor y presión, difícil de contener." }] },
+      { nombre: "Estresado", desc: "Tensión sostenida por exceso de demandas o presión sin salida clara.",                      hijos: [{ nombre: "Resentido", desc: "Amargura acumulada por una injusticia percibida que no se ha podido procesar." }] },
+      { nombre: "Crítico",   desc: "Tendencia a evaluar negativamente, exigir más o señalar lo que falla.",                     hijos: [{ nombre: "Escéptico", desc: "Desconfianza activa hacia las intenciones o motivaciones ajenas." }] },
+      { nombre: "Molesto",   desc: "Incomodidad activa ante algo que perturba el propio equilibrio.",                           hijos: [{ nombre: "Frustrado", desc: "Sentirse bloqueado o impedido de alcanzar algo que se desea o necesita." }] },
+    ],
+  },
+  {
+    nombre: "Miedo", color: "#b58fd1",
+    desc: "Alerta ante una amenaza real o percibida. Prepara al cuerpo para protegerse o evitar el peligro.",
+    hijos: [
+      { nombre: "Débil",      desc: "Sensación de falta de recursos o fuerza para afrontar lo que se viene.",                   hijos: [{ nombre: "Invisible",  desc: "Sentir que la propia presencia, voz o necesidades pasan desapercibidas." }] },
+      { nombre: "Inseguro",   desc: "Falta de confianza en uno mismo o en la situación, con miedo al fracaso.",                 hijos: [{ nombre: "Inferior",   desc: "Sentirse menos valioso o capaz que quienes están alrededor." }] },
+      { nombre: "Confundido", desc: "Sentirse desorientado sin saber cómo procesar lo que ocurre.",                             hijos: [{ nombre: "Perplejo",   desc: "Desconcierto ante algo que no encaja con ninguna explicación disponible." }] },
+      { nombre: "Amenazado",  desc: "Percibir que algo importante está en riesgo y podría perderse.",                           hijos: [{ nombre: "Nervioso",   desc: "Activación corporal ante algo incierto, con dificultad para calmarse." }] },
+      { nombre: "Ansioso",    desc: "Inquietud ante algo incierto que podría salir mal, con el cuerpo en alerta.",              hijos: [{ nombre: "Rechazado",  desc: "Sentirse indeseado o descartado por quienes importan." }] },
+      { nombre: "Preocupado", desc: "Atención sostenida en un problema o riesgo que no se puede controlar del todo.",           hijos: [{ nombre: "Excluido",   desc: "Sentirse dejado fuera deliberadamente, con dolor por no ser incluido." }] },
+    ],
+  },
+  {
+    nombre: "Tristeza", color: "#4895ef",
+    desc: "Respuesta natural a una pérdida, decepción o separación. Invita a la reflexión y al procesamiento interno.",
+    hijos: [
+      { nombre: "Solitario",    desc: "Sensación de aislamiento y ausencia de conexión significativa.",                         hijos: [{ nombre: "Aislado",      desc: "Distancia de los demás que genera silencio y vacío interno." }] },
+      { nombre: "Deprimido",    desc: "Pesadez sostenida que apaga la energía y el interés por la vida.",                       hijos: [{ nombre: "Miserable",    desc: "Malestar profundo que abarca todo y hace difícil encontrar alivio." }] },
+      { nombre: "Indiferente",  desc: "Desconexión del entorno por falta de estimulación, sentido o energía.",                  hijos: [{ nombre: "Aburrido",     desc: "Falta de interés o estímulo, con sensación de que nada vale la pena." }] },
+      { nombre: "Vulnerable",   desc: "Sentirse expuesto al daño emocional sin protección suficiente.",                         hijos: [{ nombre: "Frágil",       desc: "Estado de sensibilidad extrema donde cualquier cosa puede romper el equilibrio." }] },
+      { nombre: "Arrepentido",  desc: "Malestar por algo hecho o dicho que causó daño y no se puede deshacer.",                 hijos: [{ nombre: "Culpable",     desc: "Sensación de haber actuado en contra de los propios valores o causado daño." }] },
+      { nombre: "Decaído",      desc: "Pérdida de ánimo y energía, con dificultad para encontrar motivación.",                  hijos: [{ nombre: "Avergonzado",  desc: "Dolor por sentir que uno no es suficiente o que falló frente a otros." }] },
+    ],
+  },
+  {
+    nombre: "Calma", color: "#43aa8b",
+    desc: "Estado de paz y armonía interior. Bienestar tranquilo sin tensión, abierto a la conexión.",
+    hijos: [
+      { nombre: "Conectado",   desc: "Sentir un lazo real con alguien o algo, con presencia y reciprocidad.",                   hijos: [{ nombre: "Arropado",    desc: "Sensación de estar protegido y contenido por quienes nos rodean." }] },
+      { nombre: "Confiado",    desc: "Fe en uno mismo y en la situación, sin necesitar control externo.",                       hijos: [{ nombre: "Sensible",    desc: "Apertura emocional que permite sentir lo propio y lo ajeno con claridad." }] },
+      { nombre: "Agradecido",  desc: "Reconocer y sentir el valor de lo que se tiene o recibe.",                                hijos: [{ nombre: "Cariñoso",    desc: "Expresión suave y cálida del afecto hacia quienes importan." }] },
+      { nombre: "Tranquilo",   desc: "Estado de quietud interior sin tensión ni urgencia.",                                     hijos: [{ nombre: "Sereno",      desc: "Paz profunda que no se altera ante lo que cambia afuera." }] },
+      { nombre: "Considerado", desc: "Atención activa al bienestar ajeno, con cuidado y respeto.",                              hijos: [{ nombre: "Relajado",    desc: "Ausencia de tensión física y mental, con soltura en el cuerpo." }] },
+      { nombre: "Aliviado",    desc: "Sensación de que una presión o amenaza pasó y se puede respirar de nuevo.",               hijos: [{ nombre: "Recogido",    desc: "Estado de quietud interior donde uno se siente centrado y presente." }] },
+    ],
+  },
+  {
+    nombre: "Fuerza", color: "#e8732a",
+    desc: "Sentir la propia capacidad, valor y agencia. Estado de fortaleza interior que permite avanzar y conectar.",
+    hijos: [
+      { nombre: "Empoderado",  desc: "Sentir que se tiene la capacidad real de actuar y hacer cambios.",                        hijos: [{ nombre: "Enfocado",    desc: "Claridad de propósito y atención dirigida hacia lo que importa." }] },
+      { nombre: "Reconocido",  desc: "Sentir que el propio esfuerzo o valor es visto por quienes importan.",                   hijos: [{ nombre: "Leal",        desc: "Compromiso sostenido con las personas o valores que importan." }] },
+      { nombre: "Valiente",    desc: "Fortaleza de actuar a pesar del miedo, eligiendo avanzar cuando sería más fácil retroceder.", hijos: [{ nombre: "Respetado",  desc: "Sentir que los demás reconocen y valoran la propia dignidad." }] },
+      { nombre: "Fuerte",      desc: "Capacidad de sostener la presión sin derrumbarse ni perder el rumbo.",                    hijos: [{ nombre: "Creativo",    desc: "Impulso de generar algo nuevo, de explorar e imaginar." }] },
+      { nombre: "Orgulloso",   desc: "Satisfacción genuina por algo propio logrado o bien hecho.",                              hijos: [{ nombre: "Exitoso",     desc: "Sentir que se alcanzó algo que tenía valor y que costó esfuerzo." }] },
+      { nombre: "Seguro",      desc: "Estabilidad interior que no depende de la aprobación o circunstancias externas.",         hijos: [{ nombre: "Sano",        desc: "Sensación de integridad y equilibrio físico y emocional." }] },
+    ],
+  },
+];
 
 const ROB_CX = 300, ROB_CY = 300;
 const ROB_R1 = 82;
@@ -1465,10 +1443,10 @@ function robSector(r1: number, r2: number, startDeg: number, endDeg: number): st
   return `M ${f(x1i)} ${f(y1i)} A ${f(r1)} ${f(r1)} 0 ${large} 1 ${f(x2i)} ${f(y2i)} L ${f(x2o)} ${f(y2o)} A ${f(r2)} ${f(r2)} 0 ${large} 0 ${f(x1o)} ${f(y1o)} Z`;
 }
 
-function RuedaEmocioneWheel() {
+function RuedaEmocioneWheel({ data = emocioneData, infoTexto, colorMap = EMOCIONES_COLORS, descripcion }: { data?: EmocioneL1[]; infoTexto?: string; colorMap?: Record<string, { l1: string; l2: string; l3: string }>; descripcion?: string }) {
   const [selKey, setSelKey] = useState<string | null>(null);
   const OFFSET = -90;
-  const coreSlice = 360 / emocioneData.length;
+  const coreSlice = 360 / data.length;
 
   function toggleSel(key: string) {
     setSelKey((prev) => (prev === key ? null : key));
@@ -1497,8 +1475,8 @@ function RuedaEmocioneWheel() {
 
   if (selKey) {
     const parts = selKey.split("-").map(Number);
-    const core = emocioneData[parts[0]];
-    selColor = ROB_COLORS[core.nombre]?.l1 ?? core.color;
+    const core = data[parts[0]];
+    selColor = colorMap[core.nombre]?.l1 ?? core.color;
     if (parts.length === 1) {
       selNombre = core.nombre;
       selDesc = core.desc;
@@ -1525,18 +1503,18 @@ function RuedaEmocioneWheel() {
   return (
     <div>
       <p className="text-sm text-foreground/50 mb-3 leading-relaxed max-w-md">
-        Rueda de emociones con 3 niveles de adentro hacia afuera: del sentimiento general al matiz más específico. Tocá cualquier sección para explorarla.
+        {descripcion ?? "Las 6 emociones básicas con base neurológica, organizadas en 3 niveles de especificidad. Cada sector muestra la emoción central, sus variantes y los matices más precisos."}
       </p>
       <div className="mb-8">
         <InfoPopover
-          label="Rueda de emociones"
-          texto="La lógica es de adentro hacia afuera: el centro tiene las emociones más generales, el anillo del medio las subdivide, y el exterior llega al matiz más específico. Empezá por reconocer la emoción general y avanzá hacia afuera para nombrar con mayor precisión lo que sentís."
+          label="Rueda Neurológica de Emociones"
+          texto={infoTexto ?? "Las 6 emociones del centro — Alegría, Ira, Asco, Tristeza, Miedo y Sorpresa — son las emociones básicas con sustrato neurológico más documentado por la neurociencia. Cada una activa estructuras cerebrales específicas y cumple una función adaptativa distinta. La rueda se organiza de adentro hacia afuera: el núcleo muestra la emoción central, el anillo medio sus variantes, y el exterior los matices más precisos. Tocá cualquier sector para explorarlo."}
         />
       </div>
 
       <div className="flex flex-col items-center gap-6">
         <svg viewBox="0 0 600 600" className="w-full max-w-2xl">
-          {emocioneData.map((core, ci) => {
+          {data.map((core, ci) => {
             const cStart  = OFFSET + ci * coreSlice;
             const cEnd    = cStart + coreSlice;
             const cMid    = cStart + coreSlice / 2;
@@ -1552,7 +1530,7 @@ function RuedaEmocioneWheel() {
               <g key={ciKey}>
                 <path
                   d={robSector(0, ROB_R1, cStart, cEnd)}
-                  fill={ROB_COLORS[core.nombre]?.l1 ?? core.color}
+                  fill={colorMap[core.nombre]?.l1 ?? core.color}
                   stroke="white" strokeWidth="1.5"
                   opacity={isDimmed(ciKey) ? 0.18 : 1}
                   style={{ cursor: "pointer", transition: "opacity 0.2s" }}
@@ -1574,7 +1552,7 @@ function RuedaEmocioneWheel() {
                   const l2End   = l2Start + l2Slice;
                   const l2Mid   = l2Start + l2Slice / 2;
                   const l2Key   = `${ci}-${l2i}`;
-                  const robCol  = ROB_COLORS[core.nombre];
+                  const robCol  = colorMap[core.nombre];
                   const l2Color = robCol ? robCol.l2 : mixColor(core.color, 0.30);
                   const l3Color = robCol ? robCol.l3 : mixColor(core.color, 0.55);
                   const lp2 = {
@@ -1724,7 +1702,7 @@ function RuedaEmocioneWheel() {
 // ─── Página ───────────────────────────────────────────────────────────────────
 
 type CatId = "respiracion" | "emociones" | "anclaje";
-type HerramientaId = "478" | "box" | "plutchik" | "ekman" | "emociones-wheel" | "grounding" | "escaner";
+type HerramientaId = "478" | "box" | "plutchik" | "ekman" | "emociones-wheel" | "willcox" | "grounding" | "escaner";
 
 const categorias: { id: CatId; label: string; herramientas: { id: HerramientaId; label: string }[] }[] = [
   {
@@ -1739,7 +1717,8 @@ const categorias: { id: CatId; label: string; herramientas: { id: HerramientaId;
     id: "emociones",
     label: "Emociones",
     herramientas: [
-      { id: "emociones-wheel",  label: "Rueda de Emociones" },
+      { id: "emociones-wheel",  label: "Rueda Neurológica" },
+      { id: "willcox",  label: "Rueda de Gloria Willcox" },
       { id: "plutchik", label: "Rueda de Plutchik" },
     ],
   },
@@ -1831,6 +1810,14 @@ export default function HerramientasPage() {
         {herActiva === "box"      && <Respiracion tecnicaInicial="box" />}
         {herActiva === "ekman"    && <RuedaEkman />}
         {herActiva === "emociones-wheel"  && <RuedaEmocioneWheel />}
+        {herActiva === "willcox" && (
+          <RuedaEmocioneWheel
+            data={willcoxData}
+            colorMap={WILLCOX_COLORS}
+            descripcion="Herramienta clínica de Gloria Willcox (1982). Empezá por el centro: identificá la emoción más cercana a lo que sentís y avanzá hacia afuera para encontrar el matiz exacto."
+            infoTexto="Gloria Willcox publicó esta rueda con el propósito de ampliar el vocabulario emocional con una idea en mente: cuanto más preciso es el nombre que le damos a lo que sentimos, más fácil es comunicarlo, procesarlo y regularlo. La lógica es de adentro hacia afuera — el centro tiene las 6 emociones más amplias y cada anillo agrega especificidad. Empezá por el centro, elegí la emoción que más se acerca, y avanzá hacia afuera hasta encontrar la palabra que sí encaja."
+          />
+        )}
         {herActiva === "plutchik" && <RuedaEmociones />}
         {herActiva === "grounding" && <Grounding />}
         {herActiva === "escaner"   && <EscanerCorporal />}
