@@ -49,9 +49,10 @@ export default function AboutSection() {
                 vida, no algo a corregir.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-8">
-                No vas a tener que traducir tu vida para que la entienda. Eso
-                deja más espacio — y más energía — para lo que de verdad te
-                trajo a consulta.
+                Esta experiencia clínica se complementa con más de 8 años en ambientes corporativos,
+                trabajando en bienestar y felicidad organizacional, con amplio conocimiento en la
+                ejecución de team buildings, cultura organizacional, talleres y charlas para el
+                desarrollo profesional.
               </p>
               <Link
                 href="/sobre-mi"
