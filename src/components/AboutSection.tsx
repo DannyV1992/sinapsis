@@ -37,8 +37,8 @@ export default function AboutSection() {
                 Acompaño a personas que atraviesan ansiedad, depresión, duelo,
                 estrés, crisis de pareja o esa sensación de que algo no está
                 bien y no saben exactamente qué. Trabajo desde la terapia
-                cognitivo-conductual: un marco con evidencia detrás, con
-                dirección y con un fin.
+                cognitivo-conductual: un marco con evidencia científica detrás, 
+                con dirección y con un fin.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-4">
                 Pero la ciencia no sirve de nada si sientes que la persona que
