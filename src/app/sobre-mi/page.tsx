@@ -94,7 +94,7 @@ export default function SobreMiPage() {
               </p>
             </div>
           </div>
-          <div className="mt-4 space-y-5">
+          <div className="mt-5 space-y-5">
             <p className="text-lg text-white/70 leading-relaxed">
               Si sos parte de la comunidad LGBTQ+, tenés una estructura relacional no monógama, estás en un proceso de deconstrucción religiosa o de identidad, o tu vida no encaja en lo normativo — no tenés que justificarlo primero. Entiendo el contexto sin que me lo dibujes, y vamos directo a lo que te trajo.
             </p>
