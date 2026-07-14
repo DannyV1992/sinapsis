@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import MiPlusCards from "./MiPlusCards";
 
 export const metadata: Metadata = {
   title: "Sobre mí — Cinthya Chávez, Psicóloga Clínica",
@@ -103,18 +104,7 @@ export default function SobreMiPage() {
             </p>
           </div>
 
-          <div className="mt-16 grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {[
-              "Comunidad LGBTQ+",
-              "Relaciones no monógamas",
-              "Deconstrucción religiosa",
-              "Identidades no normativas",
-            ].map((tag) => (
-              <div key={tag} className="border border-white/20 rounded-xl px-4 py-3 text-center bg-white/5">
-                <p className="text-sm text-white/70">{tag}</p>
-              </div>
-            ))}
-          </div>
+          <MiPlusCards />
         </div>
       </section>
 
