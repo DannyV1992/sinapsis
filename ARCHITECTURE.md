@@ -277,6 +277,7 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 - GA4 en paralelo: necesario para Google Ads cuando se activen campañas
 - GA4 Measurement ID hardcodeado (es público, simplifica deploy)
 - Tracking excluido por dominio/ruta (PostHog + GA4 + Google Ads): no se inicializa en `localhost`, `127.0.0.1`, cualquier subdominio `*.vercel.app`, ni en rutas `/admin/*`. Lógica en `posthog-provider.tsx` (condición sobre `window.location`) y en el script inline de `layout.tsx`.
+- GA4 cargado con dos `<Script strategy="afterInteractive">` en `<body>` (no en `<head>`): uno con `src` del loader `gtag/js` y otro con la inicialización inline que asigna `window.gtag` antes de llamar `config`. Colocar `<Script>` dentro de `<head>` en Next.js hace que se ignore silenciosamente.
 - Paleta palo rosa + verde salvia: `--primary` palo rosa `#c4908f`, `--primary-dark` ciruela suave `#4a3040`, `--accent` verde salvia `#8aaa96`, fondo marfil cálido `#f7f4f2` — colores de neuronas hardcodeados en `NeuronBackground.tsx` en tonos palo rosa con vesículas en verde salvia (no leen CSS vars)
 - Secciones CTA (`/servicios`, `/empresas`) y contacto (`ContactSection.tsx`) usan `bg-accent/20 border-accent/15` para diferenciarse del fondo marfil sin ser pesadas
 
