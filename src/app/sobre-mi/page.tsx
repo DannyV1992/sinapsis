@@ -89,7 +89,7 @@ export default function SobreMiPage() {
                 Un lugar donde no tenés que justificar quién sos antes de pedir ayuda
               </h2>
             </div>
-            <div>
+            <div className="mt-5 lg:mt-0">
               <p className="text-lg text-white/70 leading-relaxed">
                 Casi toda terapia promete ser "libre de juicio". Pero hay temas que aun así siguen sintiéndose tabú del otro lado del sillón, y se nota: tenés que explicar y cuidar cómo lo decís para que no te miren distinto. Acá no. Para mí, tu forma de vivir no es un tema por resolver — es simplemente parte de cómo somos las personas.
               </p>

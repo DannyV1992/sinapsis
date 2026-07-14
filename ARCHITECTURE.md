@@ -48,7 +48,8 @@ src/
 │   │       └── layout.tsx      # Metadata dinámica por quiz + generateStaticParams
 │   │
 │   ├── sobre-mi/
-│   │   └── page.tsx            # Página bio: hero ("La persona detrás del proceso."), intro personal con voz propia (gatos/arte/ejercicio), mi plus (no-juicio desde convicción, bg-primary-dark, chips de diversidad), cómo trabajo (fusión de "por qué + en consulta", bg-background), CTA
+│   │   ├── page.tsx            # Página bio: hero ("La persona detrás del proceso."), intro personal con voz propia (gatos/arte/ejercicio), mi plus (no-juicio desde convicción, bg-primary-dark, chips de diversidad clickeables), cómo trabajo (fusión de "por qué + en consulta", bg-background), CTA
+│   │   └── MiPlusCards.tsx     # Client component: 4 botones (LGBTQ+, relaciones no monógamas, deconstrucción religiosa, identidades no normativas) que abren modal con texto informativo por tema; modal se cierra con X o click fuera
 │   │
 │   ├── terapia/
 │   │   └── page.tsx            # Psicología clínica: H1 "Terapia psicológica" + subhead, enfoque TCC (TccDiagram interactivo, 3 párrafos text-base), proceso terapéutico colapsable (4 pasos, bg-section-alt), tipos de terapia (cards sin botón agendar, label "Ideal si:", bg-background), CTA
