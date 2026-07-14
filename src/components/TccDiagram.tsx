@@ -103,13 +103,13 @@ export default function TccDiagram() {
       {/* Texto izquierda */}
       <div className="relative flex flex-col gap-5">
         <p className="absolute -top-8 left-0 text-xs tracking-[0.3em] text-foreground/50 uppercase">Mi enfoque</p>
-        <p className="text-foreground/70 text-sm leading-relaxed">
+        <p className="text-foreground/70 text-base leading-relaxed">
           La terapia cognitivo-conductual (TCC) parte de una premisa sencilla: lo que pensamos influye en cómo nos sentimos, y cómo nos sentimos influye en cómo actuamos. Modificar uno de esos eslabones transforma los otros. Es estructurada, orientada a metas y con décadas de evidencia detrás — el tratamiento mejor respaldado para ansiedad, depresión, duelo y dificultades de relacionamiento.
         </p>
-        <p className="text-foreground/70 text-sm leading-relaxed">
+        <p className="text-foreground/70 text-base leading-relaxed">
           En sesión aprendés a identificar los pensamientos automáticos que disparan tus emociones, a cuestionar su validez y a sustituirlos por interpretaciones más realistas. No se trata de "pensar positivo" — se trata de pensar con más precisión. Y trabajamos directo sobre las conductas: la evitación, la procrastinación, las reacciones impulsivas que sostienen el ciclo.
         </p>
-        <p className="text-foreground/70 text-sm leading-relaxed">
+        <p className="text-foreground/70 text-base leading-relaxed">
           El proceso es colaborativo: vos traés el conocimiento de tu propia vida, yo aporto las herramientas. Juntos construimos un plan concreto, con objetivos claros y avances que podés medir.
         </p>
       </div>
@@ -125,11 +125,6 @@ export default function TccDiagram() {
         <div className="relative w-full max-w-[240px] mx-auto aspect-square">
           <svg ref={svgRef} viewBox="0 0 300 300" className="w-full h-full drop-shadow-sm" style={{ filter: "drop-shadow(0 4px 24px rgba(196,144,143,0.15))" }}>
             <style>{`
-              @keyframes tcc-ping {
-                0%   { r:42; stroke-opacity:0.7; }
-                80%  { r:58; stroke-opacity:0; }
-                100% { r:58; stroke-opacity:0; }
-              }
               @keyframes tcc-glow { 0%,100% { stroke-opacity:0.4; } 50% { stroke-opacity:1; } }
             `}</style>
             <defs>
@@ -191,10 +186,14 @@ export default function TccDiagram() {
             {/* Anillos que invitan a tocar: radar expansivo + borde pulsante (encima del relleno) */}
             {active === null && (
               <g className="pointer-events-none">
-                <circle cx="150" cy="150" fill="none" stroke="#4a3040" strokeWidth="1.5"
-                  style={{ animation: "tcc-ping 2s ease-out infinite" }} />
-                <circle cx="150" cy="150" fill="none" stroke="#4a3040" strokeWidth="1.5"
-                  style={{ animation: "tcc-ping 2s ease-out infinite 1s" }} />
+                <circle cx="150" cy="150" fill="none" stroke="#4a3040" strokeWidth="1.5">
+                  <animate attributeName="r" values="42;58;58" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0 0 1 1" />
+                  <animate attributeName="stroke-opacity" values="0.7;0;0" dur="2s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0 0 1 1" />
+                </circle>
+                <circle cx="150" cy="150" fill="none" stroke="#4a3040" strokeWidth="1.5">
+                  <animate attributeName="r" values="42;58;58" dur="2s" begin="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0 0 1 1" />
+                  <animate attributeName="stroke-opacity" values="0.7;0;0" dur="2s" begin="1s" repeatCount="indefinite" calcMode="spline" keySplines="0.4 0 0.6 1;0 0 1 1" />
+                </circle>
                 <circle cx="150" cy="150" r="42" fill="none" stroke="#4a3040" strokeWidth="2"
                   style={{ animation: "tcc-glow 2s ease-in-out infinite" }} />
               </g>

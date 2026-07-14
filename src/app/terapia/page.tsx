@@ -72,8 +72,23 @@ export default function ServiciosPage() {
         </div>
       </section>
 
+      {/* Proceso terapéutico */}
+      <section id="proceso" className="py-20 lg:py-28 bg-section-alt border-t border-foreground/6">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-5">Proceso</p>
+          <h2 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-foreground flex items-center gap-5 mb-6">
+            ¿Cómo funciona?
+            <span className="flex-1 h-px bg-foreground/15 hidden sm:block" />
+          </h2>
+          <p className="text-foreground/60 text-base leading-relaxed mb-14 max-w-2xl">
+            No hay magia ni atajos. Lo que hay es un proceso estructurado, honesto y adaptado a vos — desde la primera sesión hasta el cierre.
+          </p>
+          <ProcesoSteps />
+        </div>
+      </section>
+
       {/* Servicios */}
-      <section id="tipos-de-terapia" className="bg-section-alt border-t border-foreground/6">
+      <section id="tipos-de-terapia" className="bg-background border-t border-foreground/6">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
           <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-5">Consulta</p>
           <h2 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-foreground flex items-center gap-5 mb-14">
@@ -85,7 +100,7 @@ export default function ServiciosPage() {
             {servicios.map((s) => (
               <div
                 key={s.id}
-                className="group rounded-2xl border border-foreground/8 bg-white overflow-hidden hover:-translate-y-1 hover:shadow-xl hover:shadow-foreground/8 transition-all duration-300 flex flex-col"
+                className="rounded-2xl border border-foreground/8 bg-white overflow-hidden flex flex-col"
               >
                 <div className={`h-1.5 ${s.bar}`} />
                 <div className="p-8 flex flex-col flex-1">
@@ -100,36 +115,14 @@ export default function ServiciosPage() {
                   <p className="text-foreground/70 text-sm leading-relaxed mb-5 flex-1">
                     {s.description}
                   </p>
-                  <p className="text-xs text-foreground/50 leading-relaxed mb-6">
+                  <p className="text-xs text-foreground/50 leading-relaxed">
                     <span className="font-semibold text-foreground/70">Ideal si: </span>
                     {s.ideal}
                   </p>
-                  <Link
-                    href={`/agendar?service=${s.id}`}
-                    className="w-full text-center px-5 py-2.5 bg-foreground/5 group-hover:bg-primary group-hover:text-white text-foreground/60 rounded-full text-xs font-semibold transition-all duration-300"
-                  >
-                    Agendar
-                  </Link>
                 </div>
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-
-      {/* Proceso terapéutico */}
-      <section id="proceso" className="py-20 lg:py-28 bg-background border-t border-foreground/6">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-xs tracking-[0.3em] text-foreground/50 uppercase mb-5">Proceso</p>
-          <h2 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl font-bold text-foreground flex items-center gap-5 mb-6">
-            ¿Cómo funciona?
-            <span className="flex-1 h-px bg-foreground/15 hidden sm:block" />
-          </h2>
-          <p className="text-foreground/60 text-base leading-relaxed mb-14 max-w-2xl">
-            No hay magia ni atajos. Lo que hay es un proceso estructurado, honesto y adaptado a vos — desde la primera sesión hasta el cierre.
-          </p>
-          <ProcesoSteps />
         </div>
       </section>
 
