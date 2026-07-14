@@ -111,27 +111,28 @@ export default function RootLayout({
       className={`${geistSans.variable} ${playfair.variable} ${quicksand.variable} ${cormorant.variable} ${lora.variable} ${caveat.variable} h-full antialiased`}
     >
       <head>
+        <LocalBusinessJsonLd />
+        <WebSiteJsonLd />
+      </head>
+      <body className="min-h-full flex flex-col">
+        <Script
+          id="google-analytics-loader"
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-1F00E5F123"
+        />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
             var host = window.location.hostname;
             var isExcluded = host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app') || window.location.pathname.startsWith('/admin');
             if (!isExcluded) {
-              var s = document.createElement('script');
-              s.src = 'https://www.googletagmanager.com/gtag/js?id=G-1F00E5F123';
-              s.async = true;
-              document.head.appendChild(s);
               window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-1F00E5F123');
-              gtag('config', 'AW-18306929852');
+              window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+              window.gtag('js', new Date());
+              window.gtag('config', 'G-1F00E5F123');
+              window.gtag('config', 'AW-18306929852');
             }
           `}
         </Script>
-        <LocalBusinessJsonLd />
-        <WebSiteJsonLd />
-      </head>
-      <body className="min-h-full flex flex-col">
         <PostHogProvider>
           <ScrollToTop />
           <SiteShell>
