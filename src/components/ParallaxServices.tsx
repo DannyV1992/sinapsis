@@ -42,7 +42,7 @@ const categories = [
   {
     title: "Atención especializada",
     subtitle: "Porque tu experiencia merece ser comprendida",
-    color: "from-pink-500 to-rose-400",
+    color: "from-primary to-accent",
     services: [
       { name: "Comunidad LGBTQ+", phrase: "Espacio seguro" },
       { name: "Relaciones no monógamas", phrase: "Relaciones éticas" },

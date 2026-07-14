@@ -27,8 +27,8 @@ src/
 │   ├── quiz/                    # Tests de bienestar (6 tests + checklist)
 │   │   ├── apego/               # ECR-R real (36 ítems, 2 subescalas)
 │   │   └── necesito-terapia/    # Checklist orientativo 8 preguntas
-│   ├── sobre-mi/                # Bio completa de la profesional
-│   ├── terapia/                 # Psicología clínica: TCC, tipos de terapia, precios, proceso
+│   ├── sobre-mi/                # Bio: hero con voz propia, intro personal, cómo trabajo, mi plus
+│   ├── terapia/                 # Psicología clínica: TCC, tipos de terapia (label "Ideal si:"), proceso colapsable
 │   ├── empresas/                # Talleres y bienestar organizacional
 │   ├── politicas/               # Políticas de cancelación
 │   ├── consentimiento/          # Consentimiento informado

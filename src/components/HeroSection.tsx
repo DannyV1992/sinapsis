@@ -23,14 +23,14 @@ export default function HeroSection() {
           <motion.h1
             className="text-4xl sm:text-5xl md:text-7xl font-bold text-foreground leading-tight font-[family-name:var(--font-playfair)]"
           >
-            {"Tu bienestar emocional".split("").map((char, i) => (
+            {"Un lugar donde".split("").map((char, i) => (
               <motion.span
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.03 }}
               >
-                {char}
+                {char === " " ? " " : char}
               </motion.span>
             ))}
             <motion.span
@@ -39,7 +39,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.7 }}
             >
-              comienza aquí
+              podés decirlo todo
             </motion.span>
           </motion.h1>
         </motion.div>
@@ -50,9 +50,10 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 1 }}
           className="mt-8 text-lg sm:text-xl text-foreground max-w-2xl mx-auto leading-relaxed"
         >
-          En Sinapsis creemos que cuidar tu salud mental es un acto de
-          valentía. Te acompañamos en tu proceso con profesionalismo y
-          calidez humana.
+          Terapia con rigor científico y sin juicios, para lo que sea que te
+          trajo hasta acá — ansiedad, duelo, pareja, o esa sensación de que
+          algo no está bien. Con un proceso que tiene dirección y que se
+          prepara para vos.
         </motion.p>
 
         <motion.div

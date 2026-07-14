@@ -34,23 +34,24 @@ export default function AboutSection() {
                 Cinthya Chávez
               </h2>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Me especializo en intervención cognitivo-conductual para adultos.
-                Mi práctica integra técnicas respaldadas por evidencia con un
-                enfoque centrado en la persona, orientado a objetivos concretos
-                y adaptados a cada proceso individual.
+                Acompaño a personas que atraviesan ansiedad, depresión, duelo,
+                estrés, crisis de pareja o esa sensación de que algo no está
+                bien y no saben exactamente qué. Trabajo desde la terapia
+                cognitivo-conductual: un marco con evidencia detrás, con
+                dirección y con un fin.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-4">
-                Brindo atención en diversidad relacional, de género e identidad,
-                así como en ansiedad, depresión y procesos de autoconocimiento.
-                El espacio terapéutico está diseñado para ser un lugar seguro,
-                sin juicios y orientado al cambio real adaptando el proceso a las
-                necesidades y circunstancias de cada consultante
+                Pero la ciencia no sirve de nada si sientes que la persona que
+                tienes enfrente no te entiende. Por eso escucho antes de
+                proponer — y por eso mi consulta es un lugar donde nada es tabú.
+                A muchos también los trae eso: temas que otros espacios reciben
+                con sorpresa o con un juicio silencioso. Acá son parte de la
+                vida, no algo a corregir.
               </p>
               <p className="text-foreground/70 leading-relaxed mb-8">
-                Esta experiencia clínica se complementa con más de 8 años en ambientes corporativos,
-                trabajando en bienestar y felicidad organizacional, con amplio conocimiento en la
-                ejecución de team buildings, cultura organizacional, talleres y charlas para el
-                desarrollo profesional.
+                No vas a tener que traducir tu vida para que la entienda. Eso
+                deja más espacio — y más energía — para lo que de verdad te
+                trajo a consulta.
               </p>
               <Link
                 href="/sobre-mi"
@@ -64,7 +65,8 @@ export default function AboutSection() {
                   {[
                     "Licenciada en Psicología Clínica",
                     "Terapia cognitivo-conductual",
-                    "Enfoque en diversidad relacional y de género",
+                    "Ansiedad, depresión, duelo y crisis de pareja",
+                    "Espacio afirmativo: diversidad relacional y sexualidad",
                     "8+ años en bienestar organizacional",
                     "Colegio de Profesionales en Psicología de Costa Rica (Cod. 14176)",
                   ].map((item) => (

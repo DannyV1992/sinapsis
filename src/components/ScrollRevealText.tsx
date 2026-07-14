@@ -11,7 +11,7 @@ export default function ScrollRevealText() {
     offset: ["start 0.85", "start 0.1"],
   });
 
-  const words = "A veces la mente necesita un espacio donde no tenga que sostener todo sola. Ese espacio existe.".split(" ");
+  const words = "Acá no tenés que traducir tu vida para que te entiendan. Solo contarla.".split(" ");
 
   return (
     <section

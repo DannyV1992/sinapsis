@@ -21,6 +21,9 @@ export default function SobreMiPage() {
             Cinthya Chávez
             <span className="flex-1 h-px bg-white/15 hidden sm:block max-w-[240px]" />
           </h1>
+          <p className="mt-5 text-xl font-light text-white/55 max-w-xl leading-relaxed">
+            La persona detrás del proceso.
+          </p>
         </div>
       </section>
 
@@ -56,20 +59,17 @@ export default function SobreMiPage() {
 
             <div className="space-y-8">
               <p className="text-2xl sm:text-3xl text-foreground/80 leading-relaxed">
-                ¡¡Hola!! Que hayas llegado hasta acá a querer conocerme un poco más me parece un gesto hermoso — y me da gusto contarte quién soy.
+                ¡¡Hola!! Me alegra que estés acá, con ganas de conocerme un poco antes de dar el paso. Así que te cuento quién soy.
               </p>
               <p className="text-xl text-foreground/65 leading-relaxed">
-                Soy psicóloga clínica, pero lo que me mueve es algo más simple que eso: el interés y la curiosidad genuina por las personas — por cómo piensan, cómo sienten, cómo construyen su vida.
+                Soy psicóloga clínica y amo la ciencia — pero no la ciencia por la ciencia. Uso terapia cognitivo-conductual porque funciona de verdad, y la uso desde un lugar de comprensión y cercanía. Para mí, rigor y calidez no son opuestos: son las dos cosas que hacen que una terapia sirva.
               </p>
               <div className="space-y-5">
                 <p className="text-xl text-foreground/65 leading-relaxed">
-                  Trabajo con personas que atraviesan ansiedad, depresión, duelo, estrés, crisis de pareja, decisiones difíciles, o simplemente la sensación de que algo no está bien y no saben exactamente qué. No hay un perfil de "paciente ideal" en mi consulta — hay personas reales con situaciones reales.
+                  No hay un perfil de "paciente ideal" en mi consulta — hay personas reales con situaciones reales. Por esto, me apasiona y tengo especial interés en la diversidad humana en todas sus formas y singularidades: la de identidades, la de estructuras de vida, las de creencias, la de experiencias que pocas veces encuentran un lugar donde ser nombradas.
                 </p>
                 <p className="text-xl text-foreground/65 leading-relaxed">
-                  Tengo especial interés en las relaciones — cómo nos vinculamos, cómo comunicamos, cómo nos herimos y cómo sanamos dentro de los vínculos. Y me apasiona la diversidad humana en todas sus formas: la de las identidades, la de las estructuras de vida, las de creencias, la de las experiencias que pocas veces encuentran un lugar donde ser nombradas.
-                </p>
-                <p className="text-xl text-foreground/65 leading-relaxed">
-                  Fuera de la consulta soy curiosa, lectora, con un sentido del humor que aparece cuando el espacio lo permite. Creo que la terapia puede ser un lugar serio sin ser un lugar tenso — y eso también lo traigo a cada sesión.
+                  Fuera de la consulta soy risueña. Me mueven el arte y la música, el ejercicio es parte fundamental de cómo cuido mi propia mente, y comparto la casa con dos gatos que siempre tienen una opinión para todo. Creo que la terapia puede ser un lugar serio sin ser un lugar tenso — y la persona que soy afuera es la misma que te va a recibir adentro.
                 </p>
               </div>
             </div>
@@ -77,63 +77,50 @@ export default function SobreMiPage() {
         </div>
       </section>
 
-      {/* Por qué hago esto */}
+      {/* Cómo trabajo — fusión de "Por qué hago esto" + "En consulta" */}
       <section className="py-20 lg:py-28 bg-primary-dark border-t border-white/5">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
-            <div>
-              <p className="text-3xl font-light text-white/50 mb-6">Por qué hago esto</p>
-              <p className="text-xl text-white/65 leading-relaxed mb-5">
-                Decidí dedicarme a la consulta privada porque me interesa el trabajo profundo con personas — no los protocolos, no las cajas de diagnóstico. Me interesa la persona que hay detrás de lo que la trae a consulta.
-              </p>
-              <p className="text-xl text-white/65 leading-relaxed">
-                Creo que cada proceso terapéutico es único, y que mi trabajo es escucharte antes de proponer cualquier camino.
-              </p>
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-12 items-start mb-16">
             <div>
               <p className="text-3xl font-light text-white/50 mb-6">Cómo trabajo</p>
-              <p className="text-xl text-white/65 leading-relaxed mb-5">
-                Mi enfoque es cognitivo-conductual: un marco basado en evidencia que conecta pensamientos, emociones y conductas para producir cambios reales. No es terapia de por vida — es un proceso con dirección y con fin.
+              <p className="text-xl text-white/70 leading-relaxed mb-5">
+                Mi enfoque es cognitivo-conductual porque tiene décadas de evidencia, pero la evidencia es el mapa, no el destino: lo que importa es que vos te sientas visto, entendido y con herramientas que de verdad te sirvan.
               </p>
-              <p className="text-xl text-white/65 leading-relaxed">
-                Lo que aprendés en el proceso se queda con vos. Esa es la idea.
+              <p className="text-xl text-white/70 leading-relaxed">
+                No es terapia de por vida. Es un proceso con dirección, objetivos claros y un fin — y lo que aprendés se queda con vos. La autonomía es la meta, no la dependencia.
               </p>
             </div>
+            {/* Placeholder foto informal — reemplazá src cuando tengas el archivo en public/ */}
+            {/* <div className="w-full lg:w-72 aspect-[3/4] rounded-2xl overflow-hidden bg-white/10 flex items-center justify-center border border-white/10">
+              <p className="text-white/30 text-sm italic text-center px-4">Foto próximamente</p>
+            </div> */}
           </div>
-        </div>
-      </section>
 
-      {/* Cómo soy en consulta */}
-      <section className="py-20 lg:py-28 bg-section-alt border-t border-foreground/6">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-3xl font-light text-foreground/60 mb-14">En consulta</p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10 lg:gap-12 border-t border-white/10 pt-14">
             {[
               {
                 title: "Lo que traés importa",
-                body: "No estoy leyendo un protocolo mientras te escucho. Cada sesión parte de lo que traés ese día — de cómo vas, de lo que apareció y de como estás evolucionado. Eso es lo que guía.",
+                body: "No leo un protocolo mientras te escucho. Cada sesión parte de lo que traés ese día — de cómo vas y de lo que apareció. Eso es lo que guía.",
               },
               {
                 title: "Con objetivos claros",
-                body: "Desde la primera sesión definimos juntos para qué estamos ahí. El proceso tiene dirección — no es hablar por hablar esperando que algo mejore solo. Avanzamos con herramientas concretas, respaldadas por evidencia.",
+                body: "Desde la primera sesión definimos para qué estamos ahí. No es hablar por hablar esperando que algo mejore solo: avanzamos con herramientas concretas y respaldadas por evidencia.",
               },
               {
                 title: "A tu ritmo",
-                body: "No hay un número fijo de sesiones. Hay procesos cortos y enfocados, y otros que van descubriendo capas nuevas. Los dos son válidos. El proceso dura lo que necesita durar — ni más ni menos.",
+                body: "No hay un número fijo de sesiones. Hay procesos cortos y enfocados, y otros que descubren capas nuevas. Los dos son válidos. Dura lo que necesita durar.",
               },
             ].map((item) => (
               <div key={item.title}>
-                <h3 className="text-xl font-semibold text-foreground mb-3">
-                  {item.title}
-                </h3>
-                <p className="text-lg text-foreground/60 leading-relaxed">{item.body}</p>
+                <h3 className="text-xl font-semibold text-white mb-3">{item.title}</h3>
+                <p className="text-lg text-white/60 leading-relaxed">{item.body}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Espacio seguro para lo no normativo */}
+      {/* Mi plus */}
       <section className="py-20 lg:py-28 bg-background border-t border-foreground/6">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-3xl font-light text-foreground/60 mb-8">Mi plus</p>
@@ -145,13 +132,13 @@ export default function SobreMiPage() {
             </div>
             <div className="space-y-5">
               <p className="text-xl text-foreground/65 leading-relaxed">
-                Hay experiencias que no siempre encuentran un lugar en la terapia tradicional — no porque no sean válidas, sino porque muchos espacios no están preparados para recibirlas sin sorpresa ni moralización. Acá sí. Y eso cambia todo lo que viene después.
+                Casi toda terapia promete ser "libre de juicio". Pero hay temas que aun así siguen sintiéndose tabú del otro lado del sillón, y se nota: tenés que explicar y cuidar cómo lo decís para que no te miren distinto. Acá no. Para mí, tu forma de vivir no es un tema por resolver — es simplemente parte de cómo somos las personas.
               </p>
               <p className="text-xl text-foreground/65 leading-relaxed">
-                Si sos parte de la comunidad LGBTQ+, si tenés una estructura relacional no monógama, si estás atravesando un proceso de deconstrucción religiosa o de identidad, si tu vida simplemente no encaja en el molde normativo que la sociedad da por sentado — acá no vas a tener que justificar eso primero. Yo entiendo tu contexto. Podemos ir directo a lo que te trajo.
+                Si sos parte de la comunidad LGBTQ+, tenés una estructura relacional no monógama, estás en un proceso de deconstrucción religiosa o de identidad, o tu vida no encaja en lo normativo — no tenés que justificarlo primero. Entiendo el contexto sin que me lo dibujes, y vamos directo a lo que te trajo.
               </p>
               <p className="text-xl text-foreground/65 leading-relaxed">
-                Eso no significa que no sea una psicóloga para vos si no pertenecés a ninguna de esas categorías. Significa que si pertenecés, acá tenés un lugar seguro donde eso es normal, no un tema a resolver.
+                Y si no te reconocés en nada de esto, también soy tu psicóloga. Acá tu forma de vivir es el punto de partida, no el problema a tratar.
               </p>
             </div>
           </div>

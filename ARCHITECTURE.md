@@ -48,10 +48,10 @@ src/
 │   │       └── layout.tsx      # Metadata dinámica por quiz + generateStaticParams
 │   │
 │   ├── sobre-mi/
-│   │   └── page.tsx            # Página bio completa: hero, intro personal, en consulta, mi plus, por qué/cómo, CTA
+│   │   └── page.tsx            # Página bio: hero ("La persona detrás del proceso."), intro personal con voz propia (gatos/arte/ejercicio), cómo trabajo (fusión de "por qué + en consulta"), mi plus (no-juicio desde convicción), CTA
 │   │
 │   ├── terapia/
-│   │   └── page.tsx            # Psicología clínica: H1 "Terapia Psicológica en Costa Rica", enfoque TCC (TccDiagram interactivo), tipos de terapia (cards) con precios, proceso terapéutico (4 pasos), CTA
+│   │   └── page.tsx            # Psicología clínica: H1 "Terapia psicológica" + subhead, enfoque TCC (TccDiagram interactivo, 3 párrafos), tipos de terapia (cards, label "Ideal si:"), proceso terapéutico colapsable (4 pasos), CTA
 │   │
 │   ├── empresas/
 │   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta + slideshow fotos + stats, lista talleres, CTA con video autoplay
@@ -106,8 +106,8 @@ src/
 │
 ├── components/
 │   ├── Navbar.tsx              # Navegación fija: links directos + dropdown "Servicios" (Terapia, Empresas) + dropdown "Recursos" → Tests, Herramientas, Descargas, Biblioteca, Líneas de Apoyo
-│   ├── HeroSection.tsx         # Banner principal con CTA
-│   ├── AboutSection.tsx        # Bio de la profesional + botón "Conocé más sobre mí" → /sobre-mi
+│   ├── HeroSection.tsx         # Banner principal: H1 "Un lugar donde / podés decirlo todo" + subtexto diferenciador, CTA
+│   ├── AboutSection.tsx        # Bio de la profesional: copy con diferenciador vivencial + credencial "Espacio afirmativo", botón "Conocé más sobre mí" → /sobre-mi
 │   ├── ParallaxServices.tsx    # Cards de áreas de atención (individual, pareja, familiar) con parallax
 │   ├── HowItWorksSection.tsx   # 3 pasos del proceso de agendamiento + enlace "Ver el proceso completo →" en paso 3 → /servicios#proceso
 │   ├── QuizCTA.tsx             # CTA hacia los tests de bienestar
@@ -115,18 +115,18 @@ src/
 │   ├── FAQSection.tsx          # Preguntas frecuentes (acordeón)
 │   ├── ContactSection.tsx      # Formulario de contacto → /api/contact
 │   ├── TransformSection.tsx    # Modalidades de atención (tabs) + enlace "Ver más →" esquina inferior derecha → /servicios#tipos-de-terapia
-│   ├── ProcesoSteps.tsx        # 4 pasos TCC con animaciones Framer Motion — usado en /servicios
+│   ├── ProcesoSteps.tsx        # 4 pasos TCC con contenido colapsable ("¿Qué incluye?") y móvil sin ícono lateral — usado en /terapia
 │   ├── Footer.tsx              # Pie de página: enlaces en 2 columnas (sobre-mi, psicología, empresas, proceso, contacto, agendar) + datos de contacto
 │   ├── WhatsAppButton.tsx      # Botón flotante de WhatsApp (fijo bottom-right)
 │   ├── TrackingWhatsAppLink.tsx # <a> client component con onClick que dispara PostHog + (opcionalmente) GA4 contact + conversión AW. Props: eventName (default: "whatsapp_clicked"), trackAds (default: true — poner false para páginas sin campaña activa, ej. empresas)
 │   ├── Chatbot.tsx             # Chatbot por keywords (desactivado, listo para reactivar)
 │   ├── NeuronBackground.tsx    # Animación Three.js de neuronas interactivas
 │   ├── AnimateOnScroll.tsx     # Wrapper Framer Motion para animaciones on-scroll
-│   ├── ScrollRevealText.tsx    # Texto que se revela al hacer scroll — fondo primary-dark, CTA "Dar el primer paso" → /terapia
+│   ├── ScrollRevealText.tsx    # Texto que se revela al hacer scroll — frase "Acá no tenés que traducir tu vida para que te entiendan. Solo contarla.", fondo primary-dark, CTA "Dar el primer paso" → /terapia
 │   ├── ResourcesTeaser.tsx     # Grid 4 cards sobre fondo primary-dark: tests, herramientas, biblioteca, líneas de apoyo — antes del FAQ
 │   ├── TallerSlideshow.tsx     # Slideshow automático (3.5s, fade) de fotos de talleres — usado en /empresas
 │   ├── TalleresCards.tsx       # Grid filtrable de talleres con chips por categoría (Framer Motion) — usado en /empresas
-│   ├── TccDiagram.tsx          # Diagrama circular interactivo del ciclo TCC (3 sectores clickeables + cuadro descripción) — usado en /servicios
+│   ├── TccDiagram.tsx          # Diagrama circular interactivo del ciclo TCC (3 sectores clickeables); la definición del sector aparece en un popup flotante (FloatingPopover: createPortal + Framer Motion), centro con borde pulsante que invita a "Tocá un sector"; texto a 3 párrafos — usado en /terapia
 │   ├── ScrollToTop.tsx         # Client component: escucha cambios de pathname y ejecuta window.scrollTo(0,0) — corrige que en móvil la página nueva aparezca desde la posición previa
 │   ├── SiteShell.tsx           # Client component: envuelve Navbar + Footer + WhatsAppButton; los oculta en rutas /admin
 │   └── JsonLd.tsx              # Schema.org: LocalBusiness + WebSite + SearchAction (apunta a /quiz)

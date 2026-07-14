@@ -3,6 +3,7 @@ import Link from "next/link";
 import { config, formatPrice, getWhatsAppLink } from "@/lib/config";
 import ProcesoSteps from "@/components/ProcesoSteps";
 import TccDiagram from "@/components/TccDiagram";
+
 import TrackingWhatsAppLink from "@/components/TrackingWhatsAppLink";
 
 export const metadata: Metadata = {
@@ -15,30 +16,30 @@ const servicios = [
     id: "individual",
     title: "Terapia individual",
     description:
-      "Un espacio confidencial para trabajar en tus pensamientos, emociones y comportamientos. A través del enfoque cognitivo-conductual, identificamos patrones que te limitan y construimos estrategias concretas para el cambio.",
+      "Un espacio confidencial para trabajar tus pensamientos, emociones y conductas. Identificamos los patrones que te frenan y construimos herramientas concretas para el cambio — no solo entender el problema, sino saber manejarlo.",
     price: config.prices.individual,
     duration: config.duration.individual,
-    ideal: "Ansiedad, depresión, autoestima, duelo, orientación sexual e identidad de género, transiciones vitales.",
+    ideal: "ansiedad, depresión, autoestima, duelo, cambios de vida, orientación sexual e identidad de género.",
     bar: "bg-primary",
   },
   {
     id: "pareja",
     title: "Terapia de pareja",
     description:
-      "Proceso estructurado para parejas que quieren mejorar su comunicación, resolver conflictos recurrentes o atravesar una crisis juntos. El objetivo es construir un vínculo más honesto y funcional.",
+      "Un proceso estructurado para mejorar la comunicación, salir de los conflictos que se repiten o atravesar una crisis sin que se rompa lo que construyeron. No es solo hablar — es construir un vínculo más honesto.",
     price: config.prices.pareja,
     duration: config.duration.pareja,
-    ideal: "Crisis de comunicación, infidelidad, diferencias de valores, convivencia, diversidad afectivo-sexual.",
+    ideal: "comunicación, infidelidad, diferencias de valores, convivencia. Cualquier tipo de pareja — diversidad afectivo-sexual bienvenida.",
     bar: "bg-accent",
   },
   {
     id: "familiar",
     title: "Terapia familiar",
     description:
-      "Espacio para trabajar dinámicas del sistema familiar: roles, límites, comunicación y conflictos intergeneracionales. Participan los miembros relevantes para el proceso terapéutico.",
+      "Un espacio para las dinámicas del sistema familiar: roles que ya no funcionan, límites que nunca se pusieron, conflictos que se repiten entre generaciones. Participan los miembros que son parte del proceso.",
     price: config.prices.familiar,
     duration: config.duration.familiar,
-    ideal: "Conflictos familiares, crianza, adolescentes en crisis, diversidad en el núcleo familiar.",
+    ideal: "conflictos familiares, crianza, adolescentes en crisis, familias diversas.",
     bar: "bg-primary-dark",
   },
 ];
@@ -55,9 +56,12 @@ export default function ServiciosPage() {
             Consulta psicológica
           </p>
           <h1 className="font-[family-name:var(--font-playfair)] text-6xl sm:text-7xl font-bold text-white flex items-center gap-5">
-            Terapia Psicológica en Costa Rica
+            Terapia psicológica
             <span className="flex-1 h-px bg-white/15 hidden sm:block max-w-[240px]" />
           </h1>
+          <p className="mt-5 text-white/65 text-lg max-w-xl leading-relaxed">
+            Un proceso con dirección, preparado para lo que de verdad te trajo hasta acá.
+          </p>
         </div>
       </section>
 
@@ -97,7 +101,7 @@ export default function ServiciosPage() {
                     {s.description}
                   </p>
                   <p className="text-xs text-foreground/50 leading-relaxed mb-6">
-                    <span className="font-semibold text-foreground/70">Indicado para: </span>
+                    <span className="font-semibold text-foreground/70">Ideal si: </span>
                     {s.ideal}
                   </p>
                   <Link
