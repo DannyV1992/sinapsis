@@ -48,10 +48,10 @@ src/
 │   │       └── layout.tsx      # Metadata dinámica por quiz + generateStaticParams
 │   │
 │   ├── sobre-mi/
-│   │   └── page.tsx            # Página bio: hero ("La persona detrás del proceso."), intro personal con voz propia (gatos/arte/ejercicio), cómo trabajo (fusión de "por qué + en consulta"), mi plus (no-juicio desde convicción), CTA
+│   │   └── page.tsx            # Página bio: hero ("La persona detrás del proceso."), intro personal con voz propia (gatos/arte/ejercicio), mi plus (no-juicio desde convicción, bg-primary-dark, chips de diversidad), cómo trabajo (fusión de "por qué + en consulta", bg-background), CTA
 │   │
 │   ├── terapia/
-│   │   └── page.tsx            # Psicología clínica: H1 "Terapia psicológica" + subhead, enfoque TCC (TccDiagram interactivo, 3 párrafos), tipos de terapia (cards, label "Ideal si:"), proceso terapéutico colapsable (4 pasos), CTA
+│   │   └── page.tsx            # Psicología clínica: H1 "Terapia psicológica" + subhead, enfoque TCC (TccDiagram interactivo, 3 párrafos text-base), proceso terapéutico colapsable (4 pasos, bg-section-alt), tipos de terapia (cards sin botón agendar, label "Ideal si:", bg-background), CTA
 │   │
 │   ├── empresas/
 │   │   └── page.tsx            # Talleres y bienestar organizacional: propuesta + slideshow fotos + stats, lista talleres, CTA con video autoplay
