@@ -274,8 +274,8 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 - Resend en vez de Nodemailer/SMTP (mejor entregabilidad, dashboard de tracking)
 - Cron diario (no horario) por restricción del plan Hobby de Vercel
 - PostHog en vez de Clarity (analytics + session replay en una herramienta, cookieless para sitio de salud mental)
-- GA4 en paralelo: necesario para Google Ads cuando se activen campañas
-- GA4 Measurement ID hardcodeado (es público, simplifica deploy)
+- GA4 en paralelo a PostHog: analítica del sitio. Independiente de Google Ads — las conversiones de Ads se disparan directo a la etiqueta `AW-18306929852` (`send_to: "AW-..."`), no dependen de GA4 ni de vincular ambas cuentas
+- GA4 Measurement ID (`G-YMZ7VT90T3`) centralizado en la constante `GA_MEASUREMENT_ID` de `src/lib/gtag.ts` y consumido por `layout.tsx` (loader `src` + `config`). Es público, simplifica deploy; para cambiarlo se edita solo esa constante. Verificar salud de un ID: `gtag/js?id=…` debe dar HTTP 200 (un 404 significa que su cuenta/propiedad en GA4 está eliminada o en papelera)
 - Tracking excluido por dominio/ruta (PostHog + GA4 + Google Ads): no se inicializa en `localhost`, `127.0.0.1`, cualquier subdominio `*.vercel.app`, ni en rutas `/admin/*`. Lógica en `posthog-provider.tsx` (condición sobre `window.location`) y en el script inline de `layout.tsx`.
 - GA4 cargado con dos `<Script strategy="afterInteractive">` en `<body>` (no en `<head>`): uno con `src` del loader `gtag/js` y otro con la inicialización inline que asigna `window.gtag` antes de llamar `config`. Colocar `<Script>` dentro de `<head>` en Next.js hace que se ignore silenciosamente.
 - Paleta palo rosa + verde salvia: `--primary` palo rosa `#c4908f`, `--primary-dark` ciruela suave `#4a3040`, `--accent` verde salvia `#8aaa96`, fondo marfil cálido `#f7f4f2` — colores de neuronas hardcodeados en `NeuronBackground.tsx` en tonos palo rosa con vesículas en verde salvia (no leen CSS vars)

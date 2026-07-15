@@ -172,8 +172,9 @@ Para indexar una página nueva rápidamente: Inspección de URLs → pegar la UR
 
 ## Paso 11: Google Analytics 4 (para Google Ads)
 
-GA4 ya está integrado con el Measurement ID `G-1F00E5F123` directamente en el layout.
-No requiere variables de entorno.
+GA4 ya está integrado con el Measurement ID `G-YMZ7VT90T3` (definido en `src/lib/gtag.ts` como `GA_MEASUREMENT_ID` y consumido por el layout). No requiere variables de entorno. Para cambiar el ID, editar únicamente la constante en `gtag.ts`.
+
+> Nota: el ID anterior `G-1F00E5F123` quedó inservible (Google devolvía 404 en `gtag/js`) porque su cuenta contenedora en GA4 fue enviada a la papelera. Se reemplazó por `G-YMZ7VT90T3` en una cuenta nueva bajo `info@sinapsiscr.com`. Verificar la salud de un Measurement ID con: `curl -o /dev/null -w "%{http_code}" "https://www.googletagmanager.com/gtag/js?id=EL_ID"` → debe dar 200.
 
 Eventos de conversión configurados en el código:
 - `purchase` — se dispara al agendar una cita (value en CRC según servicio)
@@ -185,9 +186,7 @@ Para activar las conversiones en GA4:
 1. GA4 → Admin → Events → esperar a que lleguen los primeros eventos
 2. Marcar `purchase`, `generate_lead`, `contact` con el toggle "Mark as conversion"
 
-Para vincular con Google Ads:
-1. GA4 → Admin → Google Ads linking → vincular cuenta de Ads
-2. En Google Ads → Herramientas → Conversiones → importar desde GA4
+Las conversiones de Google Ads se miden **directamente** con la etiqueta `AW-18306929852` (llamadas `gtag("event", "conversion", { send_to: "AW-..." })` en agendar/WhatsApp/contacto), independiente de GA4. **No es necesario vincular GA4 con Google Ads** ni importar conversiones desde GA4: son sistemas separados y el `AW-` no depende de la propiedad GA4.
 
 Dashboard: https://analytics.google.com
 

@@ -7,6 +7,7 @@ import SiteShell from "@/components/SiteShell";
 import { LocalBusinessJsonLd, WebSiteJsonLd } from "@/components/JsonLd";
 import { PostHogProvider } from "./posthog-provider";
 import ScrollToTop from "@/components/ScrollToTop";
+import { GA_MEASUREMENT_ID } from "@/lib/gtag";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -118,7 +119,7 @@ export default function RootLayout({
         <Script
           id="google-analytics-loader"
           strategy="afterInteractive"
-          src="https://www.googletagmanager.com/gtag/js?id=G-1F00E5F123"
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
         />
         <Script id="google-analytics" strategy="afterInteractive">
           {`
@@ -128,7 +129,7 @@ export default function RootLayout({
               window.dataLayer = window.dataLayer || [];
               window.gtag = function gtag(){ window.dataLayer.push(arguments); };
               window.gtag('js', new Date());
-              window.gtag('config', 'G-1F00E5F123');
+              window.gtag('config', '${GA_MEASUREMENT_ID}');
               window.gtag('config', 'AW-18306929852');
             }
           `}
