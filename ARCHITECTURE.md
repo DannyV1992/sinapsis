@@ -48,7 +48,7 @@ src/
 │   │       └── layout.tsx      # Metadata dinámica por quiz + generateStaticParams
 │   │
 │   ├── sobre-mi/
-│   │   ├── page.tsx            # Página bio: hero ("La persona detrás del proceso."), intro personal con voz propia (gatos/arte/ejercicio), mi plus (no-juicio desde convicción, bg-primary-dark, chips de diversidad clickeables), cómo trabajo (fusión de "por qué + en consulta", bg-background), CTA
+│   │   ├── page.tsx            # Página bio: hero ("La persona detrás del proceso."), intro personal con foto Cinthya_2.jpeg (sticky, aspect-[3/4]), voz propia (gatos/arte/ejercicio), mi plus (no-juicio desde convicción, bg-primary-dark, chips de diversidad clickeables), cómo trabajo (fusión de "por qué + en consulta", bg-background), CTA
 │   │   └── MiPlusCards.tsx     # Client component: 4 botones (LGBTQ+, relaciones no monógamas, deconstrucción religiosa, identidades no normativas) que abren modal con texto informativo por tema; modal se cierra con X o click fuera
 │   │
 │   ├── terapia/
@@ -108,7 +108,7 @@ src/
 ├── components/
 │   ├── Navbar.tsx              # Navegación fija: links directos + dropdown "Servicios" (Terapia, Empresas) + dropdown "Recursos" → Tests, Herramientas, Descargas, Biblioteca, Líneas de Apoyo
 │   ├── HeroSection.tsx         # Banner principal: H1 "Un lugar donde / podés decirlo todo" + subtexto diferenciador, CTA
-│   ├── AboutSection.tsx        # Bio de la profesional: copy con diferenciador vivencial + credencial "Espacio afirmativo", botón "Conocé más sobre mí" → /sobre-mi
+│   ├── AboutSection.tsx        # Bio de la profesional: foto Cinthya_1.jpeg (max-w-sm, object-contain, sin aspect fijo, adornos posicionados al contenedor), copy con diferenciador vivencial + credencial "Espacio afirmativo", grid items-start (foto alineada al tope del texto), botón "Conocé más sobre mí" → /sobre-mi
 │   ├── ParallaxServices.tsx    # Cards de áreas de atención (individual, pareja, familiar) con parallax
 │   ├── HowItWorksSection.tsx   # 3 pasos del proceso de agendamiento + enlace "Ver el proceso completo →" en paso 3 → /servicios#proceso
 │   ├── QuizCTA.tsx             # CTA hacia los tests de bienestar
@@ -277,6 +277,7 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 - GA4 en paralelo a PostHog: analítica del sitio. Independiente de Google Ads — las conversiones de Ads se disparan directo a la etiqueta `AW-18306929852` (`send_to: "AW-..."`), no dependen de GA4 ni de vincular ambas cuentas
 - GA4 Measurement ID (`G-YMZ7VT90T3`) centralizado en la constante `GA_MEASUREMENT_ID` de `src/lib/gtag.ts` y consumido por `layout.tsx` (loader `src` + `config`). Es público, simplifica deploy; para cambiarlo se edita solo esa constante. Verificar salud de un ID: `gtag/js?id=…` debe dar HTTP 200 (un 404 significa que su cuenta/propiedad en GA4 está eliminada o en papelera)
 - Tracking excluido por dominio/ruta (PostHog + GA4 + Google Ads): no se inicializa en `localhost`, `127.0.0.1`, cualquier subdominio `*.vercel.app`, ni en rutas `/admin/*`. Lógica en `posthog-provider.tsx` (condición sobre `window.location`) y en el script inline de `layout.tsx`.
+- IP del desarrollador excluida en GA4 como tráfico interno: `190.113.115.88` (IP dinámica — verificar y actualizar en GA4 → Admin → Flujos de datos → Configurar parámetros de etiqueta → Definir tráfico interno si cambia).
 - GA4 cargado con dos `<Script strategy="afterInteractive">` en `<body>` (no en `<head>`): uno con `src` del loader `gtag/js` y otro con la inicialización inline que asigna `window.gtag` antes de llamar `config`. Colocar `<Script>` dentro de `<head>` en Next.js hace que se ignore silenciosamente.
 - Paleta palo rosa + verde salvia: `--primary` palo rosa `#c4908f`, `--primary-dark` ciruela suave `#4a3040`, `--accent` verde salvia `#8aaa96`, fondo marfil cálido `#f7f4f2` — colores de neuronas hardcodeados en `NeuronBackground.tsx` en tonos palo rosa con vesículas en verde salvia (no leen CSS vars)
 - Secciones CTA (`/servicios`, `/empresas`) y contacto (`ContactSection.tsx`) usan `bg-accent/20 border-accent/15` para diferenciarse del fondo marfil sin ser pesadas

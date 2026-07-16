@@ -8,16 +8,16 @@ export default function AboutSection() {
   return (
     <section id="sobre-mi" className="py-24 border-t border-gray-100">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <AnimateOnScroll>
-            <div className="relative">
-              <div className="w-full aspect-[4/5] rounded-2xl overflow-hidden">
+            <div className="relative max-w-sm mx-auto">
+              <div className="w-full rounded-2xl overflow-hidden">
                 <Image
-                  src="/cinthya.jpg"
+                  src="/Cinthya_1.jpeg"
                   alt="Licda. Cinthya Chávez — Psicóloga clínica"
                   width={800}
                   height={1000}
-                  className="w-full h-full object-cover object-bottom scale-110 origin-bottom"
+                  className="w-full h-auto"
                   priority
                 />
               </div>

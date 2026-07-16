@@ -35,7 +35,7 @@ export default function SobreMiPage() {
             <div className="lg:sticky lg:top-24">
               <div className="aspect-[3/4] rounded-2xl overflow-hidden">
                 <Image
-                  src="/cinthya.jpg"
+                  src="/Cinthya_2.jpeg"
                   alt="Cinthya Chávez"
                   width={400}
                   height={530}
