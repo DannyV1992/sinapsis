@@ -51,7 +51,14 @@ export default function AgendarPage() {
   const today = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
-    if (!formData.date || !formData.service || !formData.modality) return;
+    if (!formData.date || !formData.service || !formData.modality) {
+      setAvailableSlots([]);
+      setNoSlots(false);
+      setNextAvailable("");
+      setNextAvailableOther("");
+      setFormData((prev) => ({ ...prev, slot: null }));
+      return;
+    }
 
     setLoadingSlots(true);
     setNoSlots(false);
@@ -713,11 +720,18 @@ export default function AgendarPage() {
                     </div>
 
                     {/* Available time slots */}
+                    <div>
+                      <label className="block text-sm font-medium text-foreground/70 mb-2">
+                        {!formData.service && !formData.date
+                          ? "Seleccioná el servicio y la fecha para ver los horarios disponibles."
+                          : !formData.service
+                          ? "Seleccioná el servicio para ver los horarios disponibles."
+                          : !formData.date
+                          ? "Seleccioná una fecha para ver los horarios disponibles."
+                          : "Horarios disponibles"}
+                      </label>
                     {formData.date && (
                       <div>
-                        <label className="block text-sm font-medium text-foreground/70 mb-2">
-                          Horarios disponibles
-                        </label>
 
                         {loadingSlots && (
                           <div className="flex items-center gap-2 py-4 text-foreground/50">
@@ -823,6 +837,7 @@ export default function AgendarPage() {
                         )}
                       </div>
                     )}
+                    </div>
                   </>
                 )}
 

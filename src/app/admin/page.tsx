@@ -639,30 +639,40 @@ function NuevaCitaForm() {
               onChange={(e) => setForm({ ...form, date: e.target.value })}
             />
           </div>
-          {form.date && form.service && (
-            <div>
-              <label className="block text-sm font-medium text-foreground/70 mb-2">Horarios disponibles</label>
-              {loadingSlots && <p className="text-sm text-foreground/40">Consultando disponibilidad...</p>}
-              {!loadingSlots && availableSlots.length === 0 && (
-                <p className="text-sm text-amber-600">No hay slots disponibles para esta fecha.</p>
-              )}
-              {availableSlots.length > 0 && (
-                <div className="grid grid-cols-3 gap-2">
-                  {availableSlots.map((slot) => (
-                    <button
-                      key={slot.start} type="button"
-                      onClick={() => setSelectedSlot(slot)}
-                      className={`px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${
-                        selectedSlot?.start === slot.start ? "bg-primary text-white border-primary" : "border-gray-200 text-foreground/70 hover:border-primary"
-                      }`}
-                    >
-                      {new Date(slot.start).toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit", hour12: true })}
-                    </button>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+          <div>
+            <label className="block text-sm font-medium text-foreground/70 mb-2">
+              {!form.service && !form.date
+                ? "Seleccioná el servicio y la fecha para ver los horarios disponibles."
+                : !form.service
+                ? "Seleccioná el servicio para ver los horarios disponibles."
+                : !form.date
+                ? "Seleccioná una fecha para ver los horarios disponibles."
+                : "Horarios disponibles"}
+            </label>
+            {form.date && form.service && (
+              <>
+                {loadingSlots && <p className="text-sm text-foreground/40">Consultando disponibilidad...</p>}
+                {!loadingSlots && availableSlots.length === 0 && (
+                  <p className="text-sm text-amber-600">No hay slots disponibles para esta fecha.</p>
+                )}
+                {availableSlots.length > 0 && (
+                  <div className="grid grid-cols-3 gap-2">
+                    {availableSlots.map((slot) => (
+                      <button
+                        key={slot.start} type="button"
+                        onClick={() => setSelectedSlot(slot)}
+                        className={`px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${
+                          selectedSlot?.start === slot.start ? "bg-primary text-white border-primary" : "border-gray-200 text-foreground/70 hover:border-primary"
+                        }`}
+                      >
+                        {new Date(slot.start).toLocaleTimeString("es-CR", { hour: "2-digit", minute: "2-digit", hour12: true })}
+                      </button>
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </>
       )}
 

@@ -33,7 +33,7 @@ src/
 │   │       └── page.tsx        # Login admin con contraseña (cookie httpOnly 8h)
 │   │
 │   ├── agendar/
-│   │   ├── page.tsx            # Wizard multi-step: servicio → modalidad (virtual default) → fecha → slot → datos → confirmación. Muestra precio en paso 2 al seleccionar servicio. Pantalla de éxito incluye link a WhatsApp para cancelar/reprogramar. Presencial: flujo de solicitud (ubicación + fecha + hora preferida → Sheet + correos); pantalla de éxito presencial muestra ubicación como texto simple (sin links de mapa)
+│   │   ├── page.tsx            # Wizard multi-step: servicio → modalidad (virtual default) → fecha → slot → datos → confirmación. Muestra precio en paso 2 al seleccionar servicio. Pantalla de éxito incluye link a WhatsApp para cancelar/reprogramar. Presencial: flujo de solicitud (ubicación + fecha + hora preferida → Sheet + correos); pantalla de éxito presencial muestra ubicación como texto simple (sin links de mapa). Label "Horarios disponibles" alterna con mensaje guía según campos faltantes (servicio y/o fecha); al limpiar un campo los slots desaparecen inmediatamente
 │   │   └── layout.tsx          # Metadata de la página de agendamiento
 │   │
 │   ├── quiz/
