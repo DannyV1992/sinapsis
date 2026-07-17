@@ -44,8 +44,8 @@ export const config = {
   // Ubicaciones presenciales (coworking)
   presencialLocations: PRESENCIAL_LOCATIONS,
   presencialLocationLinks: {
-    "La Aurora, Heredia": { active: true, maps: { waze: "https://waze.com/ul/hd1u0v4mx7", google: "https://maps.app.goo.gl/zP7oKKJ6xYedYkvY7?g_st=ic" } },
-    "Santa Ana":          { active: true, maps: { waze: "https://waze.com/ul/hd1u0s22zy", google: "https://maps.app.goo.gl/jaCurT1npFzUJkmY6?g_st=ic" } },
+    "La Aurora, Heredia": { active: true, maps: { waze: "https://ul.waze.com/ul?ll=9.98943419,-84.14825678", google: "https://maps.app.goo.gl/H32i3h3FBtdn7qQ58" } },
+    "Santa Ana":          { active: true, maps: { waze: "https://ul.waze.com/ul?ll=9.93429517,-84.18743849", google: "https://maps.app.goo.gl/BJWbANmFF1JvkE138" } },
   } satisfies LocationLinks,
 
   // Métodos de pago
