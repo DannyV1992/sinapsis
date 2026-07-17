@@ -43,9 +43,20 @@ export default function Footer() {
                 </a>
               </li>
               <li>
-                <Link href="/#contacto" className="hover:text-white transition-colors">
+                <button
+                  className="hover:text-white transition-colors"
+                  onClick={() => {
+                    const el = document.getElementById("name");
+                    if (el) {
+                      el.scrollIntoView({ behavior: "smooth", block: "center" });
+                      el.focus();
+                    } else {
+                      window.location.href = "/#contacto";
+                    }
+                  }}
+                >
                   {config.email}
-                </Link>
+                </button>
               </li>
             </ul>
           </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePostHog } from "posthog-js/react";
 import { gtagEvent } from "@/lib/gtag";
 import { config, getWhatsAppLink } from "@/lib/config";
@@ -15,6 +15,19 @@ export default function ContactSection() {
   });
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
+  const [showMapOptions, setShowMapOptions] = useState(false);
+  const mapRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!showMapOptions) return;
+    const handler = (e: MouseEvent) => {
+      if (mapRef.current && !mapRef.current.contains(e.target as Node)) {
+        setShowMapOptions(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [showMapOptions]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,10 +88,17 @@ export default function ContactSection() {
                 </div>
                 <span className="text-foreground/70 group-hover:text-pink-600 transition-colors">{config.instagramHandle}</span>
               </a>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+              <button
+                className="flex items-center gap-4 group text-left"
+                onClick={() => {
+                  const el = document.getElementById("name");
+                  el?.scrollIntoView({ behavior: "smooth", block: "center" });
+                  el?.focus();
+                }}
+              >
+                <div className="w-10 h-10 bg-violet-50 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-violet-100 transition-colors">
                   <svg
-                    className="w-5 h-5 text-primary"
+                    className="w-5 h-5 text-violet-500"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -91,12 +111,12 @@ export default function ContactSection() {
                     />
                   </svg>
                 </div>
-                <span className="text-foreground/70">{config.email}</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <span className="text-foreground/70 group-hover:text-violet-500 transition-colors">{config.email}</span>
+              </button>
+              <div className="flex items-center gap-4 relative">
+                <div className="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center flex-shrink-0">
                   <svg
-                    className="w-5 h-5 text-primary"
+                    className="w-5 h-5 text-sky-400"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -115,7 +135,51 @@ export default function ContactSection() {
                     />
                   </svg>
                 </div>
-                <span className="text-foreground/70">{config.location}</span>
+                <div className="relative" ref={mapRef}>
+                  <button
+                    onClick={() => setShowMapOptions((v) => !v)}
+                    className="text-foreground/70 hover:text-sky-400 transition-colors text-left"
+                  >
+                    {config.location}
+                  </button>
+                  {showMapOptions && (
+                    <div className="absolute left-0 bottom-full mb-2 bg-white border border-gray-200 rounded-xl shadow-lg z-10 overflow-hidden min-w-[180px]">
+                      <a
+                        href="https://waze.com/ul/hd1u0v4mx7"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setShowMapOptions(false)}
+                        className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors text-sm text-foreground/80"
+                      >
+                        {/* Waze logo */}
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M20.54 8.29C20.18 4.6 17.04 1.75 13.23 1.75c-2.07 0-3.95.8-5.34 2.1C7.12 3.3 6.27 3.1 5.38 3.1 3 3.1 1.07 5.03 1.07 7.41c0 .58.12 1.13.32 1.64C1.15 9.6 1 10.2 1 10.83c0 3.08 2.38 5.6 5.4 5.84v.02c.05 2.1 1.78 3.79 3.9 3.79.9 0 1.72-.3 2.38-.8.52.18 1.07.28 1.65.28 2.76 0 5-2.24 5-5 0-.28-.02-.55-.07-.82.96-.92 1.56-2.2 1.56-3.63 0-.68-.13-1.33-.38-1.92l-.9.7z" fill="#33CCFF"/>
+                          <circle cx="9.5" cy="10" r="1" fill="#1a1a1a"/>
+                          <circle cx="14.5" cy="10" r="1" fill="#1a1a1a"/>
+                          <path d="M10.5 13c.5.6 2.5.6 3 0" stroke="#1a1a1a" strokeWidth="1" strokeLinecap="round"/>
+                        </svg>
+                        Abrir en Waze
+                      </a>
+                      <a
+                        href="https://maps.app.goo.gl/zP7oKKJ6xYedYkvY7?g_st=ic"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={() => setShowMapOptions(false)}
+                        className="flex items-center gap-2 px-4 py-3 hover:bg-gray-50 transition-colors text-sm text-foreground/80 border-t border-gray-100"
+                      >
+                        {/* Google Maps logo */}
+                        <svg className="w-4 h-4" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" fill="#EA4335"/>
+                          <path d="M12 2c1.93 0 3.68.78 4.95 2.05L12 9V2z" fill="#34A853"/>
+                          <path d="M5 9c0-3.87 3.13-7 7-7V9H5z" fill="#FBBC04"/>
+                          <path d="M12 9l6.95-4.95A6.965 6.965 0 0119 9c0 5.25-7 13-7 13V9z" fill="#4285F4"/>
+                          <circle cx="12" cy="9" r="2.5" fill="white"/>
+                        </svg>
+                        Abrir en Google Maps
+                      </a>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
