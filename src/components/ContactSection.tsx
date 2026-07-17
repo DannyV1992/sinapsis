@@ -145,7 +145,7 @@ export default function ContactSection() {
                   {showMapOptions && (
                     <div className="absolute left-0 bottom-full mb-2 bg-white border border-gray-200 rounded-xl shadow-lg z-10 overflow-hidden min-w-[180px]">
                       <a
-                        href="https://waze.com/ul/hd1u0v4mx7"
+                        href={config.presencialLocationLinks["La Aurora, Heredia"].maps?.waze}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setShowMapOptions(false)}
@@ -161,7 +161,7 @@ export default function ContactSection() {
                         Abrir en Waze
                       </a>
                       <a
-                        href="https://maps.app.goo.gl/zP7oKKJ6xYedYkvY7?g_st=ic"
+                        href={config.presencialLocationLinks["La Aurora, Heredia"].maps?.google}
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={() => setShowMapOptions(false)}
