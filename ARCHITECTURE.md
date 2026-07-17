@@ -33,7 +33,7 @@ src/
 │   │       └── page.tsx        # Login admin con contraseña (cookie httpOnly 8h)
 │   │
 │   ├── agendar/
-│   │   ├── page.tsx            # Wizard multi-step: servicio → modalidad (virtual default) → fecha → slot → datos → confirmación. Muestra precio en paso 2 al seleccionar servicio. Pantalla de éxito incluye link a WhatsApp para cancelar/reprogramar. Presencial: flujo de solicitud (ubicación + fecha + hora preferida → Sheet + correos)
+│   │   ├── page.tsx            # Wizard multi-step: servicio → modalidad (virtual default) → fecha → slot → datos → confirmación. Muestra precio en paso 2 al seleccionar servicio. Pantalla de éxito incluye link a WhatsApp para cancelar/reprogramar. Presencial: flujo de solicitud (ubicación + fecha + hora preferida → Sheet + correos); pantalla de éxito presencial muestra ubicación como texto simple (sin links de mapa)
 │   │   └── layout.tsx          # Metadata de la página de agendamiento
 │   │
 │   ├── quiz/
@@ -133,9 +133,9 @@ src/
 │   └── JsonLd.tsx              # Schema.org: LocalBusiness + WebSite + SearchAction (apunta a /quiz)
 │
 ├── lib/
-│   ├── config.ts               # Configuración central: precios, teléfono, email, horarios, profesional
+│   ├── config.ts               # Configuración central: precios, teléfono, email, horarios, profesional. Ubicaciones presenciales tipadas con PRESENCIAL_LOCATIONS (as const) + presencialLocationLinks: Record<PresencialLocation, { active, maps?: { waze?, google? } }> — active controla visibilidad en selectores, maps tiene links de navegación Waze/Google Maps
 │   ├── google-calendar.ts      # OAuth client, getAvailableSlots(), bookAppointment() (+ PDF + Drive upload)
-│   ├── reminders.ts            # sendReminderEmail() — HTML template con Resend (activar con http://localhost:3000/api/test-email)
+│   ├── reminders.ts            # sendReminderEmail() — HTML template con Resend (activar con http://localhost:3000/api/test-email?tipo=virtual | http://localhost:3000/api/test-email?tipo=presencial)
 │   ├── generate-pdf.ts         # generateBookingPDF() — políticas de cancelación con pdf-lib
 │   ├── gmail.ts                # sendGmailNotification() — notificación interna vía Gmail cuando llega un mensaje de contacto
 │   ├── quiz-data.ts            # Definición de 5 tests: GAD-7, PHQ-9, PSS-10 (reversedItems [6,7,8,9]), Rosenberg (reversedItems [2,4,7,8,9]), WHO-5. ECR-R tiene página propia.
@@ -170,9 +170,10 @@ Usuario selecciona servicio → modalidad "Presencial" → ubicación + fecha + 
     → Envía notificación interna por Gmail a la psicóloga
     → Envía email al cliente: "Confirmamos en menos de 24h"
   → Psicóloga accede a /admin, ve solicitud pendiente, hace click en "Agendar cita"
-  → Modal: edita ubicación, fecha, hora (H:MM AM/PM) y notas
+  → Modal: edita ubicación, consultorio (campo con prefijo "Consultorio " automático al hacer foco — solo escribir el número; si se deja vacío el correo solo muestra la ubicación), fecha, hora (H:MM AM/PM) y notas
   → POST /api/admin/confirm-presencial
-    → Llama a bookAppointment() (mismo flujo que virtual, sin Meet link; location como campo separado)
+    → Combina location + consultorio → "La Aurora, Heredia — Consultorio 2-SV"
+    → Llama a bookAppointment() (mismo flujo que virtual, sin Meet link; locationFull como campo location)
     → Actualiza estado a "Confirmada" en el Sheet
   → O bien: click en "Cancelar solicitud" → POST /api/admin/update-solicitud-status → estado "Cancelada"
 ```
@@ -188,9 +189,9 @@ Tabs (default: "Agendar cita"):
   - Agendar cita directa: wizard simplificado sin PostHog/GA4
     · Virtual (Calendario): busca slots en Google Calendar
     · Virtual (Manual): fecha + hora (H:MM AM/PM) sin verificar disponibilidad
-    · Presencial: bookea directo vía /api/admin/confirm-presencial (sin pasar por solicitud)
+    · Presencial: bookea directo vía /api/admin/confirm-presencial (sin pasar por solicitud); campos: ubicación, consultorio, fecha, hora
   - Solicitudes presenciales: filtro por estado (Pendiente / Confirmada / Cancelada, default Pendiente)
-    · Botón "Agendar cita": abre modal con campos editables (ubicación, fecha, hora H:MM AM/PM, notas)
+    · Botón "Agendar cita": abre modal con campos editables (ubicación, consultorio, fecha, hora H:MM AM/PM, notas)
     · Botón "Cancelar solicitud": marca estado "Cancelada" en Sheet
     · Link "Ver hoja de citas" en el header → Google Sheets
 ```
@@ -202,8 +203,9 @@ Vercel cron (diario 14:00 UTC = 8am Costa Rica)
   → GET /api/cron/reminders (auth: Bearer CRON_SECRET)
   → Lista eventos de mañana en Google Calendar
   → Filtra por extendedProperties.private.type="booked"
-  → Extrae datos del paciente de la descripción del evento
-  → Envía email personalizado con Resend (fecha, hora, servicio, modalidad, Meet link)
+  → Extrae datos del paciente de la descripción del evento (Paciente, Email, Servicio, Modalidad, Ubicación)
+  → Envía email personalizado con Resend (fecha, hora, servicio, modalidad, Meet link para virtual; ubicación + "Cómo llegar: Waze | Google Maps" en la misma línea para presencial + párrafo de puntualidad y recomendación de llegar con tiempo para buscar parqueo y ubicar consultorio)
+  → Ubicación se resuelve contra PRESENCIAL_LOCATION_ALIASES antes del lookup (permite citas legacy con nombre anterior)
 ```
 
 ### Disponibilidad en calendario
@@ -284,7 +286,9 @@ Cuando un día no tiene slots libres, el frontend busca automáticamente el pró
 
 ## Convenciones
 
-- Todos los datos variables (precios, teléfono, horarios, ubicaciones presenciales) van en `src/lib/config.ts`
+- Todos los datos variables (precios, teléfono, horarios, ubicaciones presenciales) van en `src/lib/config.ts`. Para agregar una ubicación: (1) añadir al array PRESENCIAL_LOCATIONS, (2) TypeScript exige agregar su entrada en presencialLocationLinks con active, notes y maps. PRESENCIAL_LOCATION_ALIASES mapea nombres legacy → nombre actual (ej: "Heredia" → "La Aurora, Heredia") para citas ya agendadas con nombre anterior — eliminar cuando esas citas pasen
+- Selectores de ubicación presencial (admin + agendar) filtran por `presencialLocationLinks[loc].active` — para desactivar una sede basta con `active: false`
+- Descripción de eventos de Google Calendar estructurada en bloques separados por línea en blanco: datos del paciente / ubicación + links de navegación / notas / links legales. Links de navegación se lookup por la parte antes del " — " en locationFull
 - Eventos agendados se identifican por `extendedProperties.private.type: "booked"`
 - Zona horaria: America/Costa_Rica (UTC-6) hardcodeada en calendar y cron
 - Email transaccional desde: `citas@sinapsiscr.com`

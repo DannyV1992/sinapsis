@@ -48,6 +48,7 @@ export async function GET(request: Request) {
     const email = extractField(lines, "Email:");
     const service = extractField(lines, "Servicio:");
     const modality = extractField(lines, "Modalidad:") || "Virtual";
+    const location = extractField(lines, "Ubicación:") || undefined;
 
     if (!email || !patientName) {
       results.push({ email: email || "unknown", status: "skipped (missing data)" });
@@ -82,6 +83,7 @@ export async function GET(request: Request) {
         time,
         modality,
         meetLink: meetLink || undefined,
+        location,
       });
       results.push({ email, status: "sent" });
     } catch (error) {

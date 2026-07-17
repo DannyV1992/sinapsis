@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { google } from "googleapis";
 import { sendGmailNotification } from "@/lib/gmail";
 import { Resend } from "resend";
+import { config } from "@/lib/config";
 
 function getOAuth2Client() {
   const oauth2Client = new google.auth.OAuth2(

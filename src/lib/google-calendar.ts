@@ -1,5 +1,6 @@
 import { google } from "googleapis";
 import { sendGmailNotification } from "./gmail";
+import { config } from "@/lib/config";
 
 async function logBookingToSheet(params: {
   name: string;
@@ -184,22 +185,44 @@ export async function bookAppointment(params: {
   // const driveFolderId = process.env.GOOGLE_DRIVE_FOLDER_ID;
   // if (driveFolderId) { ... generateBookingPDF → drive.files.create ... }
 
-  const description = [
-    "Cita psicológica con Licda. Cinthya Chávez",
-    "",
+  const locationLinks = (() => {
+    if (!params.location) return "";
+    const baseLocation = params.location.split(" — ")[0];
+    const loc = config.presencialLocationLinks[baseLocation as keyof typeof config.presencialLocationLinks];
+    if (!loc?.maps) return "";
+    const parts = ["Cómo llegar:"];
+    if (loc.maps.waze) parts.push(`• Waze: ${loc.maps.waze}`);
+    if (loc.maps.google) parts.push(`• Google Maps: ${loc.maps.google}`);
+    return parts.join("\n");
+  })();
+
+  const infoBlock = [
     `Paciente: ${params.name}`,
     `Email: ${params.email}`,
     `Teléfono: ${params.phone}`,
     `Servicio: ${params.service}`,
     params.modality ? `Modalidad: ${params.modality.charAt(0).toUpperCase() + params.modality.slice(1)}` : "",
+  ].filter(Boolean).join("\n");
+
+  const locationBlock = [
     params.location ? `Ubicación: ${params.location}` : "",
-    params.notes ? `Notas: ${params.notes}` : "",
-    "",
+    locationLinks,
+  ].filter(Boolean).join("\n");
+
+  const notesBlock = params.notes ? `Notas: ${params.notes}` : "";
+
+  const linksBlock = [
     "Políticas de cancelación: https://sinapsiscr.com/politicas",
-    "Si es tu primera vez, lee el consentimiento informado: https://sinapsiscr.com/consentimiento",
-  ]
-    .filter(Boolean)
-    .join("\n");
+    "Consentimiento informado: https://sinapsiscr.com/consentimiento",
+  ].join("\n");
+
+  const description = [
+    "Cita psicológica con Licda. Cinthya Chávez",
+    infoBlock,
+    locationBlock,
+    notesBlock,
+    linksBlock,
+  ].filter(Boolean).join("\n\n");
 
   const isVirtual = params.modality?.toLowerCase() === "virtual";
 

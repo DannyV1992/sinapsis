@@ -1,4 +1,5 @@
 import { Resend } from "resend";
+import { config, PRESENCIAL_LOCATION_ALIASES } from "@/lib/config";
 
 function getResend() {
   return new Resend(process.env.RESEND_API_KEY);
@@ -14,13 +15,26 @@ interface ReminderEmailParams {
   time: string;
   modality: string;
   meetLink?: string;
+  location?: string;
 }
 
 export async function sendReminderEmail(params: ReminderEmailParams) {
-  const { to, patientName, service, date, time, modality, meetLink } = params;
+  const { to, patientName, service, date, time, modality, meetLink, location } = params;
 
   const isVirtual = modality.toLowerCase() === "virtual";
   const firstName = patientName.split(" ")[0];
+
+  const rawLocation = location?.split(" — ")[0] ?? "";
+  const baseLocation = PRESENCIAL_LOCATION_ALIASES[rawLocation] ?? rawLocation;
+  const locationData = !isVirtual && baseLocation ? config.presencialLocationLinks[baseLocation as keyof typeof config.presencialLocationLinks] : null;
+  const mapLinks = (() => {
+    if (!locationData?.maps) return "";
+    const parts = [];
+    if (locationData.maps.waze) parts.push(`<a href="${locationData.maps.waze}" style="color: #4a3040; font-size: 13px; font-weight: 600;">Waze</a>`);
+    if (locationData.maps.google) parts.push(`<a href="${locationData.maps.google}" style="color: #4a3040; font-size: 13px; font-weight: 600;">Google Maps</a>`);
+    if (!parts.length) return "";
+    return `Cómo llegar: ${parts.join(' <span style="color:#999">|</span> ')}`;
+  })();
 
   const meetSection = isVirtual && meetLink
     ? `<tr>
@@ -33,7 +47,7 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
 
   const locationText = isVirtual
     ? "Tu sesión será virtual por Google Meet."
-    : "Tu sesión será presencial en el consultorio.";
+    : `Tu sesión será presencial${location ? ` en <strong>${location}</strong>` : " en el consultorio"}.${mapLinks ? `<br>${mapLinks}` : ""}`;
 
   const html = `
 <!DOCTYPE html>
@@ -83,8 +97,11 @@ export async function sendReminderEmail(params: ReminderEmailParams) {
                 </tr>
               </table>
               ${meetSection}
-              <p style="margin: 20px 0 24px; font-size: 14px; color: #666; line-height: 1.5;">
-                ${locationText} Recuerda que puedes reprogramar con al menos 24 horas de anticipación.
+              <p style="margin: 20px 0 0; font-size: 14px; color: #666; line-height: 1.6;">
+                ${locationText}
+              </p>
+              <p style="margin: 16px 0 24px; font-size: 14px; color: #666; line-height: 1.6;">
+                ${!isVirtual ? "Te recomendamos llegar con tiempo para ubicar el consultorio y buscar parqueo. " : ""}La puntualidad es muy importante para poder aprovechar la sesión completa. Recuerda que puedes reprogramar con al menos 24 horas de anticipación.
               </p>
               <table width="100%" cellpadding="0" cellspacing="0">
                 <tr>

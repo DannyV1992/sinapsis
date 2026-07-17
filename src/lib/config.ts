@@ -3,6 +3,14 @@
 // Cambia estos valores y se actualizan en toda la página
 // =============================================
 
+const PRESENCIAL_LOCATIONS = ["La Aurora, Heredia", "Santa Ana"] as const;
+// Aliases para ubicaciones legacy (citas agendadas con nombre anterior)
+export const PRESENCIAL_LOCATION_ALIASES: Record<string, string> = {
+  "Heredia": "La Aurora, Heredia",
+};
+type PresencialLocation = (typeof PRESENCIAL_LOCATIONS)[number];
+type LocationLinks = Record<PresencialLocation, { active: boolean; maps?: { waze?: string; google?: string } }>;
+
 export const config = {
   // Datos de contacto
   phone: "50671398403",
@@ -34,7 +42,11 @@ export const config = {
   schedule: "Lunes a viernes, usualmente de 8:00am - 5:00pm pero los horarios pueden variar según disponibilidad y modalidad de la cita.",
 
   // Ubicaciones presenciales (coworking)
-  presencialLocations: ["Heredia"], //"Santa Ana", "San Pedro", "Pinares"
+  presencialLocations: PRESENCIAL_LOCATIONS,
+  presencialLocationLinks: {
+    "La Aurora, Heredia": { active: true, maps: { waze: "https://waze.com/ul/hd1u0v4mx7", google: "https://maps.app.goo.gl/zP7oKKJ6xYedYkvY7?g_st=ic" } },
+    "Santa Ana":          { active: true, maps: { waze: "https://waze.com/ul/hd1u0s22zy", google: "https://maps.app.goo.gl/jaCurT1npFzUJkmY6?g_st=ic" } },
+  } satisfies LocationLinks,
 
   // Métodos de pago
   paymentMethods: "SINPE Móvil y transferencia bancaria",

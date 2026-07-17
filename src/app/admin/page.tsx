@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { config } from "@/lib/config";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -22,6 +23,7 @@ interface ConfirmForm {
   confirmedDate: string;
   confirmedTime: string;
   location: string;
+  consultorio: string;
   notes: string;
 }
 
@@ -37,7 +39,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [selected, setSelected] = useState<Solicitud | null>(null);
-  const [confirmForm, setConfirmForm] = useState<ConfirmForm>({ confirmedDate: "", confirmedTime: "", location: "", notes: "" });
+  const [confirmForm, setConfirmForm] = useState<ConfirmForm>({ confirmedDate: "", confirmedTime: "", location: "", consultorio: "", notes: "" });
   const [confirmH, setConfirmH] = useState("");
   const [confirmM, setConfirmM] = useState("");
   const [confirmAmPm, setConfirmAmPm] = useState("PM");
@@ -64,7 +66,7 @@ export default function AdminPage() {
 
   const openConfirm = (s: Solicitud) => {
     setSelected(s);
-    setConfirmForm({ confirmedDate: s.preferredDate, confirmedTime: "", location: s.location, notes: s.notes });
+    setConfirmForm({ confirmedDate: s.preferredDate, confirmedTime: "", location: s.location, consultorio: "", notes: s.notes });
     setConfirmH(""); setConfirmM(""); setConfirmAmPm("PM");
     setConfirmError("");
   };
@@ -89,6 +91,7 @@ export default function AdminPage() {
         phone: selected.phone,
         service: selected.service,
         location: confirmForm.location,
+        consultorio: confirmForm.consultorio,
         confirmedDate: confirmForm.confirmedDate,
         confirmedTime,
         notes: confirmForm.notes,
@@ -263,10 +266,10 @@ export default function AdminPage() {
                     required
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
                     value={confirmForm.location}
-                    onChange={(e) => setConfirmForm({ ...confirmForm, location: e.target.value })}
+                    onChange={(e) => setConfirmForm({ ...confirmForm, location: e.target.value, consultorio: "" })}
                   >
                     <option value="">Selecciona una ubicación</option>
-                    {["Santa Ana", "San Pedro", "Heredia", "Pinares"].map((loc) => (
+                    {config.presencialLocations.filter((loc) => config.presencialLocationLinks[loc]?.active).map((loc) => (
                       <option key={loc} value={loc}>{loc}</option>
                     ))}
                   </select>
@@ -284,6 +287,21 @@ export default function AdminPage() {
                 <div>
                   <label className="block text-sm font-medium text-foreground/70 mb-1">Hora</label>
                   <TimeInput h={confirmH} m={confirmM} ampm={confirmAmPm} onH={setConfirmH} onM={setConfirmM} onAmPm={setConfirmAmPm} />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-foreground/70 mb-1">Consultorio (opcional)</label>
+                  <input
+                    type="text"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
+                    value={confirmForm.consultorio}
+                    onFocus={(e) => { if (!confirmForm.consultorio) setConfirmForm({ ...confirmForm, consultorio: "Consultorio " }); setTimeout(() => { const el = e.target; el.setSelectionRange(el.value.length, el.value.length); }, 0); }}
+                    onChange={(e) => {
+                      const val = e.target.value;
+                      setConfirmForm({ ...confirmForm, consultorio: val === "Consultorio " || val === "" ? "" : val });
+                    }}
+                    onBlur={(e) => { if (e.target.value === "Consultorio ") setConfirmForm({ ...confirmForm, consultorio: "" }); }}
+                    placeholder="Consultorio..."
+                  />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-foreground/70 mb-1">Notas (opcional)</label>
@@ -425,7 +443,7 @@ function NuevaCitaForm() {
   const [manualM, setManualM] = useState("");
   const [manualAmPm, setManualAmPm] = useState("PM");
   const [presencialData, setPresencialData] = useState({
-    location: "", preferredDate: "", preferredTimeH: "", preferredTimeM: "",
+    location: "", consultorio: "", preferredDate: "", preferredTimeH: "", preferredTimeM: "",
   });
   const [presencialAmPm, setPresencialAmPm] = useState("PM");
   const [availableSlots, setAvailableSlots] = useState<{ start: string; end: string }[]>([]);
@@ -480,6 +498,7 @@ function NuevaCitaForm() {
         body: JSON.stringify({
           name: form.name, email: form.email, phone: form.phone,
           service: form.service, location: presencialData.location,
+          consultorio: presencialData.consultorio,
           confirmedDate: presencialData.preferredDate, confirmedTime, notes: form.notes,
         }),
       });
@@ -533,7 +552,7 @@ function NuevaCitaForm() {
     setSuccess(false);
     setForm({ name: "", email: "", phone: "", service: "", modality: "virtual-calendario", date: "", notes: "" });
     setManualH(""); setManualM(""); setManualAmPm("PM");
-    setPresencialData({ location: "", preferredDate: "", preferredTimeH: "", preferredTimeM: "" });
+    setPresencialData({ location: "", consultorio: "", preferredDate: "", preferredTimeH: "", preferredTimeM: "" });
     setPresencialAmPm("PM");
     setAvailableSlots([]); setSelectedSlot(null);
   };
@@ -673,13 +692,28 @@ function NuevaCitaForm() {
               id="location" required
               className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
               value={presencialData.location}
-              onChange={(e) => setPresencialData({ ...presencialData, location: e.target.value })}
+              onChange={(e) => setPresencialData({ ...presencialData, location: e.target.value, consultorio: "" })}
             >
               <option value="">Selecciona una ubicación</option>
-              {["Santa Ana", "San Pedro", "Heredia", "Pinares"].map((loc) => (
+              {config.presencialLocations.filter((loc) => config.presencialLocationLinks[loc]?.active).map((loc) => (
                 <option key={loc} value={loc}>{loc}</option>
               ))}
             </select>
+          </div>
+          <div>
+            <label htmlFor="consultorio-nueva" className="block text-sm font-medium text-foreground/70 mb-1">Consultorio (opcional)</label>
+            <input
+              type="text" id="consultorio-nueva"
+              placeholder="Consultorio..."
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all text-sm"
+              value={presencialData.consultorio}
+              onFocus={(e) => { if (!presencialData.consultorio) { setPresencialData({ ...presencialData, consultorio: "Consultorio " }); setTimeout(() => { const el = e.target; el.setSelectionRange(el.value.length, el.value.length); }, 0); } }}
+              onChange={(e) => {
+                const val = e.target.value;
+                setPresencialData({ ...presencialData, consultorio: val === "Consultorio " || val === "" ? "" : val });
+              }}
+              onBlur={(e) => { if (e.target.value === "Consultorio ") setPresencialData({ ...presencialData, consultorio: "" }); }}
+            />
           </div>
           <div>
             <label htmlFor="presencial-date" className="block text-sm font-medium text-foreground/70 mb-1">Fecha</label>

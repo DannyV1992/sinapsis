@@ -16,8 +16,10 @@ const SPREADSHEET_ID = process.env.GOOGLE_CONTACT_SHEET_ID;
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, phone, service, location, confirmedDate, confirmedTime, notes, rowIndex } =
+    const { name, email, phone, service, location, consultorio, confirmedDate, confirmedTime, notes, rowIndex } =
       await request.json();
+
+    const locationFull = [location, consultorio].filter(Boolean).join(" — ");
 
     if (!name || !email || !phone || !service || !confirmedDate || !confirmedTime) {
       return NextResponse.json({ error: "Faltan campos requeridos" }, { status: 400 });
@@ -42,7 +44,7 @@ export async function POST(request: NextRequest) {
       phone,
       service,
       modality: "presencial",
-      location: location || undefined,
+      location: locationFull || undefined,
       notes: notes || undefined,
     });
 

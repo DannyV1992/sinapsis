@@ -614,7 +614,7 @@ export default function AgendarPage() {
                           onChange={(e) => setPresencialData({ ...presencialData, location: e.target.value })}
                         >
                           <option value="">Selecciona una ubicación</option>
-                          {config.presencialLocations.map((loc) => (
+                          {config.presencialLocations.filter((loc) => config.presencialLocationLinks[loc]?.active).map((loc) => (
                             <option key={loc} value={loc}>{loc}</option>
                           ))}
                         </select>
