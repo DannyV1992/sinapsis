@@ -113,8 +113,8 @@ export default function ContactSection() {
                 </div>
                 <span className="text-foreground/70 group-hover:text-violet-500 transition-colors">{config.email}</span>
               </button>
-              <div className="flex items-center gap-4 relative">
-                <div className="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center flex-shrink-0">
+              <div className="flex items-center gap-4 relative group">
+                <div className="w-10 h-10 bg-sky-50 rounded-full flex items-center justify-center flex-shrink-0 group-hover:bg-sky-100 transition-colors">
                   <svg
                     className="w-5 h-5 text-sky-400"
                     fill="none"
