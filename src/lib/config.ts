@@ -20,8 +20,8 @@ export const config = {
   location: "La Aurora, Heredia, Costa Rica",
 
   // Redes sociales
-  instagram: "https://www.instagram.com/sinapsis_psicologia_",
-  instagramHandle: "@sinapsis_psicologia_",
+  instagram: "https://www.instagram.com/sinapsis_psicologia_cr",
+  instagramHandle: "@sinapsis_psicologia_cr",
   whatsappMessage: "Hola, vengo desde tu sitio web y me gustaría saber más sobre los servicios.",
 
   // Precios
